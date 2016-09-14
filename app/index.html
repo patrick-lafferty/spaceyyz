@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="spaceyyz">
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+		
+	</head>
+	<body>
+		<p>SpaceYYZ</p>
+		<div class="sideMenu">
+			<uib-accordion>
+				<!--<div uib-accordion-group class="panel-default" heading="Order New Vehicle">
+					<a>Prefab Launch Vehicles</a>	
+					<a>Custom Launch Vehicles</a>
+				</div>
+				<div uib-accordion-group class="panel-default" heading="Custom Launch Vehicles">
+					custom
+				</div>-->
+				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
+					<ul>
+						<li><a>Order New</a></li>
+						<li><a>In Development</a></li>
+						<li><a>Ready for launch</a></li>
+					</ul>
+				</div>
+
+				<div uib-accordion-group class="panel-default" heading="Flights">
+					<ul>
+						<li><a>Schedule flight</a></li>
+						<li><a>In Progress</a></li>
+					</ul>
+				</div>
+			</uib-accordion>	
+		</div>
+
+		<div ui-view style="overflow: hidden; background-color: #505050; height: 100%">
+		</div>
+
+		<script type="text/javascript" src="angular.js"></script>
+		<script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+		<script type="text/javascript" src="app.module.js"></script>
+		<script type="text/javascript" src="app.config.js"></script>
+		<script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="components/vehicle-list.component.js"></script>
+	</body>
+</html>

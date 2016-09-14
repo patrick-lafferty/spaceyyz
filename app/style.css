@@ -3,3 +3,14 @@
 }
 
 .nav, .pagination, .carousel, .panel-title a {cursor: pointer;}
+
+html, body {
+	height: 100%;
+}
+
+.sideMenu {
+	float: left; 
+	width: 200px;
+	background-color: #19B3FE;
+	height: 100%;
+}
