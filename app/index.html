@@ -32,18 +32,18 @@
 					</ul>
 				</div>
 
-				<div uib-accordion-group class="panel-default" heading="Launchpads">
+				<div uib-accordion-group class="panel-default" heading="Spaceports">
 					<ul>
-						<li><a ui-sref="completed" ui-sref-active="active">North America</a></li>
-						<li><a ui-sref="completed" ui-sref-active="active">Europe</a></li>
-						<li><a ui-sref="completed" ui-sref-active="active">Asia</a></li>
+						<li><a ui-sref="northAmericanSpaceports" ui-sref-active="active">North America</a></li>
+						<li><a ui-sref="europeanSpaceports" ui-sref-active="active">Europe</a></li>
+						<li><a ui-sref="asianSpaceports" ui-sref-active="active">Asia</a></li>
 					</ul>
 				</div>
 
 				<div uib-accordion-group class="panel-default" heading="Research & Development">
 					<ul>
-						<li><a ui-sref="completed" ui-sref-active="active">Engines</a></li>
-						<li><a ui-sref="completed" ui-sref-active="active">Stages</a></li>
+						<li><a ui-sref="researchEngine" ui-sref-active="active">Engines</a></li>
+						<li><a ui-sref="designStage" ui-sref-active="active">Stages</a></li>
 					</ul>
 				</div>
 			</uib-accordion>	
@@ -66,5 +66,8 @@
 		<script type="text/javascript" src="flight/schedule.js"></script>
 		<!-- should progress be renamed to status? -->
 		<script type="text/javascript" src="flight/progress.js"></script>
+		<script type="text/javascript" src="spaceports/spaceports.js"></script>
+		<script type="text/javascript" src="research-development/engine.js"></script>
+		<script type="text/javascript" src="research-development/stage.js"></script>
 	</body>
 </html>

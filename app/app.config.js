@@ -34,6 +34,40 @@
 					url: '/flight/progress',
 					component: 'flightProgress'
 				},
+				{
+					name: 'northAmericanSpaceports',
+					url: '/spaceports/north-america',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'north america';}
+					}
+				},
+				{
+					name: 'europeanSpaceports',
+					url: '/spaceports/europe',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'europe';}
+					}
+				},
+				{
+					name: 'asianSpaceports',
+					url: '/spaceports/asia',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'asia';}
+					}
+				},
+				{
+					name: 'researchEngine',
+					url: '/research/engine',
+					component: 'researchEngine'
+				},
+				{
+					name: 'designStage',
+					url: '/researc/stage',
+					component: 'designStage'
+				},
 			];
 
 			states.forEach(function(state) {
