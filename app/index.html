@@ -7,7 +7,7 @@
 		
 	</head>
 	<body>
-		<p>SpaceYYZ</p>
+		<p>SpaceYYZ, your one stop shop for Space Operations</p>
 		<div class="sideMenu">
 			<uib-accordion>
 				<!--<div uib-accordion-group class="panel-default" heading="Order New Vehicle">
@@ -19,16 +19,31 @@
 				</div>-->
 				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
 					<ul>
-						<li><a>Order New</a></li>
-						<li><a>In Development</a></li>
-						<li><a>Ready for launch</a></li>
+						<li><a ui-sref="orderNew" ui-sref-active="active">Order New</a></li>
+						<li><a ui-sref="development" ui-sref-active="active">In Development</a></li>
+						<li><a ui-sref="completed" ui-sref-active="active">Ready for launch</a></li>
 					</ul>
 				</div>
 
 				<div uib-accordion-group class="panel-default" heading="Flights">
 					<ul>
-						<li><a>Schedule flight</a></li>
-						<li><a>In Progress</a></li>
+						<li><a ui-sref="schedule" ui-sref-active="active">Schedule flight</a></li>
+						<li><a ui-sref="progress" ui-sref-active="active">In Progress</a></li>
+					</ul>
+				</div>
+
+				<div uib-accordion-group class="panel-default" heading="Launchpads">
+					<ul>
+						<li><a ui-sref="completed" ui-sref-active="active">North America</a></li>
+						<li><a ui-sref="completed" ui-sref-active="active">Europe</a></li>
+						<li><a ui-sref="completed" ui-sref-active="active">Asia</a></li>
+					</ul>
+				</div>
+
+				<div uib-accordion-group class="panel-default" heading="Research & Development">
+					<ul>
+						<li><a ui-sref="completed" ui-sref-active="active">Engines</a></li>
+						<li><a ui-sref="completed" ui-sref-active="active">Stages</a></li>
 					</ul>
 				</div>
 			</uib-accordion>	
@@ -42,6 +57,14 @@
 		<script type="text/javascript" src="app.module.js"></script>
 		<script type="text/javascript" src="app.config.js"></script>
 		<script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+
+		<!-- Components -->
 		<script type="text/javascript" src="components/vehicle-list.component.js"></script>
+		<script type="text/javascript" src="launch-vehicles/order-new.js"></script>
+		<script type="text/javascript" src="launch-vehicles/development.js"></script>
+		<script type="text/javascript" src="launch-vehicles/inventory.js"></script>
+		<script type="text/javascript" src="flight/schedule.js"></script>
+		<!-- should progress be renamed to status? -->
+		<script type="text/javascript" src="flight/progress.js"></script>
 	</body>
 </html>
