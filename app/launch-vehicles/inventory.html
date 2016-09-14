@@ -1,23 +1,15 @@
 <h1>Inventory</h1>
 
 <h3>Super-heavy launch vehicles (>50,000 kg to LEO)</h3>
-<ul>
-	<li ng-repeat="vehicle in $ctrl.vehicles | filter: $ctrl.minimumCapacity(50000) | orderBy:'capacity'">
-		<h4>{{vehicle.name}}</h4>
-		<p>Capacity: {{vehicle.capacity}}</p>
-	</li>
-</ul>
+<vehicle-list vehicles="$ctrl.superHeavyVehicles"></vehicle-list>
 
 <h3>Heavy launch vehicles (20,000 kg to 50,000 kg to LEO)</h3>
+<vehicle-list vehicles="$ctrl.heavyVehicles"></vehicle-list>
 
 <h3>Medium launch vehicles (2,000 kg to 20,000 kg to LEO)</h3>
-<ul>
-	<li ng-repeat="vehicle in $ctrl.vehicles | filter: $ctrl.capacityBetween(2000, 20000) | orderBy:'capacity'">
-		<h4>{{vehicle.name}}</h4>
-		<p>Capacity: {{vehicle.capacity}}</p>
-	</li>
-</ul>
+<vehicle-list vehicles="$ctrl.mediumVehicles"></vehicle-list>
 
 <h3>Small launch vehicles (&lt2,000 kg to LEO)</h3>
+<vehicle-list vehicles="$ctrl.smallVehicles"></vehicle-list>
 
 
