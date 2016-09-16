@@ -1,13 +1,58 @@
 <h1>Order New Launch Vehicle</h1>
 <uib-tabset active="active">
 	<uib-tab index="0" heading="Prefab">
-		<label for="payload" class="col-sm-2 control-label">Payload</label>
+		<!--<label for="payload" class="col-sm-2 control-label">Payload</label>
 		<div class="input-group col-sm-2">
 			<input type="text" class="form-control" id="payload" placeholder="10000">
 			<div class="input-group-addon">kg</div>
 		</div>
 
-		<vehicle-list></vehicle-list>
+		<vehicle-list></vehicle-list>-->
+		<!--<div class="pull-left">
+		<div class="radio">
+			<label>
+				<input type="radio" name="searchType" id="searchByName" ng-model="searchType" value="name" checked>
+				Search by name
+			</label>
+		</div>
+
+		<div class="radio">
+			<label>
+				<input type="radio" name="searchType" id="searchByPayload" ng-model="searchType" value="payload" >
+				Search by payload
+			</label>
+		</div>
+		</div>
+		-->
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="">
+					<label class="col-sm-2 control-label">Search by:</label>
+					<select ng-model="$ctrl.searchType" ng-init="$ctrl.searchType='Name'" class="col-sm-2 btn btn-primary dropdown-toggle">
+						<option>Name</option>
+						<option>Payload</option>
+					</select>
+				</div>
+
+				<div ng-switch="$ctrl.searchType" class="col-sm-2">
+					<div ng-switch-when="Name" class="input-group"> 
+						<input type="text" ng-model="$ctrl.search_name" class="form-control" id="name" placeholder="">
+					</div>
+					<div ng-switch-when="Payload" class="input-group">
+						<input type="text" ng-model="$ctrl.search_payload" class="form-control" id="payload" placeholder="10000">
+						<div class="input-group-addon">kg</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<li ng-repeat="vehicle in $ctrl.vehicles | filter:$ctrl.search($ctrl.searchType)">
+			<h4>{{vehicle.name}}</h4>
+			<p>Capacity: {{vehicle.capacity}}</p>
+			<p>Stock: {{vehicle.inventory}}</p>
+			<button type="button" class="btn btn-primary">Order</button>
+		</li>
+
 	</uib-tab>
 	<uib-tab index="1" heading="Custom">
 	</uib-tab>

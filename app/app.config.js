@@ -21,7 +21,7 @@
 				},
 				{
 					name: 'completed',
-					url: '/launchVehicles/completed',
+					url: '/launchVehicles/inventory',
 					component: 'vehicleInventory'
 				},
 				{
