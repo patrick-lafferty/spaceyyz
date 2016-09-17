@@ -7,7 +7,25 @@
 		
 	</head>
 	<body>
-		<p>SpaceYYZ, your one stop shop for Space Operations</p>
+		<div class="clearfix" style="color: black">
+			<div class="pull-left">
+
+				<h1 style="display: inline;">SpaceYYZ</h1>
+				<i>your one stop shop for Space Operations</i>
+			</div>
+
+			<div class="pull-right" style="overflow: hidden" ng-controller="userAccount as user">
+
+				<div ng-if="user.name">
+					Logged in as {{user.name}}
+				</div>
+
+				<div ng-if="!user.name">
+					<p>Login</p>
+				</div>
+			</div>
+		</div>
+
 		<div class="sideMenu">
 			<uib-accordion>
 				<!--<div uib-accordion-group class="panel-default" heading="Order New Vehicle">
@@ -52,6 +70,20 @@
 		<div ui-view style="overflow: hidden; background-color: #505050; height: 100%">
 		</div>
 
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+		<script>
+			// Initializing Firebase
+			var config = {
+				apiKey: "AIzaSyDiLuNfzOgNiPzozjxKmxCymOtRsK2PFRc",
+				authDomain: "spaceyyz.firebaseapp.com",
+				databaseURL: "https://spaceyyz.firebaseio.com",
+				storageBucket: "",
+				messagingSenderId: "493266462901"
+			};
+
+			firebase.initializeApp(config);
+		</script>
+
 		<script type="text/javascript" src="angular.js"></script>
 		<script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 		<script type="text/javascript" src="app.module.js"></script>
@@ -61,6 +93,8 @@
 		<!-- factories -->
 		<script type="text/javascript" src="launch-vehicles/inventory.factory.js"></script>
 		<!-- Components -->
+		<script type="text/javascript" src="login/login.js"></script>
+		<script type="text/javascript" src="user.js"></script>
 		<!--<script type="text/javascript" src="components/vehicle-list.component.js"></script>-->
 		<script type="text/javascript" src="launch-vehicles/order-new.js"></script>
 		<script type="text/javascript" src="launch-vehicles/vehicle.js"></script>

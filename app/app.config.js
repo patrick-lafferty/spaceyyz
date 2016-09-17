@@ -10,36 +10,47 @@
 					url: '/',
 				},
 				{
+					name: 'login',
+					url: '/login',
+					component: 'login'
+				},
+				{
 					name: 'orderNew',
 					url: '/launchVehicles/orderNew',
-					component: 'orderLaunchVehicle'
+					component: 'orderLaunchVehicle',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'development',
 					url: '/launchVehicles/development',
-					component: 'vehicleDevelopment'
+					component: 'vehicleDevelopment',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'completed',
 					url: '/launchVehicles/inventory',
-					component: 'vehicleInventory'
+					component: 'vehicleInventory',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'schedule',
 					url: '/flight/schedule',
-					component: 'scheduleFlight'
+					component: 'scheduleFlight',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'progress',
 					url: '/flight/progress',
-					component: 'flightProgress'
+					component: 'flightProgress',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'northAmericanSpaceports',
 					url: '/spaceports/north-america',
 					component: 'spaceports',
 					resolve: {
-						location: function(){return 'north america';}
+						location: function(){return 'north america';},
+						authenticate: authenticate
 					}
 				},
 				{
@@ -47,7 +58,8 @@
 					url: '/spaceports/europe',
 					component: 'spaceports',
 					resolve: {
-						location: function(){return 'europe';}
+						location: function(){return 'europe';},
+						authenticate: authenticate
 					}
 				},
 				{
@@ -55,18 +67,21 @@
 					url: '/spaceports/asia',
 					component: 'spaceports',
 					resolve: {
-						location: function(){return 'asia';}
+						location: function(){return 'asia';},
+						authenticate: authenticate
 					}
 				},
 				{
 					name: 'researchEngine',
 					url: '/research/engine',
-					component: 'researchEngine'
+					component: 'researchEngine',
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'designStage',
 					url: '/researc/stage',
-					component: 'designStage'
+					component: 'designStage',
+					resolve: {authenticate: authenticate}
 				},
 			];
 
@@ -74,5 +89,28 @@
 				$stateProvider.state(state);
 			});
 		});
+
+	function authenticate($q, $state, $timeout) {
+		var user = firebase.auth().currentUser;
+
+		if (user) {
+			return $q.when();
+		} else {
+			
+			$timeout(function() {
+
+				$state.go('login');
+			});
+
+			return $q.reject();
+		}
+	}
+
+
+	angular
+		.module('spaceyyz')
+		.run(['$state', function($state) {
+			$state.defaultErrorHandler(function() {});
+		}]);
 				   
 })();

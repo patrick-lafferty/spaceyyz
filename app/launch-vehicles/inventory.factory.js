@@ -44,9 +44,15 @@
 
 		}
 
+		function updateVehicle(vehicle)
+		{
+			//$http.post('vehicles.json', vehicle);
+		}
+
 		return {
 			//vehicles: getVehicles();
-			getVehicles: getVehicles
+			getVehicles: getVehicles,
+			updateVehicle: updateVehicle
 		}
 
 	}

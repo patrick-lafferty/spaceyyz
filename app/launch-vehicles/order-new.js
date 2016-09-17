@@ -42,5 +42,11 @@
 				alert(type + " shouldn't get here");
 			}
 		}
+
+		this.order = function(vehicle) {
+			//alert("ordering a new " + vehicle.name);
+			vehicle.inventory++;
+			vehicleInventoryFactory.updateVehicle(vehicle);
+		}
 	}
 })();

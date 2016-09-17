@@ -2,21 +2,25 @@
 	{
 		"name": "SLS Block 2",
 		"capacity": 130000,
+		"cost": 20000000000,
 		"inventory": 1
 	},
 	{
 		"name": "SLS Block 1B",
 		"capacity": 70000,
+		"cost": 1000000000,
 		"inventory": 1
 	},
 	{
 		"name": "Delta IV Heavy",
 		"capacity": 28000,
+		"cost": 700000000,
 		"inventory": 1
 	},
 	{
 		"name": "falcon",
 		"capacity": 2000,
+		"cost": 400000000,
 		"inventory": 10
 	}
 ]

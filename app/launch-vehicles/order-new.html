@@ -49,8 +49,9 @@
 		<li ng-repeat="vehicle in $ctrl.vehicles | filter:$ctrl.search($ctrl.searchType)">
 			<h4>{{vehicle.name}}</h4>
 			<p>Capacity: {{vehicle.capacity}}</p>
+			<p>Cost: ${{vehicle.cost}}</p>
 			<p>Stock: {{vehicle.inventory}}</p>
-			<button type="button" class="btn btn-primary">Order</button>
+			<button type="button" class="btn btn-primary" ng-click="$ctrl.order(vehicle)">Order</button>
 		</li>
 
 	</uib-tab>
