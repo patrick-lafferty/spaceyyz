@@ -7,7 +7,8 @@
 			var states = [ 
 				{
 					name: 'home',
-					url: '/',
+					url: '/home',
+					component: 'home'
 				},
 				{
 					name: 'login',
@@ -79,10 +80,15 @@
 				},
 				{
 					name: 'designStage',
-					url: '/researc/stage',
+					url: '/research/stage',
 					component: 'designStage',
 					resolve: {authenticate: authenticate}
 				},
+				{
+					name: 'default',
+					url: '*path',
+					component: 'home'
+				}
 			];
 
 			states.forEach(function(state) {

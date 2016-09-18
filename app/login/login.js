@@ -8,8 +8,18 @@
 			controller: Login
 		});
 
-	function Login() {
+	function Login(userFactory, $state) {
+
 		this.email = "";
+		this.password = "";
+		this.login = function() {
+			userFactory.login(this.email, this.password, function() {
+				$state.go('home');
+			});
+		};
+		this.register = function() {userFactory.register(this.email, this.password);};
+
+/*		this.email = "";
 		this.password = "";
 
 		this.login = function() {
@@ -30,17 +40,6 @@
 					alert("Error registering: " + error.code + ", " + error.message);
 				});
 
-		};
+		};*/
 	}
-
-	/*angular
-		.module('spaceyyz')
-		.run(function($rootScope, $urlRouter) {
-			$rootScope.$on('$locationChangeSuccess', function(evt) {
-				evt.preventDefault();
-
-				$state.go('login');
-			});
-		});*/
-
 })();

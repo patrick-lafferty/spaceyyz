@@ -32,7 +32,7 @@
 		this.search = function(type) {
 			if (type === "Name") {
 				return function(vehicle) {
-					return vehicle.name.toLowerCase().includes(self.search_name);
+					return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
 				};
 			} else if (type === "Payload") {
 				return function(vehicle) {

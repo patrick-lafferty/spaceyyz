@@ -14,27 +14,43 @@
 				<i>your one stop shop for Space Operations</i>
 			</div>
 
-			<div class="pull-right" style="overflow: hidden" ng-controller="userAccount as user">
+			<div class="pull-right" style="overflow: hidden" ng-controller="userAccount as userr">
 
-				<div ng-if="user.name">
-					Logged in as {{user.name}}
+				<div ng-show="user.user.email">
+					Logged in as {{user.user.email}}
+					<button ng-click="user.logout()" type="button" class="btn btn-primary">Log out</button>
 				</div>
 
-				<div ng-if="!user.name">
-					<p>Login</p>
+				<div ng-hide="userr.isLoggedIn()">
+					<form class="form-inline" ng-submit="userr.login()">
+						<div class="form-group">
+							<label for="email" class="sr-only control-label">Email</label>
+							<div>
+								<input type="text" id="email" class="form-control" ng-model="email" placeholder="Email">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="sr-only control-label">Password</label>
+							<div>
+								<input type="password" id="password" class="form-control" ng-model="password" placeholder="Password">
+							</div>
+						</div>
+
+						<button ng-click="userr.login(email, password)" type="button" class="btn btn-primary">Log in</button>
+					</form>
 				</div>
+
 			</div>
 		</div>
 
 		<div class="sideMenu">
 			<uib-accordion>
-				<!--<div uib-accordion-group class="panel-default" heading="Order New Vehicle">
-					<a>Prefab Launch Vehicles</a>	
-					<a>Custom Launch Vehicles</a>
+				<div uib-accordion-group class="panel-default" heading="Home">
+					<ul>
+						<li><a ui-sref="home" ui-sref-active="active">Home</a></li>
+					</ul>
 				</div>
-				<div uib-accordion-group class="panel-default" heading="Custom Launch Vehicles">
-					custom
-				</div>-->
 				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
 					<ul>
 						<li><a ui-sref="orderNew" ui-sref-active="active">Order New</a></li>
@@ -92,8 +108,10 @@
 
 		<!-- factories -->
 		<script type="text/javascript" src="launch-vehicles/inventory.factory.js"></script>
+		<script type="text/javascript" src="user.factory.js"></script>
 		<!-- Components -->
 		<script type="text/javascript" src="login/login.js"></script>
+		<script type="text/javascript" src="home.js"></script>
 		<script type="text/javascript" src="user.js"></script>
 		<!--<script type="text/javascript" src="components/vehicle-list.component.js"></script>-->
 		<script type="text/javascript" src="launch-vehicles/order-new.js"></script>
