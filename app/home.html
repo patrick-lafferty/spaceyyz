@@ -1,0 +1,12 @@
+<div ng-controller="userAccount as u">
+
+	<p style="font-size: 16pt">SpaceYYZ is a single page application I wrote to learn and demonstrate front end development. It uses AngularJS, Bootstrap, Firebase, (other stuff).</p>
+
+	<div ng-if="u.user.user.email">
+		<h3>Logged in as: {{u.user.user.email}}</h3>
+	</div>
+
+	<div ng-if="!u.user.user.email">
+		<h3>Not logged in. <a ui-sref="login" ui-sref-active="active">Log in</a> to use SpaceYYZ.</h3>
+	</div>
+</div>
