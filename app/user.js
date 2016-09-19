@@ -12,9 +12,11 @@
 		this.email = function(){return userFactory.getEmail();};
 		this.login = function(email, password) {
 			userFactory.login(email, password, function() {
+				setupDB();
 				$state.go('home');
 			});
 		};
+
 
 		this.logout = function() {
 			this.email = "";

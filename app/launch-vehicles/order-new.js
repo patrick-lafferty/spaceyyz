@@ -13,20 +13,26 @@
 			{name: "Earth", satellites: ["None", "Moon"], selectedSatellite: "None"},
 			{name: "Mars", satellites: ["None", "Phobos", "Deimos"], selectedSatellite: "None"}
 		];
+		this.vehicles = [];
 
 		this.selectedPrimary = this.primaries[0];
 		this.search_name = "";
 		this.search_payload = 10000;
+		var self = this;
 
 		vehicleInventoryFactory.getVehicles(set);
+		vehicleInventoryFactory.getInventory(setInventory);
 
-		var self = this;
 		function set(vehicles) {
 			self.vehicles = vehicles.vehicles;
 			self.smallVehicles = vehicles.smallVehicles;
 			self.mediumVehicles = vehicles.mediumVehicles;
 			self.heavyVehicles = vehicles.heavyVehicles;
 			self.superHeavyVehicles = vehicles.superHeavyVehicles;
+		}
+		
+		function setInventory(inventory) {
+			self.inventory = inventory;
 		}
 
 		this.search = function(type) {
@@ -45,8 +51,10 @@
 
 		this.order = function(vehicle) {
 			//alert("ordering a new " + vehicle.name);
-			vehicle.inventory++;
-			vehicleInventoryFactory.updateVehicle(vehicle);
+			//var v = { count: 0};
+			var inv = this.inventory.find(function(v) {return v.key === vehicle.key;});
+			inv.count++;
+			vehicleInventoryFactory.updateVehicle(inv);
 		}
 	}
 })();
