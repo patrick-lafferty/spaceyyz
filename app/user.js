@@ -17,7 +17,6 @@
 			});
 		};
 
-
 		this.logout = function() {
 			this.email = "";
 			userFactory.logout();
@@ -30,16 +29,9 @@
 		};
 
 		userFactory.onAuthChange(self, function (user) {
-		/*if (user) {
-				self.email = user.email;
-			} else {
-				self.email = "";
-			}*/
 			$timeout(function() {
 				$scope.$apply();
 			});
-
-			//alert("change!");
 		});
 	}
 })();

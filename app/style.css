@@ -19,3 +19,16 @@ html, body {
 .panel-body {
 	background-color: #354545;
 }
+
+.vehicles {
+	list-style: none;
+}
+
+.vehicles li {
+	border-bottom: 1px solid #ddd;
+
+}
+
+.vehicles li:last-child {
+	border-bottom: none;
+}

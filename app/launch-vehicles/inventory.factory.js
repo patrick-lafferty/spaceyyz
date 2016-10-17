@@ -29,20 +29,6 @@
 			return b.capacity - a.capacity;
 		}
 
-		/*function getVehicles(c) {
-			var gv = {};
-
-			$http.get('vehicles.json').then(function(response) {
-				var vehicles = response.data;
-				gv.vehicles = vehicles;
-				gv.smallVehicles = vehicles.filter(maximumCapacity(2000)).sort(sortByCapacity);
-				gv.mediumVehicles = vehicles.filter(capacityBetween(2000, 20000)).sort(sortByCapacity);
-				gv.heavyVehicles = vehicles.filter(capacityBetween(20000, 50000)).sort(sortByCapacity);
-				gv.superHeavyVehicles = vehicles.filter(minimumCapacity(50000)).sort(sortByCapacity);
-				c(gv);
-			});
-
-		}*/
 		function getVehicles(c) {
 			var gv = {};
 
@@ -104,14 +90,12 @@
 
 		function updateVehicle(vehicle)
 		{
-			//$http.post('vehicles.json', vehicle);
 			firebase.database().ref().child("inventory/" + vehicle.key).update({
 				count: vehicle.count 
 			});
 		}
 
 		return {
-			//vehicles: getVehicles();
 			getVehicles: getVehicles,
 			getInventory: getInventory,
 			updateVehicle: updateVehicle

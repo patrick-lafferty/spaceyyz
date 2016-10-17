@@ -34,6 +34,12 @@
 					resolve: {authenticate: authenticate}
 				},
 				{
+					name: 'config',
+					url: '/launchVehicles/config',
+					component: 'configVehicle',
+					resolve: {authenticate: authenticate}
+				},
+				{
 					name: 'schedule',
 					url: '/flight/schedule',
 					component: 'scheduleFlight',
@@ -99,9 +105,16 @@
 	function authenticate($q, $state, $timeout) {
 		var user = firebase.auth().currentUser;
 
+		//alert(user == null);
 		if (user) {
 			return $q.when();
 		} else {
+			for(var key in localStorage) {
+				if (key.startsWith("firebase:authUser"))
+				{
+					return $q.when();
+				}
+			}
 			
 			$timeout(function() {
 

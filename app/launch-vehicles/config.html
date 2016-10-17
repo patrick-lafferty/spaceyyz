@@ -1,0 +1,36 @@
+<h1>Config</h1>
+
+<uib-tabset active="active">
+	<uib-tab index="0" heading="Existing">
+		<form class="form">
+			<div class="form-group">
+				<input type="text" ng-model="$ctrl.search_name" class="form-control col-sm-6" id="name" placeholder="">
+			</div>
+		</form>
+		<ul class="vehicles">
+			<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search">
+				<form class="form">
+					<div class="form-group">
+						<h4>{{vehicle.name}}</h4>
+						<div ng-show="vehicle.beingEdited">
+							<button class="btn btn-default" ng-click="$ctrl.saveVehicle(vehicle)">save</button>
+						</div>
+
+						<div ng-hide="vehicle.beingEdited">
+							<button class="btn btn-default" ng-click="$ctrl.editVehicle(vehicle)">edit</button>
+						</div>
+					</div>
+					<div ng-show="vehicle.beingEdited">
+						<p>Cost: ${{vehicle.cost}}</p>
+					</div>
+					<div ng-hide="vehicle.beingEdited">
+						<p>Capacity: {{vehicle.capacity}}</p>
+						<p>Cost: ${{vehicle.cost}}</p>
+					</div>
+				</form>
+			</li>
+		</ul>
+	</uib-tab>
+	<uib-tab index="1" heading="New">
+	</uib-tab>
+</uib-tabset>

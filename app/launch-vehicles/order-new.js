@@ -8,12 +8,19 @@
 			controller: OrderLaunchVehicle 
 		});	
 
-	function OrderLaunchVehicle(vehicleInventoryFactory) {
+	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout) {
 		this.primaries = [
 			{name: "Earth", satellites: ["None", "Moon"], selectedSatellite: "None"},
 			{name: "Mars", satellites: ["None", "Phobos", "Deimos"], selectedSatellite: "None"}
 		];
-		this.vehicles = [];
+
+		this.vehicles = {
+			all: [],
+			small: [],
+			medium: [],
+			heavy: [],
+			superHeavy: []
+		}
 
 		this.selectedPrimary = this.primaries[0];
 		this.search_name = "";
@@ -24,11 +31,15 @@
 		vehicleInventoryFactory.getInventory(setInventory);
 
 		function set(vehicles) {
-			self.vehicles = vehicles.vehicles;
-			self.smallVehicles = vehicles.smallVehicles;
-			self.mediumVehicles = vehicles.mediumVehicles;
-			self.heavyVehicles = vehicles.heavyVehicles;
-			self.superHeavyVehicles = vehicles.superHeavyVehicles;
+			self.vehicles.all = vehicles.vehicles;
+			self.vehicles.small = vehicles.smallVehicles;
+			self.vehicles.medium = vehicles.mediumVehicles;
+			self.vehicles.heavy = vehicles.heavyVehicles;
+			self.vehicles.superHeavy = vehicles.superHeavyVehicles;
+
+			$timeout(function() {
+				$scope.$apply();
+			});
 		}
 		
 		function setInventory(inventory) {
