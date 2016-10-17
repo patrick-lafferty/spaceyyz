@@ -15,6 +15,8 @@
 			all: [],
 		};
 
+		this.newVehicle = {};
+
 		this.search_name = "";
 		this.search = function(vehicle) {
 			return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
@@ -39,6 +41,13 @@
 
 		this.deleteVehicle = function(vehicle) {
 			vehicleInventoryFactory.deleteVehicle(vehicle);
+			
+			self.vehicles.all.splice(self.vehicles.all.indexOf(vehicle), 1);
+		};
+
+		this.createVehicle = function(vehicle) {
+			vehicleInventoryFactory.addVehicle(vehicle);
+			self.newVehicle = {};
 		};
 
 		vehicleInventoryFactory.getVehicles(set);

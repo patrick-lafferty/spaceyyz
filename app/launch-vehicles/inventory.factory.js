@@ -110,7 +110,9 @@
 		return {
 			getVehicles: getVehicles,
 			getInventory: getInventory,
-			updateVehicle: updateVehicle
+			updateVehicle: updateVehicle,
+			deleteVehicle: deleteVehicle,
+			addVehicle: addVehicle
 		}
 
 	}
