@@ -6,8 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 	</head>
-	<body>
-		<div class="clearfix" style="color: black">
+	<body style="overflow:hidden">
+		<div class="clearfix" style="color: black; height: 40px">
 			<div class="pull-left">
 
 				<h1 style="display: inline;">SpaceYYZ</h1>
@@ -84,7 +84,8 @@
 			</uib-accordion>	
 		</div>
 
-		<div ui-view style="overflow: hidden; background-color: #505050; height: 100%">
+		<!--<div ui-view style="overflow: hidden; background-color: #505050; height: 100%">-->
+		<div ui-view style="overflow-y: scroll; background-color: #505050; height: calc(100% - 40px)">
 		</div>
 
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>

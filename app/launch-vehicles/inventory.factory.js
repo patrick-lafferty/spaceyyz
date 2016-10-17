@@ -90,9 +90,21 @@
 
 		function updateVehicle(vehicle)
 		{
-			firebase.database().ref().child("inventory/" + vehicle.key).update({
+			/*firebase.database().ref().child("inventory/" + vehicle.key).update({
 				count: vehicle.count 
+			});*/
+
+			firebase.database().ref().child("vehicles/" + vehicle.key).set({
+				capacity: vehicle.capacity,
+				cost: vehicle.cost,
+				name: vehicle.name,
+				description: vehicle.description
 			});
+		}
+
+		function deleteVehicle(vehicle)
+		{
+			firebase.database().ref().child("vehicles/" + vehicle.key).remove();
 		}
 
 		return {

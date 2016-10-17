@@ -24,8 +24,21 @@
 			vehicle.beingEdited = true;
 		};
 
+		this.cancelEditVehicle = function(vehicle) {
+			vehicle.beingEdited = false;
+		};
+
 		this.saveVehicle = function(vehicle) {
 			vehicle.beingEdited = false;
+			vehicleInventoryFactory.updateVehicle(vehicle);
+
+			var index = self.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
+
+			self.vehicles.all[index] = vehicle;
+		};
+
+		this.deleteVehicle = function(vehicle) {
+			vehicleInventoryFactory.deleteVehicle(vehicle);
 		};
 
 		vehicleInventoryFactory.getVehicles(set);
