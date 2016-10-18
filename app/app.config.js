@@ -22,6 +22,12 @@
 					resolve: {authenticate: authenticate}
 				},
 				{
+					name: 'vehicleOrderDetail',
+					url: '/launchVehicles/orderNew/:name',
+					component: 'vehicleOrderDetail',
+					resolve: {authenticate: authenticate}
+				},
+				{
 					name: 'development',
 					url: '/launchVehicles/development',
 					component: 'vehicleDevelopment',

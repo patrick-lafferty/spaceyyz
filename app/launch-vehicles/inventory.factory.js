@@ -39,6 +39,7 @@
 				Object.keys(vehicleObject).forEach(function (key) {
 					var object = vehicleObject[key];
 					object.key = key;
+					object.nameWithoutSpaces = object.name.replace(/\s+/g, "-");
 					vehicles.push(object);
 				});
 
@@ -49,6 +50,14 @@
 				gv.superHeavyVehicles = vehicles.filter(minimumCapacity(50000)).sort(sortByCapacity);
 
 				c(gv);
+			});
+		}
+
+		function getVehicle(name, then) {
+			getVehicles(function(vehicles) {
+				then(vehicles.vehicles.filter(function(vehicle) {
+					return vehicle.nameWithoutSpaces == name;
+				})[0]);
 			});
 		}
 
@@ -108,6 +117,7 @@
 		}
 
 		return {
+			getVehicle: getVehicle,
 			getVehicles: getVehicles,
 			getInventory: getInventory,
 			updateVehicle: updateVehicle,

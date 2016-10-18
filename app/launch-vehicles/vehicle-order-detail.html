@@ -1,0 +1,13 @@
+<div style="display: flex; justify-content: space-between">
+	<h1 style="flex: 1 1 auto">{{$ctrl.vehicle.name}}</h1>
+	<div style="display: flex">
+		<h2 style="margin-right: 20px">Cost: {{$ctrl.vehicle.cost}}</h2>
+		<button class="btn btn-primary" ng-click="$ctrl.open()">Order</button>
+	</div>
+</div>
+
+<h3>Payload Capabilities</h3>
+<p>To LEO: {{$ctrl.vehicle.capacity}}</p>
+
+<h3>Description</h3>
+<p>{{$ctrl.vehicle.description}}</p>

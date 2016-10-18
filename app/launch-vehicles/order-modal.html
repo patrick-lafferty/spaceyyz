@@ -1,0 +1,14 @@
+<div class="modal-header">
+	<h2 class="modal-title" id="modal-title">Order Launch Vehicle</h2>
+</div>
+
+<div class="modal-body" id="modal-body">
+	<h3>Name: {{$ctrl.vehicle.name}}</h3>
+	<h3>Cost: {{$ctrl.vehicle.cost}}</h3>
+
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="$ctrl.confirm()">Confirm Order</button>
+	<button class="btn btn-primary" ng-click="$ctrl.cancel()">Cancel</button>
+</div>
