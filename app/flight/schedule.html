@@ -1,1 +1,46 @@
-<p>Schedule a new flight</p>
+<div class="view">
+	<h1>Schedule a new flight</h1>
+	<uib-tabset active="active">
+		<uib-tab heading="Flight planner" index="0">
+
+			<form class="form-horizontal" style="margin-top: 10px">
+				<div class="form-group">
+					<label for="payload" class="col-sm-2 control-label">Payload</label>
+					<div class="col-sm-3 input-group">
+						<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload">
+						<div class="input-group-addon">kg</div>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label for="destination" class="col-sm-2 control-label">Destination</label>
+				</div>
+			</form>
+
+			<h2>Vehicles that meet mission requirements</h2>
+			<ul class="vehicles">
+				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.filter">
+					<div class="vehiclePreview">
+						<div class="radio" style="flex: 1 3 auto">
+							<label>
+								<input type="radio" name="vehicles" ng-model="vehicle.selected">
+							</label>	
+						</div>
+						<div>
+							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
+							<p>Capacity: {{vehicle.capacity | number}}kg</p>
+							<p>Cost: {{vehicle.cost | currency}}</p>
+							<p>In stock: {{vehicle.inventory}}</p>
+						</div>
+						<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
+						<div ng-show="vehicle.selected" uib-alert ng-class="alert-danger">Currently out of stock, will be ordered if you schedule this flight></div>
+					</div>
+				</li>
+			</ul>
+		</uib-tab>
+
+		<uib-tab heading="Manual" index="1">
+		</uib-tab>
+		
+	</uib-tabset>
+</div>
+

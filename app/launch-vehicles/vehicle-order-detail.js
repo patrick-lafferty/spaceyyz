@@ -40,23 +40,6 @@
 			});
 
 			self.modalInstance.result.then(function(thing) {
-				/*firebase.database().ref().child("orders/nextId").transaction(
-					function (currentValue) {
-						var next = (currentValue || 0) + 1;
-						var deliveryDate = new Date(); 
-						deliveryDate.setFullYear(new Date().getFullYear() + 1);
-
-						var order = {
-							number: next,
-							deliveryDate: deliveryDate
-						};
-
-						orderFactory.addOrder(order);
-
-						$state.go('orderConfirmation', {orderNumber: next, order: order});
-
-						return next;
-				});*/
 
 				var deliveryDate = new Date(); 
 				deliveryDate.setFullYear(new Date().getFullYear() + 1);

@@ -1,5 +1,11 @@
 <div class="view">
 	<h1>Thank you for your order</h1>
-	<h3>Order number is: {{$ctrl.order.number}}</h3>
-	<h3>Expected delivery: {{$ctrl.order.deliveryDate.toDateString()}}</h3>
+	<div style="font-size: 20px">
+		<p>Order number: {{$ctrl.order.number}}</p>
+		<p>Vehicle name: {{$ctrl.order.vehicleName}}</p>
+		<p>Expected delivery: {{$ctrl.order.deliveryDate.toDateString()}}</p>
+		<p>Order was received on: {{$ctrl.order.orderDate.toDateString()}}</p>
+		<br><br>
+		<p>You can track the progress of this order by going to Launch Vehicles \ In Development page</p>
+	</div>
 </div>

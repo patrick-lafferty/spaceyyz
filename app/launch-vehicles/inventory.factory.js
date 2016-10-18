@@ -30,7 +30,6 @@
 		}
 
 		function getVehicles() {
-			//var gv = {};
 
 			return firebase.database().ref().child("vehicles").once('value').then(function(snapshot) {
 
@@ -46,13 +45,6 @@
 
 				return getInventory().then(function (inventory) {
 					inventory.forEach(function (vehicle) {
-						/*var matchingVehicle = vehicles.find(function (v) {
-							return v.key === vehicle.key;
-						});
-						
-						if (typeof matchingVehicle !== "undefined")
-							matchingVehicle.count = vehicle.count;*/
-
 						vehicles.forEach(function(v) {
 							if (v.key === vehicle.key) {
 								v.inventory = vehicle.count;
@@ -69,13 +61,11 @@
 					return gv;
 				});
 
-
-				//c(gv);
 			});
 		}
 
 		function getVehicle(name, then) {
-			getVehicles(function(vehicles) {
+			getVehicles().then(function(vehicles) {
 				then(vehicles.vehicles.filter(function(vehicle) {
 					return vehicle.nameWithoutSpaces == name;
 				})[0]);

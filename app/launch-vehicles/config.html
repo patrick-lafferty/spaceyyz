@@ -1,5 +1,5 @@
 <div class="view">
-	<h1>Config</h1>
+	<h1>Configure Vehicles</h1>
 
 	<uib-tabset active="active">
 	<uib-tab index="0" heading="Existing">
@@ -46,8 +46,8 @@
 							</div>
 						</div>
 						<div ng-hide="vehicle.beingEdited">
-							<p>Capacity: {{vehicle.capacity}}</p>
-							<p>Cost: ${{vehicle.cost}}</p>
+							<p>Capacity: {{vehicle.capacity | number}}kg</p>
+							<p>Cost: {{vehicle.cost | currency}}</p>
 							<p>Description: {{vehicle.description}}</p>
 						</div>
 					</form>

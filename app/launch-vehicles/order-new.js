@@ -27,8 +27,8 @@
 		this.search_payload = 10000;
 		var self = this;
 
-		vehicleInventoryFactory.getVehicles(set);
-		vehicleInventoryFactory.getInventory(setInventory);
+		vehicleInventoryFactory.getVehicles().then(set);
+		vehicleInventoryFactory.getInventory().then(setInventory);
 
 		function set(vehicles) {
 			self.vehicles.all = vehicles.vehicles;
@@ -61,8 +61,6 @@
 		}
 
 		this.order = function(vehicle) {
-			//alert("ordering a new " + vehicle.name);
-			//var v = { count: 0};
 			var inv = this.inventory.find(function(v) {return v.key === vehicle.key;});
 			inv.count++;
 			vehicleInventoryFactory.updateVehicle(inv);

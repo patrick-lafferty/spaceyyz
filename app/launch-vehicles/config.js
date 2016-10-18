@@ -50,7 +50,7 @@
 			self.newVehicle = {};
 		};
 
-		vehicleInventoryFactory.getVehicles(set);
+		vehicleInventoryFactory.getVehicles().then(set);
 
 		function set(vehicles) {
 			self.vehicles.all = vehicles.vehicles;

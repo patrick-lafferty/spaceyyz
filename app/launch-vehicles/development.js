@@ -15,7 +15,7 @@
 
 		var self = this;
 
-		orderFactory.getOrders(function (orders) {
+		orderFactory.getOrders().then(function (orders) {
 			self.orders.all = orders;
 
 			var timestampNow = new Date().getTime();
