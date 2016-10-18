@@ -1,1 +1,7 @@
 <p>Vehicles in development</p>
+<ul>
+	<li ng-repeat="order in $ctrl.orders.all">
+		<p>Order number: {{order.number}}</p>
+		<p>Delivery date: {{order.deliveryDate.toDateString()}}</p>
+	</li>
+</ul>

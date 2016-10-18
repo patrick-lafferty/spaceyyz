@@ -8,7 +8,7 @@
 	function OrderFactory() {
 
 		function getOrders(then) {
-			firebase.database().ref().child("orders").once('value').then(function(snapshot) {
+			firebase.database().ref().child("orders/current").once('value').then(function(snapshot) {
 				var orderObject = snapshot.val();
 
 				var orders = [];
@@ -16,6 +16,7 @@
 				Object.keys(orderObject).forEach(function (key) {
 					var object = orderObject[key];
 					object.key = key;
+					object.deliveryDate = new Date(object.deliveryTimestamp);
 					orders.push(object);
 				});
 
@@ -31,10 +32,12 @@
 		}
 
 		function addOrder(order) {
-			var key = firebase.database().ref().child("orders").push().key;
+			var key = firebase.database().ref().child("orders/current").push().key;
 			var updates = {};
 
-			updates["/orders/" + key] = order;
+			order.deliveryTimestamp = order.deliveryDate.getTime();
+
+			updates["/orders/current/" + key] = order;
 			firebase.database().ref().update(updates);
 		}
 
