@@ -10,7 +10,7 @@
 
 	function VehicleOrderDetail(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams,
-			$uibModal, $state) {
+			$uibModal, $state, orderFactory) {
 
 		this.vehicle = {};
 		var self = this;
@@ -40,17 +40,39 @@
 			});
 
 			self.modalInstance.result.then(function(thing) {
-				firebase.database().ref().child("orders/nextId").transaction(
+				/*firebase.database().ref().child("orders/nextId").transaction(
 					function (currentValue) {
 						var next = (currentValue || 0) + 1;
+						var deliveryDate = new Date(); 
+						deliveryDate.setFullYear(new Date().getFullYear() + 1);
+
 						var order = {
 							number: next,
-							deliveryDate: 'tomorrow'
+							deliveryDate: deliveryDate
 						};
+
+						orderFactory.addOrder(order);
 
 						$state.go('orderConfirmation', {orderNumber: next, order: order});
 
 						return next;
+				});*/
+
+				var deliveryDate = new Date(); 
+				deliveryDate.setFullYear(new Date().getFullYear() + 1);
+
+				var order = {
+					deliveryDate: deliveryDate
+				};
+
+				orderFactory.getNewOrderNumber().then(function(snapshot) {
+					var orderNumber = snapshot.snapshot.val();
+					order.number = orderNumber;
+					orderFactory.addOrder(order);
+
+					$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
+				}, function (error) {
+					console.error(error);
 				});
 			});
 
