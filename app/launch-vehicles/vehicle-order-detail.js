@@ -10,7 +10,7 @@
 
 	function VehicleOrderDetail(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams,
-			$uibModal) {
+			$uibModal, $state) {
 
 		this.vehicle = {};
 		var self = this;
@@ -30,12 +30,28 @@
 				ariaDescribedBy: 'modal-body',
 				templateUrl: 'launch-vehicles/order-modal.html',
 				component: 'orderVehicleModal',
+				backdrop: 'static',
 				resolve: {
 					vehicle: function() {
 						return self.vehicle;
 					}
 				}
 			
+			});
+
+			self.modalInstance.result.then(function(thing) {
+				firebase.database().ref().child("orders/nextId").transaction(
+					function (currentValue) {
+						var next = (currentValue || 0) + 1;
+						var order = {
+							number: next,
+							deliveryDate: 'tomorrow'
+						};
+
+						$state.go('orderConfirmation', {orderNumber: next, order: order});
+
+						return next;
+				});
 			});
 
 		};

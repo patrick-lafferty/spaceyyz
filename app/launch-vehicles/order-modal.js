@@ -23,7 +23,7 @@
 		};
 
 		this.confirm = function() {
-			self.modalInstance.close();
+			self.modalInstance.close({name: 0});
 		};
 
 	}

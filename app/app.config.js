@@ -28,6 +28,20 @@
 					resolve: {authenticate: authenticate}
 				},
 				{
+					name: 'orderConfirmation',
+					url: '/launchVehicles/order/:orderNumber',
+					component: 'orderConfirmation',
+					params: {
+						order: {},
+						hiddenParam: 'YES'
+					},
+					resolve: {authenticate: authenticate, 
+						/*order: ['$stateParams', function($stateParams) {
+							return $stateParams.order;
+						}]*/
+					}
+				},
+				{
 					name: 'development',
 					url: '/launchVehicles/development',
 					component: 'vehicleDevelopment',
