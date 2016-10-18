@@ -1,7 +1,16 @@
-<p>Vehicles in development</p>
-<ul>
-	<li ng-repeat="order in $ctrl.orders.all">
-		<p>Order number: {{order.number}}</p>
-		<p>Delivery date: {{order.deliveryDate.toDateString()}}</p>
-	</li>
-</ul>
+<div class="view">
+	<h1>Vehicles in development</h1>
+	<ul class="orders">
+		<li ng-repeat="order in $ctrl.orders.all">
+			<h3>Order number: {{order.number}}</h3>
+			<p>Vehicle name: {{order.vehicleName}}</p>
+			<p>Delivery date: {{order.deliveryDate.toDateString()}}</p>
+			<div style="display: flex">
+				<p>Progress:</p>
+				<div class="col-sm-4">
+					<uib-progressbar value="order.progress"></uib-progressbar>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

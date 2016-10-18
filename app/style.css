@@ -39,11 +39,20 @@ html, body {
 
 .vehiclePreview > div {
 	flex: 1 1 auto;
-	max-width: 200px;
+	max-width: 300px;
+	width: 300px;
+}
+
+.view {
+	margin: 10px;
 }
 
 .vehiclePreview > p {
 	flex: 4 1 auto;
+}
+
+.vehiclePreviewDescription {
+	margin-top: 10px;
 }
 
 .modal-header, .modal-body, .modal-footer {
@@ -87,6 +96,14 @@ html, body {
 	margin-top: -470px;
 	transform-origin: 47% 50%;
 	animation-delay: -3.5s;
+}
+
+.orders {
+	list-style: none;
+}
+
+.sideMenu ul {
+	list-style: none;
 }
 
 @keyframes logoTransforms {

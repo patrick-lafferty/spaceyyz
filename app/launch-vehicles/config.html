@@ -1,86 +1,88 @@
-<h1>Config</h1>
+<div class="view">
+	<h1>Config</h1>
 
-<uib-tabset active="active">
-<uib-tab index="0" heading="Existing">
-		<form class="form">
-			<div class="form-group">
-				<input type="text" ng-model="$ctrl.search_name" class="form-control col-sm-6" id="name" placeholder="">
-			</div>
-		</form>
-		<ul class="vehicles">
-			<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<h4>{{vehicle.name}}</h4>
-						<div class="btn-group" uib-dropdown is-open="status.isopen">
-							<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-								Modify <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
-								<li role="menuitem" ng-hide="vehicle.beingEdited"><a ng-click="$ctrl.editVehicle(vehicle)">Edit</a></li>
-								<li role="menuitem" ng-show="vehicle.beingEdited"><a ng-click="$ctrl.cancelEditVehicle(vehicle)">Cancel Edit</a></li>
-								<li role="menuitem" ng-class="{'disabled': !vehicle.beingEdited}"><a ng-click="$ctrl.saveVehicle(vehicle)">Save</a></li>
-								<li role="menuitem" ng-class="{'disabled': vehicle.beingEdited}"><a ng-click="$ctrl.deleteVehicle(vehicle)">Delete</a></li>
-							</ul>
-						</div>	
-					</div>
-					<div ng-show="vehicle.beingEdited">
+	<uib-tabset active="active">
+	<uib-tab index="0" heading="Existing">
+			<form class="form">
+				<div class="form-group">
+					<input type="text" ng-model="$ctrl.search_name" class="form-control col-sm-6" id="name" placeholder="">
+				</div>
+			</form>
+			<ul class="vehicles">
+				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search">
+					<form class="form-horizontal">
 						<div class="form-group">
-							<label for="capacity" class="col-sm-2 control-label">Capacity</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
+							<h4>{{vehicle.name}}</h4>
+							<div class="btn-group" uib-dropdown is-open="status.isopen">
+								<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+									Modify <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
+									<li role="menuitem" ng-hide="vehicle.beingEdited"><a ng-click="$ctrl.editVehicle(vehicle)">Edit</a></li>
+									<li role="menuitem" ng-show="vehicle.beingEdited"><a ng-click="$ctrl.cancelEditVehicle(vehicle)">Cancel Edit</a></li>
+									<li role="menuitem" ng-class="{'disabled': !vehicle.beingEdited}"><a ng-click="$ctrl.saveVehicle(vehicle)">Save</a></li>
+									<li role="menuitem" ng-class="{'disabled': vehicle.beingEdited}"><a ng-click="$ctrl.deleteVehicle(vehicle)">Delete</a></li>
+								</ul>
+							</div>	
+						</div>
+						<div ng-show="vehicle.beingEdited">
+							<div class="form-group">
+								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="cost" class="col-sm-2 control-label">Cost</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="description" class="col-sm-2 control-label">Description</label>
+								<div class="col-sm-5">
+									<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="cost" class="col-sm-2 control-label">Cost</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
-							</div>
+						<div ng-hide="vehicle.beingEdited">
+							<p>Capacity: {{vehicle.capacity}}</p>
+							<p>Cost: ${{vehicle.cost}}</p>
+							<p>Description: {{vehicle.description}}</p>
 						</div>
-						<div class="form-group">
-							<label for="description" class="col-sm-2 control-label">Description</label>
-							<div class="col-sm-5">
-								<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
-							</div>
-						</div>
+					</form>
+				</li>
+			</ul>
+		</uib-tab>
+		<uib-tab index="1" heading="New">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="name" ng-model="$ctrl.newVehicle.name" placeholder="">
 					</div>
-					<div ng-hide="vehicle.beingEdited">
-						<p>Capacity: {{vehicle.capacity}}</p>
-						<p>Cost: ${{vehicle.cost}}</p>
-						<p>Description: {{vehicle.description}}</p>
+				</div><div class="form-group">
+					<label for="capacity" class="col-sm-2 control-label">Capacity</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
 					</div>
-				</form>
-			</li>
-		</ul>
-	</uib-tab>
-	<uib-tab index="1" heading="New">
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label for="name" class="col-sm-2 control-label">Name</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="name" ng-model="$ctrl.newVehicle.name" placeholder="">
 				</div>
-			</div><div class="form-group">
-				<label for="capacity" class="col-sm-2 control-label">Capacity</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
+				<div class="form-group">
+					<label for="cost" class="col-sm-2 control-label">Cost</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="cost" class="col-sm-2 control-label">Cost</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
+				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-5">
+						<textarea class="form-control" id="description" ng-model="$ctrl.newVehicle.description"></textarea>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">Description</label>
-				<div class="col-sm-5">
-					<textarea class="form-control" id="description" ng-model="$ctrl.newVehicle.description"></textarea>
+				<div class="form-group">
+					<button ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
 				</div>
-			</div>
-			<div class="form-group">
-				<button ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
-			</div>
-		</form>
-	</uib-tab>
-</uib-tabset>
+			</form>
+		</uib-tab>
+	</uib-tabset>
+</div>

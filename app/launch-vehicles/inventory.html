@@ -1,15 +1,35 @@
-<h1>Inventory</h1>
+<div class="view">
+	<h1>Inventory</h1>
 
-<h3>Super-heavy launch vehicles (>50,000 kg to LEO)</h3>
-<vehicle-list vehicles="$ctrl.superHeavyVehicles"></vehicle-list>
+	<uib-tabset active="active">
+		<uib-tab index="0" heading="Super-heavy">
+			<h3>>50,000kg to LEO</h3>
+			<vehicle-list vehicles="$ctrl.superHeavyVehicles"></vehicle-list>
+		</uib-tab>
+		<uib-tab index="1" heading="Heavy">
+			<h3>20,000kg to 50,000kg to LEO</h3>
+			<vehicle-list vehicles="$ctrl.heavyVehicles"></vehicle-list>
+		</uib-tab>
+		<uib-tab index="2" heading="Medium">
+			<h3>2,000kg to 20,000kg to LEO</h3>
+			<vehicle-list vehicles="$ctrl.mediumVehicles"></vehicle-list>
+		</uib-tab>
+		<uib-tab index="3" heading="Small">
+			<h3>&lt2,000kg to LEO</h3>
+			<vehicle-list vehicles="$ctrl.smallVehicles"></vehicle-list>
+		</uib-tab>
+	</uib-tabset>
 
-<h3>Heavy launch vehicles (20,000 kg to 50,000 kg to LEO)</h3>
-<vehicle-list vehicles="$ctrl.heavyVehicles"></vehicle-list>
+	<!--<h3>Super-heavy launch vehicles (>50,000 kg to LEO)</h3>
+	<vehicle-list vehicles="$ctrl.superHeavyVehicles"></vehicle-list>
 
-<h3>Medium launch vehicles (2,000 kg to 20,000 kg to LEO)</h3>
-<vehicle-list vehicles="$ctrl.mediumVehicles"></vehicle-list>
+	<h3>Heavy launch vehicles (20,000 kg to 50,000 kg to LEO)</h3>
+	<vehicle-list vehicles="$ctrl.heavyVehicles"></vehicle-list>
 
-<h3>Small launch vehicles (&lt2,000 kg to LEO)</h3>
-<vehicle-list vehicles="$ctrl.smallVehicles"></vehicle-list>
+	<h3>Medium launch vehicles (2,000 kg to 20,000 kg to LEO)</h3>
+	<vehicle-list vehicles="$ctrl.mediumVehicles"></vehicle-list>
 
-
+	<h3>Small launch vehicles (&lt2,000 kg to LEO)</h3>
+	<vehicle-list vehicles="$ctrl.smallVehicles"></vehicle-list>
+	-->
+</div>

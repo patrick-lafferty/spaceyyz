@@ -62,7 +62,9 @@
 				deliveryDate.setFullYear(new Date().getFullYear() + 1);
 
 				var order = {
-					deliveryDate: deliveryDate
+					orderTimestamp: new Date().getTime(),
+					deliveryDate: deliveryDate,
+					vehicleName: self.vehicle.name
 				};
 
 				orderFactory.getNewOrderNumber().then(function(snapshot) {

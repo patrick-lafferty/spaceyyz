@@ -18,6 +18,14 @@
 		orderFactory.getOrders(function (orders) {
 			self.orders.all = orders;
 
+			var timestampNow = new Date().getTime();
+
+			self.orders.all.forEach(function (order) {
+				var t = timestampNow - order.orderTimestamp;
+				
+				order.progress = 100 * t / (order.deliveryTimestamp - order.orderTimestamp);
+			});
+
 			$timeout(function() {
 				$scope.$apply();
 			});

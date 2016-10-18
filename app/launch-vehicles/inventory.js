@@ -8,8 +8,8 @@
 			controller: Inventory
 		});
 
-	function Inventory(vehicleInventoryFactory) {
-		vehicleInventoryFactory.getVehicles(set);
+	function Inventory(vehicleInventoryFactory, $timeout, $scope) {
+		vehicleInventoryFactory.getVehicles().then(set);
 
 		var self = this;
 		function set(vehicles) {
@@ -17,6 +17,10 @@
 			self.mediumVehicles = vehicles.mediumVehicles;
 			self.heavyVehicles = vehicles.heavyVehicles;
 			self.superHeavyVehicles = vehicles.superHeavyVehicles;
+
+			$timeout(function() {
+				$scope.$apply();
+			});
 		}
 	}
 })();
