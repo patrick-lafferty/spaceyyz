@@ -8,8 +8,9 @@
 					<input type="text" ng-model="$ctrl.search_name" class="form-control col-sm-6" id="name" placeholder="">
 				</div>
 			</form>
-			<ul class="vehicles">
-				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search">
+			<br>
+			<ul class="vehicles" style="margin-top: 10px">
+				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search | orderBy: 'name'">
 					<form class="form-horizontal">
 						<div class="form-group">
 							<h4>{{vehicle.name}}</h4>
@@ -29,13 +30,13 @@
 							<div class="form-group">
 								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
+									<input type="number" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cost" class="col-sm-2 control-label">Cost</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
+									<input type="number" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -64,13 +65,13 @@
 				</div><div class="form-group">
 					<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
+						<input type="number" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="cost" class="col-sm-2 control-label">Cost</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
+						<input type="number" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
@@ -80,7 +81,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<button ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
+					<div class="col-sm-7">
+						<button class="btn btn-primary form-control" ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
+					</div>
 				</div>
 			</form>
 		</uib-tab>

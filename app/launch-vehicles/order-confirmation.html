@@ -1,11 +1,23 @@
 <div class="view">
 	<h1>Thank you for your order</h1>
-	<div style="font-size: 20px">
-		<p>Order number: {{$ctrl.order.number}}</p>
-		<p>Vehicle name: {{$ctrl.order.vehicleName}}</p>
-		<p>Expected delivery: {{$ctrl.order.deliveryDate.toDateString()}}</p>
-		<p>Order was received on: {{$ctrl.order.orderDate.toDateString()}}</p>
+	<div style="font-size: 20px" class="container">
+		<div class="row">
+			<p class="col-sm-3 text-right">Order number:</p>
+		   	<p>{{$ctrl.order.number}}</p>
+		</div>
+		<div class="row">
+			<p class="col-sm-3 text-right">Vehicle name:</p>
+			<p>{{$ctrl.order.vehicleName}}</p>
+		</div>
+		<div class="row">
+			<p class="col-sm-3 text-right">Expected delivery:</p>
+			<p>{{$ctrl.order.deliveryDate.toDateString()}}</p>
+		</div>
+		<div class="row">
+			<p class="col-sm-3 text-right">Order was received on:</p>
+			<p>{{$ctrl.order.orderDate.toDateString()}}</p>
+		</div>
 		<br><br>
-		<p>You can track the progress of this order by going to Launch Vehicles \ In Development page</p>
+		<p>You can track the progress of this order from the In Development page under the Launch Vehicles menu.</p> 
 	</div>
 </div>

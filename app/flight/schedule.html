@@ -3,11 +3,12 @@
 	<uib-tabset active="active">
 		<uib-tab heading="Flight planner" index="0">
 
+			<h2>Mission Parameters</h2>
 			<form class="form-horizontal" style="margin-top: 10px">
 				<div class="form-group">
 					<label for="payload" class="col-sm-2 control-label">Payload</label>
 					<div class="col-sm-3 input-group">
-						<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload">
+						<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload" required ng-pattern="/^[1-9][0-9]*/">
 						<div class="input-group-addon">kg</div>
 					</div>	
 				</div>
@@ -22,7 +23,7 @@
 					<div class="vehiclePreview">
 						<div class="radio" style="flex: 1 3 auto">
 							<label>
-								<input type="radio" name="vehicles" ng-model="vehicle.selected">
+								<input type="radio" name="vehicles" ng-model="$ctrl.selectedVehicle" ng-value="vehicle">
 							</label>	
 						</div>
 						<div>
@@ -32,10 +33,32 @@
 							<p>In stock: {{vehicle.inventory}}</p>
 						</div>
 						<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
-						<div ng-show="vehicle.selected" uib-alert ng-class="alert-danger">Currently out of stock, will be ordered if you schedule this flight></div>
 					</div>
+					<div ng-show="$ctrl.selectedVehicle === vehicle && vehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Currently out of stock, will be ordered if you schedule this flight</div>
 				</li>
 			</ul>
+
+			<h2>Launch Parameters</h2>
+			<form class="form-horizontal" style="margin-top: 10px">
+				<div class="form-group">
+					<label for="launchDate" class="col-sm-2 control-label">Launch Date</label>
+					<div class="col-sm-3 input-group">
+						<input type="text" uib-datepicker-popup close-text="Close" class="form-control" id="launchDate" ng-model="$ctrl.flight.launchDate" is-open="datePicker.isOpen">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-primary" ng-click="datePicker.isOpen = true">
+								<i class="glyphicon glyphicon-calendar"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="launchSite" class="col-sm-2 control-label">Launch Site</label>
+					<div class="col-sm-3 input-group">
+						<input type="text" id="launchSite">
+					</div>
+				</div>
+			</form>
+
 		</uib-tab>
 
 		<uib-tab heading="Manual" index="1">

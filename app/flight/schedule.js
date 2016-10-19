@@ -14,10 +14,15 @@
 		var self = this;
 
 		this.filter = function(vehicle) {
-			return vehicle.capacity >= self.payload;
+			//alert(typeof self.payload);
+			return vehicle.capacity >= Number(self.payload);
 		};
 
 		this.vehicles = {all: []};
+		this.selectedVehicle = {};
+		this.datePicker = {
+			isOpen: false
+		};
 
 		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
 			self.vehicles.all = vehicles.vehicles;

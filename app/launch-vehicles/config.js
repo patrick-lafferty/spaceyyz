@@ -8,7 +8,7 @@
 			controller: Config
 		});
 
-	function Config(vehicleInventoryFactory, $scope, $timeout) {
+	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal) {
 
 		var self = this;
 		this.vehicles = {
@@ -39,25 +39,42 @@
 			self.vehicles.all[index] = vehicle;
 		};
 
-		this.deleteVehicle = function(vehicle) {
-			vehicleInventoryFactory.deleteVehicle(vehicle);
+		self.modalInstance = {};
+		this.deleteVehicle = function (vehicle) {
+			self.modalInstance = $uibModal.open({
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				component: 'confirmVehicleDeleteModal',
+				backdrop: 'static',
+				resolve: {
+					vehicle: function() {
+						return vehicle;
+					}
+				}
 			
-			self.vehicles.all.splice(self.vehicles.all.indexOf(vehicle), 1);
+			});
+
+			self.modalInstance.result.then(function (vehicle) {
+				vehicleInventoryFactory.deleteVehicle(vehicle);
+				
+				self.vehicles.all.splice(self.vehicles.all.indexOf(vehicle), 1);
+			});
+
 		};
 
 		this.createVehicle = function(vehicle) {
 			vehicleInventoryFactory.addVehicle(vehicle);
+			self.vehicles.all.push(vehicle);
 			self.newVehicle = {};
 		};
 
-		vehicleInventoryFactory.getVehicles().then(set);
-
-		function set(vehicles) {
+		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
 			self.vehicles.all = vehicles.vehicles;
 
 			$timeout(function() {
 				$scope.$apply();
 			});
-		}
+		});
+
 	}
 })();

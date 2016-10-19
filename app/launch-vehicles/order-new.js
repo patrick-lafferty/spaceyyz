@@ -47,11 +47,11 @@
 		}
 
 		this.search = function(type) {
-			if (type === "Name") {
+			if (type === "name") {
 				return function(vehicle) {
 					return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
 				};
-			} else if (type === "Payload") {
+			} else if (type === "capacity") {
 				return function(vehicle) {
 					return vehicle.capacity >= self.search_payload;
 				};
