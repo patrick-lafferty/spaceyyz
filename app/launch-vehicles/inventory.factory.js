@@ -1,3 +1,6 @@
+/*
+ * VehicleInventoryFactory handles all things vehicular. It manages accessing/modifying vehicles stored in firebase
+ * */
 (function() {
 	'use strict';
 
@@ -84,7 +87,6 @@
 					inventory.push(object);
 				});
 
-				//then(inventory);
 				return inventory;
 			});
 		}
@@ -105,10 +107,6 @@
 
 		function updateVehicle(vehicle)
 		{
-			/*firebase.database().ref().child("inventory/" + vehicle.key).update({
-				count: vehicle.count 
-			});*/
-
 			firebase.database().ref().child("vehicles/" + vehicle.key).set({
 				capacity: vehicle.capacity,
 				cost: vehicle.cost,

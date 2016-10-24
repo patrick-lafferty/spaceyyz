@@ -1,3 +1,9 @@
+/* OrderLaunchVehicle is the component for the Order New page.
+ * It lists all of the vehicles currently configured in the database that
+ * can be purchased by the user. It allows filtering by name or payload, 
+ * and sorting alphabetically if filtering by name, or sorting by payload capacity
+ * if filtering by payload.
+ * */
 (function() {
 	'use strict';
 
@@ -55,15 +61,8 @@
 				return function(vehicle) {
 					return vehicle.capacity >= self.search_payload;
 				};
-			} else {
-				alert(type + " shouldn't get here");
 			}
 		}
 
-		this.order = function(vehicle) {
-			var inv = this.inventory.find(function(v) {return v.key === vehicle.key;});
-			inv.count++;
-			vehicleInventoryFactory.updateVehicle(inv);
-		}
 	}
 })();

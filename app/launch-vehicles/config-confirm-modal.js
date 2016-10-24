@@ -1,3 +1,8 @@
+/*
+ * ConfirmVehicleDeleteModal is a component for a modal that pops up when
+ * the user tries to delete a vehicle in the Config page
+ * */
+
 (function() {
 	'use strict';
 

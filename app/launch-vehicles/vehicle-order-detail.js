@@ -1,3 +1,6 @@
+/* VehicleOrderDetail is the component for the individual vehicle pages
+ * where the user can view the vehicle's details and order it.
+ * */
 (function() {
 	'use strict';
 

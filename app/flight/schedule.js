@@ -14,7 +14,6 @@
 		var self = this;
 
 		this.filter = function(vehicle) {
-			//alert(typeof self.payload);
 			return vehicle.capacity >= Number(self.payload);
 		};
 
@@ -24,6 +23,30 @@
 			isOpen: false
 		};
 
+		this.flight = {
+			launchDate: new Date()
+		}
+
+		this.datePickerOptions = {
+			minDate: new Date()
+		};
+		
+		function notifyChanges() {
+			$timeout(function() {
+				$scope.$apply();
+			});
+		}
+
+		this.selected = function() {
+			if (self.selectedVehicle.inventory === 0) {
+				self.datePickerOptions.minDate.setFullYear(new Date().getFullYear() + 1);
+
+				if (self.flight.launchDate < self.datePickerOptions.minDate) {
+					self.flight.launchDate = self.datePickerOptions.minDate;
+				}
+			}
+		};
+
 		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
 			self.vehicles.all = vehicles.vehicles;
 
@@ -31,9 +54,8 @@
 				vehicle.selected = false;
 			});
 
-			$timeout(function() {
-				$scope.$apply();
-			});
+			notifyChanges();
+
 		});
 
 	}

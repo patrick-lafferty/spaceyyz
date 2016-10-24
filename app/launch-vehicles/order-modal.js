@@ -1,3 +1,7 @@
+/* OrderVehicleModal is the controller for the modal that pops up
+ * when the user clicks on the order button on a vehicle's information
+ * page.
+ * */
 (function() {
 	'use strict';
 

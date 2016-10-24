@@ -1,3 +1,7 @@
+/*
+ * ConfigVehicle is the component for Config page. Its used to add/modify/delete launch
+ * vehicles from the database
+ * */
 (function() {
 	'use strict';
 
@@ -16,7 +20,6 @@
 		};
 
 		this.newVehicle = {};
-
 		this.search_name = "";
 		this.search = function(vehicle) {
 			return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());

@@ -1,3 +1,7 @@
+/*
+ * Set up all of the state routing and authentication
+ * */
+
 (function() {
 	'use strict';
 
@@ -35,11 +39,7 @@
 						order: {},
 						hiddenParam: 'YES'
 					},
-					resolve: {authenticate: authenticate, 
-						/*order: ['$stateParams', function($stateParams) {
-							return $stateParams.order;
-						}]*/
-					}
+					resolve: {authenticate: authenticate}
 				},
 				{
 					name: 'development',
@@ -125,10 +125,14 @@
 	function authenticate($q, $state, $timeout) {
 		var user = firebase.auth().currentUser;
 
-		//alert(user == null);
 		if (user) {
 			return $q.when();
 		} else {
+			/*
+			 * user can be undefined if they're logged in but refreshed the page
+			 * check to see if firebase saved a token to indicate that they
+			 * will be automatically signed in
+			 */
 			for(var key in localStorage) {
 				if (key.startsWith("firebase:authUser"))
 				{

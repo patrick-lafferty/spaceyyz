@@ -1,3 +1,5 @@
+/* OrderFactory manages access to orders stored in firebase
+ * */
 (function() {
 	'use strict';
 

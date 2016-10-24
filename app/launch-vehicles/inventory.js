@@ -1,3 +1,5 @@
+/* VehicleInventory is the component for the Inventory page. It lists all of the completed owned vehicles
+ * */
 (function() {
 	'use strict';
 

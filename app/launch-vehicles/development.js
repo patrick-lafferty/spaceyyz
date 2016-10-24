@@ -1,3 +1,8 @@
+/* VehicleDevelopment is the component for the In Development page
+ * It shows all of the orders currently being processed, with
+ * a progress bar showing how many dates into the order they are.
+ * */
+
 (function() {
 	'use strict';
 

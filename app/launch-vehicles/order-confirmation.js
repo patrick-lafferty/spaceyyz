@@ -1,3 +1,5 @@
+/* OrderConfirmation is the component for displaying a specific vehicle order's confirmation details
+ * */
 (function() {
 	'use strict';
 

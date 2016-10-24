@@ -1,6 +1,20 @@
-<div ng-controller="userAccount as u">
+<div ng-controller="userAccount as u" class="view">
 
-	<p style="font-size: 16pt">SpaceYYZ is a single page application I wrote to learn and demonstrate front end development. It uses AngularJS, Bootstrap, Firebase, (other stuff).</p>
+	<p style="font-size: 16pt">SpaceYYZ is a single page application I wrote to learn and demonstrate front end development. It currently uses:</p>
+	<ul>
+		<li>AngularJS</li>
+		<li>Angular-UI</li>
+		<li>Angular-UI-Router</li>
+		<li>Bootstrap</li>
+		<li>Firebase</li>
+	</ul>
+
+	<p style="font-size: 16pt">For tools I'm currently using: </p>
+	<ul>
+		<li>npm</li>
+		<li>webpack</li>
+		<li>git</li>
+	</ul>
 
 	<div ng-if="u.user.user.email">
 		<h3>Logged in as: {{u.user.user.email}}</h3>

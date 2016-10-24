@@ -1,3 +1,6 @@
+/* VehicleList is a component that represents a list of vehicles that 
+ * can be filtered, for easy reuse across different pages.
+ * */
 (function() {
 	'use strict';
 
@@ -26,8 +29,6 @@
 				return function(vehicle) {
 					return vehicle.capacity >= self.search_payload;
 				};
-			} else {
-				alert(type + " shouldn't get here");
 			}
 		}
 	}
