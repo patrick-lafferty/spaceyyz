@@ -11,7 +11,10 @@
 		this.getEmail = function(){return userFactory.getEmail();};
 		this.email = function(){return userFactory.getEmail();};
 		this.login = function(email, password) {
-			userFactory.login(email, password, function() {
+			var promise = userFactory.login(email, password);/*, function() {
+				$state.go('home');
+			});*/
+			promise.then(function(user) {
 				$state.go('home');
 			});
 		};

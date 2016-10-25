@@ -41,7 +41,6 @@
 			}
 
 			Object.keys(self.authChangeSubscribers).forEach(function (key) {
-				alert(key);
 				self.authChangeSubscribers[key](user);
 			});
 
@@ -51,13 +50,13 @@
 			return this.factory.user.email;
 		}
 
-		function login(email, password, theny) {
+		function login(email, password) {//, theny) {
 
-			firebase.auth()
+			return firebase.auth()
 				.signInWithEmailAndPassword(email, password).catch(function (error) {
 					alert("Error logging in: " + error.code + ", " + error.message);
-				})
-				.then(theny());
+				});
+				//.then(theny());
 		};
 
 		function logout() {

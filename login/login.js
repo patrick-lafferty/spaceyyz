@@ -13,8 +13,9 @@
 		this.email = "";
 		this.password = "";
 		this.login = function() {
-			userFactory.login(this.email, this.password, function() {
-				$state.go('home');
+			var promise = userFactory.login(this.email, this.password);
+			promise.then(function(user) {
+				$state.go($state.params.redirectTo);
 			});
 
 		};
