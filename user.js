@@ -15,7 +15,7 @@
 				$state.go('home');
 			});*/
 			promise.then(function(user) {
-				$state.go('home');
+				$state.go('auth.home');
 			});
 		};
 

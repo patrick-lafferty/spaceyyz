@@ -11,7 +11,7 @@
 	function Home(userFactory, $timeout, $scope) {
 		var self = this;
 		this.user = {
-			email: ""
+			email: userFactory.user.email
 		};
 
 		//TODO: replace all onAuthChange(this with onAuthChange("componentName"

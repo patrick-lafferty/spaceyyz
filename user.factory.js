@@ -50,19 +50,18 @@
 			return this.factory.user.email;
 		}
 
-		function login(email, password) {//, theny) {
+		function login(email, password) {
 
 			return firebase.auth()
 				.signInWithEmailAndPassword(email, password).catch(function (error) {
 					alert("Error logging in: " + error.code + ", " + error.message);
 				});
-				//.then(theny());
 		};
 
 		function logout() {
 			firebase.auth().signOut().then(function() {
 				factory.user.email = "";
-				$state.go('home', {}, {reload: true});
+				$state.go('login', {}, {reload: true});
 			}, function(error) {
 				alert("error logging out: " + error);});	
 		};

@@ -15,7 +15,8 @@
 		this.login = function() {
 			var promise = userFactory.login(this.email, this.password);
 			promise.then(function(user) {
-				$state.go($state.params.redirectTo);
+				console.log($state.params.redirectTo);
+				$state.go($state.params.redirectTo || "auth.home");
 			});
 
 		};
