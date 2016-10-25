@@ -19,7 +19,6 @@
 		this.logout = function() {
 			this.email = "";
 			userFactory.logout();
-			$state.go('home');
 		};
 
 		var self = this;

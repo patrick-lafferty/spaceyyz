@@ -7,7 +7,7 @@ angular
 
 /* for using webpack, require all the files so it will bundle them together
  * */
-require('./app.config.js')
+/*require('./app.config.js')
 require('./launch-vehicles/inventory.factory.js')
 require('./launch-vehicles/order.factory.js')
 require('./user.factory.js')
@@ -28,4 +28,4 @@ require('./flight/progress.js')
 require('./spaceports/spaceports.js')
 require('./research-development/engine.js')
 require('./research-development/stage.js')
-
+*/

@@ -47,6 +47,7 @@
 					</form>
 				</div>
 
+
 			</div>
 		</div>
 
@@ -55,6 +56,7 @@
 				<div uib-accordion-group class="panel-default" heading="Home">
 					<ul>
 						<li><a ui-sref="home" ui-sref-active="active">Home</a></li>
+						<li><a ui-sref="about" ui-sref-active="active">About</a></li>
 					</ul>
 				</div>
 				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
@@ -93,10 +95,6 @@
 		<div ui-view style="overflow-y: auto; background-color: #505050; height: calc(100% - 40px)">
 		</div>
 		
-		<!--
-	  	switching to use individual firebase features
-		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
-		-->
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
@@ -148,6 +146,7 @@
 
 		<script type="text/javascript" src="login/login.js"></script>
 		<script type="text/javascript" src="home.js"></script>
+		<script type="text/javascript" src="about.js"></script>
 		<script type="text/javascript" src="user.js"></script>
 		<script type="text/javascript" src="launch-vehicles/order-new.js"></script>
 		<script type="text/javascript" src="launch-vehicles/vehicle.js"></script>

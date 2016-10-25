@@ -1,26 +1,3 @@
-<div ng-controller="userAccount as u" class="view">
-
-	<p style="font-size: 16pt">SpaceYYZ is a single page application I wrote to learn and demonstrate front end development. It currently uses:</p>
-	<ul>
-		<li>AngularJS</li>
-		<li>Angular-UI</li>
-		<li>Angular-UI-Router</li>
-		<li>Bootstrap</li>
-		<li>Firebase</li>
-	</ul>
-
-	<p style="font-size: 16pt">For tools I'm currently using: </p>
-	<ul>
-		<li>npm</li>
-		<li>webpack</li>
-		<li>git</li>
-	</ul>
-
-	<div ng-if="u.user.user.email">
-		<h3>Logged in as: {{u.user.user.email}}</h3>
-	</div>
-
-	<div ng-if="!u.user.user.email">
-		<h3>Not logged in. <a ui-sref="login" ui-sref-active="active">Log in</a> to use SpaceYYZ.</h3>
-	</div>
+<div class="view">
+	<h3>Logged in as: {{$ctrl.user.email}}</h3>
 </div>

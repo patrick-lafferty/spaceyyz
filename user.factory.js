@@ -7,12 +7,15 @@
 		.module('spaceyyz')
 		.factory('userFactory', UserFactory);
 
-	function UserFactory() {
+	function UserFactory($state) {
+		var self = this;
 		this.email = "";
 		this.password = "";
 
 		this.authChangeSubscribers = {};
-		this.onAuthChange = function(subscriber, f) {self.authChangeSubscribers[subscriber] = f;}
+		this.onAuthChange = function(subscriber, f) {
+			self.authChangeSubscribers[subscriber] = f;
+		};
 
 		var factory = {
 			email: this.email,
@@ -23,14 +26,13 @@
 			login: login,
 			logout: logout,
 			register: register,
-			onAuthChange: this.onAuthChange
+			onAuthChange: self.onAuthChange
 		};
 
 		if (firebase.auth().currentUser) {
 			factory.user.email = firebase.auth().currentUser.email;
 		}
 
-		var self = this;
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
 				factory.user.email = user.email;
@@ -39,8 +41,10 @@
 			}
 
 			Object.keys(self.authChangeSubscribers).forEach(function (key) {
+				alert(key);
 				self.authChangeSubscribers[key](user);
 			});
+
 		});
 
 		function getEmail() {
@@ -59,6 +63,7 @@
 		function logout() {
 			firebase.auth().signOut().then(function() {
 				factory.user.email = "";
+				$state.go('home', {}, {reload: true});
 			}, function(error) {
 				alert("error logging out: " + error);});	
 		};

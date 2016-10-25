@@ -12,7 +12,13 @@
 				{
 					name: 'home',
 					url: '/home',
-					component: 'home'
+					component: 'home',
+					resolve: {authenticate: authenticate}
+				},
+				{
+					name: 'about',
+					url: '/about',
+					component: 'about'
 				},
 				{
 					name: 'login',
