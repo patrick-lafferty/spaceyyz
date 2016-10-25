@@ -15,11 +15,6 @@
 					component: 'home',
 				},
 				{
-					name: 'about',
-					url: '/about',
-					component: 'about'
-				},
-				{
 					name: 'orderNew',
 					url: '/launchVehicles/orderNew',
 					component: 'orderLaunchVehicle',
@@ -104,6 +99,22 @@
 				}*/
 			];
 
+			var nonAuthStates = [
+				{
+					name: 'about',
+					url: '/about',
+					component: 'about'
+				},
+				{
+					name: 'login',
+					url: '/login',
+					component: 'login',
+					params: {
+						redirectTo: 'auth.home'
+					},
+				}
+			];
+
 			var authState = {
 				name: 'auth',
 				template: '<ui-view></ui-view>'
@@ -115,14 +126,10 @@
 				state.name = 'auth.' + state.name;
 				$stateProvider.state(state);
 			});
-				$stateProvider.state({
-					name: 'login',
-					url: '/login',
-					component: 'login',
-					params: {
-						redirectTo: 'auth.home'
-					},
-				});
+			
+			nonAuthStates.forEach(function (state) {
+				$stateProvider.state(state);
+			});
 
 		});
 
@@ -152,7 +159,6 @@
 				var user = firebase.auth().currentUser;
 
 				if (user) {
-					console.log("logged in, allowing transition");
 					return true;
 				} else {
 					/*
@@ -163,7 +169,6 @@
 					for(var key in localStorage) {
 						if (key.startsWith("firebase:authUser"))
 						{
-							console.log("found key, allowing transition");
 							return true;
 						}
 					}

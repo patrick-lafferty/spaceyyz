@@ -3,6 +3,7 @@
 	<uib-tabset active="active">
 		<uib-tab heading="Flight planner" index="0">
 
+			<h1>Not finished yet</h1>
 			<h2>Mission Parameters</h2>
 			<form class="form-horizontal" style="margin-top: 10px">
 				<div class="form-group">
@@ -27,7 +28,7 @@
 							</label>	
 						</div>
 						<div>
-							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
+							<h4><a ui-sref="auth.vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
 							<p>Capacity: {{vehicle.capacity | number}}kg</p>
 							<p>Cost: {{vehicle.cost | currency}}</p>
 							<p>In stock: {{vehicle.inventory}}</p>
@@ -69,6 +70,7 @@
 		</uib-tab>
 
 		<uib-tab heading="Manual" index="1">
+			<h1>Not implemented yet</h1>
 		</uib-tab>
 		
 	</uib-tabset>

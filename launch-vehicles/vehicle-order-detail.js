@@ -58,7 +58,7 @@
 					order.number = orderNumber;
 					orderFactory.addOrder(order);
 
-					$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
+					$state.go('auth.orderConfirmation', {orderNumber: orderNumber, order: order});
 				}, function (error) {
 					console.error(error);
 				});

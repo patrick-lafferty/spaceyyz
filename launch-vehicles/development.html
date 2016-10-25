@@ -2,7 +2,7 @@
 	<h1>Vehicles in development</h1>
 	<ul class="orders">
 		<li ng-repeat="order in $ctrl.orders.all">
-			<h3>Order number: <a ui-sref="orderConfirmation({orderNumber: order.number, order: order})" ui-sref-active="active">{{order.number}}</a></h3>
+			<h3>Order number: <a ui-sref="auth.orderConfirmation({orderNumber: order.number, order: order})" ui-sref-active="active">{{order.number}}</a></h3>
 			<p>Vehicle name: {{order.vehicleName}}</p>
 			<p>Delivery date: {{order.deliveryDate.toDateString()}}</p>
 			<div style="display: flex">
