@@ -8,12 +8,13 @@
 			controller: ConfigureSpaceport
 		});
 
-	function ConfigureSpaceport(spaceportFactory, $timeout, $scope) {
+	function ConfigureSpaceport(spaceportFactory, $timeout, $scope, $uibModal) {
 		var self = this;
 
 		this.search_name = "";
 		this.newSpaceport = {};
 		this.spaceports = {};
+		this.successfullyCreated = false;
 
 		spaceportFactory.getSpaceports().then(function (spaceports) {
 			self.spaceports = spaceports;
@@ -39,20 +40,40 @@
 			spaceport.beingEdited = false;
 			spaceportFactory.updateSpaceport(spaceport);
 
-			var index = self.spaceports.findIndex(function (s) {
+			var index = self.spaceports.all.findIndex(function (s) {
 				return s.name === spaceport.name;
 			});
 
-			self.spaceports[index] = spaceport;
+			self.spaceports.all[index] = spaceport;
 		};
 
 		this.createSpaceport = function (spaceport) {
-			spaceportFactory.createSpaceport(spaceport);
-			self.spaceports.push(spaceport);
+			spaceportFactory.addSpaceport(spaceport);
+			self.spaceports.all.push(spaceport);
 			self.newSpaceport = {};
+			this.successfullyCreated = true;
 		};
 
+		this.modalInstance = {};
 		this.deleteSpaceport = function (spaceport) {
+			self.modalInstance = $uibModal.open({
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				component: 'confirmSpaceportDeleteModal',
+				backdrop: 'static',
+				resolve: {
+					spaceport: function() {
+						return spaceport;
+					}
+				}
+			
+			});
+
+			self.modalInstance.result.then(function (spaceport) {
+				spaceportFactory.deleteSpaceport(spaceport);
+				
+				self.spaceports.all.splice(self.spaceports.all.indexOf(spaceport), 1);
+			});
 		};
 	}
 })();
