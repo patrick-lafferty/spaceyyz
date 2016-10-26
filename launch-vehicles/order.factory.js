@@ -58,6 +58,17 @@
 			firebase.database().ref().update(updates);
 		}
 
+		function updateOrder(order)
+		{
+			firebase.database().ref().child("orders/current/" + order.key).set({
+				number: order.number,
+				orderTimestamp: order.orderTimestamp,
+				deliveryTimestamp: order.deliveryDate.getTime(),
+				vehicleName: order.vehicleName,
+				cost: order.cost
+			});
+		}
+
 		function deleteOrder(order) {
 			firebase.database().ref().child("orders/current/" + order.key).remove();
 		}
@@ -67,6 +78,7 @@
 			getOrder: getOrder,
 			getNewOrderNumber: getNewOrderNumber,
 			addOrder: addOrder,
+			updateOrder: updateOrder,
 			deleteOrder: deleteOrder
 		}
 

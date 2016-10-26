@@ -20,6 +20,14 @@
 		var self = this;
 
 		this.order = this.resolve.order;
+		this.costToCancel = (function() {
+			var timestampNow = new Date().getTime();
+
+			var t = timestampNow - self.order.orderTimestamp;
+			var progress = t / (self.order.deliveryTimestamp - self.order.orderTimestamp);
+			return self.order.cost * progress;
+				
+		})();
 		this.cancel = function() {
 			self.modalInstance.dismiss('cancel');
 		};

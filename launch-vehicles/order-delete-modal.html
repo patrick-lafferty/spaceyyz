@@ -2,9 +2,21 @@
 	<h2 class="modal-title" id="modal-title">Delete Order</h2>
 </div>
 
-<div class="modal-body" id="modal-body">
-	<h3>Number: {{$ctrl.order.number}}</p>
-	<h3>Name: {{$ctrl.order.vehicleName}}</h3>
+<div class="modal-body container" id="modal-body" style="font-size: 24px">
+	<div class="row">
+		<p class="col-sm-2 text-right">Number:</p>
+		<p>{{$ctrl.order.number}}</p>
+	</div>
+
+	<div class="row">
+		<p class="col-sm-2 text-right">Name:</p>
+		<p>{{$ctrl.order.vehicleName}}</p>
+	</div>
+	
+	<div class="row">
+		<p class="col-sm-2 text-right">Cost to cancel:</p>
+		<p>{{$ctrl.costToCancel | currency}}</p>
+	</div>
 </div>
 
 <div class="modal-footer">

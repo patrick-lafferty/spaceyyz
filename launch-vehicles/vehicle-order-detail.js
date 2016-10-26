@@ -50,7 +50,8 @@
 				var order = {
 					orderTimestamp: new Date().getTime(),
 					deliveryDate: deliveryDate,
-					vehicleName: self.vehicle.name
+					vehicleName: self.vehicle.name,
+					cost: self.vehicle.cost
 				};
 
 				orderFactory.getNewOrderNumber().then(function(snapshot) {
