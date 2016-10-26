@@ -77,9 +77,13 @@
 
 				<div uib-accordion-group class="panel-default" heading="Spaceports">
 					<ul>
+						<!--
 						<li><a ui-sref="auth.northAmericanSpaceports" ui-sref-active="active">North America</a></li>
 						<li><a ui-sref="auth.europeanSpaceports" ui-sref-active="active">Europe</a></li>
 						<li><a ui-sref="auth.asianSpaceports" ui-sref-active="active">Asia</a></li>
+						-->
+						<li><a ui-sref="auth.spaceportStatus" ui-sref-active="active">Status</a></li>
+						<li><a ui-sref="auth.configureSpaceport" ui-sref-active="active">Configure</a></li>
 					</ul>
 				</div>
 
@@ -167,7 +171,12 @@
 
 		<script type="text/javascript" src="flight/schedule.js"></script>
 		<script type="text/javascript" src="flight/progress.js"></script>
+		<!--
 		<script type="text/javascript" src="spaceports/spaceports.js"></script>
+		-->
+		<script src="spaceports/spaceport-status.js"></script>
+		<script src="spaceports/spaceport-factory.js"></script>
+		<script src="spaceports/configure.js"></script>
 		<script type="text/javascript" src="research-development/engine.js"></script>
 		<script type="text/javascript" src="research-development/stage.js"></script>
 

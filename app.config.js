@@ -58,7 +58,7 @@
 					url: '/flight/progress',
 					component: 'flightProgress',
 				},
-				{
+				/*{
 					name: 'northAmericanSpaceports',
 					url: '/spaceports/north-america',
 					component: 'spaceports',
@@ -81,6 +81,20 @@
 					resolve: {
 						location: function(){return 'asia';},
 					}
+				},*/
+				{
+					name: 'spaceportStatus',
+					url: '/spaceports/status',
+					component: 'spaceportStatus',
+					params: {
+						continent: {},
+						hiddenParam: 'YES'
+					},
+				},
+				{
+					name: 'configureSpaceport',
+					url: '/spaceports/configure',
+					component: 'configureSpaceport'
 				},
 				{
 					name: 'researchEngine',

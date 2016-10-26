@@ -1,6 +1,5 @@
 <div class="view">
-	<h1>Configure Vehicles</h1>
-
+	<h1>Configure Spaceports</h1>
 	<uib-tabset active="active">
 		<uib-tab index="0" heading="Existing">
 			<form class="form">
@@ -9,47 +8,45 @@
 				</div>
 			</form>
 			<br>
-			<ul class="vehicles" style="margin-top: 10px">
-				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search | orderBy: 'name'">
+			<ul style="margin-top: 10px">
+				<li ng-repeat="spaceport in $ctrl.spaceports.northAmerica | filter:$ctrl.search | orderBy: 'name'">
 					<form class="form-horizontal">
 						<div class="form-group">
-							<h4>{{vehicle.name}}</h4>
+							<h4>{{spaceport.name}}</h4>
 							<div class="btn-group" uib-dropdown is-open="status.isopen">
 								<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
 									Modify <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
-									<li role="menuitem" ng-hide="vehicle.beingEdited"><a ng-click="$ctrl.editVehicle(vehicle)">Edit</a></li>
-									<li role="menuitem" ng-show="vehicle.beingEdited"><a ng-click="$ctrl.cancelEditVehicle(vehicle)">Cancel Edit</a></li>
-									<li role="menuitem" ng-class="{'disabled': !vehicle.beingEdited}"><a ng-click="$ctrl.saveVehicle(vehicle)">Save</a></li>
-									<li role="menuitem" ng-class="{'disabled': vehicle.beingEdited}"><a ng-click="$ctrl.deleteVehicle(vehicle)">Delete</a></li>
+									<li role="menuitem" ng-hide="spaceport.beingEdited"><a ng-click="$ctrl.editSpaceport(spaceport)">Edit</a></li>
+									<li role="menuitem" ng-show="spaceport.beingEdited"><a ng-click="$ctrl.cancelEditSpaceport(spaceport)">Cancel Edit</a></li>
+									<li role="menuitem" ng-class="{'disabled': !spaceport.beingEdited}"><a ng-click="$ctrl.saveSpaceport(spaceport)">Save</a></li>
+									<li role="menuitem" ng-class="{'disabled': spaceport.beingEdited}"><a ng-click="$ctrl.deleteSpaceport(spaceport)">Delete</a></li>
 								</ul>
 							</div>	
 						</div>
-						<div ng-show="vehicle.beingEdited">
+						<div ng-show="spaceport.beingEdited">
 							<div class="form-group">
 								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 								<div class="col-sm-5">
-									<input type="number" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
+									<input type="number" class="form-control" id="capacity" ng-model="spaceport.capacity" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cost" class="col-sm-2 control-label">Cost</label>
 								<div class="col-sm-5">
-									<input type="number" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
+									<input type="number" class="form-control" id="cost" ng-model="spaceport.cost" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">Description</label>
 								<div class="col-sm-5">
-									<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
+									<textarea class="form-control" id="description" ng-model="spaceport.description"></textarea>
 								</div>
 							</div>
 						</div>
-						<div ng-hide="vehicle.beingEdited">
-							<p>Capacity: {{vehicle.capacity | number}}kg</p>
-							<p>Cost: {{vehicle.cost | currency}}</p>
-							<p>Description: {{vehicle.description}}</p>
+						<div ng-hide="spaceport.beingEdited">
+							<p>Name: {{spaceport.name}}</p>
 						</div>
 					</form>
 				</li>
@@ -60,29 +57,29 @@
 				<div class="form-group">
 					<label for="name" class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="name" ng-model="$ctrl.newVehicle.name" placeholder="">
+						<input type="text" class="form-control" id="name" ng-model="$ctrl.newSpaceport.name" placeholder="">
 					</div>
 				</div><div class="form-group">
 					<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 					<div class="col-sm-5">
-						<input type="number" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
+						<input type="number" class="form-control" id="capacity" ng-model="$ctrl.newSpaceport.capacity" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="cost" class="col-sm-2 control-label">Cost</label>
 					<div class="col-sm-5">
-						<input type="number" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
+						<input type="number" class="form-control" id="cost" ng-model="$ctrl.newSpaceport.cost" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-5">
-						<textarea class="form-control" id="description" ng-model="$ctrl.newVehicle.description"></textarea>
+						<textarea class="form-control" id="description" ng-model="$ctrl.newSpaceport.description"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-7">
-						<button class="btn btn-primary form-control" ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
+						<button class="btn btn-primary form-control" ng-click="$ctrl.createSpaceport($ctrl.newSpaceport)">Create</button>
 					</div>
 				</div>
 			</form>
