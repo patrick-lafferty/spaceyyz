@@ -10,8 +10,8 @@
 			controller: OrderConfirmation,
 		});	
 
-	function OrderConfirmation(orderFactory, 
-			$scope, $timeout, $stateParams) {
+	function OrderConfirmation(orderFactory, $uibModal,
+			$scope, $timeout, $state, $stateParams) {
 
 		var self = this;
 		this.order = $stateParams.order;
@@ -26,6 +26,29 @@
 				});
 			});
 		}
+
+		this.modalInstance = {};
+		this.cancelOrder = function() {
+			self.modalInstance = $uibModal.open({
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				templateUrl: 'launch-vehicles/order-delete-modal.html',
+				component: 'orderDeleteModal',
+				backdrop: 'static',
+				resolve: {
+					order: function() {
+						return self.order;
+					}
+				}
+			
+			});
+
+			self.modalInstance.result.then(function(thing) {
+
+				orderFactory.deleteOrder(self.order);
+				$state.go('auth.development');
+			});
+		};
 
 	}
 })();

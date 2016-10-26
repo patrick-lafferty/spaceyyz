@@ -58,11 +58,16 @@
 			firebase.database().ref().update(updates);
 		}
 
+		function deleteOrder(order) {
+			firebase.database().ref().child("orders/current/" + order.key).remove();
+		}
+
 		return {
 			getOrders: getOrders,
 			getOrder: getOrder,
 			getNewOrderNumber: getNewOrderNumber,
-			addOrder: addOrder
+			addOrder: addOrder,
+			deleteOrder: deleteOrder
 		}
 
 	}

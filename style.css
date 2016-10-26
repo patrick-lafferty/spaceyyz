@@ -24,9 +24,12 @@ html, body {
 	list-style: none;
 }
 
-.vehicles li {
-	border-bottom: 1px solid #ddd;
+.vehicles .form-group {
+	margin-left: 0px;
+}
 
+.vehicles li:nth-child(even) {
+	background: #5d5d5d;
 }
 
 .vehicles li:last-child {
@@ -38,9 +41,8 @@ html, body {
 }	
 
 .vehiclePreview > div {
-	flex: 1 1 auto;
-	max-width: 300px;
-	width: 300px;
+	flex: 1 0 auto;
+	width: 250px;
 }
 
 .view {
