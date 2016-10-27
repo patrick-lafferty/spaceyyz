@@ -8,7 +8,16 @@
 			controller: Spaceports,
 		});
 
-	function Spaceports(spaceportFactory) {
-		this.spaceports = spaceportFactory.getSpaceports();
+	function Spaceports(spaceportFactory, $timeout, $scope) {
+		var self = this;
+		this.spaceports = {};
+		
+		spaceportFactory.getSpaceports().then(function (spaceports) {
+			self.spaceports = spaceports;
+
+			$timeout(function () {
+				$scope.$apply();
+			});
+		});
 	}
 })();

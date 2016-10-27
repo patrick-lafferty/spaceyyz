@@ -72,13 +72,13 @@
 				<div class="form-group">
 					<label for="name" class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="name" ng-model="$ctrl.newSpaceport.name" placeholder="">
+						<input type="text" class="form-control" id="name" ng-model="$ctrl.newSpaceport.name" placeholder="" ng-change="$ctrl.onChange()">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="continent" class="col-sm-2 control-label">Continent</label>
 					<div class="col-sm-2">
-						<select class="form-control" ng-model="$ctrl.newSpaceport.continent">
+						<select class="form-control" ng-model="$ctrl.newSpaceport.continent" ng-change="$ctrl.onChange()">
 							<option value="northAmerica">North America</option>
 							<option value="europe">Europe</option>
 							<option value="asia">Asia</option>
@@ -89,7 +89,7 @@
 				<div class="form-group">
 					<label for="country" class="col-sm-2 control-label">Country</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="country" ng-model="$ctrl.newSpaceport.country" placeholder="">
+						<input type="text" class="form-control" id="country" ng-model="$ctrl.newSpaceport.country" placeholder="" ng-change="$ctrl.onChange()">
 					</div>
 				</div>
 				<!--

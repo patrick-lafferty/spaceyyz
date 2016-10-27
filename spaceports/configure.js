@@ -24,6 +24,10 @@
 			});
 		});
 
+		this.onChange = function () {
+			self.successfullyCreated = false;
+		};
+
 		this.search = function (spaceport) {
 			return spaceport.name.toLowerCase().includes(self.search_name.toLowerCase());
 		};

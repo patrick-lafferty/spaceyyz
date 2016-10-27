@@ -8,7 +8,8 @@
 			controller: ScheduleFlight
 		});
 
-	function ScheduleFlight(vehicleInventoryFactory, $timeout, $scope) {
+	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
+			$timeout, $scope, groupByFilter) {
 		this.payload = 0;
 
 		var self = this;
@@ -29,6 +30,44 @@
 
 		this.datePickerOptions = {
 			minDate: new Date()
+		};
+
+		this.spaceports = {};
+		this.continent = "northAmerica";
+		this.spaceport = {};
+		this.selectedValidSpaceport = false;
+		this.filtername = "";
+		this.spaceportFilter = function (spaceport) {
+			return spaceport.name.toLowerCase().includes(self.filtername.toLowerCase());
+		};
+		this.isopen = false;
+		this.spaceportSelected = function(spaceport) {
+			self.spaceport = spaceport;
+			self.selectedValidSpaceport = true;
+			self.filtername = spaceport.name;
+		};
+		this.filterChanged = function () {
+			self.isopen = true;
+			self.spaceport = {};
+			self.selectedValidSpaceport = false;
+			
+			for(var i = 0; i < self.ungroupedSpaceports[self.continent].length; i++) {
+				var spaceport = self.ungroupedSpaceports[self.continent][i];
+
+				if (spaceport.name === self.filtername) {
+					self.spaceport = spaceport;
+					self.selectedValidSpaceport = true;
+					break;
+				}
+			}
+		};
+
+		this.schedule = function () {
+		};
+
+		this.continentChanged = function () {
+			self.filterChanged();
+			notifyChanges();
 		};
 		
 		function notifyChanges() {
@@ -56,6 +95,13 @@
 
 			notifyChanges();
 
+		});
+
+		spaceportFactory.getSpaceports().then(function (spaceports) {
+			self.ungroupedSpaceports = spaceports;
+			self.spaceports.northAmerica = groupByFilter(spaceports.northAmerica, 'country');
+
+			notifyChanges();
 		});
 
 	}
