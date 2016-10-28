@@ -9,7 +9,7 @@
 		});
 
 	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
-			$timeout, $scope, groupByFilter, solarSystemFactory) {
+			$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
 		this.payload = 0;
 
 		var self = this;
@@ -27,10 +27,11 @@
 
 		this.flight = {
 			mission: {
+				id: "",
 				payload: 0,
 				destination: {
-					primary: "",
-					secondary: ""
+					primary: self.solarSystem.planets[2],
+					secondary: "None"
 				},
 				type: "orbit",
 				vehicle: {}
@@ -76,6 +77,8 @@
 		};
 
 		this.schedule = function () {
+			self.flight.mission.name = "sts-31";
+			flightFactory.scheduleFlight(self.flight);
 		};
 
 		this.continentChanged = function () {
@@ -90,6 +93,8 @@
 		}
 
 		this.selected = function() {
+			self.flight.mission.vehicle = self.selectedVehicle;
+
 			if (self.selectedVehicle.inventory === 0) {
 				self.datePickerOptions.minDate.setFullYear(new Date().getFullYear() + 1);
 

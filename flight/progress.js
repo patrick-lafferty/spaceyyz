@@ -8,6 +8,15 @@
 			controller: FlightProgress
 		});
 
-	function FlightProgress() {
+	function FlightProgress(flightFactory, $timeout, $scope) {
+
+		var self = this;
+		this.flights = [];
+
+		flightFactory.getFlights().then(function (flights) {
+			self.flights = flights;
+
+			$timeout(function () { $scope.$apply();});
+		});
 	}
 })();

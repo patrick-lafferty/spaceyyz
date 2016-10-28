@@ -58,6 +58,15 @@
 					url: '/flight/progress',
 					component: 'flightProgress',
 				},
+				{
+					name: 'flightDetails',
+					url: '/flight/details/:missionName',
+					component: 'flightDetails',
+					params: {
+						flight: {},
+						hiddenParam: 'YES'
+					},
+				},
 				/*{
 					name: 'northAmericanSpaceports',
 					url: '/spaceports/north-america',
