@@ -9,10 +9,11 @@
 		});
 
 	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
-			$timeout, $scope, groupByFilter) {
+			$timeout, $scope, groupByFilter, solarSystemFactory) {
 		this.payload = 0;
 
 		var self = this;
+		this.solarSystem = solarSystemFactory;
 
 		this.filter = function(vehicle) {
 			return vehicle.capacity >= Number(self.payload);
@@ -25,8 +26,20 @@
 		};
 
 		this.flight = {
-			launchDate: new Date()
-		}
+			mission: {
+				payload: 0,
+				destination: {
+					primary: "",
+					secondary: ""
+				},
+				type: "orbit",
+				vehicle: {}
+			},
+			launch: {
+				date: new Date(),
+				site: {}
+			}
+		};
 
 		this.datePickerOptions = {
 			minDate: new Date()
