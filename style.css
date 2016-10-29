@@ -113,10 +113,23 @@ input[type='number'] {
 	-moz-appearance: textfield;
 }
 
+#ascentPath {
+	animation: drawPath 5s forwards;
+}
+
 @keyframes logoTransforms {
 	from { transform: rotate(0deg) rotateX(0deg)}
 
 	50% { transform: rotate(180deg) rotateX(20deg)}
 
 	to { transform: rotate(360deg) rotateX(0deg)}
+}
+
+@keyframes drawPath {
+	from {
+		stroke-dasharray: 0 633;
+	}
+	to {
+		stroke-dasharray: 633 0;
+	}
 }

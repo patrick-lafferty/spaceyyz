@@ -1,3 +1,22 @@
 <div class="view">
 	<h1>{{$ctrl.flight.mission.name | uppercase}} Details</h1>
+	<div ng-show="!$ctrl.flight.launched" style="display: flex">
+		<svg width="600" height="200" shape-rendering="auto"> 
+
+			<path id="ascentPath" d="M 0 200 Q 150 50 600 50" stroke="blue" stroke-width="4" stroke-dasharray="0, 633" fill="transparent" />
+			
+		</svg>
+
+		<ul>
+			<li>08:32:00 - Ignition</li>
+			<li>08:32:10 - Liftoff</li>
+			<li>08:32:30 - Roll program</li>
+			<li>08:34:45 - Stage 1 Sep</li>
+			<li>08:34:50 - Stage 2 Ignition</li>
+			<li>08:42:00 - Stage 2 Shutdown</li>
+		</ul>
+	</div>
+	<div ng-hide="!$ctrl.flight.launched">
+		<h2>Not launched yet</h2>
+	</div>
 </div>
