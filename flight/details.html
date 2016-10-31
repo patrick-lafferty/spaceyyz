@@ -1,10 +1,43 @@
 <div class="view">
 	<h1>{{$ctrl.flight.mission.name | uppercase}} Details</h1>
+	<form class="form" style="margin-left: 0">
+		<div class="form-group">
+			<label for="playbackSpeed" class="col-sm-2 control-label">Playback speed</label>
+			<div class="input-group">
+				<select id="playbackSpeed" class="form-control" ng-model="$ctrl.playbackSpeed" ng-change="$ctrl.changePlaybackSpeed()">
+					<option>Realtime</option>
+					<option>10x</option>
+				</select>
+			</div>
+		</div>
+	</form>
 	<div ng-show="!$ctrl.flight.launched" style="display: flex">
 		<svg width="600" height="200" shape-rendering="auto"> 
 
 			<path id="ascentPath" d="M 0 200 Q 150 50 600 50" stroke="blue" stroke-width="4" stroke-dasharray="0, 633" fill="transparent" />
-			
+			<!--
+			<circle id="point" r="10" cx="0" cy="0" fill="black" />
+			-->
+			<!-- at length t=14 , 0.022, (*5s) = 0.11 -->
+			<circle class="futureFlightEvent" r="10" cx="10" cy="190" fill="black" />
+			<text class="futureFlightEvent" x="30" y="200">Liftoff</text>
+
+			<!-- at length t=106 0.167 (*5s) = 0.835 -->
+			<circle class="futureFlightEvent" r="10" cx="86" cy="138" fill="black" />
+			<text class="futureFlightEvent" x="86" y="160">Max Q</text>
+
+			<!-- at length t=253 0.400 (*5s) = 2 -->
+			<circle class="futureFlightEvent" r="10" cx="224" cy="87" fill="black" />
+			<text class="futureFlightEvent" x="224" y="110">Stage 1 sep</text>
+
+			<!-- at length t=348 0.550, (*5s) = 2.75 -->
+			<circle class="futureFlightEvent" r="10" cx="317" cy="69" fill="black" />
+			<text class="futureFlightEvent" x="317" y="50">Fairing sep</text>
+
+			<!-- at length t=604 0.954 (*5s) = 4.77 -->
+			<circle class="futureFlightEvent" r="10" cx="572" cy="50" fill="black" />
+			<text class="futureFlightEvent" x="512" y="75">Stage 2 sep</text>
+
 		</svg>
 
 		<ul>

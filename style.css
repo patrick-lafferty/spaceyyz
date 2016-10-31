@@ -114,7 +114,11 @@ input[type='number'] {
 }
 
 #ascentPath {
-	animation: drawPath 5s forwards;
+	animation: drawPath 5s forwards linear;
+}
+
+.futureFlightEvent {
+	animation: flight 0.2s forwards;
 }
 
 @keyframes logoTransforms {
@@ -131,5 +135,15 @@ input[type='number'] {
 	}
 	to {
 		stroke-dasharray: 633 0;
+	}
+}
+
+@keyframes flight {
+	from {
+		fill: black;
+	}
+
+	to {
+		fill: white;
 	}
 }
