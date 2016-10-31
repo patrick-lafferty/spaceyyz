@@ -17,6 +17,11 @@
 			if (self.flight.launch.date <= Date.now) {
 				self.flight.launched = true;
 			}
+
+			self.flight.status = {
+				velocity: 0,
+				altitude: 0
+			};
 		}
 
 		if (typeof this.flight.mission === "undefined") {
@@ -81,6 +86,58 @@
 		};
 
 		this.changePlaybackSpeed();
+
+		var intervalId = window.setInterval(tick, 1000);
+
+		self.events = [
+			["Ignition", "Liftoff", "Roll program"],
+			["Stage 1 Sep", "Stage 2 Ignition"],
+			["Fairing sep"],
+			["Stage 2 shutdown"]
+		];
+
+		this.elapsedTime = 0;
+		this.maxFlightTime = 600;
+		
+		function getStage() {
+			var stage = 0;
+
+			for (var i = 0; i < lengths.length; i++) {
+				if (self.elapsedTime >= lengths[i] * self.maxFlightTime) {
+					stage++;
+				} else {
+					break;
+				}
+			}
+
+			return stage;
+		}
+
+		self.currentStage = 0;
+		function tick() {
+			if (self.elapsedTime >= self.maxFlightTime) {
+				window.clearInterval(intervalId);
+			}
+
+			self.elapsedTime+= (self.maxFlightTime / self.animLength);
+			self.flight.status.velocity = 40 * self.elapsedTime;
+			self.flight.status.altitude++; 
+
+			var stage = getStage();
+			if (stage > self.currentStage) {
+				self.currentStage = stage;
+				self.flight.log = [];
+			
+				for (var i = 0; i < stage; i++) {
+					for (var j = 0; j < self.events[i].length; j++) {
+						self.flight.log.push(self.events[i][j]);
+					}
+				}
+				
+			}
+
+			$timeout(function () {$scope.$apply();});
+		}
 	}
 
 })();

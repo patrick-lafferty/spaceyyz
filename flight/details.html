@@ -39,7 +39,7 @@
 			<text class="futureFlightEvent" x="512" y="75">Stage 2 sep</text>
 
 		</svg>
-
+		<!--
 		<ul>
 			<li>08:32:00 - Ignition</li>
 			<li>08:32:10 - Liftoff</li>
@@ -47,8 +47,20 @@
 			<li>08:34:45 - Stage 1 Sep</li>
 			<li>08:34:50 - Stage 2 Ignition</li>
 			<li>08:42:00 - Stage 2 Shutdown</li>
-		</ul>
+		</ul>-->
+		<div style="margin-left: 20px">
+			<h3>Status</h3>
+			<p>Velocity: {{$ctrl.flight.status.velocity}}m/s</p>
+			<p>Altitude: {{$ctrl.flight.status.altitude}}km</p>
+
+		</div>
 	</div>
+	<h2>Flight log</h2>
+	<ul>
+		<li ng-repeat="log in $ctrl.flight.log">
+			{{log}}
+		</li>
+	</ul>
 	<div ng-hide="!$ctrl.flight.launched">
 		<h2>Not launched yet</h2>
 	</div>
