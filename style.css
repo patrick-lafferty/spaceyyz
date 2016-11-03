@@ -2,6 +2,14 @@
 	display: none !important;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Cutive', serif;
+}
+
+body > * {
+	font-family: 'Montserrat', sansserif;
+}
+
 .nav, .pagination, .carousel, .panel-title a {cursor: pointer;}
 
 html, body {
@@ -38,6 +46,7 @@ html, body {
 
 .vehiclePreview {
 	display: flex;
+	padding: 5px;
 }	
 
 .vehiclePreview > div {

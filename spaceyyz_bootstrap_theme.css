@@ -18,3 +18,7 @@
 	background-color: rgb(101, 101, 101);
 	color: white;
 }
+
+label.control-label {
+	font-weight: 400;
+}
