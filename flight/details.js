@@ -62,6 +62,7 @@
 		
 
 		self.animLength = 5.0;
+		//liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
 		var lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
 		this.changePlaybackSpeed = function () {
 			switch(self.playbackSpeed) {
@@ -91,6 +92,7 @@
 
 		self.events = [
 			["Ignition", "Liftoff", "Roll program"],
+			["Maximum Dynamic Pressure"],
 			["Stage 1 Sep", "Stage 2 Ignition"],
 			["Fairing sep"],
 			["Stage 2 shutdown"]
@@ -113,13 +115,14 @@
 			return stage;
 		}
 
-		self.currentStage = 0;
+		self.currentStage = -1;
 		function tick() {
 			if (self.elapsedTime >= self.maxFlightTime) {
 				window.clearInterval(intervalId);
 			}
 
-			self.elapsedTime+= (self.maxFlightTime / self.animLength);
+			self.elapsedTime += (self.maxFlightTime / self.animLength);
+			console.log(self.elapsedTime);
 			self.flight.status.velocity = 40 * self.elapsedTime;
 			self.flight.status.altitude++; 
 

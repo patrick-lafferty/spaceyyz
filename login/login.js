@@ -9,16 +9,40 @@
 		});
 
 	function Login(userFactory, $state) {
-
+		var self = this;
 		this.email = "";
 		this.password = "";
+		this.newAccount = {
+			email: "",
+			password: "",
+			confirmPassword: ""
+		};
+
 		this.login = function() {
-			var promise = userFactory.login(this.email, this.password);
+
+			var promise = userFactory.login(self.email, this.password);
 			promise.then(function(user) {
 				$state.go($state.params.redirectTo || "auth.home");
 			});
 
 		};
-		this.register = function() {userFactory.register(this.email, this.password);};
+
+		this.register = function() {
+			if (self.newAccount.email === ""  			
+				|| self.newAccount.password === ""
+			    || self.newAccount.password !== self.newAccount.confirmPassword
+				) {
+				return;
+			}
+
+			userFactory.register(self.newAccount.email, self.newAccount.password).then(
+					function (user) {
+						$state.go($state.params.redirectTo || "auth.home");
+					},
+					function (error) {
+						alert("Error registering: " + error.code + ", " + error.message);
+					});
+					
+		};
 	}
 })();

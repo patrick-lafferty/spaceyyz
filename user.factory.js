@@ -68,10 +68,7 @@
 
 		function register(email, password) {
 
-			firebase.auth()
-				.createUserWithEmailAndPassword(email, password).catch(function (error) {
-					alert("Error registering: " + error.code + ", " + error.message);
-				});
+			return firebase.auth().createUserWithEmailAndPassword(email, password);
 		};
 
 		return factory;
