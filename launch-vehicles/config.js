@@ -9,7 +9,7 @@
 		.module('spaceyyz')
 		.component('configVehicle', {
 			templateUrl: 'launch-vehicles/config.html',
-			controller: Config
+			controller: Config,
 		});
 
 	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal) {
@@ -19,7 +19,14 @@
 			all: [],
 		};
 
+		this.engines = [
+			{
+				name: "F1"
+			}
+		];
+
 		this.newVehicle = {};
+		this.variants = [];
 		this.search_name = "";
 		this.search = function(vehicle) {
 			return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
@@ -69,6 +76,28 @@
 			vehicleInventoryFactory.addVehicle(vehicle);
 			self.vehicles.all.push(vehicle);
 			self.newVehicle = {};
+		};
+
+		this.addNewVariant = function () {
+			self.variants.push({
+				name: "Unnamed",
+				stages: []
+			});
+		};
+
+		this.addNewStage = function (variant) {
+			variant.stages.push({
+				engines: []
+			});
+		};
+
+		this.selectedEngine = {};
+		this.addEngine = function (engine, stage) {
+			stage.engines.push(engine);
+		};
+
+		this.removeEngine = function (index, stage) {
+			stage.engines.splice(index, 1);
 		};
 
 		vehicleInventoryFactory.getVehicles().then(function (vehicles) {

@@ -103,11 +103,6 @@
 						<input id="filterName" type="text" uib-dropdown-toggle ng-model="$ctrl.filtername"
 						ng-change="$ctrl.filterChanged()" class="form-control" ng-focus="$ctrl.isopen = true" style="color: black;">
 						<span ng-class="{'glyphicon-remove': !$ctrl.selectedValidSpaceport}" class="glyphicon form-control-feedback" style="color: red"></span>
-						<!--
-		  				<ul uib-dropdown-menu class="dropdown-menu">
-							<li ng-repeat="spaceport in $ctrl.spaceports[$ctrl.continent] | filter:$ctrl.spaceportFilter | groupBy: 'country'" ng-click="$ctrl.spaceportSelected(spaceport)" style="color: black;">{{spaceport.name}}</li>
-						</ul>
-						-->
 						<div uib-dropdown-menu class="dropdown-menu">
 							<div ng-repeat="group in $ctrl.spaceports[$ctrl.continent]"
 								style="color: black">
@@ -117,12 +112,6 @@
 								</ul>
 							</div>
 						</div>
-						<!--
-						<select ng-model="$ctrl.spaceport" 
-			  				uib-dropdown-menu class="dropdown-menu"
-							ng-options="spaceport.name for spaceport in $ctrl.spaceports[$ctrl.continent] track by spaceport.name">
-						</select>
-						-->
 					</div>
 				</div>
 
