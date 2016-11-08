@@ -1,5 +1,6 @@
 <div class="view">
 	<h1>Vehicles in development</h1>
+	<p>Click on an order number to see the order details</p>
 	<ul class="orders">
 		<li ng-repeat="order in $ctrl.orders.all">
 			<h3>Order number: <a ui-sref="auth.orderConfirmation({orderNumber: order.number, order: order})" ui-sref-active="active">{{order.number}}</a></h3>

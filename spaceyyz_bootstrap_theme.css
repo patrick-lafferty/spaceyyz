@@ -22,3 +22,7 @@
 label.control-label {
 	font-weight: 400;
 }
+
+.progress-bar {
+	background: #19b3fe;
+}

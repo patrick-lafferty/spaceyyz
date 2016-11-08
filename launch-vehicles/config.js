@@ -87,12 +87,16 @@
 
 		this.addNewStage = function (variant) {
 			variant.stages.push({
-				engines: []
+				engines: [],
+				selectedEngine: {}
 			});
 		};
 
-		this.selectedEngine = {};
 		this.addEngine = function (engine, stage) {
+			if (typeof engine.name === "undefined") {
+				return;
+			}
+
 			stage.engines.push(engine);
 		};
 

@@ -28,6 +28,14 @@ html, body {
 	background-color: #354545;
 }
 
+.panel-body a {
+	color: #19b3fe;
+}
+
+.view a {
+	color: #19b3fe;
+}
+
 .vehicles {
 	list-style: none;
 }
