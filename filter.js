@@ -11,7 +11,7 @@
 					return groups;
 				}
 
-				for(const i = 0; i < input.length; i++) {
+				for(let i = 0; i < input.length; i++) {
 					const element = input[i];
 					const groupName = element[group];
 

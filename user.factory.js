@@ -25,10 +25,6 @@
 		this.password = '';
 
 		this.authChangeSubscribers = {};
-		//this.onAuthChange = function(subscriber, f) {
-		function onAuthChange(subscriber, f) {
-			self.authChangeSubscribers[subscriber] = f;
-		};
 
 		if (firebase.auth().currentUser) {
 			factory.user.email = firebase.auth().currentUser.email;
@@ -46,6 +42,10 @@
 			});
 
 		});
+
+		function onAuthChange(subscriber, f) {
+			self.authChangeSubscribers[subscriber] = f;
+		}
 
 		function getEmail() {
 			return self.factory.user.email;
