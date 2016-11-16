@@ -146,7 +146,7 @@
 			$stateProvider.state(authState);
 			states.forEach(function(state) {
 				state.parent = authState;
-				state.name = 'auth.' + state.name;
+				//state.name = 'auth.' + state.name;
 				$stateProvider.state(state);
 			});
 			
@@ -166,7 +166,7 @@
 
 	angular
 		.module('spaceyyz')
-		.run(['$state', '$transitions', '$timeout', function($state, $transitions, $timeout) {
+		.run(['$state', '$transitions', function($state, $transitions) {
 			//$state.defaultErrorHandler(function() {});
 
 			$transitions.onBefore({to: 'login'}, function (trans) {
@@ -189,19 +189,16 @@
 					 * check to see if firebase saved a token to indicate that they
 					 * will be automatically signed in
 					 */
-					for(var key in localStorage) {
-						if (key.startsWith("firebase:authUser"))
+					for(const key in localStorage) {
+						if (key.startsWith('firebase:authUser'))
 						{
 							return true;
 						}
 					}
 
-					var to = trans.$to().name;
-
-					return trans.router.stateService.target('login', {redirectTo: to}, {reload: true});
+					return trans.router.stateService.target('login', {redirectTo: trans.$to().name}, {reload: true});
 				}
 			});
 
 		}]);
-				   
 })();

@@ -57,23 +57,23 @@
 			<uib-accordion>
 				<div uib-accordion-group class="panel-default" heading="Home">
 					<ul>
-						<li><a ui-sref="auth.home" ui-sref-active="active">Account</a></li>
+						<li><a ui-sref="home" ui-sref-active="active">Account</a></li>
 						<li><a ui-sref="about" ui-sref-active="active">About</a></li>
 					</ul>
 				</div>
 				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
 					<ul>
-						<li><a ui-sref="auth.orderNew" ui-sref-active="active">Order New</a></li>
-						<li><a ui-sref="auth.development" ui-sref-active="active">In Development</a></li>
-						<li><a ui-sref="auth.completed" ui-sref-active="active">Inventory</a></li>
-						<li><a ui-sref="auth.config" ui-sref-active="active">Config</a></li>
+						<li><a ui-sref="orderNew" ui-sref-active="active">Order New</a></li>
+						<li><a ui-sref="development" ui-sref-active="active">In Development</a></li>
+						<li><a ui-sref="completed" ui-sref-active="active">Inventory</a></li>
+						<li><a ui-sref="config" ui-sref-active="active">Config</a></li>
 					</ul>
 				</div>
 
 				<div uib-accordion-group class="panel-default" heading="Flights">
 					<ul>
-						<li><a ui-sref="auth.schedule" ui-sref-active="active">Schedule flight</a></li>
-						<li><a ui-sref="auth.progress" ui-sref-active="active">In Progress</a></li>
+						<li><a ui-sref="schedule" ui-sref-active="active">Schedule flight</a></li>
+						<li><a ui-sref="progress" ui-sref-active="active">In Progress</a></li>
 					</ul>
 				</div>
 
@@ -84,15 +84,15 @@
 						<li><a ui-sref="auth.europeanSpaceports" ui-sref-active="active">Europe</a></li>
 						<li><a ui-sref="auth.asianSpaceports" ui-sref-active="active">Asia</a></li>
 						-->
-						<li><a ui-sref="auth.spaceportStatus" ui-sref-active="active">Status</a></li>
-						<li><a ui-sref="auth.configureSpaceport" ui-sref-active="active">Configure</a></li>
+						<li><a ui-sref="spaceportStatus" ui-sref-active="active">Status</a></li>
+						<li><a ui-sref="configureSpaceport" ui-sref-active="active">Configure</a></li>
 					</ul>
 				</div>
 
 				<div uib-accordion-group class="panel-default" heading="Research & Development">
 					<ul>
-						<li><a ui-sref="auth.researchEngine" ui-sref-active="active">Engines</a></li>
-						<li><a ui-sref="auth.designStage" ui-sref-active="active">Stages</a></li>
+						<li><a ui-sref="researchEngine" ui-sref-active="active">Engines</a></li>
+						<li><a ui-sref="designStage" ui-sref-active="active">Stages</a></li>
 					</ul>
 				</div>
 			</uib-accordion>	
@@ -119,18 +119,21 @@
 
 		<!--
 	  	switching to google's cdn and also the minified version
-		<script type="text/javascript" src="angular.js"></script>
+		<script src="angular.js"></script>
 		-->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<!--
 		<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+		-->
+		<script src="//unpkg.com/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 		<!--
 	  	switching to cdn/minified
-		-->
 		<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+		-->
 		<!--
 	  	unpkg seems to have a real old version of ui-router, so leave this for now
-		<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 		-->
+		<script src="//unpkg.com/angular-ui-router@next/release/angular-ui-router.min.js"></script>
 		<!-- testing out webpack -->
 		<!--
 		<script type="text/javascript" src="bundle.js"></script>

@@ -1,8 +1,8 @@
 
 angular
 	.module('spaceyyz', [
-			'ui.bootstrap',
-			'ui.router'
+		'ui.bootstrap',
+		'ui.router'
 	]);
 
 /* for using webpack, require all the files so it will bundle them together

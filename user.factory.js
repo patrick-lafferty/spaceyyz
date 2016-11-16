@@ -9,24 +9,25 @@
 
 	function UserFactory($state) {
 		var self = this;
-		this.email = "";
-		this.password = "";
-
-		this.authChangeSubscribers = {};
-		this.onAuthChange = function(subscriber, f) {
-			self.authChangeSubscribers[subscriber] = f;
-		};
-
 		var factory = {
 			email: this.email,
 			user: {
-				email: "" 
+				email: ''
 			},
 			getEmail: getEmail,
 			login: login,
 			logout: logout,
 			register: register,
-			onAuthChange: self.onAuthChange
+			onAuthChange: onAuthChange
+		};
+
+		this.email = '';
+		this.password = '';
+
+		this.authChangeSubscribers = {};
+		//this.onAuthChange = function(subscriber, f) {
+		function onAuthChange(subscriber, f) {
+			self.authChangeSubscribers[subscriber] = f;
 		};
 
 		if (firebase.auth().currentUser) {
@@ -37,7 +38,7 @@
 			if (user) {
 				factory.user.email = user.email;
 			} else {
-				factory.user.email = "";
+				factory.user.email = '';
 			}
 
 			Object.keys(self.authChangeSubscribers).forEach(function (key) {
@@ -47,29 +48,29 @@
 		});
 
 		function getEmail() {
-			return this.factory.user.email;
+			return self.factory.user.email;
 		}
 
 		function login(email, password) {
 
 			return firebase.auth()
 				.signInWithEmailAndPassword(email, password).catch(function (error) {
-					alert("Error logging in: " + error.code + ", " + error.message);
+					alert('Error logging in: ' + error.code + ', ' + error.message);
 				});
-		};
+		}
 
 		function logout() {
 			firebase.auth().signOut().then(function() {
-				factory.user.email = "";
+				factory.user.email = '';
 				$state.go('login', {}, {reload: true});
 			}, function(error) {
-				alert("error logging out: " + error);});	
-		};
+				alert('error logging out: ' + error);});	
+		}
 
 		function register(email, password) {
 
 			return firebase.auth().createUserWithEmailAndPassword(email, password);
-		};
+		}
 
 		return factory;
 	}

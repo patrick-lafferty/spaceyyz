@@ -1,7 +1,8 @@
 *.swp
 design
 node_modules/
-!node_modules/angular-ui-bootstrap
-!node_modules/angular-ui-router
-!node_modules/anymatch
-!node_modules/bootstrap
+eslint_results
+# !node_modules/angular-ui-bootstrap
+# !node_modules/angular-ui-router
+# !node_modules/anymatch
+# !node_modules/bootstrap

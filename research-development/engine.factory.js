@@ -1,3 +1,6 @@
+/*
+ * EngineFactory is responsible for reading/writing data about rocket engines from firebase
+ * */
 (function() {
 	'use strict';
 

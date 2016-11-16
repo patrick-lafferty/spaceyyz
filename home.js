@@ -15,7 +15,7 @@
 		};
 
 		//TODO: replace all onAuthChange(this with onAuthChange("componentName"
-		userFactory.onAuthChange("home", function (user) {
+		userFactory.onAuthChange('home', function (user) {
 			self.user.email = user.email;
 			$timeout(function() {
 				$scope.$apply();
