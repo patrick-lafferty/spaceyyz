@@ -10,6 +10,7 @@
 
 	function EngineFactory() {
 		var self = this;
+		self.getEngines = getEngines;
 
 		function getEngines() {
 

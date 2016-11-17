@@ -2,6 +2,7 @@
 design
 node_modules/
 eslint_results
+coverage/
 # !node_modules/angular-ui-bootstrap
 # !node_modules/angular-ui-router
 # !node_modules/anymatch
