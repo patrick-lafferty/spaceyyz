@@ -8,6 +8,8 @@
 			controller: ScheduleFlight
 		});
 
+	ScheduleFlight.$inject = ['vehicleInventoryFactory', 'spaceportFactory',
+		'$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
 	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
 			$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
 		this.payload = 0;

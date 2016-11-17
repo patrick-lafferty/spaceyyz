@@ -5,6 +5,7 @@
 		.module('spaceyyz')
 		.controller('userAccount', UserAccount);
 
+	UserAccount.$inject = ['userFactory', '$state', '$scope', '$timeout'];
 	function UserAccount(userFactory, $state, $scope, $timeout) {
 		var self = this;
 		this.user = userFactory;

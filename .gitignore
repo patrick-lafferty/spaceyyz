@@ -1,4 +1,5 @@
 *.swp
+dist/
 design
 node_modules/
 eslint_results

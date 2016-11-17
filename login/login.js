@@ -8,6 +8,7 @@
 			controller: Login
 		});
 
+	Login.$inject = ['userFactory', '$state'];
 	function Login(userFactory, $state) {
 		var self = this;
 		this.email = "";

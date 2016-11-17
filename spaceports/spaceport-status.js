@@ -8,6 +8,7 @@
 			controller: Spaceports,
 		});
 
+	Spaceports.$inject = ['spaceportFactory', '$timeout', '$scope'];
 	function Spaceports(spaceportFactory, $timeout, $scope) {
 		var self = this;
 		this.spaceports = {};

@@ -22,7 +22,7 @@
 
 <ul class="vehicles">
 	<li ng-repeat="vehicle in $ctrl.vehicles | filter:$ctrl.search($ctrl.searchType) | orderBy: $ctrl.searchType : $ctrl.searchType === 'capacity'">
-		<h4><a ui-sref="auth.vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
+		<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
 		<p>Capacity: {{vehicle.capacity}}</p>
 		<p>Stock: {{vehicle.inventory}}</p>
 	</li>

@@ -40,7 +40,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-		'bundle.js', 'karma.conf.js', 'webpack.config.js',
+		'bundle.js', 'karma.conf.js', 'webpack.config.prod.js', 'webpack.config.dev.js',
 		'node_modules/*!(mocha|karma-mocha/lib|chai|karma-chai|angular-mocks|angular-ui-bootstrap|angular-ui-router)/**/*.js',
 		'node_modules/JSONStream/**/*.js',
 		'coverage/**/*.js'
@@ -51,7 +51,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
 		'app.module.js': ['coverage'],
-		'!(angular|bundle|webpack.config|karma.conf).js': ['coverage'],
+		'!(angular|bundle|webpack.config.prod|webpack.config.dev|karma.conf).js': ['coverage'],
 		'!(node_modules|test|coverage)/!(angular|bundle).js': ['coverage'],
 		'test/**/*.js': ['browserify']
 		//'node_modules/JSONStream/**/*.js': ['browserify'],

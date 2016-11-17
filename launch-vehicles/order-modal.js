@@ -16,6 +16,8 @@
 			}
 		});	
 
+	OrderVehicleModal.$inject = ['vehicleInventoryFactory',
+		'$scope', '$timeout', '$stateParams'];
 	function OrderVehicleModal(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams) {
 

@@ -8,6 +8,7 @@
 			controller: Home
 		});
 
+	Home.$inject = ['userFactory', '$timeout', '$scope'];
 	function Home(userFactory, $timeout, $scope) {
 		var self = this;
 		this.user = {

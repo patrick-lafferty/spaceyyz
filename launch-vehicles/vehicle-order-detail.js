@@ -11,6 +11,9 @@
 			controller: VehicleOrderDetail 
 		});	
 
+	VehicleOrderDetail.$inject = ['vehicleInventoryFactory',
+		'$scope', '$timeout', '$stateParams',
+		'$uibModal', '$state', 'orderFactory'];
 	function VehicleOrderDetail(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams,
 			$uibModal, $state, orderFactory) {

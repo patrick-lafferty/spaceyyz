@@ -7,7 +7,7 @@
 
 	angular
 		.module('spaceyyz')
-		.config(function ($stateProvider) {
+		.config(['$stateProvider', function ($stateProvider) {
 			var states = [ 
 				{
 					name: 'home',
@@ -154,7 +154,7 @@
 				$stateProvider.state(state);
 			});
 
-		});
+		}]);
 
 	/*angular
 		.module('spaceyyz')

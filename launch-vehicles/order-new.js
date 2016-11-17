@@ -14,6 +14,7 @@
 			controller: OrderLaunchVehicle 
 		});	
 
+	OrderLaunchVehicle.$inject = ['vehicleInventoryFactory', '$scope', '$timeout'];
 	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout) {
 		this.primaries = [
 			{name: "Earth", satellites: ["None", "Moon"], selectedSatellite: "None"},

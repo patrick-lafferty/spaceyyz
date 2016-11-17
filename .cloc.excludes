@@ -1,0 +1,6 @@
+angular.js
+bundle.js
+.eslintrc.js
+.stylelintrc.js
+webpack.config.prod.js
+webpack.config.dev.js

@@ -7,6 +7,7 @@
 		.module('spaceyyz')
 		.factory('userFactory', UserFactory);
 
+	UserFactory.$inject = ['$state'];
 	function UserFactory($state) {
 		var self = this;
 		var factory = {

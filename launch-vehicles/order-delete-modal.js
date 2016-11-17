@@ -16,6 +16,7 @@
 			}
 		});	
 
+	OrderDeleteModal.$inject = ['$scope', '$timeout', '$stateParams'];
 	function OrderDeleteModal($scope, $timeout, $stateParams) {
 		var self = this;
 

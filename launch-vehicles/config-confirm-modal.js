@@ -17,6 +17,8 @@
 			}
 		});	
 
+	ConfirmVehicleDeleteModal.$inject = ['vehicleInventoryFactory',
+		'$scope', '$timeout', '$stateParams'];
 	function ConfirmVehicleDeleteModal(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams) {
 

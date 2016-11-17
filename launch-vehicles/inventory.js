@@ -10,6 +10,7 @@
 			controller: Inventory
 		});
 
+	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope'];
 	function Inventory(vehicleInventoryFactory, $timeout, $scope) {
 		vehicleInventoryFactory.getVehicles().then(set);
 

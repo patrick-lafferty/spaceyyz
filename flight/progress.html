@@ -3,7 +3,7 @@
 	<p>Click on a flight name to see the details of a flight</p>
 	<ul style="list-style: none">
 		<li ng-repeat="flight in $ctrl.flights" style="display: flex; align-items: center">
-			<a style="font-size: 24px; margin-right: 20px" ui-sref="auth.flightDetails({missionName: flight.mission.name, flight: flight})" ui-sref-active="active">{{flight.mission.name | uppercase}}</a>
+			<a style="font-size: 24px; margin-right: 20px" ui-sref="flightDetails({missionName: flight.mission.name, flight: flight})" ui-sref-active="active">{{flight.mission.name | uppercase}}</a>
 			<p style="margin: 0px">Flight mission progress:</p>
 			<div class="col-sm-4">
 				<uib-progressbar style="margin: 0px" value="order.progress"></uib-progressbar>

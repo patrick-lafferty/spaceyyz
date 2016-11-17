@@ -12,6 +12,7 @@
 			controller: Config,
 		});
 
+	Config.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal'];
 	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal) {
 
 		var self = this;

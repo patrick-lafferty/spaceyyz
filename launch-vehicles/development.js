@@ -13,6 +13,7 @@
 			controller: VehicleDevelopment 
 		});	
 
+	VehicleDevelopment.$inject = ['orderFactory', '$timeout', '$scope'];
 	function VehicleDevelopment(orderFactory, $timeout, $scope) {
 		this.orders = {
 			all: []

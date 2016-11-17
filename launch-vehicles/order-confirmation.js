@@ -10,6 +10,8 @@
 			controller: OrderConfirmation,
 		});	
 
+	OrderConfirmation.$inject = ['orderFactory', '$uibModal', 
+		'$scope', '$timeout', '$state', '$stateParams'];
 	function OrderConfirmation(orderFactory, $uibModal,
 			$scope, $timeout, $state, $stateParams) {
 

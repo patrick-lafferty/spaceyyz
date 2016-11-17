@@ -8,6 +8,7 @@
 			controller: FlightProgress
 		});
 
+	FlightProgress.$inject = ['flightFactory', '$timeout', '$scope'];
 	function FlightProgress(flightFactory, $timeout, $scope) {
 
 		var self = this;

@@ -8,6 +8,7 @@
 			controller: ConfigureSpaceport
 		});
 
+	ConfigureSpaceport.$inject = ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
 	function ConfigureSpaceport(spaceportFactory, $timeout, $scope, $uibModal) {
 		var self = this;
 

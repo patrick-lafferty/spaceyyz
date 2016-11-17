@@ -8,6 +8,7 @@
 			controller: FlightDetails
 		});
 
+	FlightDetails.$inject = ['$stateParams', 'flightFactory', '$timeout', '$scope'];
 	function FlightDetails($stateParams, flightFactory, $timeout, $scope) {
 		var self = this;
 		this.flight = $stateParams.flight;
@@ -122,7 +123,7 @@
 			}
 
 			self.elapsedTime += (self.maxFlightTime / self.animLength);
-			console.log(self.elapsedTime);
+			//console.log(self.elapsedTime);
 			self.flight.status.velocity = 40 * self.elapsedTime;
 			self.flight.status.altitude++; 
 

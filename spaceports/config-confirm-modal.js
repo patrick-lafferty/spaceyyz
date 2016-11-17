@@ -17,6 +17,7 @@
 			}
 		});	
 
+	ConfirmSpaceportDeleteModal.$inject = ['spaceportFactory'];
 	function ConfirmSpaceportDeleteModal(spaceportFactory)  {
 
 		this.spaceport = this.resolve.spaceport;
