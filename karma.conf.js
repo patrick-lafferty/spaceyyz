@@ -22,18 +22,18 @@ module.exports = function(config) {
 		'node_modules/angular-ui-router/release/angular-ui-router.js',
 		{ pattern: 'node_modules/angular-ui-router/release/angular-ui-router.js.map', included: false},
 		'node_modules/angular-mocks/angular-mocks.js',
-		'app.module.js',
+		'src/app.module.js',
 		//'!(angular|bundle|webpack.config|karma.conf).js',
-		'*.js',
+		'src/**/*.js',
 		//{ pattern: 'node_modules/**/*.js', included: false, served: false, watched: false},
 		//{ pattern: 'bundle.js', included: false, served: false, watched: false},	
 		//'**/*.js',
 		//'!(node_modules|coverage|test)/!(bundle).js',
-		'flight/*.js',
+		/*'flight/*.js',
 		'launch-vehicles/*.js',
 		'login/*.js',
 		'research-development/*.js',
-		'spaceports/*.js',
+		'spaceports/*.js',*/
       	'test/**/*.js'
     ],
 
@@ -50,9 +50,10 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		'app.module.js': ['coverage'],
-		'!(angular|bundle|webpack.config.prod|webpack.config.dev|karma.conf).js': ['coverage'],
-		'!(node_modules|test|coverage)/!(angular|bundle).js': ['coverage'],
+		//'app.module.js': ['coverage'],
+		//'!(angular|bundle|webpack.config.prod|webpack.config.dev|karma.conf).js': ['coverage'],
+		'src/**/*.js': ['coverage', 'browserify'],
+		//'!(node_modules|test|coverage)/!(angular|bundle).js': ['coverage'],
 		'test/**/*.js': ['browserify']
 		//'node_modules/JSONStream/**/*.js': ['browserify'],
     },

@@ -1,4 +1,5 @@
 var assert = require('chai').assert;
+window.firebase = require('./mocks/firebase');
 
 describe('Testing Services', function () {
 	beforeEach(angular.mock.module('spaceyyz'));
