@@ -38,7 +38,7 @@
   "scripts": {
     "build-dev": "webpack --config webpack.config.dev.js --progress --colors -d",
     "build-prod": "webpack --config webpack.config.prod.js --progress --colors -p",
-    "test": "karma start",
+    "tests": "karma start",
     "count": "cloc . --exclude-dir=node_modules,coverage,dist --exclude-list-file=.cloc.excludes"
   }
 }

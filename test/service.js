@@ -21,7 +21,6 @@ describe('Testing Services', function () {
 
 		it('should run', function () {
 			engineFactory.getEngines();	
-			assert.equal(1, 2);
 		});
 	});
 });

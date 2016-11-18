@@ -1,4 +1,3 @@
-
 angular
 	.module('spaceyyz', [
 		'ui.bootstrap',
@@ -6,7 +5,7 @@ angular
 	]);
 
 /* for using webpack, require all the files so it will bundle them together
- * */
+ **/ 
 
 require('./app.config.js')
 

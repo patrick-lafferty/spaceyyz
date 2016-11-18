@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: __dirname  + "/app.module.js",
+		app: __dirname  + "/src/app.module.js",
 		//to combine vendor libs: vendors: ['angular']
 	},
 	output: {
