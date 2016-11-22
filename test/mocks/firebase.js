@@ -1,5 +1,8 @@
 var firebase = {};
 
+/* Replacement for Firebase's Promise
+ * Returns the value immediately (not async)
+ * */
 function Promise (foo) {
 	this.value = foo;
 }
@@ -8,6 +11,9 @@ Promise.prototype.then = function (onSuccess) {
 	onSuccess(this.value);
 };
 
+/* Replacement for Firebase's Snapshot
+ * Just stores and returns a single value
+ * */
 function Snapshot (value) {
 	this.value = value;
 }
