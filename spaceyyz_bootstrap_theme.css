@@ -26,3 +26,8 @@ label.control-label {
 .progress-bar {
 	background: #19b3fe;
 }
+
+.glyphicon {
+	color: red;
+	right: 10px;
+}

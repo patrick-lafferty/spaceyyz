@@ -121,8 +121,11 @@
 		<!--just for debugging
 		<script src="//unpkg.com/ui-router-visualizer@2"></script>
 		-->
+
 		<% if (htmlWebpackPlugin.options.isDevEnvironment) { %>
 			<%= require('html!./dev_scripts.html') %>
+		<% } else { %>
+			<%= require('./app.requires.js') %>
 		<% } %>
 
 	</body>

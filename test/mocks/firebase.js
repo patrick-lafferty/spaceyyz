@@ -44,4 +44,8 @@ firebase.database = function () {
 	};*/
 };
 
-var exports = module.exports = firebase;
+var exports = module.exports = {
+	firebase: firebase,
+	Promise: Promise
+
+};

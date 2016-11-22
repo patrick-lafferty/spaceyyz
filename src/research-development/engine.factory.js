@@ -8,25 +8,26 @@
 		.module('spaceyyz')
 		.factory('engineFactory', EngineFactory);
 
-	function EngineFactory() {
-		var self = this;
-		self.getEngines = getEngines;
 
-		function getEngines() {
+	function EngineFactory() {
+
+		function getEngines () {
 
 			return firebase.database().ref().child("engines").once('value').then(function(snapshot) {
 
 				var engineObject = snapshot.val();
 				var engines = [];
 
-				Object.keys(engineObject).forEach(function (key) {
-					var object = engineObject[key];
-					object.key = key;
-					engines.push(object);
-				});
+				if (engineObject !== null && typeof engineObject !== 'undefined') {
+
+					Object.keys(engineObject).forEach(function (key) {
+						var object = engineObject[key];
+						object.key = key;
+						engines.push(object);
+					});
+				}
 				
 				return engines;
-
 			});
 		}
 
@@ -54,7 +55,12 @@
 			firebase.database().ref().child("engines/" + engine.key).remove();
 		}
 
-		return self;
+		return {
+			getEngines: getEngines,
+			addEngine: addEngine,
+			updateEngine: updateEngine,
+			deleteEngine: deleteEngine
+		};
 
 	}
 })();

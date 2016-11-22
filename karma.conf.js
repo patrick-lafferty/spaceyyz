@@ -23,6 +23,7 @@ module.exports = function(config) {
 		{ pattern: 'node_modules/angular-ui-router/release/angular-ui-router.js.map', included: false},
 		'node_modules/angular-mocks/angular-mocks.js',
 		'src/app.module.js',
+		'src/app.requires.js',
 		'src/**/*.js',
       	'test/**/*.js'
     ],

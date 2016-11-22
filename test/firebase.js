@@ -1,8 +1,9 @@
 var assert = require('chai').assert;
-var firebase = require('./mocks/firebase');
+var firebase = require('./mocks/firebase').firebase;
 
 describe('Testing Firebase Mock', function () {
 
+	/*var oldStore = firebase.store;
 	before('setup db for engines', function () {
 		firebase.store = {
 			engines: {
@@ -12,6 +13,10 @@ describe('Testing Firebase Mock', function () {
 			}
 		};
 	});
+
+	after(function () {
+		firebase.store = oldStore;
+	});*/
 
 	beforeEach(angular.mock.module('spaceyyz'));
 
@@ -32,7 +37,7 @@ describe('Testing Firebase Mock', function () {
 		it('can set initial db values', function () {
 			firebase.database().ref().child("engines")
 				.once()
-				.then(function (ss) { console.log(ss.val());});
+				.then(function (ss) { });
 		});
 	});
 });
