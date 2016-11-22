@@ -9,7 +9,7 @@
 		.module('spaceyyz')
 		.component('orderVehicleModal', {
 			controller: OrderVehicleModal,
-			templateUrl: 'launch-vehicles/order-modal.html',
+			templateUrl: 'src/launch-vehicles/order-modal.html',
 			bindings: {
 				resolve: '<',
 				modalInstance: '<'

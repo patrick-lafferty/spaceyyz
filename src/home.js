@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('home', {
-			templateUrl: 'home.html',
+			templateUrl: 'src/home.html',
 			controller: Home
 		});
 

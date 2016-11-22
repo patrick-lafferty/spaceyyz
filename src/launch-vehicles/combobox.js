@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('combobox', {
-			templateUrl: 'launch-vehicles/combobox.html',
+			templateUrl: 'src/launch-vehicles/combobox.html',
 			controller: Combobox,
 			bindings: {
 				items: '=',

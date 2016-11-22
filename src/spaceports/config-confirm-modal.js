@@ -10,7 +10,7 @@
 		.module('spaceyyz')
 		.component('confirmSpaceportDeleteModal', {
 			controller: ConfirmSpaceportDeleteModal,
-			templateUrl: 'spaceports/config-confirm-modal.html',
+			templateUrl: 'src/spaceports/config-confirm-modal.html',
 			bindings: {
 				resolve: '<',
 				modalInstance: '<'

@@ -6,7 +6,7 @@
 	angular
 		.module('spaceyyz')
 		.component('orderConfirmation', {
-			templateUrl: 'launch-vehicles/order-confirmation.html',
+			templateUrl: 'src/launch-vehicles/order-confirmation.html',
 			controller: OrderConfirmation,
 		});	
 

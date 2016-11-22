@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('flightDetails', {
-			templateUrl: 'flight/details.html',
+			templateUrl: 'src/flight/details.html',
 			controller: FlightDetails
 		});
 

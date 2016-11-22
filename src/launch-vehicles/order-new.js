@@ -10,7 +10,7 @@
 	angular
 		.module('spaceyyz')
 		.component('orderLaunchVehicle', {
-			templateUrl: 'launch-vehicles/order-new.html',
+			templateUrl: 'src/launch-vehicles/order-new.html',
 			controller: OrderLaunchVehicle 
 		});	
 

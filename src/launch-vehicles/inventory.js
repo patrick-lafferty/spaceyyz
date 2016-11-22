@@ -6,7 +6,7 @@
 	angular
 		.module('spaceyyz')
 		.component('vehicleInventory', {
-			templateUrl: 'launch-vehicles/inventory.html',
+			templateUrl: 'src/launch-vehicles/inventory.html',
 			controller: Inventory
 		});
 

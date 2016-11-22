@@ -8,7 +8,7 @@
 	angular
 		.module('spaceyyz')
 		.component('configVehicle', {
-			templateUrl: 'launch-vehicles/config.html',
+			templateUrl: 'src/launch-vehicles/config.html',
 			controller: Config,
 		});
 

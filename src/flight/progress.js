@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('flightProgress', {
-			templateUrl: 'flight/progress.html',
+			templateUrl: 'src/flight/progress.html',
 			controller: FlightProgress
 		});
 

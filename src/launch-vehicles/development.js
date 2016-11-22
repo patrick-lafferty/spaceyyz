@@ -9,7 +9,7 @@
 	angular
 		.module('spaceyyz')
 		.component('vehicleDevelopment', {
-			templateUrl: 'launch-vehicles/development.html',
+			templateUrl: 'src/launch-vehicles/development.html',
 			controller: VehicleDevelopment 
 		});	
 

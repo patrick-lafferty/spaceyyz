@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('researchEngine', {
-			templateUrl: 'research-development/engines.html',
+			templateUrl: 'src/research-development/engines.html',
 			controller: Engines
 		});
 

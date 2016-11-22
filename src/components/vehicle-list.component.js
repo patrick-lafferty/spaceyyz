@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('vehicleList', {
-			templateUrl: 'components/vehicle-list.component.html',
+			templateUrl: 'src/components/vehicle-list.component.html',
 			controller: Vehicles 
 		});	
 

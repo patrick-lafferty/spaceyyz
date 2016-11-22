@@ -10,7 +10,7 @@
 		.module('spaceyyz')
 		.component('confirmVehicleDeleteModal', {
 			controller: ConfirmVehicleDeleteModal,
-			templateUrl: 'launch-vehicles/config-confirm-modal.html',
+			templateUrl: 'src/launch-vehicles/config-confirm-modal.html',
 			bindings: {
 				resolve: '<',
 				modalInstance: '<'

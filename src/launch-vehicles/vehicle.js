@@ -7,7 +7,7 @@
 	angular
 		.module('spaceyyz')
 		.component('vehicleList', {
-			templateUrl: 'launch-vehicles/vehicle.html',
+			templateUrl: 'src/launch-vehicles/vehicle.html',
 			controller: Vehicle,
 			bindings: {
 				vehicles: '<',

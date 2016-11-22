@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('configureSpaceport', {
-			templateUrl: 'spaceports/configure.html',
+			templateUrl: 'src/spaceports/configure.html',
 			controller: ConfigureSpaceport
 		});
 

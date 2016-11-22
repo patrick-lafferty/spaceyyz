@@ -9,7 +9,7 @@
 		.module('spaceyyz')
 		.component('orderDeleteModal', {
 			controller: OrderDeleteModal,
-			templateUrl: 'launch-vehicles/order-delete-modal.html',
+			templateUrl: 'src/launch-vehicles/order-delete-modal.html',
 			bindings: {
 				resolve: '<',
 				modalInstance: '<'

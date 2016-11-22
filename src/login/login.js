@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('login', {
-			templateUrl: 'login/login.html',
+			templateUrl: 'src/login/login.html',
 			controller: Login
 		});
 

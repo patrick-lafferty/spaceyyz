@@ -7,7 +7,7 @@
 	angular
 		.module('spaceyyz')
 		.component('vehicleOrderDetail', {
-			templateUrl: 'launch-vehicles/vehicle-order-detail.html',
+			templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
 			controller: VehicleOrderDetail 
 		});	
 

@@ -4,7 +4,7 @@
 	angular
 		.module('spaceyyz')
 		.component('about', {
-			templateUrl: 'about.html',
+			templateUrl: 'src/about.html',
 			controller: About
 		});
 
