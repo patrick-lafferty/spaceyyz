@@ -1,4 +1,4 @@
-var firebase = {};
+var firebase = { store: {} };
 
 /* Replacement for Firebase's Promise
  * Returns the value immediately (not async)
@@ -23,22 +23,25 @@ Snapshot.prototype.val = function () {
 };
 
 firebase.database = function () {
-	var things = {engines: {}};
 
-	return {
+	self.ref = function () {
+		return {
+			child: function (name) {
+				return {
+					once: function (unused) {
+						return new Promise(new Snapshot(firebase.store[name]));
+					}
+				};
+			}
+		};
+	};
+
+	return self; /*{
+
 		ref: function () {
-			return {
-				child: function (name) {
-					return {
-						once: function (unused) {
-							return new Promise(new Snapshot(things[name]));
-						}
-					};
-				}
-			};
 		},
 
-	};
+	};*/
 };
 
 var exports = module.exports = firebase;
