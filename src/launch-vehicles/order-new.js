@@ -14,8 +14,8 @@
 			controller: OrderLaunchVehicle 
 		});	
 
-	OrderLaunchVehicle.$inject = ['vehicleInventoryFactory', '$scope', '$timeout'];
-	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout) {
+	OrderLaunchVehicle.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
+	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
 		this.primaries = [
 			{name: "Earth", satellites: ["None", "Moon"], selectedSatellite: "None"},
 			{name: "Mars", satellites: ["None", "Phobos", "Deimos"], selectedSatellite: "None"}
@@ -34,8 +34,35 @@
 		this.search_payload = 10000;
 		var self = this;
 
-		vehicleInventoryFactory.getVehicles().then(set);
+		//vehicleInventoryFactory.getVehicles().then(set);
 		vehicleInventoryFactory.getInventory().then(setInventory);
+
+		Promise.all([
+			vehicleInventoryFactory.getVehicles(),
+			variantFactory.getFamilies()])
+		.then(function (results) {
+			//self.vehicles.all = results[0].vehicles;
+			set(results[0]);
+
+			var variants = results[1];
+
+			variants.forEach(function (family) {
+				var vehicle;
+				for(var i = 0; i < self.vehicles.all.length; i++) {
+					if (self.vehicles.all[i].familyKey === family.key) {
+						vehicle = self.vehicles.all[i];
+						break;
+					}
+				}	
+
+				vehicle.variants = family.variants;
+			});
+
+			$timeout(function () {
+				$scope.$apply();
+			});
+
+		});
 
 		function set(vehicles) {
 			self.vehicles.all = vehicles.vehicles;
@@ -44,9 +71,9 @@
 			self.vehicles.heavy = vehicles.heavyVehicles;
 			self.vehicles.superHeavy = vehicles.superHeavyVehicles;
 
-			$timeout(function() {
+			/*$timeout(function() {
 				$scope.$apply();
-			});
+			});*/
 		}
 		
 		function setInventory(inventory) {
@@ -60,10 +87,21 @@
 				};
 			} else if (type === "capacity") {
 				return function(vehicle) {
-					return vehicle.capacity >= self.search_payload;
+					//return vehicle.capacity >= self.search_payload;
+					return vehicle.variants.some(function (variant) {
+						return variant.capacity >= self.search_payload;
+					});
 				};
 			}
-		}
+		};
+
+		this.variantFilter = function (variant) {
+			if (self.searchType === "capacity") {
+				return variant.capacity >= self.search_payload;
+			}
+
+			return true;
+		};
 
 	}
 })();
