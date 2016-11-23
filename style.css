@@ -36,6 +36,7 @@ html, body {
 	color: #19b3fe;
 }
 
+.no-list-style, 
 .vehicles {
 	list-style: none;
 }

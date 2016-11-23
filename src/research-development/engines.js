@@ -25,8 +25,8 @@
 
 	}
 
-	Engines.$inject = ['engineFactory', '$scope', '$timeout'];
-	function Engines(engineFactory, $scope, $timeout) {
+	Engines.$inject = ['engineFactory', '$scope', '$timeout', '$uibModal'];
+	function Engines(engineFactory, $scope, $timeout, $uibModal) {
 		var self = this;
 		this.engines = {all: []};
 		this.newEngine = new Engine();
@@ -44,6 +44,48 @@
 			engineFactory.addEngine(newEngine);
 			this.engines.all.push(newEngine);
 			this.newEngine = new Engine();
+		};
+
+		this.editEngine = function (engine) {
+			engine.beingEdited = true;
+		};
+
+		this.cancelEditEngine = function (engine) {
+			engine.beingEdited = false;
+		};
+
+		this.saveEngine = function (engine) {
+			if (!engine.beingEdited) {
+				return;
+			}
+
+			engine.beingEdited = false;
+
+			engineFactory.updateEngine(engine);
+
+			var index = self.engines.all.findIndex(function (e) { return e.name === engine.name;});
+
+			self.engines.all[index] = engine;
+		};
+
+		self.modalInstance = {};
+		this.deleteEngine = function (engine) {
+			self.modalInstance = $uibModal.open({
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				component: 'confirmEngineDeleteModal',
+				backdrop: 'static',
+				resolve: {
+					engine: function () {
+						return engine;
+					}
+				}
+			});
+
+			self.modalInstance.result.then(function (engine) {
+				engineFactory.deleteEngine(engine);
+				self.engines.all.splice(self.engines.all.indexOf(engine), 1);
+			});
 		};
 
 		engineFactory.getEngines().then(function (engines) {

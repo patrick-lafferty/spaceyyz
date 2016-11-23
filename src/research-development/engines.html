@@ -3,13 +3,26 @@
 
 	<uib-tabset active="active">
 		<uib-tab index="0" heading="Existing">
-			<ul class="" style="margin-top: 10px">
+			<ul class="no-list-style" style="margin-top: 10px">
 				<li ng-repeat="engine in $ctrl.engines.all | orderBy: 'name'">
 					<form class="form-horizontal">
 						<div class="form-group">
 							<h4>{{engine.name}}</h4>
+							<div class="btn-group" uib-dropdown is-open="status.isopen">
+								<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">Modify <span class="caret"></span></button>
+								<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
+									<li role="menuitem" ng-hide="engine.beingEdited"><a ng-click="$ctrl.editEngine(engine)">Edit</a></li>
+									<li role="menuitem" ng-show="engine.beingEdited"><a ng-click="$ctrl.cancelEditEngine(engine)">Cancel edit</a></li>
+									<li role="menuitem" ng-class="{'disabled': engine.beingEdited}"><a ng-click="$ctrl.deleteEngine(engine)">Delete</a></li>
+								</ul>
+							</div>
 						</div>
-						<div>
+						<div ng-show="engine.beingEdited">
+							<div class="form-group">
+								<label for="" class="col-sm-2 control-label"></label>
+							</div>
+						</div>
+						<div ng-hide="engine.beingEdited">
 							<p>Description: {{engine.description}}</p>
 						</div>
 					</form>

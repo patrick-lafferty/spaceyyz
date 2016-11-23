@@ -36,4 +36,6 @@ require('./spaceports/spaceport-status.js')
 require('./spaceports/spaceport-factory.js')
 require('./spaceports/configure.js')
 require('./spaceports/config-confirm-modal.js')
+
 require('./research-development/engines.js')
+require('./research-development/config-confirm-modal.js')
