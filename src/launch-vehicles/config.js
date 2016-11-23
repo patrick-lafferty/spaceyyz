@@ -12,19 +12,15 @@
 			controller: Config,
 		});
 
-	Config.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal'];
-	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal) {
+	Config.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
+	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
 
 		var self = this;
 		this.vehicles = {
 			all: [],
 		};
 
-		this.engines = [
-			{
-				name: "F1"
-			}
-		];
+		this.engines = [];
 
 		this.newVehicle = {};
 		this.variants = [];
@@ -74,9 +70,11 @@
 		};
 
 		this.createVehicle = function(vehicle) {
+			vehicle.variants = self.variants;
 			vehicleInventoryFactory.addVehicle(vehicle);
 			self.vehicles.all.push(vehicle);
 			self.newVehicle = {};
+			self.variants = [];
 		};
 
 		this.addNewVariant = function () {
@@ -105,12 +103,50 @@
 			stage.engines.splice(index, 1);
 		};
 
-		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
+		/*vehicleInventoryFactory.getVehicles().then(function (vehicles) {
 			self.vehicles.all = vehicles.vehicles;
 
 			$timeout(function() {
 				$scope.$apply();
 			});
+		});
+
+		engineFactory.getEngines().then(function (engines) {
+			self.engines = engines;
+
+			$timeout(function () {
+				$scope.$apply();
+			});
+		});*/
+
+		Promise.all([
+			vehicleInventoryFactory.getVehicles(),
+			engineFactory.getEngines(),
+			variantFactory.getFamilies()])
+		.then(function (results) {
+			self.vehicles.all = results[0].vehicles;
+			self.engines = results[1];
+
+			var variants = results[2];
+
+			variants.forEach(function (family) {
+				var vehicle = self.vehicles.all[self.vehicles.all.indexOf(function (v) {return v.familyKey === family.key;})];
+
+				vehicle.variants = family.variants;
+
+				vehicle.variants.forEach(function (variant) {
+					variant.stages.forEach(function (stage) {
+						stage.engines = stage.engines.map(function (engineKey) {
+							return self.engines[self.engines.indexOf(function (engine) { return engine.key === engineKey;})];
+						});
+					});
+				});
+			});
+
+			$timeout(function () {
+				$scope.$apply();
+			});
+
 		});
 
 	}

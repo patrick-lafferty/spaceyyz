@@ -11,6 +11,7 @@ require('./user.factory.js')
 require('./solar-system-factory.js')
 require('./flight/flight-factory.js')
 require('./research-development/engine.factory.js')
+require('./launch-vehicles/vehicle-variant.factory.js')
 
 require('./launch-vehicles/combobox.js')
 

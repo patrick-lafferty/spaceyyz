@@ -8,7 +8,8 @@
 		.module('spaceyyz')
 		.factory('vehicleInventoryFactory', InventoryFactory);
 
-	function InventoryFactory() {
+	InventoryFactory.$inject = ['variantFactory'];
+	function InventoryFactory(variantFactory) {
 
 		function minimumCapacity(capacity) {
 			return function(vehicle) {
@@ -99,10 +100,24 @@
 				count: 0
 			};
 
-			updates["/vehicles/" + key] = vehicle;
+			var familyKey = firebase.database().ref().child("variants").push().key;
+
+			//updates["/vehicles/" + key] = vehicle;
+			updates["/vehicles/" + key] = {
+				name: vehicle.name,
+				description: vehicle.description,
+				familyKey: familyKey
+			};
+
+			vehicle.familyKey = familyKey;
+
 			updates["/inventory/" + key] = inventory;
 
 			firebase.database().ref().update(updates);
+
+			vehicle.variants.forEach(function (variant) {
+				variantFactory.addVariant(variant, familyKey);
+			});
 		}
 
 		function updateVehicle(vehicle)
@@ -118,6 +133,8 @@
 		function deleteVehicle(vehicle)
 		{
 			firebase.database().ref().child("vehicles/" + vehicle.key).remove();
+
+			firebase.database().ref().child("variants/" + vehicle.familyKey).remove();
 		}
 
 		return {

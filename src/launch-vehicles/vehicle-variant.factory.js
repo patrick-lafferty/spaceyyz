@@ -3,7 +3,7 @@
 
 	angular
 		.module('spaceyyz')
-		.factory('vehicleVariantFactory', VehicleVariantFactory);
+		.factory('variantFactory', VehicleVariantFactory);
 
 	function VehicleVariantFactory() {
 
@@ -16,11 +16,23 @@
 			//a configuration is then one complete set of stages
 		};
 
-		var configurations = {
-			"Atlas V" : [atlas402, atlas501, atlas541, atlas552]
-		}
+		function getFamilies() {
+			return firebase.database().ref().child("variants").once('value').then(function (snapshot) {
+				var familyObject = snapshot.val();
+				var families = [];
 
-		function getVariants(family) {
+				if (familyObject !== null) {
+					Object.keys(familyObject).forEach(function (key) {
+						var family = familyObject[key];
+						family.key = key;
+						families.push(family);
+					});
+				}
+
+				return families;
+			});
+		}
+		/*function getVariants(family) {
 
 			return firebase.database().ref().child("variants").orderByChild('family').equalTo(family).once('value').then(function(snapshot) {
 				var variantObject = snapshot.val();
@@ -34,7 +46,7 @@
 
 				return variants;
 			});
-		}
+		}*/
 
 		/*function getVehicle(name, then) {
 			getVehicles().then(function(vehicles) {
@@ -45,9 +57,21 @@
 		}*/
 
 		function addVariant(variant, familyKey) {
+			var stages = variant.stages.map(function (stage) {
+				return {
+					name: stage.name,
+					engines: stage.engines.map(function (engine) {
+						return engine.key;
+					})
+				}
+			});
+
 			firebase.database().ref().child("variants/" + familyKey).push({
 				name: variant.name,
-				stages: variant.stages
+				capacity: variant.capacity,
+				cost: variant.cost,
+				description: variant.description,
+				stages: stages
 			});
 		}
 
@@ -64,7 +88,9 @@
 			firebase.database().ref().child("variants/" + familyKey + "/" + variant.key).remove();
 		}
 
-		return self;
-
+		return {
+			getFamilies: getFamilies,
+			addVariant: addVariant
+		};
 	}
 })();

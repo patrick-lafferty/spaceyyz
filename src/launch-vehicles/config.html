@@ -27,6 +27,7 @@
 							</div>	
 						</div>
 						<div ng-show="vehicle.beingEdited">
+							<!--
 							<div class="form-group">
 								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 								<div class="col-sm-5">
@@ -44,12 +45,21 @@
 								<div class="col-sm-5">
 									<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
 								</div>
-							</div>
+							</div>-->
 						</div>
 						<div ng-hide="vehicle.beingEdited">
+							<!--
 							<p>Capacity: {{vehicle.capacity | number}}kg</p>
 							<p>Cost: {{vehicle.cost | currency}}</p>
+							-->
 							<p>Description: {{vehicle.description}}</p>
+
+							<p>Variants</p>
+							<ul>
+								<li ng-repeat="variant in vehicle.variants">
+									<p>{{variant.name}}</p>
+								</li>
+							</ul>
 						</div>
 					</form>
 				</li>
@@ -64,30 +74,12 @@
 						<input type="text" class="form-control" id="name" ng-model="$ctrl.newVehicle.name" placeholder="">
 					</div>
 				</div>
-				<!--<div class="form-group">
-					<label for="capacity" class="col-sm-2 control-label">Capacity</label>
-					<div class="col-sm-5">
-						<input type="number" class="form-control" id="capacity" ng-model="$ctrl.newVehicle.capacity" placeholder="">
-					</div>
-				</div>-->
-				<!--<div class="form-group">
-					<label for="cost" class="col-sm-2 control-label">Cost</label>
-					<div class="col-sm-5">
-						<input type="number" class="form-control" id="cost" ng-model="$ctrl.newVehicle.cost" placeholder="">
-					</div>
-				</div>-->
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-5">
 						<textarea class="form-control" id="description" ng-model="$ctrl.newVehicle.description"></textarea>
 					</div>
 				</div>
-				<!--
-				<div class="form-group">
-					<div class="col-sm-7">
-						<button class="btn btn-primary form-control" ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create</button>
-					</div>
-				</div>-->
 			</form>
 
 			<h2>Variants</h2>
@@ -107,13 +99,19 @@
 							<div class="form-group">
 								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
 								<div class="col-sm-5">
-									<input type="number" class="form-control" id="capacity" ng-model="variant.capacity" placeholder="">
+									<div class="input-group">
+										<input type="number" class="form-control" id="capacity" ng-model="variant.capacity" placeholder="">
+										<div class="input-group-addon">kg to LEO</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cost" class="col-sm-2 control-label">Cost</label>
 								<div class="col-sm-5">
-									<input type="number" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
+									<div class="input-group">
+										<div class="input-group-addon">$</div>
+										<input type="number" class="form-control" id="cost" ng-model="variant.cost" placeholder="">
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -125,40 +123,41 @@
 						</div>
 					</form>
 
-				<h4>Stages</h4>
-				<button class="btn btn-primary" ng-click="$ctrl.addNewStage(variant)">Add new</button>
-				<ul style="margin-top: 10px; list-style: none">
-					<li ng-repeat="stage in variant.stages">
-						<form class="form-horizontal">
-							<div class="form-group">
-								<label for="stageName" class="col-sm-2 control-label">Name</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="stageName" ng-model="stage.name">
+					<h4>Stages</h4>
+					<button class="btn btn-primary" ng-click="$ctrl.addNewStage(variant)">Add new</button>
+					<ul style="margin-top: 10px; list-style: none">
+						<li ng-repeat="stage in variant.stages">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label for="stageName" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="stageName" ng-model="stage.name">
+									</div>
+									<button class="btn btn-primary">Remove</button>
 								</div>
-								<button class="btn btn-primary">Remove</button>
-							</div>
-							<div class="form-group">
-								<label for="engines" class="col-sm-2 control-label">Engines</label>
-								<combobox items="$ctrl.engines" display="name" selected-item="stage.selectedEngine" class="col-sm-3"> 
-								</combobox>
+								<div class="form-group">
+									<label for="engines" class="col-sm-2 control-label">Engines</label>
+									<combobox items="$ctrl.engines" display="name" selected-item="stage.selectedEngine" class="col-sm-3"> 
+									</combobox>
 
-								<button class="btn btn-primary" ng-click="$ctrl.addEngine(stage.selectedEngine, stage)">Add</button>
-							</div>
+									<button class="btn btn-primary" ng-click="$ctrl.addEngine(stage.selectedEngine, stage)">Add</button>
+								</div>
 
-							<div class="form-group">
-								<ul class="col-sm-offset-2">
-									<li ng-repeat="engine in stage.engines track by $index">
-										{{engine.name}}
-										<button class="btn btn-primary" ng-click="$ctrl.removeEngine($index, stage)">Remove</button>
-									</li>
-								</ul>
-							</div>
-						</form>
-					</li>
-				</ul>
-			</li>
-		</ul>
-		<br ng-repeat="i in [1, 2, 3, 4, 5]" >
+								<div class="form-group">
+									<ul class="col-sm-offset-2">
+										<li ng-repeat="engine in stage.engines track by $index">
+											{{engine.name}}
+											<button class="btn btn-primary" ng-click="$ctrl.removeEngine($index, stage)">Remove</button>
+										</li>
+									</ul>
+								</div>
+							</form>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<button class="btn btn-primary" ng-click="$ctrl.createVehicle($ctrl.newVehicle)">Create vehicle</button>
+			<br ng-repeat="i in [1, 2, 3, 4, 5]" >
 		</uib-tab>
 	</uib-tabset>
 </div>

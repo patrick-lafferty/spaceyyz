@@ -91,26 +91,38 @@
 				<div class="form-group">
 					<label for="ispSeaLevel" class="col-sm-2 control-label">Isp (Sea level)</label>
 					<div class="col-sm-2">
-						<input type="number" class="form-control" id="ispSeaLevel" ng-model="$ctrl.newEngine.isp.seaLevel">
-						<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.seaLevel <= 0}" class="glyphicon form-control-feedback"></span>
+						<div class="input-group flex-container">
+							<input type="number" class="form-control" id="ispSeaLevel" ng-model="$ctrl.newEngine.isp.seaLevel">
+							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.seaLevel <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
+							<div class="input-group-addon">s</div>
+						</div>
 					</div>
 					<label for="ispVacuum" class="col-sm-1 control-label">Vacuum</label>
 					<div class="col-sm-2">
-						<input type="number" class="form-control" id="ispVacuum" ng-model="$ctrl.newEngine.isp.vacuum">
-						<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.vacuum <= 0}" class="glyphicon form-control-feedback"></span>
+						<div class="input-group flex-container">
+							<input type="number" class="form-control" id="ispVacuum" ng-model="$ctrl.newEngine.isp.vacuum">
+							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.vacuum <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
+							<div class="input-group-addon">s</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="thrustSeaLevel" class="col-sm-2 control-label">Thrust (Sea level)</label>
 					<div class="col-sm-2">
-						<input type="number" class="form-control" id="thrustSeaLevel" ng-model="$ctrl.newEngine.thrust.seaLevel">
-						<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.seaLevel <= 0}" class="glyphicon form-control-feedback"></span>
+						<div class="input-group">
+							<input type="number" class="form-control" id="thrustSeaLevel" ng-model="$ctrl.newEngine.thrust.seaLevel">
+							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.seaLevel <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
+							<div class="input-group-addon">kN</div>
+						</div>
 					</div>
 					<label for="thrustVacuum" class="col-sm-1 control-label">Vacuum</label>
 					<div class="col-sm-2">
-						<input type="number" class="form-control" id="thrustVacuum" ng-model="$ctrl.newEngine.thrust.vacuum">
-						<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.vacuum <= 0}" class="glyphicon form-control-feedback"></span>
+						<div class="input-group">
+							<input type="number" class="form-control" id="thrustVacuum" ng-model="$ctrl.newEngine.thrust.vacuum">
+							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.vacuum <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
+							<div class="input-group-addon">kN</div>
+						</div>
 					</div>
 				</div>
 

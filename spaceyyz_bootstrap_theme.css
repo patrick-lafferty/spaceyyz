@@ -31,3 +31,16 @@ label.control-label {
 	color: red;
 	right: 10px;
 }
+
+.glyphicon-with-addon {
+	right: 30px;
+}
+
+.input-group-addon {
+	width: unset;
+	padding: 9px 12px;
+}
+
+.flex-container {
+	display: flex;
+}
