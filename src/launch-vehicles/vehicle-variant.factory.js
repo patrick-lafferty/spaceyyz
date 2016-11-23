@@ -24,7 +24,16 @@
 				if (familyObject !== null) {
 					Object.keys(familyObject).forEach(function (key) {
 						var family = familyObject[key];
+						var variants = [];
+
+						Object.keys(family).forEach(function (variantKey) {
+							var variant = family[variantKey];
+							variants.push(variant);
+						});
+
+						family.variants = variants;
 						family.key = key;
+
 						families.push(family);
 					});
 				}
@@ -88,9 +97,18 @@
 			firebase.database().ref().child("variants/" + familyKey + "/" + variant.key).remove();
 		}
 
+		function replaceVariants(familyKey, variants) {
+			firebase.database().ref().child("variants/" + familyKey).remove();
+
+			variants.forEach(function (variant) {
+				addVariant(variant, familyKey);
+			});
+		}
+
 		return {
 			getFamilies: getFamilies,
-			addVariant: addVariant
+			addVariant: addVariant,
+			replaceVariants: replaceVariants
 		};
 	}
 })();

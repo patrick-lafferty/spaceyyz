@@ -3,65 +3,117 @@
 
 	<uib-tabset active="active">
 		<uib-tab index="0" heading="Existing">
-			<form class="form">
+			<form class="form-horizontal" style="margin:10px">
 				<div class="form-group">
 					<input type="text" ng-model="$ctrl.search_name" class="form-control col-sm-6" id="name" placeholder="Search by vehicle name">
 				</div>
 			</form>
-			<br>
-			<ul class="vehicles" style="margin-top: 10px">
+			<ul class="vehicles">
 				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search | orderBy: 'name'">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<h4>{{vehicle.name}}</h4>
-							<div class="btn-group" uib-dropdown is-open="status.isopen">
-								<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-									Modify <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
-									<li role="menuitem" ng-hide="vehicle.beingEdited"><a ng-click="$ctrl.editVehicle(vehicle)">Edit</a></li>
-									<li role="menuitem" ng-show="vehicle.beingEdited"><a ng-click="$ctrl.cancelEditVehicle(vehicle)">Cancel Edit</a></li>
-									<li role="menuitem" ng-class="{'disabled': !vehicle.beingEdited}"><a ng-click="$ctrl.saveVehicle(vehicle)">Save</a></li>
-									<li role="menuitem" ng-class="{'disabled': vehicle.beingEdited}"><a ng-click="$ctrl.deleteVehicle(vehicle)">Delete</a></li>
-								</ul>
-							</div>	
-						</div>
-						<div ng-show="vehicle.beingEdited">
-							<!--
-							<div class="form-group">
-								<label for="capacity" class="col-sm-2 control-label">Capacity</label>
-								<div class="col-sm-5">
-									<input type="number" class="form-control" id="capacity" ng-model="vehicle.capacity" placeholder="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cost" class="col-sm-2 control-label">Cost</label>
-								<div class="col-sm-5">
-									<input type="number" class="form-control" id="cost" ng-model="vehicle.cost" placeholder="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="description" class="col-sm-2 control-label">Description</label>
-								<div class="col-sm-5">
-									<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
-								</div>
-							</div>-->
-						</div>
-						<div ng-hide="vehicle.beingEdited">
-							<!--
-							<p>Capacity: {{vehicle.capacity | number}}kg</p>
-							<p>Cost: {{vehicle.cost | currency}}</p>
-							-->
-							<p>Description: {{vehicle.description}}</p>
-
-							<p>Variants</p>
-							<ul>
-								<li ng-repeat="variant in vehicle.variants">
-									<p>{{variant.name}}</p>
-								</li>
+					<div class="form-group">
+						<h4>{{vehicle.name}}</h4>
+						<div class="btn-group" uib-dropdown is-open="status.isopen">
+							<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+								Modify <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
+								<li role="menuitem" ng-hide="vehicle.beingEdited"><a ng-click="$ctrl.editVehicle(vehicle)">Edit</a></li>
+								<li role="menuitem" ng-show="vehicle.beingEdited"><a ng-click="$ctrl.cancelEditVehicle(vehicle)">Cancel Edit</a></li>
+								<li role="menuitem" ng-class="{'disabled': !vehicle.beingEdited}"><a ng-click="$ctrl.saveVehicle(vehicle)">Save</a></li>
+								<li role="menuitem" ng-class="{'disabled': vehicle.beingEdited}"><a ng-click="$ctrl.deleteVehicle(vehicle)">Delete</a></li>
 							</ul>
+						</div>	
+					</div>
+					<div ng-show="vehicle.beingEdited">
+						<div class="form-group">
+							<label for="description" class="col-sm-2 control-label">Description</label>
+							<textarea class="form-control" id="description" ng-model="vehicle.description"></textarea>
 						</div>
-					</form>
+						<h2>Variants</h2>
+						<button class="btn btn-primary" ng-click="$ctrl.addNewVariant(vehicle)">Add new</button>
+
+						<ul>
+							<li ng-repeat="variant in vehicle.variants track by $index" class="no-list-style">
+								<h3>{{variant.name}}</h3>
+								<form class="form-horizontal">
+									<div class="form-group">
+										<label for="variantName" class="col-sm-2 control-label">Name</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="variantName" ng-model="variant.name">
+										</div>
+										<button class="btn btn-primary" ng-click="$ctrl.removeVariant($index, vehicle)">Remove</button>
+									</div>
+									<div>
+										<div class="form-group">
+											<label for="capacity" class="col-sm-2 control-label">Capacity</label>
+											<div class="col-sm-5">
+												<div class="input-group">
+													<input type="number" class="form-control" id="capacity" ng-model="variant.capacity" placeholder="">
+													<div class="input-group-addon">kg to LEO</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="cost" class="col-sm-2 control-label">Cost</label>
+											<div class="col-sm-5">
+												<div class="input-group">
+													<div class="input-group-addon">$</div>
+													<input type="number" class="form-control" id="cost" ng-model="variant.cost" placeholder="">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="description" class="col-sm-2 control-label">Description</label>
+											<div class="col-sm-5">
+												<textarea class="form-control" id="description" ng-model="variant.description"></textarea>
+											</div>
+										</div>
+									</div>
+								</form>
+
+								<h4>Stages</h4>
+								<button class="btn btn-primary" ng-click="$ctrl.addNewStage(variant)">Add new</button>
+								<ul style="margin-top: 10px; list-style: none">
+									<li ng-repeat="stage in variant.stages track by $index">
+										<form class="form-horizontal">
+											<div class="form-group">
+												<label for="stageName" class="col-sm-2 control-label">Name</label>
+												<div class="col-sm-5">
+													<input type="text" class="form-control" id="stageName" ng-model="stage.name">
+												</div>
+												<button class="btn btn-primary" ng-click="$ctrl.removeStage($index, variant)">Remove</button>
+											</div>
+											<div class="form-group">
+												<label for="engines" class="col-sm-2 control-label">Engines</label>
+												<combobox items="$ctrl.engines" display="name" selected-item="stage.selectedEngine" class="col-sm-3"> 
+												</combobox>
+
+												<button class="btn btn-primary" ng-click="$ctrl.addEngine(stage.selectedEngine, stage)">Add</button>
+											</div>
+
+											<div class="form-group">
+												<ul class="col-sm-offset-2">
+													<li ng-repeat="engine in stage.engines track by $index">
+														{{engine.name}}
+														<button class="btn btn-primary" ng-click="$ctrl.removeEngine($index, stage)">Remove</button>
+													</li>
+												</ul>
+											</div>
+										</form>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div ng-hide="vehicle.beingEdited">
+						<p>Description: {{vehicle.description}}</p>
+						<p>Variants</p>
+						<ul>
+							<li ng-repeat="variant in vehicle.variants">
+								<p><strong>{{variant.name}}:</strong> Capacity: {{variant.capacity | number}}kg to LEO, Cost: {{variant.cost | currency}}</p>
+							</li>
+						</ul>
+					</div>
 				</li>
 			</ul>
 		</uib-tab>
@@ -83,9 +135,9 @@
 			</form>
 
 			<h2>Variants</h2>
-			<button class="btn btn-primary" ng-click="$ctrl.addNewVariant()">Add new</button>
+			<button class="btn btn-primary" ng-click="$ctrl.addNewVariant($ctrl.newVehicle)">Add new</button>
 			<ul style="margin-top: 10px; list-style: none">
-				<li ng-repeat="variant in $ctrl.variants">
+				<li ng-repeat="variant in $ctrl.variants track by $index">
 					<h3>{{variant.name}}</h3>
 					<form class="form-horizontal">
 						<div class="form-group">
@@ -93,7 +145,7 @@
 							<div class="col-sm-5">
 								<input type="text" class="form-control" id="variantName" ng-model="variant.name">
 							</div>
-							<button class="btn btn-primary">Remove</button>
+							<button class="btn btn-primary" ng-click="$ctrl.removeVariant($index, $ctrl.variants)">Remove</button>
 						</div>
 						<div>
 							<div class="form-group">

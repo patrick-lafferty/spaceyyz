@@ -22,7 +22,7 @@
 
 		this.engines = [];
 
-		this.newVehicle = {};
+		this.newVehicle = {variants: []};
 		this.variants = [];
 		this.search_name = "";
 		this.search = function(vehicle) {
@@ -70,25 +70,34 @@
 		};
 
 		this.createVehicle = function(vehicle) {
-			vehicle.variants = self.variants;
+			//vehicle.variants = self.variants;
 			vehicleInventoryFactory.addVehicle(vehicle);
 			self.vehicles.all.push(vehicle);
-			self.newVehicle = {};
+			self.newVehicle = {variants: []};
 			self.variants = [];
 		};
 
-		this.addNewVariant = function () {
-			self.variants.push({
+		this.addNewVariant = function (vehicle) {
+			//self.variants.push({
+			vehicle.variants.push({
 				name: "Unnamed",
 				stages: []
 			});
 		};
+
+		this.removeVariant = function (index, vehicle) {
+			vehicle.variants.splice(index, 1);
+		};			
 
 		this.addNewStage = function (variant) {
 			variant.stages.push({
 				engines: [],
 				selectedEngine: {}
 			});
+		};
+
+		this.removeStage = function (index, variant) {
+			variant.stages.splice(index, 1);
 		};
 
 		this.addEngine = function (engine, stage) {
@@ -103,22 +112,9 @@
 			stage.engines.splice(index, 1);
 		};
 
-		/*vehicleInventoryFactory.getVehicles().then(function (vehicles) {
-			self.vehicles.all = vehicles.vehicles;
-
-			$timeout(function() {
-				$scope.$apply();
-			});
-		});
-
-		engineFactory.getEngines().then(function (engines) {
-			self.engines = engines;
-
-			$timeout(function () {
-				$scope.$apply();
-			});
-		});*/
-
+		/*
+		 * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
+		 * */
 		Promise.all([
 			vehicleInventoryFactory.getVehicles(),
 			engineFactory.getEngines(),
@@ -130,14 +126,27 @@
 			var variants = results[2];
 
 			variants.forEach(function (family) {
-				var vehicle = self.vehicles.all[self.vehicles.all.indexOf(function (v) {return v.familyKey === family.key;})];
+				var vehicle;
+				for(var i = 0; i < self.vehicles.all.length; i++) {
+					if (self.vehicles.all[i].familyKey === family.key) {
+						vehicle = self.vehicles.all[i];
+						break;
+					}
+				}	
 
 				vehicle.variants = family.variants;
 
 				vehicle.variants.forEach(function (variant) {
 					variant.stages.forEach(function (stage) {
 						stage.engines = stage.engines.map(function (engineKey) {
-							return self.engines[self.engines.indexOf(function (engine) { return engine.key === engineKey;})];
+							var engine;
+							self.engines.forEach(function (e) {
+								if (e.key === engineKey) {
+									engine = e;
+								}
+							});
+
+							return engine;
 						});
 					});
 				});

@@ -39,6 +39,7 @@ html, body {
 .no-list-style, 
 .vehicles {
 	list-style: none;
+	margin-top: 10px;
 }
 
 .vehicles .form-group {

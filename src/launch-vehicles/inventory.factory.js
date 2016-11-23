@@ -123,11 +123,14 @@
 		function updateVehicle(vehicle)
 		{
 			firebase.database().ref().child("vehicles/" + vehicle.key).set({
-				capacity: vehicle.capacity,
-				cost: vehicle.cost,
+				//capacity: vehicle.capacity,
+				//cost: vehicle.cost,
 				name: vehicle.name,
-				description: vehicle.description
+				description: vehicle.description,
+				familyKey: vehicle.familyKey
 			});
+
+			variantFactory.replaceVariants(vehicle.familyKey, vehicle.variants);
 		}
 
 		function deleteVehicle(vehicle)
