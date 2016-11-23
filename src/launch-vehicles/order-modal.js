@@ -22,6 +22,7 @@
 			$scope, $timeout, $stateParams) {
 
 		this.vehicle = this.resolve.vehicle;
+		this.variant = this.resolve.variant;
 		var self = this;
 
 		this.cancel = function() {
@@ -29,7 +30,7 @@
 		};
 
 		this.confirm = function() {
-			self.modalInstance.close({name: 0});
+			self.modalInstance.close(self.variant);
 		};
 
 	}

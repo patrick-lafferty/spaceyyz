@@ -13,24 +13,44 @@
 
 	VehicleOrderDetail.$inject = ['vehicleInventoryFactory',
 		'$scope', '$timeout', '$stateParams',
-		'$uibModal', '$state', 'orderFactory'];
+		'$uibModal', '$state', 'orderFactory', 'variantFactory'];
 	function VehicleOrderDetail(vehicleInventoryFactory, 
 			$scope, $timeout, $stateParams,
-			$uibModal, $state, orderFactory) {
+			$uibModal, $state, orderFactory, variantFactory) {
 
 		this.vehicle = {};
 		var self = this;
 
-		vehicleInventoryFactory.getVehicle($stateParams.name, function(vehicle) {
+		/*vehicleInventoryFactory.getVehicle($stateParams.name, function(vehicle) {
 			self.vehicle = vehicle;
 
 			$timeout(function() {
 				$scope.$apply();
 			});
+		});*/
+
+		Promise.all([
+			vehicleInventoryFactory.getVehicle($stateParams.name),
+			variantFactory.getFamilies()])
+		.then(function (results) {
+			self.vehicle = results[0];
+			var families = results[1];
+
+			for(var i = 0; i < families.length; i++) {
+				if (families[i].key === self.vehicle.familyKey) {
+					self.vehicle.variants = families[i].variants;
+					break;
+				}
+			}
+
+			$timeout(function () {
+				$scope.$apply();
+			});
+
 		});
 
 		self.modalInstance = {};
-		this.open = function() {
+		this.open = function(variant) {
 			self.modalInstance = $uibModal.open({
 				ariaLabelledBy: 'modal-title',
 				ariaDescribedBy: 'modal-body',
@@ -38,14 +58,18 @@
 				component: 'orderVehicleModal',
 				backdrop: 'static',
 				resolve: {
+					//needs to be variant not vehicle
 					vehicle: function() {
 						return self.vehicle;
+					},
+					variant: function () {
+						return variant;
 					}
 				}
 			
 			});
 
-			self.modalInstance.result.then(function(thing) {
+			self.modalInstance.result.then(function(variant) {
 
 				var deliveryDate = new Date(); 
 				deliveryDate.setFullYear(new Date().getFullYear() + 1);
@@ -54,7 +78,8 @@
 					orderTimestamp: new Date().getTime(),
 					deliveryDate: deliveryDate,
 					vehicleName: self.vehicle.name,
-					cost: self.vehicle.cost
+					variantName: variant.name,
+					cost: variant.cost
 				};
 
 				orderFactory.getNewOrderNumber().then(function(snapshot) {
@@ -62,7 +87,7 @@
 					order.number = orderNumber;
 					orderFactory.addOrder(order);
 
-					$state.go('auth.orderConfirmation', {orderNumber: orderNumber, order: order});
+					$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
 				}, function (error) {
 					console.error(error);
 				});

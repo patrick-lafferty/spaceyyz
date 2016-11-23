@@ -68,11 +68,21 @@
 			});
 		}
 
-		function getVehicle(name, then) {
+		/*function getVehicle(name, then) {
 			getVehicles().then(function(vehicles) {
 				then(vehicles.vehicles.filter(function(vehicle) {
 					return vehicle.nameWithoutSpaces == name;
 				})[0]);
+			});
+		}*/
+
+		function getVehicle(name) {
+			return getVehicles().then(function (vehicles) {
+				for (var i = 0; i < vehicles.vehicles.length; i++)  {
+					if (vehicles.vehicles[i].nameWithoutSpaces == name) {
+						return vehicles.vehicles[i];
+					}
+				}
 			});
 		}
 

@@ -34,14 +34,12 @@
 		this.search_payload = 10000;
 		var self = this;
 
-		//vehicleInventoryFactory.getVehicles().then(set);
 		vehicleInventoryFactory.getInventory().then(setInventory);
 
 		Promise.all([
 			vehicleInventoryFactory.getVehicles(),
 			variantFactory.getFamilies()])
 		.then(function (results) {
-			//self.vehicles.all = results[0].vehicles;
 			set(results[0]);
 
 			var variants = results[1];
