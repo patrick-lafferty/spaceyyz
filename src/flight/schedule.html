@@ -46,16 +46,24 @@
 			<ul class="vehicles">
 				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.filter">
 					<div class="vehiclePreview">
-						<div class="radio" style="flex: 1 3 auto">
+						<div class="radio" style="flex: 0 1 30px">
 							<label>
 								<input type="radio" name="vehicles" ng-model="$ctrl.selectedVehicle" ng-value="vehicle" ng-click="$ctrl.selected()">
 							</label>	
 						</div>
 						<div>
-							<h4><a ui-sref="auth.vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
-							<p>Capacity: {{vehicle.capacity | number}}kg</p>
+							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
+							<!--<p>Capacity: {{vehicle.capacity | number}}kg</p>
 							<p>Cost: {{vehicle.cost | currency}}</p>
-							<p>In stock: {{vehicle.inventory}}</p>
+							<p>In stock: {{vehicle.inventory}}</p>-->
+							<h5>Variants</h5>
+							<ul>
+								<li class="no-list-style" ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
+									<strong>{{variant.name}}</strong>
+									<p style="margin-left: 20px">Capacity: {{variant.capacity | number}}kg</p>
+									<p style="margin-left: 20px">Cost: {{variant.cost | currency}}</p>
+								</li>
+							</ul>
 						</div>
 						<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
 					</div>

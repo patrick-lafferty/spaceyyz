@@ -18,7 +18,14 @@
 		this.solarSystem = solarSystemFactory;
 
 		this.filter = function(vehicle) {
-			return vehicle.capacity >= Number(self.payload);
+			//return vehicle.capacity >= Number(self.payload);
+			return vehicle.variants.some(function (variant) {
+				return variant.capacity >= Number(self.payload);
+			});
+		};
+
+		this.variantFilter = function (variant) {
+			return variant.capacity >= Number(self.payload);
 		};
 
 		this.vehicles = {all: []};
@@ -114,7 +121,6 @@
 			});
 
 			notifyChanges();
-
 		});
 
 		spaceportFactory.getSpaceports().then(function (spaceports) {
@@ -123,6 +129,5 @@
 
 			notifyChanges();
 		});
-
 	}
 })();
