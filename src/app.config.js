@@ -133,7 +133,7 @@
 					url: '/login',
 					component: 'login',
 					params: {
-						redirectTo: 'auth.home'
+						redirectTo: 'home'
 					},
 				}
 			];
@@ -173,12 +173,21 @@
 
 				var user = firebase.auth().currentUser;
 				if (user) { 
-					return trans.router.stateService.target('auth.home');
+					return trans.router.stateService.target('home');
 				}
 
 				return true;
 			});
-			$transitions.onBefore({to: 'auth.**'}, function(trans) {
+			/*$transitions.onBefore({to: '*'}, function (trans) {
+				console.log(trans.$to().name);
+			});*/
+			$transitions.onBefore({to: function(state) {
+				return state.parent.name == "auth";
+			}}, /*function (trans) {
+				console.log(trans.$to().name);
+			});
+
+			$transitions.onBefore({to: 'auth.**'},*/ function(trans) {
 				var user = firebase.auth().currentUser;
 
 				if (user) {

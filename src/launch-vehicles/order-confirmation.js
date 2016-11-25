@@ -48,7 +48,7 @@
 			self.modalInstance.result.then(function(thing) {
 
 				orderFactory.deleteOrder(self.order);
-				$state.go('auth.development');
+				$state.go('development');
 			});
 		};
 
