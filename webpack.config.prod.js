@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: __dirname  + "/src/app.module.js",
+		app: __dirname  + "/src/app.requires.js",
 		//to combine vendor libs: vendors: ['angular']
 	},
 	output: {
@@ -18,16 +18,25 @@ module.exports = {
 
 	module: {
 		loaders: [
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+			{ 
+				test: /\.js$/, 
+				include: [
+					path.resolve(__dirname, "src/")
+				],	
+				exclude: [
+					"node_modules/",
+				   "test/"
+				],	
+				loader: 'babel-loader' }
 		]
 	},
 
-	plugins: [
+	/*plugins: [
 		new HtmlWebpackPlugin({
-			template: 'src/index.html',
+			template: 'src/index.ejs',
 			filename: 'index.html',
 			isDevEnvironment: false
 		}),
 		//to combine vendor libs: new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
-	]
+	]*/
 }

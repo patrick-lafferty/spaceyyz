@@ -1,6 +1,7 @@
 /* for using webpack, require all the files so it will bundle them together
  **/ 
-
+//require('angular')
+require('./app.module.js')
 require('./app.config.js')
 
 require('./filter.js')
