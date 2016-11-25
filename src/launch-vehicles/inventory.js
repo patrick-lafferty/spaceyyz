@@ -10,16 +10,29 @@
 			controller: Inventory
 		});
 
-	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope'];
-	function Inventory(vehicleInventoryFactory, $timeout, $scope) {
-		vehicleInventoryFactory.getVehicles().then(set);
+	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope', 'variantFactory'];
+	function Inventory(vehicleInventoryFactory, $timeout, $scope, variantFactory) {
+		//vehicleInventoryFactory.getVehicles().then(set);
 
+		var self = this;
 		this.searchType = "name";
 		this.search_name = "";
 		this.search_payload = 0;
 
-		var self = this;
-		function set(vehicles) {
+		Promise.all([
+			vehicleInventoryFactory.getVehicles(),
+			])
+		.then(function (results) {
+			var vehicles = results[0];
+			self.smallVehicles = vehicles.smallVehicles;
+			self.mediumVehicles = vehicles.mediumVehicles;
+			self.heavyVehicles = vehicles.mediumVehicles;
+			self.superHeavyVehicles = vehicles.superHeavyVehicles;
+
+			$timeout(function() {$scope.$apply();});
+		});
+
+		/*function set(vehicles) {
 			self.smallVehicles = vehicles.smallVehicles;
 			self.mediumVehicles = vehicles.mediumVehicles;
 			self.heavyVehicles = vehicles.heavyVehicles;
@@ -28,6 +41,6 @@
 			$timeout(function() {
 				$scope.$apply();
 			});
-		}
+		}*/
 	}
 })();

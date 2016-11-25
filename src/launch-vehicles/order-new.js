@@ -63,7 +63,7 @@
 		});
 
 		function set(vehicles) {
-			self.vehicles.all = vehicles.vehicles;
+			self.vehicles.all = vehicles.allVehicles;
 			self.vehicles.small = vehicles.smallVehicles;
 			self.vehicles.medium = vehicles.mediumVehicles;
 			self.vehicles.heavy = vehicles.heavyVehicles;

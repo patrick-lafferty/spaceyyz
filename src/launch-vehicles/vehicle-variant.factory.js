@@ -28,6 +28,7 @@
 
 						Object.keys(family).forEach(function (variantKey) {
 							var variant = family[variantKey];
+							variant.key = variantKey;
 							variants.push(variant);
 						});
 

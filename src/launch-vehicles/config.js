@@ -120,7 +120,7 @@
 			engineFactory.getEngines(),
 			variantFactory.getFamilies()])
 		.then(function (results) {
-			self.vehicles.all = results[0].vehicles;
+			self.vehicles.all = results[0].allVehicles;
 			self.engines = results[1];
 
 			var variants = results[2];

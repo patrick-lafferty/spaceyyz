@@ -107,7 +107,7 @@
 		};
 
 		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
-			self.vehicles.all = vehicles.vehicles;
+			self.vehicles.all = vehicles.allVehicles;
 
 			self.vehicles.all.forEach(function (vehicle) {
 				vehicle.selected = false;

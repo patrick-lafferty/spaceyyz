@@ -27,7 +27,7 @@
 				};
 			} else if (type === "capacity") {
 				return function(vehicle) {
-					return vehicle.capacity >= self.search_payload;
+					return vehicle.variant.capacity >= self.search_payload;
 				};
 			}
 		}
