@@ -23,7 +23,7 @@
 
 		this.vehicle = this.resolve.vehicle;
 		this.variant = this.resolve.variant;
-		var self = this;
+		let self = this;
 
 		this.cancel = function() {
 			self.modalInstance.dismiss('cancel');

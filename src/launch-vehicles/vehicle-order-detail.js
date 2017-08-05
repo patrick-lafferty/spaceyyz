@@ -19,15 +19,7 @@
 		$uibModal, $state, orderFactory, variantFactory) {
 
 		this.vehicle = {};
-		var self = this;
-
-		/*vehicleInventoryFactory.getVehicle($stateParams.name, function(vehicle) {
-			self.vehicle = vehicle;
-
-			$timeout(function() {
-				$scope.$apply();
-			});
-		});*/
+		let self = this;
 
 		Promise
 			.all([
@@ -35,9 +27,9 @@
 				variantFactory.getFamilies()])
 			.then(function (results) {
 				self.vehicle = results[0];
-				var families = results[1];
+				let families = results[1];
 
-				for(var i = 0; i < families.length; i++) {
+				for(let i = 0; i < families.length; i++) {
 					if (families[i].key === self.vehicle.familyKey) {
 						self.vehicle.variants = families[i].variants;
 						break;
@@ -72,10 +64,10 @@
 
 			self.modalInstance.result.then(function(variant) {
 
-				var deliveryDate = new Date(); 
+				let deliveryDate = new Date(); 
 				deliveryDate.setFullYear(new Date().getFullYear() + 1);
 
-				var order = {
+				let order = {
 					orderTimestamp: new Date().getTime(),
 					deliveryDate: deliveryDate,
 					vehicleName: self.vehicle.name,
@@ -84,7 +76,7 @@
 				};
 
 				orderFactory.getNewOrderNumber().then(function(snapshot) {
-					var orderNumber = snapshot.snapshot.val();
+					let orderNumber = snapshot.snapshot.val();
 					order.number = orderNumber;
 					orderFactory.addOrder(order);
 

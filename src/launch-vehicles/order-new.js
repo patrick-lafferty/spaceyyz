@@ -32,7 +32,7 @@
 		this.selectedPrimary = this.primaries[0];
 		this.search_name = '';
 		this.search_payload = 10000;
-		var self = this;
+		let self = this;
 
 		vehicleInventoryFactory.getInventory().then(setInventory);
 
@@ -43,11 +43,11 @@
 			.then(function (results) {
 				set(results[0]);
 
-				var variants = results[1];
+				let variants = results[1];
 
 				variants.forEach(function (family) {
-					var vehicle;
-					for(var i = 0; i < self.vehicles.all.length; i++) {
+					let vehicle = undefined;
+					for(let i = 0; i < self.vehicles.all.length; i++) {
 						if (self.vehicles.all[i].familyKey === family.key) {
 							vehicle = self.vehicles.all[i];
 							break;

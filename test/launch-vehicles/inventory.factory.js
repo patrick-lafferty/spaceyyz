@@ -1,10 +1,10 @@
-var assert = require('chai').assert;
-var fb = require('../mocks/firebase');
-var firebase = window.firebase = fb.firebase;
-var Promise = fb.Promise;
+let assert = require('chai').assert;
+let fb = require('../mocks/firebase');
+let firebase = window.firebase = fb.firebase;
+let Promise = fb.Promise;
 
 describe('Vehicle Inventory Factory', function () {
-	var factory;
+	let factory = undefined;
 
 	firebase.store = {
 		vehicles: {
@@ -52,8 +52,8 @@ describe('Vehicle Inventory Factory', function () {
 		}
 	};
 
-	var vehicles = [];
-	var variants = [];	
+	let vehicles = [];
+	let variants = [];	
 
 	beforeEach(function () {
 		angular.mock.module('spaceyyz')
@@ -102,9 +102,7 @@ describe('Vehicle Inventory Factory', function () {
 
 		it('should group vehicles by capacity', function () {
 			factory.combineVehiclesWithVariants(vehicles, variants);
-			var categories = factory.categorizeVehicles(vehicles);
-
-			console.log(categories.smallVehicles);
+			let categories = factory.categorizeVehicles(vehicles);
 
 			assert.isDefined(categories.smallVehicles);
 			assert.isDefined(categories.mediumVehicles);

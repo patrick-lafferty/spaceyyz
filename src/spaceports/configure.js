@@ -10,7 +10,7 @@
 
 	ConfigureSpaceport.$inject = ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
 	function ConfigureSpaceport(spaceportFactory, $timeout, $scope, $uibModal) {
-		var self = this;
+		let self = this;
 
 		this.search_name = '';
 		this.newSpaceport = {};
@@ -45,7 +45,7 @@
 			spaceport.beingEdited = false;
 			spaceportFactory.updateSpaceport(spaceport);
 
-			var index = self.spaceports.all.findIndex(function (s) {
+			let index = self.spaceports.all.findIndex(function (s) {
 				return s.name === spaceport.name;
 			});
 

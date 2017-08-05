@@ -138,7 +138,7 @@
 
 		function getVehicle(name) {
 			return getVehicles().then(function (vehicles) {
-				for (var i = 0; i < vehicles.allVehicles.length; i++)  {
+				for (let i = 0; i < vehicles.allVehicles.length; i++)  {
 					if (vehicles.allVehicles[i].nameWithoutSpaces == name) {
 						return vehicles.allVehicles[i];
 					}

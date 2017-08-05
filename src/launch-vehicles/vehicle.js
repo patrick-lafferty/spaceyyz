@@ -18,7 +18,7 @@
 		this.searchType = 'name';
 		this.search_name = '';
 		this.search_payload = 10000;
-		var self = this;
+		let self = this;
 
 		this.search = function(type) {
 			if (type === 'name') {

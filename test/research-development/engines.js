@@ -1,11 +1,11 @@
-var assert = require('chai').assert;
-var fb = require('../mocks/firebase');
-var firebase = window.firebase = fb.firebase;
-var Promise = fb.Promise;
+let assert = require('chai').assert;
+let fb = require('../mocks/firebase');
+let firebase = window.firebase = fb.firebase;
+let Promise = fb.Promise;
 
 describe('ResearchEngine component for Research&Development menu', function () {
 
-	var engineFactory = {
+	let engineFactory = {
 		getEngines: function () { return new Promise([]);},
 		addEngine: function (engine) {},
 		updateEngine: function (engine) {},
@@ -13,7 +13,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		
 	};
 
-	var $uibModal = {
+	let $uibModal = {
 		open: function (modal) { 
 			return {
 				result: new Promise(modal.resolve.engine)
@@ -21,7 +21,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		}
 	};
 
-	var engine = {
+	let engine = {
 		name: 'test',
 		isp: {
 			seaLevel: 262,
@@ -42,14 +42,15 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		});
 	});
 
-	var $componentController;
+	let $componentController = undefined;
 
 	beforeEach(inject(function(_$componentController_) {
 		$componentController = _$componentController_;
 	}));
 
 	describe('addEngine(engine)', function () {
-		var researchEngine;
+		let researchEngine = undefined;
+
 		beforeEach(function () {
 			researchEngine = $componentController('researchEngine');
 		});
@@ -69,7 +70,8 @@ describe('ResearchEngine component for Research&Development menu', function () {
 	});
 
 	describe('saveEngine(engine)', function () {
-		var researchEngine;
+		let researchEngine = undefined;
+
 		beforeEach(function () {
 			researchEngine = $componentController('researchEngine');
 		});
@@ -82,7 +84,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		it('should save the new values', function () {
 			researchEngine.addEngine(engine);
 			
-			var copy = JSON.parse(JSON.stringify(engine));
+			let copy = JSON.parse(JSON.stringify(engine));
 			copy.description = 'changed';
 			
 			researchEngine.editEngine(copy);
@@ -96,7 +98,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		it('shouldnt save if engine isnt being edited', function () {
 			researchEngine.addEngine(engine);
 			
-			var copy = JSON.parse(JSON.stringify(engine));
+			let copy = JSON.parse(JSON.stringify(engine));
 			copy.description = 'changed';
 			
 			researchEngine.saveEngine(copy);
@@ -107,7 +109,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 	});
 
 	describe('deleteEngine(engine)', function () {
-		var researchEngine;
+		let researchEngine = undefined;
 
 		beforeEach(function () {
 			researchEngine = $componentController('researchEngine');

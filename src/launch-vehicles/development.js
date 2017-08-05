@@ -19,16 +19,16 @@
 			all: []
 		};
 
-		var self = this;
+		let self = this;
 
 		orderFactory.getOrders().then(function (orders) {
 			self.orders.all = orders;
 
-			var timestampNow = new Date().getTime();
+			let timestampNow = new Date().getTime();
 
 			self.orders.all.forEach(function (order) {
 
-				var t = timestampNow - order.orderTimestamp;
+				let t = timestampNow - order.orderTimestamp;
 				order.progress = 100 * t / (order.deliveryTimestamp - order.orderTimestamp);
 			});
 

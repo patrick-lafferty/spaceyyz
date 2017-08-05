@@ -55,7 +55,6 @@ module.exports = {
 		"strict": ["error", "function"],
 
 		"init-declarations": ["error", "always"],
-		"no-shadow": ["error", { "hoist": "all"}],
 		"no-use-before-define": ["error", "nofunc"],
 
 

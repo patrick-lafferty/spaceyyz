@@ -21,7 +21,7 @@
 	function ConfirmSpaceportDeleteModal(spaceportFactory)  {
 
 		this.spaceport = this.resolve.spaceport;
-		var self = this;
+		let self = this;
 
 		this.cancel = function() {
 			self.modalInstance.dismiss('cancel');

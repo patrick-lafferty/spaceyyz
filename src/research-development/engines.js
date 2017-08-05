@@ -27,7 +27,7 @@
 
 	Engines.$inject = ['engineFactory', '$scope', '$timeout', '$uibModal'];
 	function Engines(engineFactory, $scope, $timeout, $uibModal) {
-		var self = this;
+		let self = this;
 		this.engines = {all: []};
 		this.newEngine = new Engine();
 
@@ -63,7 +63,7 @@
 
 			engineFactory.updateEngine(engine);
 
-			var index = self.engines.all.findIndex(function (e) { return e.name === engine.name;});
+			let index = self.engines.all.findIndex(function (e) { return e.name === engine.name;});
 
 			self.engines.all[index] = engine;
 		};

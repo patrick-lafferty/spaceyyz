@@ -42,16 +42,16 @@
 			checkLaunchStatus();
 		}
 
-		var path = document.getElementById('ascentPath');
-		var point = document.getElementById('point');
+		let path = document.getElementById('ascentPath');
+		let point = document.getElementById('point');
 
-		var svg = document.querySelector('svg');
-		var p = svg.createSVGPoint();
+		let svg = document.querySelector('svg');
+		let p = svg.createSVGPoint();
 
 		path.addEventListener('mousedown', function (event) {
 			p.x = event.clientX;
 			p.y = event.clientY;
-			var f = p.matrixTransform(svg.getScreenCTM().inverse());
+			let f = p.matrixTransform(svg.getScreenCTM().inverse());
 	
 			point.setAttribute('cx', f.x);
 			point.setAttribute('cy', f.y);
@@ -61,7 +61,7 @@
 
 		self.animLength = 5.0;
 		//liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
-		var lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
+		let lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
 		this.changePlaybackSpeed = function () {
 			switch(self.playbackSpeed) {
 				case 'Realtime': {
@@ -86,7 +86,7 @@
 
 		this.changePlaybackSpeed();
 
-		var intervalId = window.setInterval(tick, 1000);
+		let intervalId = window.setInterval(tick, 1000);
 
 		self.events = [
 			['Ignition', 'Liftoff', 'Roll program'],
@@ -100,9 +100,9 @@
 		this.maxFlightTime = 600;
 		
 		function getStage() {
-			var stage = 0;
+			let stage = 0;
 
-			for (var i = 0; i < lengths.length; i++) {
+			for (let i = 0; i < lengths.length; i++) {
 				if (self.elapsedTime >= lengths[i] * self.maxFlightTime) {
 					stage++;
 				} else {
@@ -123,13 +123,13 @@
 			self.flight.status.velocity = 40 * self.elapsedTime;
 			self.flight.status.altitude++; 
 
-			var stage = getStage();
+			let stage = getStage();
 			if (stage > self.currentStage) {
 				self.currentStage = stage;
 				self.flight.log = [];
 			
-				for (var i = 0; i < stage; i++) {
-					for (var j = 0; j < self.events[i].length; j++) {
+				for (let i = 0; i < stage; i++) {
+					for (let j = 0; j < self.events[i].length; j++) {
 						self.flight.log.push(self.events[i][j]);
 					}
 				}

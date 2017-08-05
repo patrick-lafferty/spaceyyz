@@ -21,7 +21,7 @@
 	function ConfirmEngineDeleteModal($scope, $timeout, $stateParams) {
 
 		this.engine = this.resolve.engine;
-		var self = this;
+		let self = this;
 
 		this.cancel = function() {
 			self.modalInstance.dismiss('cancel');

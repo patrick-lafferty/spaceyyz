@@ -14,7 +14,7 @@
 		$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
 		this.payload = 0;
 
-		var self = this;
+		let self = this;
 		this.solarSystem = solarSystemFactory;
 
 		this.filter = function(vehicle) {
@@ -73,8 +73,8 @@
 			self.spaceport = {};
 			self.selectedValidSpaceport = false;
 			
-			for(var i = 0; i < self.ungroupedSpaceports[self.continent].length; i++) {
-				var spaceport = self.ungroupedSpaceports[self.continent][i];
+			for(let i = 0; i < self.ungroupedSpaceports[self.continent].length; i++) {
+				let spaceport = self.ungroupedSpaceports[self.continent][i];
 
 				if (spaceport.name === self.filtername) {
 					self.spaceport = spaceport;

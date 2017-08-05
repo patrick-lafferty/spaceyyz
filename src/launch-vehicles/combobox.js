@@ -14,7 +14,7 @@
 		});
 
 	function Combobox() {
-		var self = this;
+		let self = this;
 
 		this.filterName = '';
 		this.isOpen = false;
@@ -25,8 +25,8 @@
 			self.selectedItem = {};
 			self.selectedValidItem = false;
 
-			for (var i = 0; i < self.items.length; i++) {
-				var item = self.items[i];
+			for (let i = 0; i < self.items.length; i++) {
+				let item = self.items[i];
 
 				if (item[self.display] == self.filterName) {
 					self.selectedItem = item;

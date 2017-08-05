@@ -15,7 +15,7 @@
 	Config.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
 	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
 
-		var self = this;
+		let self = this;
 		this.vehicles = {
 			all: [],
 		};
@@ -41,7 +41,7 @@
 			vehicle.beingEdited = false;
 			vehicleInventoryFactory.updateVehicle(vehicle);
 
-			var index = self.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
+			let index = self.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
 
 			self.vehicles.all[index] = vehicle;
 		};
@@ -70,7 +70,6 @@
 		};
 
 		this.createVehicle = function(vehicle) {
-			//vehicle.variants = self.variants;
 			vehicleInventoryFactory.addVehicle(vehicle);
 			self.vehicles.all.push(vehicle);
 			self.newVehicle = {variants: []};
@@ -124,11 +123,11 @@
 				self.vehicles.all = results[0].allVehicles;
 				self.engines = results[1];
 
-				var variants = results[2];
+				let variants = results[2];
 
 				variants.forEach(function (family) {
-					var vehicle;
-					for(var i = 0; i < self.vehicles.all.length; i++) {
+					let vehicle = undefined;
+					for(let i = 0; i < self.vehicles.all.length; i++) {
 						if (self.vehicles.all[i].familyKey === family.key) {
 							vehicle = self.vehicles.all[i];
 							break;
@@ -140,7 +139,7 @@
 					vehicle.variants.forEach(function (variant) {
 						variant.stages.forEach(function (stage) {
 							stage.engines = stage.engines.map(function (engineKey) {
-								var engine;
+								let engine = undefined;
 								self.engines.forEach(function (e) {
 									if (e.key === engineKey) {
 										engine = e;
