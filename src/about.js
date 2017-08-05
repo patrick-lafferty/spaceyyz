@@ -1,13 +1,14 @@
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
+const about = angular
+		.module('spaceyyz.about', [])
 		.component('about', {
 			templateUrl: 'src/about.html',
 			controller: About
-		});
+		})
+		.name;
 
-	function About() {
-	}
-})();
+export default about;
+
+function About() {
+}

@@ -4,7 +4,7 @@ class Home {
 
 	constructor(userFactory, $timeout, $scope) {
 		this.user = {
-			email: userFactory.user.email
+			email: userFactory.email
 		};
 
 		//TODO: replace all onAuthChange(this with onAuthChange("componentName"
@@ -24,7 +24,7 @@ class Home {
 const home = angular
 	.module('spaceyyz.user.home', [])
 	.component('home', {
-		templateUrl: 'src/home.html',
+		templateUrl: 'src/user/home.html',
 		controller: Home
 	})
 	.name;

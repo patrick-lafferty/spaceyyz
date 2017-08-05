@@ -44,7 +44,7 @@ class Login {
 const login = angular
 	.module('spaceyyz.user.login', [])
 	.component('login', {
-		templateUrl: 'src/login/login.html',
+		templateUrl: 'src/user/login.html',
 		controller: Login
 	})
 	.name;

@@ -1,10 +1,9 @@
 /*
  * Set up all of the state routing and authentication
  * */
+import angular from 'angular';
 
-(function() {
-	'use strict';
-
+export default function configure() {
 	angular
 		.module('spaceyyz')
 		.config(['$stateProvider', function ($stateProvider) {
@@ -156,18 +155,9 @@
 
 		}]);
 
-	/*angular
-		.module('spaceyyz')
-		.run(function($uiRouter) {
-			var vis = window['ui-router-visualizer'];
-			vis.visualizer($uiRouter);
-		});*/
-
-
 	angular
 		.module('spaceyyz')
 		.run(['$state', '$transitions', function($state, $transitions) {
-			//$state.defaultErrorHandler(function() {});
 
 			$transitions.onBefore({to: 'login'}, function (trans) {
 
@@ -178,26 +168,21 @@
 
 				return true;
 			});
-			/*$transitions.onBefore({to: '*'}, function (trans) {
-				console.log(trans.$to().name);
-			});*/
 			$transitions.onBefore({to: function(state) {
 				return state.parent.name == "auth";
-			}}, /*function (trans) {
-				console.log(trans.$to().name);
-			});
+			}}, 
 
-			$transitions.onBefore({to: 'auth.**'},*/ function(trans) {
+			function(trans) {
 				var user = firebase.auth().currentUser;
 
 				if (user) {
 					return true;
 				} else {
 					/*
-					 * user can be undefined if they're logged in but refreshed the page
-					 * check to see if firebase saved a token to indicate that they
-					 * will be automatically signed in
-					 */
+						* user can be undefined if they're logged in but refreshed the page
+						* check to see if firebase saved a token to indicate that they
+						* will be automatically signed in
+						*/
 					for(const key in localStorage) {
 						if (key.startsWith('firebase:authUser'))
 						{
@@ -210,4 +195,4 @@
 			});
 
 		}]);
-})();
+}

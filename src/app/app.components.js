@@ -4,14 +4,16 @@ import angular from 'angular';
 import user from './app.components.user';
 //import researchDevelopment from 'app.components.researchDevelopment';
 //import spaceports from 'app.components.spaceports';
+import about from '../about';
 
 const components = angular
     .module('spaceyyz.components', [
         //flight,
         //launchVehicles,
-        user//,
+        user,
         //researchDevelopment,
         //spaceports
+        about
     ])
     .name;
 
