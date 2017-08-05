@@ -6,20 +6,14 @@ import angular from 'angular';
 
 class OrderDeleteModal {
 
-	static get $inject() {
-		return ['$scope', '$timeout', '$stateParams'];
-	}
-
-	constructor($scope, $timeout, $stateParams) {
+	$onInit() {
 		this.order = this.resolve.order;
-		this.costToCancel = (function() {
-			var timestampNow = new Date().getTime();
 
-			var t = timestampNow - this.order.orderTimestamp;
-			var progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
-			return this.order.cost * progress;
+		const timestampNow = new Date().getTime();
+		const t = timestampNow - this.order.orderTimestamp;
+		const progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
 				
-		})();
+		this.costToCancel = this.order.cost * progress;
 	}
 
 	cancel() {

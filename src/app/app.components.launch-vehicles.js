@@ -9,9 +9,9 @@ import orderModal from '../launch-vehicles/order-modal';
 import orderDeleteModal from '../launch-vehicles/order-delete-modal';
 import orderConfirmation from '../launch-vehicles/order-confirmation';
 import development from '../launch-vehicles/development';
-/*import inventory from '../launch-vehicles/inventory';
+import inventory from '../launch-vehicles/inventory';
 import config from '../launch-vehicles/config';
-import configConfirmModal from '../launch-vehicles/config-confirm-modal';
+/*import configConfirmModal from '../launch-vehicles/config-confirm-modal';
 */
 const launchVehicles = angular
     .module('spaceyyz.components.launchVehicles', [
@@ -25,9 +25,9 @@ const launchVehicles = angular
         orderDeleteModal,
         orderConfirmation,
         development,
-        /*inventory,
+        inventory,
         config,
-        configConfirmModal*/
+        /*configConfirmModal*/
     ])
     .name;
 

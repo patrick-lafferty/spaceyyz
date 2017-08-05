@@ -1,33 +1,38 @@
 /* VehicleInventory is the component for the Inventory page. It lists all of the completed owned vehicles
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('vehicleInventory', {
-			templateUrl: 'src/launch-vehicles/inventory.html',
-			controller: Inventory
-		});
+class VehicleInventory {
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$timeout', '$scope'];
+	}
 
-	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope'];
-	function Inventory(vehicleInventoryFactory, $timeout, $scope) {
+	constructor(vehicleInventoryFactory, $timeout, $scope) {
 
-		var self = this;
 		this.searchType = 'name';
 		this.search_name = '';
 		this.search_payload = 0;
 
 		Promise
 			.all([vehicleInventoryFactory.getVehicles()])
-			.then(function (results) {
+			.then(results => {
 				var vehicles = results[0];
-				self.smallVehicles = vehicles.smallVehicles;
-				self.mediumVehicles = vehicles.mediumVehicles;
-				self.heavyVehicles = vehicles.mediumVehicles;
-				self.superHeavyVehicles = vehicles.superHeavyVehicles;
+				this.smallVehicles = vehicles.smallVehicles;
+				this.mediumVehicles = vehicles.mediumVehicles;
+				this.heavyVehicles = vehicles.mediumVehicles;
+				this.superHeavyVehicles = vehicles.superHeavyVehicles;
 
-				$timeout(function() {$scope.$apply();});
+				$timeout(() => $scope.$apply());
 			});
 	}
-})();
+}
+
+const vehicleInventory = angular
+	.module('spaceyyz.launchVehicles.vehicleInventory', [])
+	.component('vehicleInventory', {
+		templateUrl: 'src/launch-vehicles/inventory.html',
+		controller: VehicleInventory
+	})
+	.name;
+
+export default vehicleInventory;

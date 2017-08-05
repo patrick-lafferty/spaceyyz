@@ -6,11 +6,7 @@ import angular from 'angular';
 
 class OrderVehicleModal {
 
-	static get $inject() {
-		return ['vehicleInventoryFactory', '$scope', '$timeout', '$stateParams'];
-	}
-
-	constructor(vehicleInventoryFactory, $scope, $timeout, $stateParams) {
+	$onInit() {
 		this.vehicle = this.resolve.vehicle;
 		this.variant = this.resolve.variant;
 	}

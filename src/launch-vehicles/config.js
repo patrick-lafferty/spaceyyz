@@ -29,43 +29,27 @@ class Config {
 				vehicleInventoryFactory.getVehicles(),
 				engineFactory.getEngines(),
 				variantFactory.getFamilies()])
-			.then((results) => {
+			.then(results => {
 				this.vehicles.all = results[0].allVehicles;
 				this.engines = results[1];
 
 				let variants = results[2];
 
 				variants.forEach(function (family) {
-					let vehicle = undefined;
-					for(let i = 0; i < this.vehicles.all.length; i++) {
-						if (this.vehicles.all[i].familyKey === family.key) {
-							vehicle = this.vehicles.all[i];
-							break;
-						}
-					}	
+					let vehicle = this.vehicles.all.find(vehicle => vehicle.familyKey === family.key);
 
-					vehicle.variants = family.variants;
+					if (vehicle !== undefined) {
+						vehicle.variants = family.variants;
 
-					vehicle.variants.forEach(function (variant) {
-						variant.stages.forEach(function (stage) {
-							stage.engines = stage.engines.map(function (engineKey) {
-								let engine = undefined;
-								this.engines.forEach(function (e) {
-									if (e.key === engineKey) {
-										engine = e;
-									}
-								});
-
-								return engine;
+						vehicle.variants.forEach(variant => {
+							variant.stages.forEach(stage => {
+								stage.engines = stage.engines.map(engineKey => this.engines.find(engine => engine.key === engineKey));
 							});
 						});
-					});
+					}
 				});
 
-				$timeout(function () {
-					$scope.$apply();
-				});
-
+				$timeout(() => this.$scope.$apply());
 			});
 	}
 
@@ -89,7 +73,7 @@ class Config {
 		vehicle.beingEdited = false;
 		this.vehicleInventoryFactory.updateVehicle(vehicle);
 
-		let index = this.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
+		let index = this.vehicles.all.findIndex(v => v.name === vehicle.name);
 
 		this.vehicles.all[index] = vehicle;
 	}
@@ -101,16 +85,12 @@ class Config {
 			component: 'confirmVehicleDeleteModal',
 			backdrop: 'static',
 			resolve: {
-				vehicle: function() {
-					return vehicle;
-				}
+				vehicle: () => vehicle
 			}
-		
 		});
 
-		this.modalInstance.result.then(function (vehicle) {
+		this.modalInstance.result.then(vehicle => {
 			this.vehicleInventoryFactory.deleteVehicle(vehicle);
-			
 			this.vehicles.all.splice(this.vehicles.all.indexOf(vehicle), 1);
 		});
 	}
@@ -145,7 +125,7 @@ class Config {
 	}
 
 	addEngine(engine, stage) {
-		if (typeof engine.name === 'undefined') {
+		if (engine.name === undefined) {
 			return;
 		}
 
@@ -158,7 +138,7 @@ class Config {
 }
 
 const config = angular
-	.module('spaceyyz')
+	.module('spaceyyz.launchVehicles.config', [])
 	.component('configVehicle', {
 		templateUrl: 'src/launch-vehicles/config.html',
 		controller: Config,

@@ -69,7 +69,7 @@ class VehicleOrderDetail {
 				cost: variant.cost
 			};
 
-			this.orderFactory.getNewOrderNumber().then(function(snapshot) {
+			this.orderFactory.getNewOrderNumber().then(snapshot => {
 				let orderNumber = snapshot.snapshot.val();
 				order.number = orderNumber;
 				this.orderFactory.addOrder(order);
