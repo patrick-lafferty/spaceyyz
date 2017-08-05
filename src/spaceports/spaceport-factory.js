@@ -8,7 +8,7 @@
 	function SpaceportFactory() {
 
 		function getSpaceports() {
-			return firebase.database().ref().child("spaceports").once('value')
+			return firebase.database().ref().child('spaceports').once('value')
 				.then(function (snapshot) {
 					var spaceportObject = snapshot.val();
 					var spaceports = [];
@@ -34,23 +34,23 @@
 		}
 
 		function addSpaceport(spaceport) {
-			var key = firebase.database().ref().child("spaceports/" + spaceport.continent).push(
-					{
-						name: spaceport.name,
-						country: spaceport.country
-					}).key;
+			var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push(
+				{
+					name: spaceport.name,
+					country: spaceport.country
+				}).key;
 			spaceport.key = key;
 		}
 
 		function updateSpaceport(spaceport) {
-			firebase.database().ref().child("spaceports/" + spaceport.continent + "/" + spaceport.key).set({
+			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
 				name: spaceport.name,
 				country: spaceport.country
 			});
 		}
 
 		function deleteSpaceport(spaceport) {
-			firebase.database().ref().child("spaceports/" + spaceport.continent + "/" + spaceport.key).remove();			
+			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();			
 		}
 		
 		return {

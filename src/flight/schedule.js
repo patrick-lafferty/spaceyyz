@@ -36,13 +36,13 @@
 
 		this.flight = {
 			mission: {
-				id: "",
+				id: '',
 				payload: 0,
 				destination: {
 					primary: self.solarSystem.planets[2],
-					secondary: "None"
+					secondary: 'None'
 				},
-				type: "orbit",
+				type: 'orbit',
 				vehicle: {}
 			},
 			launch: {
@@ -56,10 +56,10 @@
 		};
 
 		this.spaceports = {};
-		this.continent = "northAmerica";
+		this.continent = 'northAmerica';
 		this.spaceport = {};
 		this.selectedValidSpaceport = false;
-		this.filtername = "";
+		this.filtername = '';
 		this.spaceportFilter = function (spaceport) {
 			return spaceport.name.toLowerCase().includes(self.filtername.toLowerCase());
 		};
@@ -86,7 +86,7 @@
 		};
 
 		this.schedule = function () {
-			self.flight.mission.name = "sts-31";
+			self.flight.mission.name = 'sts-31';
 			flightFactory.scheduleFlight(self.flight);
 		};
 

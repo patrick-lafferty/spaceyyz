@@ -24,7 +24,7 @@
 
 		this.newVehicle = {variants: []};
 		this.variants = [];
-		this.search_name = "";
+		this.search_name = '';
 		this.search = function(vehicle) {
 			return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
 		};
@@ -80,7 +80,7 @@
 		this.addNewVariant = function (vehicle) {
 			//self.variants.push({
 			vehicle.variants.push({
-				name: "Unnamed",
+				name: 'Unnamed',
 				stages: []
 			});
 		};
@@ -101,7 +101,7 @@
 		};
 
 		this.addEngine = function (engine, stage) {
-			if (typeof engine.name === "undefined") {
+			if (typeof engine.name === 'undefined') {
 				return;
 			}
 

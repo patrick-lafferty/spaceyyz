@@ -18,7 +18,7 @@
 		var self = this;
 		this.order = $stateParams.order;
 
-		if (typeof this.order.number === "undefined") {
+		if (typeof this.order.number === 'undefined') {
 			//possibly refreshed the page, see if we can pull up the order from the db
 			orderFactory.getOrder(Number($stateParams.orderNumber)).then(function (order) {
 				self.order = order;

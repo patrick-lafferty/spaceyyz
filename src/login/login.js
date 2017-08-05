@@ -11,26 +11,26 @@
 	Login.$inject = ['userFactory', '$state'];
 	function Login(userFactory, $state) {
 		var self = this;
-		this.email = "";
-		this.password = "";
+		this.email = '';
+		this.password = '';
 		this.newAccount = {
-			email: "",
-			password: "",
-			confirmPassword: ""
+			email: '',
+			password: '',
+			confirmPassword: ''
 		};
 
 		this.login = function() {
 
 			var promise = userFactory.login(self.email, this.password);
 			promise.then(function(user) {
-				$state.go($state.params.redirectTo || "auth.home");
+				$state.go($state.params.redirectTo || 'auth.home');
 			});
 
 		};
 
 		this.register = function() {
-			if (self.newAccount.email === ""  			
-				|| self.newAccount.password === ""
+			if (self.newAccount.email === ''  			
+				|| self.newAccount.password === ''
 			    || self.newAccount.password !== self.newAccount.confirmPassword
 				) {
 				return;
@@ -38,10 +38,10 @@
 
 			userFactory.register(self.newAccount.email, self.newAccount.password).then(
 					function (user) {
-						$state.go($state.params.redirectTo || "auth.home");
+						$state.go($state.params.redirectTo || 'auth.home');
 					},
 					function (error) {
-						alert("Error registering: " + error.code + ", " + error.message);
+						alert('Error registering: ' + error.code + ', ' + error.message);
 					});
 					
 		};

@@ -9,6 +9,6 @@
 		});	
 
 	function Vehicles() {
-		this.vehicles = ["SLS", "Falcon"];
+		this.vehicles = ['SLS', 'Falcon'];
 	}
 })();

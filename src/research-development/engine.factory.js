@@ -13,7 +13,7 @@
 
 		function getEngines () {
 
-			return firebase.database().ref().child("engines").once('value').then(function(snapshot) {
+			return firebase.database().ref().child('engines').once('value').then(function(snapshot) {
 
 				var engineObject = snapshot.val();
 				var engines = [];
@@ -32,7 +32,7 @@
 		}
 
 		function addEngine(engine) {
-			var key = firebase.database().ref().child("engines").push({
+			var key = firebase.database().ref().child('engines').push({
 				name: engine.name,
 				isp: engine.isp,
 				thrust: engine.thrust,
@@ -42,7 +42,7 @@
 
 		function updateEngine(engine)
 		{
-			firebase.database().ref().child("engines/" + engine.key).set({
+			firebase.database().ref().child('engines/' + engine.key).set({
 				name: engine.name,
 				isp: engine.isp,
 				thrust: engine.thrust,
@@ -52,7 +52,7 @@
 
 		function deleteEngine(engine)
 		{
-			firebase.database().ref().child("engines/" + engine.key).remove();
+			firebase.database().ref().child('engines/' + engine.key).remove();
 		}
 
 		return {

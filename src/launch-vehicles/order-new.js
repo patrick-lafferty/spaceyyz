@@ -17,8 +17,8 @@
 	OrderLaunchVehicle.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
 	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
 		this.primaries = [
-			{name: "Earth", satellites: ["None", "Moon"], selectedSatellite: "None"},
-			{name: "Mars", satellites: ["None", "Phobos", "Deimos"], selectedSatellite: "None"}
+			{name: 'Earth', satellites: ['None', 'Moon'], selectedSatellite: 'None'},
+			{name: 'Mars', satellites: ['None', 'Phobos', 'Deimos'], selectedSatellite: 'None'}
 		];
 
 		this.vehicles = {
@@ -30,7 +30,7 @@
 		}
 
 		this.selectedPrimary = this.primaries[0];
-		this.search_name = "";
+		this.search_name = '';
 		this.search_payload = 10000;
 		var self = this;
 
@@ -79,11 +79,11 @@
 		}
 
 		this.search = function(type) {
-			if (type === "name") {
+			if (type === 'name') {
 				return function(vehicle) {
 					return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
 				};
-			} else if (type === "capacity") {
+			} else if (type === 'capacity') {
 				return function(vehicle) {
 					//return vehicle.capacity >= self.search_payload;
 					return vehicle.variants.some(function (variant) {
@@ -94,7 +94,7 @@
 		};
 
 		this.variantFilter = function (variant) {
-			if (self.searchType === "capacity") {
+			if (self.searchType === 'capacity') {
 				return variant.capacity >= self.search_payload;
 			}
 

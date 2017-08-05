@@ -10,7 +10,7 @@
 
 	function Engine() {
 
-		this.name = "";
+		this.name = '';
 		this.isp = {
 			seaLevel: 0,
 			vacuum: 0
@@ -21,7 +21,7 @@
 			vacuum: 0
 		};
 
-		this.description = "";
+		this.description = '';
 
 	}
 

@@ -15,8 +15,8 @@
 		//vehicleInventoryFactory.getVehicles().then(set);
 
 		var self = this;
-		this.searchType = "name";
-		this.search_name = "";
+		this.searchType = 'name';
+		this.search_name = '';
 		this.search_payload = 0;
 
 		Promise.all([

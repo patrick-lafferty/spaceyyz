@@ -94,7 +94,7 @@
 
 			return Promise.all([
 
-				firebase.database().ref().child("vehicles").once('value'),
+				firebase.database().ref().child('vehicles').once('value'),
 				getInventory(),
 				variantFactory.getFamilies()
 			])
@@ -107,7 +107,7 @@
 				Object.keys(vehicleObject).forEach(function (key) {
 					var object = vehicleObject[key];
 					object.key = key;
-					object.nameWithoutSpaces = object.name.replace(/\s+/g, "-");
+					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
 					vehicles.push(object);
 					vehicleMap[object.key] = object;
 
@@ -135,7 +135,7 @@
 				return categorizeVehicles(vehicles);
 			});
 
-			/*return firebase.database().ref().child("vehicles").once('value').then(function(snapshot) {
+			/*return firebase.database().ref().child('vehicles').once('value').then(function(snapshot) {
 
 				var gv = {};
 				var vehicleObject = snapshot.val();
@@ -143,7 +143,7 @@
 				Object.keys(vehicleObject).forEach(function (key) {
 					var object = vehicleObject[key];
 					object.key = key;
-					object.nameWithoutSpaces = object.name.replace(/\s+/g, "-");
+					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
 					vehicles.push(object);
 				});
 
@@ -187,7 +187,7 @@
 		}
 
 		function getInventory() {
-			return firebase.database().ref().child("inventory").once('value').then(function(snapshot) {
+			return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
 				var inventoryObject = snapshot.val();
 
 				var inventory = [];
@@ -203,17 +203,17 @@
 		}
 
 		function addVehicle(vehicle) {
-			var key = firebase.database().ref().child("vehicles").push().key;
+			var key = firebase.database().ref().child('vehicles').push().key;
 			var updates = {};
 
 			var inventory = {
 				//count: 0
 			};
 
-			var familyKey = firebase.database().ref().child("variants").push().key;
+			var familyKey = firebase.database().ref().child('variants').push().key;
 
-			//updates["/vehicles/" + key] = vehicle;
-			updates["/vehicles/" + key] = {
+			//updates['/vehicles/' + key] = vehicle;
+			updates['/vehicles/' + key] = {
 				name: vehicle.name,
 				description: vehicle.description,
 				familyKey: familyKey
@@ -228,13 +228,13 @@
 				};
 			});
 
-			updates["/inventory/" + key] = inventory;
+			updates['/inventory/' + key] = inventory;
 			firebase.database().ref().update(updates);
 		}
 
 		function updateVehicle(vehicle)
 		{
-			firebase.database().ref().child("vehicles/" + vehicle.key).set({
+			firebase.database().ref().child('vehicles/' + vehicle.key).set({
 				//capacity: vehicle.capacity,
 				//cost: vehicle.cost,
 				name: vehicle.name,
@@ -247,9 +247,9 @@
 
 		function deleteVehicle(vehicle)
 		{
-			firebase.database().ref().child("vehicles/" + vehicle.key).remove();
+			firebase.database().ref().child('vehicles/' + vehicle.key).remove();
 
-			firebase.database().ref().child("variants/" + vehicle.familyKey).remove();
+			firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
 		}
 
 		return {

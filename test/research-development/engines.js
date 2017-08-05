@@ -83,7 +83,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 			researchEngine.addEngine(engine);
 			
 			var copy = JSON.parse(JSON.stringify(engine));
-			copy.description = "changed";
+			copy.description = 'changed';
 			
 			researchEngine.editEngine(copy);
 			researchEngine.saveEngine(copy);
@@ -97,7 +97,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 			researchEngine.addEngine(engine);
 			
 			var copy = JSON.parse(JSON.stringify(engine));
-			copy.description = "changed";
+			copy.description = 'changed';
 			
 			researchEngine.saveEngine(copy);
 

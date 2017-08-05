@@ -12,7 +12,7 @@
 	function ConfigureSpaceport(spaceportFactory, $timeout, $scope, $uibModal) {
 		var self = this;
 
-		this.search_name = "";
+		this.search_name = '';
 		this.newSpaceport = {};
 		this.spaceports = {};
 		this.successfullyCreated = false;

@@ -17,7 +17,7 @@
 		};
 
 		function getFamilies() {
-			return firebase.database().ref().child("variants").once('value').then(function (snapshot) {
+			return firebase.database().ref().child('variants').once('value').then(function (snapshot) {
 				var familyObject = snapshot.val();
 				var families = [];
 
@@ -44,7 +44,7 @@
 		}
 		/*function getVariants(family) {
 
-			return firebase.database().ref().child("variants").orderByChild('family').equalTo(family).once('value').then(function(snapshot) {
+			return firebase.database().ref().child('variants').orderByChild('family').equalTo(family).once('value').then(function(snapshot) {
 				var variantObject = snapshot.val();
 				var variants = [];
 
@@ -76,7 +76,7 @@
 				}
 			});
 
-			firebase.database().ref().child("variants/" + familyKey).push({
+			firebase.database().ref().child('variants/' + familyKey).push({
 				name: variant.name,
 				capacity: variant.capacity,
 				cost: variant.cost,
@@ -87,7 +87,7 @@
 
 		function updateVariant(variant, familyKey)
 		{
-			firebase.database().ref().child("variants/" + familyKey + "/" + variant.key).set({
+			firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).set({
 				name: variant.name,
 				stages: variant.stages
 			});
@@ -95,11 +95,11 @@
 
 		function deleteVariant(variant, familyKey)
 		{
-			firebase.database().ref().child("variants/" + familyKey + "/" + variant.key).remove();
+			firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).remove();
 		}
 
 		function replaceVariants(familyKey, variants) {
-			firebase.database().ref().child("variants/" + familyKey).remove();
+			firebase.database().ref().child('variants/' + familyKey).remove();
 
 			variants.forEach(function (variant) {
 				addVariant(variant, familyKey);

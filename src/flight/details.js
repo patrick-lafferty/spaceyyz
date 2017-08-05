@@ -12,7 +12,7 @@
 	function FlightDetails($stateParams, flightFactory, $timeout, $scope) {
 		var self = this;
 		this.flight = $stateParams.flight;
-		this.playbackSpeed = "Realtime";
+		this.playbackSpeed = 'Realtime';
 
 		function checkLaunchStatus() {
 			if (self.flight.launch.date <= Date.now) {
@@ -25,7 +25,7 @@
 			};
 		}
 
-		if (typeof this.flight.mission === "undefined") {
+		if (typeof this.flight.mission === 'undefined') {
 			//possibly refreshed the page, see if we can pull up the order from the db
 			flightFactory.getFlight($stateParams.missionName).then(function (flight) {
 				self.flight = flight;
@@ -42,22 +42,21 @@
 			checkLaunchStatus();
 		}
 
-		var path = document.getElementById("ascentPath");
-		var point = document.getElementById("point");
+		var path = document.getElementById('ascentPath');
+		var point = document.getElementById('point');
 
-		var svg = document.querySelector("svg");
+		var svg = document.querySelector('svg');
 		var p = svg.createSVGPoint();
 
-		path.addEventListener("mousedown", function (event) {
-			//console.log(event.x + ", " + event.y);
+		path.addEventListener('mousedown', function (event) {
 			p.x = event.clientX;
 			p.y = event.clientY;
 			var f = p.matrixTransform(svg.getScreenCTM().inverse());
 	
-			point.setAttribute("cx", f.x);
-			point.setAttribute("cy", f.y);
+			point.setAttribute('cx', f.x);
+			point.setAttribute('cy', f.y);
 
-			console.log(f.x + ", " + f.y);
+			console.log(f.x + ', ' + f.y);
 		});
 
 		
@@ -67,20 +66,20 @@
 		var lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
 		this.changePlaybackSpeed = function () {
 			switch(self.playbackSpeed) {
-				case "Realtime": {
+				case 'Realtime': {
 					self.animLength = 600;
 					break;
 				}
-				case "10x": {
+				case '10x': {
 					self.animLength = 60;
 					break;
 				}
 			}
 
-			document.querySelectorAll("circle.futureFlightEvent").forEach(function (e, i) {
+			document.querySelectorAll('circle.futureFlightEvent').forEach(function (e, i) {
 				e.style.setProperty('animation-delay', lengths[i] * self.animLength + 's');
 			});
-			document.querySelectorAll("text.futureFlightEvent").forEach(function (e, i) {
+			document.querySelectorAll('text.futureFlightEvent').forEach(function (e, i) {
 				e.style.setProperty('animation-delay', lengths[i] * self.animLength + 's');
 			});
 
@@ -92,11 +91,11 @@
 		var intervalId = window.setInterval(tick, 1000);
 
 		self.events = [
-			["Ignition", "Liftoff", "Roll program"],
-			["Maximum Dynamic Pressure"],
-			["Stage 1 Sep", "Stage 2 Ignition"],
-			["Fairing sep"],
-			["Stage 2 shutdown"]
+			['Ignition', 'Liftoff', 'Roll program'],
+			['Maximum Dynamic Pressure'],
+			['Stage 1 Sep', 'Stage 2 Ignition'],
+			['Fairing sep'],
+			['Stage 2 shutdown']
 		];
 
 		this.elapsedTime = 0;
@@ -123,7 +122,6 @@
 			}
 
 			self.elapsedTime += (self.maxFlightTime / self.animLength);
-			//console.log(self.elapsedTime);
 			self.flight.status.velocity = 40 * self.elapsedTime;
 			self.flight.status.altitude++; 
 

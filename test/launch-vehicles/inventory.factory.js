@@ -8,18 +8,18 @@ describe('Vehicle Inventory Factory', function () {
 
 	firebase.store = {
 		vehicles: {
-			"aa11b": {
-				name: "test",
-				description: "test",
-				key: "aa11b",
-				familyKey: "allInThe"
+			'aa11b': {
+				name: 'test',
+				description: 'test',
+				key: 'aa11b',
+				familyKey: 'allInThe'
 			}
 		},
 
 		inventory: {
-			"aa11b": {
+			'aa11b': {
 				variants: {
-					"2b||!2b": {
+					'2b||!2b': {
 						count: 1
 					}
 				}
@@ -27,24 +27,24 @@ describe('Vehicle Inventory Factory', function () {
 		},
 
 		variants: {
-			"a": {
-				key: "allInThe",
+			'a': {
+				key: 'allInThe',
 
 				variants: {
-					"small": {
-						name: "block1",
+					'small': {
+						name: 'block1',
 						capacity: 200
 					},
-					"medium": {
-						name: "blockThrice",
+					'medium': {
+						name: 'blockThrice',
 						capacity: 12000
 					},
-					"heavy": {
-						name: "blockSchfiftyFive",
+					'heavy': {
+						name: 'blockSchfiftyFive',
 						capacity: 25000
 					},
-					"superHeavy": {
-						name: "johnCena",
+					'superHeavy': {
+						name: 'johnCena',
 						capacity: 55000
 					}
 				}

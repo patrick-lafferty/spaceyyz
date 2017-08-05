@@ -16,7 +16,7 @@
 	function Combobox() {
 		var self = this;
 
-		this.filterName = "";
+		this.filterName = '';
 		this.isOpen = false;
 		this.selectedValidItem = false;
 
