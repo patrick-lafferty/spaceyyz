@@ -15,4 +15,7 @@ test:
 count:
 	cloc . --list-file=config/.cloc.includes --exclude-dir=node_modules,coverage,dist --exclude-list-file=config/.cloc.excludes
 
-.PHONY: test clean count
+lint:
+	node node_modules/eslint/bin/eslint.js --config config/.eslintrc.js src/**/*.js test/**/*.js
+
+.PHONY: test clean count lint

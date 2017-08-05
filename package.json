@@ -13,6 +13,7 @@
     "angular-mocks": "^1.6.5",
     "browserify": "^14.4.0",
     "chai": "^4.1.0",
+    "eslint": "^4.3.0",
     "karma": "^1.7.0",
     "karma-browserify": "^5.1.1",
     "karma-chai": "^0.1.0",
@@ -24,5 +25,5 @@
     "uglify-es": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
     "watchify": "^3.9.0"
-  },
+  }
 }
