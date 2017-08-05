@@ -199,7 +199,7 @@ class InventoryFactory {
 }
 
 const inventoryFactory = angular
-		.module('spaceyyz')
+		.module('spaceyyz.launchVehicles.inventoryFactory', [])
 		.factory('vehicleInventoryFactory', InventoryFactory)
 		.name;
 
