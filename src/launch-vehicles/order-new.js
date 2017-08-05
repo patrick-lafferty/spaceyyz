@@ -4,18 +4,17 @@
  * and sorting alphabetically if filtering by name, or sorting by payload capacity
  * if filtering by payload.
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('orderLaunchVehicle', {
-			templateUrl: 'src/launch-vehicles/order-new.html',
-			controller: OrderLaunchVehicle 
-		});	
+class OrderLaunchVehicle {
 
-	OrderLaunchVehicle.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
-	function OrderLaunchVehicle(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
+	}
+
+	constructor(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
+		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, variantFactory});
+
 		this.primaries = [
 			{name: 'Earth', satellites: ['None', 'Moon'], selectedSatellite: 'None'},
 			{name: 'Mars', satellites: ['None', 'Phobos', 'Deimos'], selectedSatellite: 'None'}
@@ -32,7 +31,6 @@
 		this.selectedPrimary = this.primaries[0];
 		this.search_name = '';
 		this.search_payload = 10000;
-		let self = this;
 
 		vehicleInventoryFactory.getInventory().then(setInventory);
 
@@ -46,61 +44,54 @@
 				let variants = results[1];
 
 				variants.forEach(function (family) {
-					let vehicle = undefined;
-					for(let i = 0; i < self.vehicles.all.length; i++) {
-						if (self.vehicles.all[i].familyKey === family.key) {
-							vehicle = self.vehicles.all[i];
-							break;
-						}
-					}	
+					let vehicle = this.vehicles.all.find(vehicle =>vehicle.familyKey === family.key);
 
-					vehicle.variants = family.variants;
+					if (vehicle !== undefined) {
+						vehicle.variants = family.variants;
+					}
 				});
 
 				$timeout(function () {
 					$scope.$apply();
 				});
-
 			});
-
-		function set(vehicles) {
-			self.vehicles.all = vehicles.allVehicles;
-			self.vehicles.small = vehicles.smallVehicles;
-			self.vehicles.medium = vehicles.mediumVehicles;
-			self.vehicles.heavy = vehicles.heavyVehicles;
-			self.vehicles.superHeavy = vehicles.superHeavyVehicles;
-
-			/*$timeout(function() {
-				$scope.$apply();
-			});*/
-		}
-		
-		function setInventory(inventory) {
-			self.inventory = inventory;
-		}
-
-		this.search = function(type) {
-			if (type === 'name') {
-				return function(vehicle) {
-					return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
-				};
-			} else if (type === 'capacity') {
-				return function(vehicle) {
-					//return vehicle.capacity >= self.search_payload;
-					return vehicle.variants.some(function (variant) {
-						return variant.capacity >= self.search_payload;
-					});
-				};
-			}
-		};
-
-		this.variantFilter = function (variant) {
-			if (self.searchType === 'capacity') {
-				return variant.capacity >= self.search_payload;
-			}
-
-			return true;
-		};
-
 	}
-})();
+
+	set(vehicles) {
+		this.vehicles.all = vehicles.allVehicles;
+		this.vehicles.small = vehicles.smallVehicles;
+		this.vehicles.medium = vehicles.mediumVehicles;
+		this.vehicles.heavy = vehicles.heavyVehicles;
+		this.vehicles.superHeavy = vehicles.superHeavyVehicles;
+	}
+		
+	setInventory(inventory) {
+		this.inventory = inventory;
+	}
+
+	search(type) {
+		if (type === 'name') {
+			return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+		} else if (type === 'capacity') {
+			return vehicle => vehicle.variants.some(variant => variant.capacity >= this.search_payload);
+		}
+	}
+
+	variantFilter(variant) {
+		if (this.searchType === 'capacity') {
+			return variant.capacity >= this.search_payload;
+		}
+
+		return true;
+	}
+}
+
+const orderNew = angular
+		.module('spaceyyz.launchVehicles.orderNew', [])
+		.component('orderLaunchVehicle', {
+			templateUrl: 'src/launch-vehicles/order-new.html',
+			controller: OrderLaunchVehicle 
+		})
+		.name;	
+	
+export default orderNew;

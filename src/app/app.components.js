@@ -1,4 +1,5 @@
 import angular from 'angular';
+import common from './app.components.common';
 //import flight from 'app.components.flight';
 import launchVehicles from './app.components.launch-vehicles';
 import user from './app.components.user';
@@ -8,6 +9,7 @@ import about from '../about';
 
 const components = angular
     .module('spaceyyz.components', [
+        common,
         //flight,
         launchVehicles,
         user,
