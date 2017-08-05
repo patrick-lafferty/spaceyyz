@@ -28,7 +28,7 @@
 			for (let i = 0; i < self.items.length; i++) {
 				let item = self.items[i];
 
-				if (item[self.display] == self.filterName) {
+				if (item[self.display] === self.filterName) {
 					self.selectedItem = item;
 					self.selectedValidItem = true;
 

@@ -55,8 +55,6 @@
 	
 			point.setAttribute('cx', f.x);
 			point.setAttribute('cy', f.y);
-
-			console.log(f.x + ', ' + f.y);
 		});
 
 		self.animLength = 5.0;
@@ -68,7 +66,8 @@
 					self.animLength = 600;
 					break;
 				}
-				case '10x': {
+				case '10x': 
+				default: {
 					self.animLength = 60;
 					break;
 				}

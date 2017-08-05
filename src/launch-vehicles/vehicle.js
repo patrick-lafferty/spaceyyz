@@ -30,6 +30,6 @@
 					return vehicle.variant.capacity >= self.search_payload;
 				};
 			}
-		}
+		};
 	}
 })();

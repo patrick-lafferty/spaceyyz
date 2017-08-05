@@ -80,7 +80,7 @@
 			addOrder: addOrder,
 			updateOrder: updateOrder,
 			deleteOrder: deleteOrder
-		}
+		};
 
 	}
 })();

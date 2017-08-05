@@ -10,8 +10,8 @@
 			controller: Inventory
 		});
 
-	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope', 'variantFactory'];
-	function Inventory(vehicleInventoryFactory, $timeout, $scope, variantFactory) {
+	Inventory.$inject = ['vehicleInventoryFactory', '$timeout', '$scope'];
+	function Inventory(vehicleInventoryFactory, $timeout, $scope) {
 
 		var self = this;
 		this.searchType = 'name';

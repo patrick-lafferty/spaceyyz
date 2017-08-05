@@ -27,7 +27,7 @@
 			medium: [],
 			heavy: [],
 			superHeavy: []
-		}
+		};
 
 		this.selectedPrimary = this.primaries[0];
 		this.search_name = '';

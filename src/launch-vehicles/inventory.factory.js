@@ -56,7 +56,7 @@
 				key: vehicle.key,
 				familyKey: vehicle.familyKey,
 				variant: variant
-			}
+			};
 		}
 
 		function categorizeVehicles(vehicles) {
@@ -139,7 +139,7 @@
 		function getVehicle(name) {
 			return getVehicles().then(function (vehicles) {
 				for (let i = 0; i < vehicles.allVehicles.length; i++)  {
-					if (vehicles.allVehicles[i].nameWithoutSpaces == name) {
+					if (vehicles.allVehicles[i].nameWithoutSpaces === name) {
 						return vehicles.allVehicles[i];
 					}
 				}
@@ -221,7 +221,7 @@
 			addVehicle: addVehicle,
 			combineVehiclesWithVariants: combineVehiclesWithVariants,
 			categorizeVehicles: categorizeVehicles
-		}
+		};
 
 	}
 })();

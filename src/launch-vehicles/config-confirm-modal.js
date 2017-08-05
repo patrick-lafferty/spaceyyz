@@ -18,9 +18,9 @@
 		});	
 
 	ConfirmVehicleDeleteModal.$inject = ['vehicleInventoryFactory',
-		'$scope', '$timeout', '$stateParams'];
+		'$scope'];
 	function ConfirmVehicleDeleteModal(vehicleInventoryFactory, 
-		$scope, $timeout, $stateParams) {
+		$scope) {
 
 		this.vehicle = this.resolve.vehicle;
 		let self = this;
