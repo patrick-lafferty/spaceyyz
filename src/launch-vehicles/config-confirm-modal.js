@@ -3,35 +3,33 @@
  * the user tries to delete a vehicle in the Config page
  * */
 
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('confirmVehicleDeleteModal', {
-			controller: ConfirmVehicleDeleteModal,
-			templateUrl: 'src/launch-vehicles/config-confirm-modal.html',
-			bindings: {
-				resolve: '<',
-				modalInstance: '<'
-			}
-		});	
+class ConfirmVehicleDeleteModal {
 
-	ConfirmVehicleDeleteModal.$inject = ['vehicleInventoryFactory',
-		'$scope'];
-	function ConfirmVehicleDeleteModal(vehicleInventoryFactory, 
-		$scope) {
-
+	$onInit() {
 		this.vehicle = this.resolve.vehicle;
-		let self = this;
-
-		this.cancel = function() {
-			self.modalInstance.dismiss('cancel');
-		};
-
-		this.confirm = function() {
-			self.modalInstance.close(self.vehicle);
-		};
-
 	}
-})();
+	
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.vehicle);
+	}
+}
+
+const confirmVehicleDeleteModal = angular
+	.module('spaceyyz.launchVehicles.confirmVehicleDeleteModal', [])
+	.component('confirmVehicleDeleteModal', {
+		controller: ConfirmVehicleDeleteModal,
+		templateUrl: 'src/launch-vehicles/config-confirm-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+export default confirmVehicleDeleteModal;

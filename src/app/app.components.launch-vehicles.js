@@ -11,8 +11,8 @@ import orderConfirmation from '../launch-vehicles/order-confirmation';
 import development from '../launch-vehicles/development';
 import inventory from '../launch-vehicles/inventory';
 import config from '../launch-vehicles/config';
-/*import configConfirmModal from '../launch-vehicles/config-confirm-modal';
-*/
+import configConfirmModal from '../launch-vehicles/config-confirm-modal';
+
 const launchVehicles = angular
     .module('spaceyyz.components.launchVehicles', [
         inventoryFactory,
@@ -27,7 +27,7 @@ const launchVehicles = angular
         development,
         inventory,
         config,
-        /*configConfirmModal*/
+        configConfirmModal
     ])
     .name;
 
