@@ -1,227 +1,206 @@
 /*
  * VehicleInventoryFactory handles all things vehicular. It manages accessing/modifying vehicles stored in firebase
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.factory('vehicleInventoryFactory', InventoryFactory);
+function minimumCapacity(capacity) {
+	return function(vehicle) {
+		return vehicle.capacity >= capacity;
+	};
+}
 
-	InventoryFactory.$inject = ['variantFactory'];
-	function InventoryFactory(variantFactory) {
+function maximumCapacity(capacity) {
+	return function(vehicle) {
+		return vehicle.capacity < capacity;
+	};
+}
 
-		function minimumCapacity(capacity) {
-			return function(vehicle) {
-				return vehicle.capacity >= capacity;
-			};
-		}
+function capacityBetween(minimum, maximum) {
+	return function(vehicle) {
+		return vehicle.capacity >= minimum && vehicle.capacity < maximum;
+	};
+}
 
-		function maximumCapacity(capacity) {
-			return function(vehicle) {
-				return vehicle.capacity < capacity;
-			};
-		}
+function sortByCapacity(a, b) {
+	return b.variant.capacity - a.variant.capacity;
+}
 
-		function capacityBetween(minimum, maximum) {
-			return function(vehicle) {
-				return vehicle.capacity >= minimum && vehicle.capacity < maximum;
-			};
-		}
+class CategorizedVehicle {
+	constructor(vehicle, variant) {
+		this.name = vehicle.name;
+		this.nameWithoutSpaces = vehicle.nameWithoutSpaces;
+		this.description = vehicle.description;
+		this.key = vehicle.key;
+		this.familyKey = vehicle.familyKey;
+		this.variant = variant;
+	}
+}
 
-		function sortByCapacity(a, b) {
-			return b.variant.capacity - a.variant.capacity;
-		}
+function categorizeVehicles(vehicles) {
+	let vehicleCategories = Object.create(null);
+	vehicleCategories.smallVehicles = [];
+	vehicleCategories.mediumVehicles = [];
+	vehicleCategories.heavyVehicles = [];
+	vehicleCategories.superHeavyVehicles = [];
 
-		function combineVehiclesWithVariants(vehicles, variants) {
-			variants.forEach(function (family) {
-				let vehicle = {};
+	vehicles.forEach(function (vehicle) {
+		vehicle.variants.forEach(function (variant) {
+			if (maximumCapacity(2000)(variant)) {
+				vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
+			} else if (capacityBetween(2000, 20000)(variant)) {
+				vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
+			} else if (capacityBetween(20000, 50000)(variant)) {
+				vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+			} else if (minimumCapacity(50000)(variant)) {
+				vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+			}
+		});
+	});
 
-				for(let i = 0; i < vehicles.length; i++) {
-					if (vehicles[i].familyKey === family.key) {
-						vehicle = vehicles[i];
-						break;
-					}
-				}
+	Object.keys(vehicleCategories).forEach(function (key) {
+		vehicleCategories[key].sort(sortByCapacity);
+	});
 
+	vehicleCategories.allVehicles = vehicles;
+	
+	return vehicleCategories;
+}
+
+class InventoryFactory {
+
+	static get $inject() {
+		return ['variantFactory'];
+	}
+
+	constructor(variantFactory) {
+		this.variantFactory = variantFactory;
+	}
+
+	combineVehiclesWithVariants(vehicles, variants) {
+		variants.forEach(function (family) {
+			let vehicle = vehicles.find(vehicle => vehicle.familyKey === family.key);
+
+			if (vehicle !== undefined) {
 				vehicle.variants = family.variants;
-			});
-		}
+			}
+		});
+	}
 
-		function CategorizedVehicle(vehicle, variant) {
-			return {
-				name: vehicle.name,
-				nameWithoutSpaces: vehicle.nameWithoutSpaces,
-				description: vehicle.description,
-				key: vehicle.key,
-				familyKey: vehicle.familyKey,
-				variant: variant
-			};
-		}
+	getVehicles() {
 
-		function categorizeVehicles(vehicles) {
-			var vehicleCategories = Object.create(null);
-			vehicleCategories.smallVehicles = [];
-			vehicleCategories.mediumVehicles = [];
-			vehicleCategories.heavyVehicles = [];
-			vehicleCategories.superHeavyVehicles = [];
+		return Promise
+			.all([
+				firebase.database().ref().child('vehicles').once('value'),
+				getInventory(),
+				variantFactory.getFamilies()
+			])
+			.then(function (results) {
 
-			vehicles.forEach(function (vehicle) {
-				vehicle.variants.forEach(function (variant) {
-					if (maximumCapacity(2000)(variant)) {
-						vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
-					} else if (capacityBetween(2000, 20000)(variant)) {
-						vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
-					} else if (capacityBetween(20000, 50000)(variant)) {
-						vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-					} else if (minimumCapacity(50000)(variant)) {
-						vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-					}
-				});
-			});
+				var vehicleObject = results[0].val();
+				var vehicles = [];
+				var vehicleMap = Object.create(null);
 
-
-			Object.keys(vehicleCategories).forEach(function (key) {
-				vehicleCategories[key].sort(sortByCapacity);
-			});
-
-			vehicleCategories.allVehicles = vehicles;
-			
-			return vehicleCategories;
-		}
-
-		function getVehicles() {
-
-			return Promise
-				.all([
-
-					firebase.database().ref().child('vehicles').once('value'),
-					getInventory(),
-					variantFactory.getFamilies()
-				])
-				.then(function (results) {
-
-					var vehicleObject = results[0].val();
-					var vehicles = [];
-					var vehicleMap = Object.create(null);
-
-					Object.keys(vehicleObject).forEach(function (key) {
-						var object = vehicleObject[key];
-						object.key = key;
-						object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
-						vehicles.push(object);
-						vehicleMap[object.key] = object;
-
-					});
-
-					combineVehiclesWithVariants(vehicles, results[2]);
-
-					let inventory = results[1];
-
-					inventory.forEach(function (vehicleInventory) {
-						Object.keys(vehicleInventory).forEach(function (key) {
-							let variant = vehicleInventory[key];
-							let variants = vehicleMap[vehicleInventory.key].variants;
-							for(let i = 0; i < variants.length; i++) {
-								if (variants[i].key === key) {
-									variants[i].count = variant.count;
-									break;
-								}
-							}
-						});
-					});
-
-					return categorizeVehicles(vehicles);
-				});
-
-		}
-
-		function getVehicle(name) {
-			return getVehicles().then(function (vehicles) {
-				for (let i = 0; i < vehicles.allVehicles.length; i++)  {
-					if (vehicles.allVehicles[i].nameWithoutSpaces === name) {
-						return vehicles.allVehicles[i];
-					}
-				}
-			});
-		}
-
-		function getInventory() {
-			return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
-				var inventoryObject = snapshot.val();
-
-				var inventory = [];
-
-				Object.keys(inventoryObject).forEach(function (key) {
-					var object = inventoryObject[key];
+				Object.keys(vehicleObject).forEach(function (key) {
+					var object = vehicleObject[key];
 					object.key = key;
-					inventory.push(object);
+					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
+					vehicles.push(object);
+					vehicleMap[object.key] = object;
 				});
 
-				return inventory;
+				combineVehiclesWithVariants(vehicles, results[2]);
+
+				let inventory = results[1];
+
+				inventory.forEach(function (vehicleInventory) {
+					Object.keys(vehicleInventory).forEach(function (key) {
+						let variant = vehicleInventory[key];
+						let variants = vehicleMap[vehicleInventory.key].variants;
+						for(let i = 0; i < variants.length; i++) {
+							if (variants[i].key === key) {
+								variants[i].count = variant.count;
+								break;
+							}
+						}
+					});
+				});
+
+				return categorizeVehicles(vehicles);
 			});
-		}
+	}
 
-		function addVehicle(vehicle) {
-			var key = firebase.database().ref().child('vehicles').push().key;
-			var updates = {};
+	getVehicle(name) {
+		return this.getVehicles().then(function (vehicles) {
+			return vehicles.allVehicles.find(vehicle => vehicle.nameWithoutSpaces === name);
+		});
+	}
 
-			var inventory = {
-				//count: 0
-			};
+	 getInventory() {
+		return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
+			let inventoryObject = snapshot.val();
 
-			var familyKey = firebase.database().ref().child('variants').push().key;
+			let inventory = [];
 
-			//updates['/vehicles/' + key] = vehicle;
-			updates['/vehicles/' + key] = {
-				name: vehicle.name,
-				description: vehicle.description,
-				familyKey: familyKey
-			};
-
-			vehicle.familyKey = familyKey;
-
-			vehicle.variants.forEach(function (variant) {
-				variantFactory.addVariant(variant, familyKey);
-				inventory[variant.key] = { 
-					count: 0
-				};
-			});
-
-			updates['/inventory/' + key] = inventory;
-			firebase.database().ref().update(updates);
-		}
-
-		function updateVehicle(vehicle)
-		{
-			firebase.database().ref().child('vehicles/' + vehicle.key).set({
-				//capacity: vehicle.capacity,
-				//cost: vehicle.cost,
-				name: vehicle.name,
-				description: vehicle.description,
-				familyKey: vehicle.familyKey
+			Object.keys(inventoryObject).forEach(function (key) {
+				let object = inventoryObject[key];
+				object.key = key;
+				inventory.push(object);
 			});
 
-			variantFactory.replaceVariants(vehicle.familyKey, vehicle.variants);
-		}
+			return inventory;
+		});
+	}
 
-		function deleteVehicle(vehicle)
-		{
-			firebase.database().ref().child('vehicles/' + vehicle.key).remove();
+	addVehicle(vehicle) {
+		var key = firebase.database().ref().child('vehicles').push().key;
+		var updates = {};
 
-			firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
-		}
-
-		return {
-			getVehicle: getVehicle,
-			getVehicles: getVehicles,
-			getInventory: getInventory,
-			updateVehicle: updateVehicle,
-			deleteVehicle: deleteVehicle,
-			addVehicle: addVehicle,
-			combineVehiclesWithVariants: combineVehiclesWithVariants,
-			categorizeVehicles: categorizeVehicles
+		var inventory = {
+			//count: 0
 		};
 
+		var familyKey = firebase.database().ref().child('variants').push().key;
+
+		updates['/vehicles/' + key] = {
+			name: vehicle.name,
+			description: vehicle.description,
+			familyKey: familyKey
+		};
+
+		vehicle.familyKey = familyKey;
+
+		vehicle.variants.forEach(function (variant) {
+			variantFactory.addVariant(variant, familyKey);
+			inventory[variant.key] = { 
+				count: 0
+			};
+		});
+
+		updates['/inventory/' + key] = inventory;
+		firebase.database().ref().update(updates);
 	}
-})();
+
+	updateVehicle(vehicle)
+	{
+		firebase.database().ref().child('vehicles/' + vehicle.key).set({
+			name: vehicle.name,
+			description: vehicle.description,
+			familyKey: vehicle.familyKey
+		});
+
+		this.variantFactory.replaceVariants(vehicle.familyKey, vehicle.variants);
+	}
+
+	deleteVehicle(vehicle)
+	{
+		firebase.database().ref().child('vehicles/' + vehicle.key).remove();
+		firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
+	}
+}
+
+const inventoryFactory = angular
+		.module('spaceyyz')
+		.factory('vehicleInventoryFactory', InventoryFactory)
+		.name;
+
+export default inventoryFactory;
