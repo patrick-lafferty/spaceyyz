@@ -13,4 +13,4 @@ test:
 	karma start
 
 count:
-	cloc . --list-file=.cloc.includes --exclude-dir=node_modules,coverage,dist --exclude-list-file=.cloc.excludes
+	cloc . --list-file=config/.cloc.includes --exclude-dir=node_modules,coverage,dist --exclude-list-file=config/.cloc.excludes
