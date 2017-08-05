@@ -7,9 +7,9 @@
 var path = require('path');
 
 module.exports = {
-	entry: __dirname  + "/src/app.module.js",
+	entry: __dirname  + "/../src/app.module.js",
 	output: {
-		path: __dirname, 
+		path: __dirname + "/../", 
 		filename: "bundle.js"
 	},
 }

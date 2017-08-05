@@ -12,20 +12,20 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['browserify', 'mocha', 'chai'],
 
-	plugins: ['karma-mocha', 'karma-chai', 'karma-browserify', 'karma-mocha-reporter', 'karma-coverage', 'karma-sourcemap-loader'],
+	plugins: ['karma-mocha', 'karma-chai', 'karma-browserify', 'karma-mocha-reporter', 'karma-sourcemap-loader'],
 
 
     // list of files / patterns to load in the browser
     files: [
-		'angular.js',
-		'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-		'node_modules/angular-ui-router/release/angular-ui-router.js',
-		{ pattern: 'node_modules/angular-ui-router/release/angular-ui-router.js.map', included: false},
-		'node_modules/angular-mocks/angular-mocks.js',
-		'src/app.module.js',
-		'src/app.requires.js',
-		'src/**/*.js',
-      	'test/**/*.js'
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js',
+    'https://unpkg.com/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+    'https://unpkg.com/angular-ui-router@next/release/angular-ui-router.min.js',
+		//{ pattern: 'node_modules/angular-ui-router/release/angular-ui-router.js.map', included: false},
+		'../node_modules/angular-mocks/angular-mocks.js',
+		'../src/app.module.js',
+		'../src/app.requires.js',
+		'../src/**/*.js',
+      	'../test/**/*.js'
     ],
 
 
@@ -41,8 +41,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		'src/**/*.js': ['coverage', 'browserify', 'sourcemap'],
-		'test/**/*.js': ['browserify', 'sourcemap']
+		'../src/**/*.js': ['browserify', 'sourcemap'],
+		'../test/**/*.js': ['browserify', 'sourcemap']
     },
 
 	browserify: {
@@ -54,12 +54,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage'],
-
-	coverageReporter: {
-		type: 'html',
-		dir: 'coverage/'
-	},
+    reporters: ['mocha'],
 
     // web server port
     port: 9876,
