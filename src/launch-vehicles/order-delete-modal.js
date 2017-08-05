@@ -2,40 +2,45 @@
  * when the user clicks on the order delete button on an order's confirmation
  * page.
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('orderDeleteModal', {
-			controller: OrderDeleteModal,
-			templateUrl: 'src/launch-vehicles/order-delete-modal.html',
-			bindings: {
-				resolve: '<',
-				modalInstance: '<'
-			}
-		});	
+class OrderDeleteModal {
 
-	OrderDeleteModal.$inject = ['$scope', '$timeout', '$stateParams'];
-	function OrderDeleteModal($scope, $timeout, $stateParams) {
-		var self = this;
+	static get $inject() {
+		return ['$scope', '$timeout', '$stateParams'];
+	}
 
+	constructor($scope, $timeout, $stateParams) {
 		this.order = this.resolve.order;
 		this.costToCancel = (function() {
 			var timestampNow = new Date().getTime();
 
-			var t = timestampNow - self.order.orderTimestamp;
-			var progress = t / (self.order.deliveryTimestamp - self.order.orderTimestamp);
-			return self.order.cost * progress;
+			var t = timestampNow - this.order.orderTimestamp;
+			var progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
+			return this.order.cost * progress;
 				
 		})();
-		this.cancel = function() {
-			self.modalInstance.dismiss('cancel');
-		};
-
-		this.confirm = function() {
-			self.modalInstance.close({name: 0});
-		};
-
 	}
-})();
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close({name: 0});
+	}
+}
+
+const orderDeleteModal = angular
+	.module('spaceyyz.launchVehicles.orderDeleteModal', [])
+	.component('orderDeleteModal', {
+		controller: OrderDeleteModal,
+		templateUrl: 'src/launch-vehicles/order-delete-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+export default orderDeleteModal;

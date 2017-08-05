@@ -91,10 +91,10 @@ class InventoryFactory {
 		return Promise
 			.all([
 				firebase.database().ref().child('vehicles').once('value'),
-				getInventory(),
-				variantFactory.getFamilies()
+				this.getInventory(),
+				this.variantFactory.getFamilies()
 			])
-			.then(function (results) {
+			.then(results => {
 
 				var vehicleObject = results[0].val();
 				var vehicles = [];
@@ -108,7 +108,7 @@ class InventoryFactory {
 					vehicleMap[object.key] = object;
 				});
 
-				combineVehiclesWithVariants(vehicles, results[2]);
+				this.combineVehiclesWithVariants(vehicles, results[2]);
 
 				let inventory = results[1];
 
@@ -138,7 +138,6 @@ class InventoryFactory {
 	 getInventory() {
 		return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
 			let inventoryObject = snapshot.val();
-
 			let inventory = [];
 
 			Object.keys(inventoryObject).forEach(function (key) {
@@ -170,7 +169,7 @@ class InventoryFactory {
 		vehicle.familyKey = familyKey;
 
 		vehicle.variants.forEach(function (variant) {
-			variantFactory.addVariant(variant, familyKey);
+			this.variantFactory.addVariant(variant, familyKey);
 			inventory[variant.key] = { 
 				count: 0
 			};

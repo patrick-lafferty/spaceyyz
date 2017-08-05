@@ -2,36 +2,38 @@
  * when the user clicks on the order button on a vehicle's information
  * page.
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('orderVehicleModal', {
-			controller: OrderVehicleModal,
-			templateUrl: 'src/launch-vehicles/order-modal.html',
-			bindings: {
-				resolve: '<',
-				modalInstance: '<'
-			}
-		});	
+class OrderVehicleModal {
 
-	OrderVehicleModal.$inject = ['vehicleInventoryFactory',
-		'$scope', '$timeout', '$stateParams'];
-	function OrderVehicleModal(vehicleInventoryFactory, 
-		$scope, $timeout, $stateParams) {
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$scope', '$timeout', '$stateParams'];
+	}
 
+	constructor(vehicleInventoryFactory, $scope, $timeout, $stateParams) {
 		this.vehicle = this.resolve.vehicle;
 		this.variant = this.resolve.variant;
-		let self = this;
-
-		this.cancel = function() {
-			self.modalInstance.dismiss('cancel');
-		};
-
-		this.confirm = function() {
-			self.modalInstance.close(self.variant);
-		};
-
 	}
-})();
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.variant);
+	}
+}
+
+const orderVehicleModal = angular
+	.module('spaceyyz.launchVehicles.orderModal', [])
+	.component('orderVehicleModal', {
+		controller: OrderVehicleModal,
+		templateUrl: 'src/launch-vehicles/order-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+export default orderVehicleModal;

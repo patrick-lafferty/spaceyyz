@@ -1,39 +1,37 @@
 /* VehicleOrderDetail is the component for the individual vehicle pages
  * where the user can view the vehicle's details and order it.
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('vehicleOrderDetail', {
-			templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
-			controller: VehicleOrderDetail 
-		});	
+class VehicleOrderDetail {
+	static get $inject() {
+		return ['vehicleInventoryFactory',
+			'$scope', '$timeout', '$stateParams',
+			'$uibModal', '$state', 'orderFactory', 'variantFactory'];
+	}
 
-	VehicleOrderDetail.$inject = ['vehicleInventoryFactory',
-		'$scope', '$timeout', '$stateParams',
-		'$uibModal', '$state', 'orderFactory', 'variantFactory'];
-	function VehicleOrderDetail(vehicleInventoryFactory, 
+	constructor(vehicleInventoryFactory, 
 		$scope, $timeout, $stateParams,
 		$uibModal, $state, orderFactory, variantFactory) {
 
+		Object.assign(this, {vehicleInventoryFactory, 
+			$scope, $timeout, $stateParams,
+			$uibModal, $state, orderFactory, variantFactory});
+
 		this.vehicle = {};
-		let self = this;
 
 		Promise
 			.all([
 				vehicleInventoryFactory.getVehicle($stateParams.name),
 				variantFactory.getFamilies()])
-			.then(function (results) {
-				self.vehicle = results[0];
+			.then(results => {
+				this.vehicle = results[0];
 				let families = results[1];
+				
+				let variants = families.find(family => family.key === this.vehicle.familyKey);
 
-				for(let i = 0; i < families.length; i++) {
-					if (families[i].key === self.vehicle.familyKey) {
-						self.vehicle.variants = families[i].variants;
-						break;
-					}
+				if (variants !== undefined) {
+					this.vehicle.variants = variants;
 				}
 
 				$timeout(function () {
@@ -42,50 +40,55 @@
 
 			});
 
-		self.modalInstance = {};
-		this.open = function(variant) {
-			self.modalInstance = $uibModal.open({
-				ariaLabelledBy: 'modal-title',
-				ariaDescribedBy: 'modal-body',
-				templateUrl: 'launch-vehicles/order-modal.html',
-				component: 'orderVehicleModal',
-				backdrop: 'static',
-				resolve: {
-					//needs to be variant not vehicle
-					vehicle: function() {
-						return self.vehicle;
-					},
-					variant: function () {
-						return variant;
-					}
-				}
-			
-			});
-
-			self.modalInstance.result.then(function(variant) {
-
-				let deliveryDate = new Date(); 
-				deliveryDate.setFullYear(new Date().getFullYear() + 1);
-
-				let order = {
-					orderTimestamp: new Date().getTime(),
-					deliveryDate: deliveryDate,
-					vehicleName: self.vehicle.name,
-					variantName: variant.name,
-					cost: variant.cost
-				};
-
-				orderFactory.getNewOrderNumber().then(function(snapshot) {
-					let orderNumber = snapshot.snapshot.val();
-					order.number = orderNumber;
-					orderFactory.addOrder(order);
-
-					$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
-				}, function (error) {
-					console.error(error);
-				});
-			});
-
-		};
+		this.modalInstance = {};
 	}
-})();
+
+	open(variant) {
+		this.modalInstance = this.$uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'launch-vehicles/order-modal.html',
+			component: 'orderVehicleModal',
+			backdrop: 'static',
+			resolve: {
+				vehicle: () => this.vehicle, 
+				variant: () => variant
+			}
+		});
+
+		this.modalInstance.result.then(variant => {
+
+			let deliveryDate = new Date(); 
+			deliveryDate.setFullYear(new Date().getFullYear() + 1);
+
+			let order = {
+				orderTimestamp: new Date().getTime(),
+				deliveryDate: deliveryDate,
+				vehicleName: this.vehicle.name,
+				variantName: variant.name,
+				cost: variant.cost
+			};
+
+			this.orderFactory.getNewOrderNumber().then(function(snapshot) {
+				let orderNumber = snapshot.snapshot.val();
+				order.number = orderNumber;
+				this.orderFactory.addOrder(order);
+
+				this.$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
+			}, function (error) {
+				console.error(error);
+			});
+		});
+
+	}
+}
+
+const vehicleOrderDetail = angular
+		.module('spaceyyz.launchVehicles.vehicleOrderDetail', [])
+		.component('vehicleOrderDetail', {
+			templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
+			controller: VehicleOrderDetail 
+		})
+		.name;	
+
+export default vehicleOrderDetail;

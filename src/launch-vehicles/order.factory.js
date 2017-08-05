@@ -22,9 +22,7 @@ class OrderFactory {
 	}
 
 	getOrder(number) {
-		return getOrders().then(function (orders) {
-			return orders.find(order => order.number === number);
-		});
+		return this.getOrders().then(orders => orders.find(order => order.number === number));
 	}
 
 	getNewOrderNumber() {

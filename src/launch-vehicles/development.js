@@ -2,32 +2,25 @@
  * It shows all of the orders currently being processed, with
  * a progress bar showing how many dates into the order they are.
  * */
+ import angular from 'angular';
 
-(function() {
-	'use strict';
+class VehicleDevelopment {
 
-	angular
-		.module('spaceyyz')
-		.component('vehicleDevelopment', {
-			templateUrl: 'src/launch-vehicles/development.html',
-			controller: VehicleDevelopment 
-		});	
+	static get $inject() {
+		return ['orderFactory', '$timeout', '$scope'];
+	}
 
-	VehicleDevelopment.$inject = ['orderFactory', '$timeout', '$scope'];
-	function VehicleDevelopment(orderFactory, $timeout, $scope) {
+	constructor(orderFactory, $timeout, $scope) {
 		this.orders = {
 			all: []
 		};
 
-		let self = this;
-
-		orderFactory.getOrders().then(function (orders) {
-			self.orders.all = orders;
+		orderFactory.getOrders().then(orders => {
+			this.orders.all = orders;
 
 			let timestampNow = new Date().getTime();
 
-			self.orders.all.forEach(function (order) {
-
+			this.orders.all.forEach(function (order) {
 				let t = timestampNow - order.orderTimestamp;
 				order.progress = 100 * t / (order.deliveryTimestamp - order.orderTimestamp);
 			});
@@ -35,7 +28,16 @@
 			$timeout(function() {
 				$scope.$apply();
 			});
-
 		});
 	}
-})();
+}
+
+const vehicleDevelopment = angular
+	.module('spaceyyz.launchVehicles.vehicleDevelopment', [])
+	.component('vehicleDevelopment', {
+		templateUrl: 'src/launch-vehicles/development.html',
+		controller: VehicleDevelopment 
+	})
+	.name;	
+
+export default vehicleDevelopment;

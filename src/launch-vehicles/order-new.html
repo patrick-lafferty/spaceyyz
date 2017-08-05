@@ -14,10 +14,10 @@
 
 					<div ng-switch="$ctrl.searchType" class="col-sm-2">
 						<div ng-switch-when="name" class="input-group"> 
-							<input type="text" ng-model="$ctrl.search_name" class="form-control" id="name" placeholder="">
+							<input type="text" ng-model="$ctrl.search_name" class="form-control" id="name" placeholder="" />
 						</div>
 						<div ng-switch-when="capacity" class="input-group">
-							<input type="text" ng-model="$ctrl.search_payload" class="form-control" id="payload" placeholder="10000">
+							<input type="text" ng-model="$ctrl.search_payload" class="form-control" id="payload" placeholder="10000" />
 							<div class="input-group-addon">kg</div>
 						</div>
 					</div>
@@ -29,8 +29,6 @@
 					<div class="vehiclePreview">
 						<div>
 							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
-							<!--<p>Capacity: {{vehicle.capacity | number}}kg</p>
-							<p>Cost: {{vehicle.cost | currency}}</p>-->
 							<h5>Variants</h5>
 							<ul>
 								<li class="no-list-style" ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
@@ -50,14 +48,13 @@
 			<h1>Not implemented yet</h1>
 		</uib-tab>
 		<uib-tab index="2" heading="Delta-V Calculator">
-			<!--<form class="form-horizontal">-->
 			<h1>Not implemented yet</h1>
 			<div class="form-horizontal">
 				<div class="form-group">
 					<label for="payload" class="col-sm-2 control-label">Payload</label>
 					<div class="col-sm-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="payload" placeholder="10000">
+							<input type="text" class="form-control" id="payload" placeholder="10000" />
 							<div class="input-group-addon">kg</div>
 						</div>
 					</div>
@@ -82,7 +79,7 @@
 					<label class="col-sm-2 control-label">Apoapsis</label>
 					<div class="col-sm-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="apoapsis" placeholder="10000">
+							<input type="text" class="form-control" id="apoapsis" placeholder="10000" />
 							<div class="input-group-addon">km</div>
 						</div>
 					</div>
@@ -92,7 +89,7 @@
 					<label class="col-sm-2 control-label">Periapsis</label>
 					<div class="col-sm-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="periapsis" placeholder="10000">
+							<input type="text" class="form-control" id="periapsis" placeholder="10000" />
 							<div class="input-group-addon">km</div>
 						</div>
 					</div>

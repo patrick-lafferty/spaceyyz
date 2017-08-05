@@ -32,18 +32,26 @@ class OrderLaunchVehicle {
 		this.search_name = '';
 		this.search_payload = 10000;
 
-		vehicleInventoryFactory.getInventory().then(setInventory);
+		this.variantFilter = variant => {
+			if (this.searchType === 'capacity') {
+				return variant.capacity >= this.search_payload;
+			}
+
+			return true;
+		};
+
+		vehicleInventoryFactory.getInventory().then(result => this.setInventory(result));
 
 		Promise
 			.all([
 				vehicleInventoryFactory.getVehicles(),
 				variantFactory.getFamilies()])
-			.then(function (results) {
-				set(results[0]);
+			.then(results => {
+				this.set(results[0]);
 
 				let variants = results[1];
 
-				variants.forEach(function (family) {
+				variants.forEach(family => {
 					let vehicle = this.vehicles.all.find(vehicle =>vehicle.familyKey === family.key);
 
 					if (vehicle !== undefined) {
@@ -51,9 +59,7 @@ class OrderLaunchVehicle {
 					}
 				});
 
-				$timeout(function () {
-					$scope.$apply();
-				});
+				$timeout(() => this.$scope.$apply());
 			});
 	}
 
@@ -77,13 +83,7 @@ class OrderLaunchVehicle {
 		}
 	}
 
-	variantFilter(variant) {
-		if (this.searchType === 'capacity') {
-			return variant.capacity >= this.search_payload;
-		}
-
-		return true;
-	}
+	
 }
 
 const orderNew = angular

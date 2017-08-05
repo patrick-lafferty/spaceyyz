@@ -6,7 +6,8 @@ import configure from './app.config';
 angular
     .module('spaceyyz', [
         components,
-        uiRouter
+        uiRouter,
+        'ui.bootstrap'
     ]);
 
 configure();
