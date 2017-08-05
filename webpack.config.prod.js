@@ -4,39 +4,22 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: {
 		app: __dirname  + "/src/app.requires.js",
-		//to combine vendor libs: vendors: ['angular']
 	},
 	output: {
 		path: __dirname, 
 		filename: "bundle.js"
 	},
+	plugins: [
+		new UglifyJSPlugin({
+			uglifyOptions: {
+				ecma: 6
+			}
+		})
+	]
 
-	module: {
-		loaders: [
-			{ 
-				test: /\.js$/, 
-				include: [
-					path.resolve(__dirname, "src/")
-				],	
-				exclude: [
-					"node_modules/",
-				   "test/"
-				],	
-				loader: 'babel-loader' }
-		]
-	},
-
-	/*plugins: [
-		new HtmlWebpackPlugin({
-			template: 'src/index.ejs',
-			filename: 'index.html',
-			isDevEnvironment: false
-		}),
-		//to combine vendor libs: new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
-	]*/
 }

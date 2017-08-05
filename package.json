@@ -7,38 +7,14 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-mocks": "^1.5.8",
-    "angular-ui-bootstrap": "^2.2.0",
-    "angular-ui-router": "next",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.7",
-    "babel-preset-latest": "^6.16.0",
-    "bootstrap": "^3.3.7",
-    "browserify": "^13.1.1",
-    "chai": "^3.5.0",
-    "eslint": "^3.10.2",
-    "html-loader": "^0.4.4",
-    "html-webpack-plugin": "^2.24.1",
-    "karma": "^1.3.0",
-    "karma-browserify": "^5.1.0",
-    "karma-chai": "^0.1.0",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha-reporter": "^2.2.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "karma-sourcemap-loader": "^0.3.7",
-    "mocha": "^3.1.2",
-    "ng-annotate-webpack-plugin": "^0.1.3",
-    "stylelint": "^7.5.0",
-    "watchify": "^3.7.0",
-    "webpack": "^1.13.3"
+    "webpack": "^3.4.1"
   },
   "devDependencies": {
-    "karma-mocha": "^1.3.0"
+    "karma": "^1.7.0",
+    "uglify-es": "git://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.2"
   },
   "scripts": {
-    "build-dev": "webpack --config webpack.config.dev.js --progress --colors -d",
-    "build-prod": "webpack --config webpack.config.prod.js --progress --colors -p",
     "test": "karma start",
     "count": "cloc . --list-file=.cloc.includes --exclude-dir=node_modules,coverage,dist --exclude-list-file=.cloc.excludes"
   }
