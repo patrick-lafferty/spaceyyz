@@ -92,89 +92,49 @@
 
 		function getVehicles() {
 
-			return Promise.all([
+			return Promise
+				.all([
 
-				firebase.database().ref().child('vehicles').once('value'),
-				getInventory(),
-				variantFactory.getFamilies()
-			])
-			.then(function (results) {
+					firebase.database().ref().child('vehicles').once('value'),
+					getInventory(),
+					variantFactory.getFamilies()
+				])
+				.then(function (results) {
 
-				var vehicleObject = results[0].val();
-				var vehicles = [];
-				var vehicleMap = Object.create(null);
+					var vehicleObject = results[0].val();
+					var vehicles = [];
+					var vehicleMap = Object.create(null);
 
-				Object.keys(vehicleObject).forEach(function (key) {
-					var object = vehicleObject[key];
-					object.key = key;
-					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
-					vehicles.push(object);
-					vehicleMap[object.key] = object;
+					Object.keys(vehicleObject).forEach(function (key) {
+						var object = vehicleObject[key];
+						object.key = key;
+						object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
+						vehicles.push(object);
+						vehicleMap[object.key] = object;
 
-				});
-
-				combineVehiclesWithVariants(vehicles, results[2]);
-
-				let inventory = results[1];
-
-				inventory.forEach(function (vehicleInventory) {
-					//vehicleInventory.forEach(function (variant) {
-					Object.keys(vehicleInventory).forEach(function (key) {
-						let variant = vehicleInventory[key];
-						//vehicleMap[vehicleInventory.key].variants[variant.key].count = variant.count;
-						let variants = vehicleMap[vehicleInventory.key].variants;
-						for(let i = 0; i < variants.length; i++) {
-							if (variants[i].key === key) {
-								variants[i].count = variant.count;
-								break;
-							}
-						}
 					});
-				});
 
-				return categorizeVehicles(vehicles);
-			});
+					combineVehiclesWithVariants(vehicles, results[2]);
 
-			/*return firebase.database().ref().child('vehicles').once('value').then(function(snapshot) {
+					let inventory = results[1];
 
-				var gv = {};
-				var vehicleObject = snapshot.val();
-				var vehicles = [];
-				Object.keys(vehicleObject).forEach(function (key) {
-					var object = vehicleObject[key];
-					object.key = key;
-					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
-					vehicles.push(object);
-				});
-
-				return getInventory().then(function (inventory) {
-					inventory.forEach(function (vehicle) {
-						vehicles.forEach(function(v) {
-							if (v.key === vehicle.key) {
-								v.inventory = vehicle.count;
+					inventory.forEach(function (vehicleInventory) {
+						Object.keys(vehicleInventory).forEach(function (key) {
+							let variant = vehicleInventory[key];
+							let variants = vehicleMap[vehicleInventory.key].variants;
+							for(let i = 0; i < variants.length; i++) {
+								if (variants[i].key === key) {
+									variants[i].count = variant.count;
+									break;
+								}
 							}
 						});
 					});
 
-					gv.vehicles = vehicles;
-					gv.smallVehicles = vehicles.filter(maximumCapacity(2000)).sort(sortByCapacity);
-					gv.mediumVehicles = vehicles.filter(capacityBetween(2000, 20000)).sort(sortByCapacity);
-					gv.heavyVehicles = vehicles.filter(capacityBetween(20000, 50000)).sort(sortByCapacity);
-					gv.superHeavyVehicles = vehicles.filter(minimumCapacity(50000)).sort(sortByCapacity);
-
-					return gv;
+					return categorizeVehicles(vehicles);
 				});
 
-			});*/
 		}
-
-		/*function getVehicle(name, then) {
-			getVehicles().then(function(vehicles) {
-				then(vehicles.vehicles.filter(function(vehicle) {
-					return vehicle.nameWithoutSpaces == name;
-				})[0]);
-			});
-		}*/
 
 		function getVehicle(name) {
 			return getVehicles().then(function (vehicles) {

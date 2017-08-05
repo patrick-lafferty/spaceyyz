@@ -31,18 +31,17 @@
 		this.register = function() {
 			if (self.newAccount.email === ''  			
 				|| self.newAccount.password === ''
-			    || self.newAccount.password !== self.newAccount.confirmPassword
-				) {
+				|| self.newAccount.password !== self.newAccount.confirmPassword) {
 				return;
 			}
 
 			userFactory.register(self.newAccount.email, self.newAccount.password).then(
-					function (user) {
-						$state.go($state.params.redirectTo || 'auth.home');
-					},
-					function (error) {
-						alert('Error registering: ' + error.code + ', ' + error.message);
-					});
+				function (user) {
+					$state.go($state.params.redirectTo || 'auth.home');
+				},
+				function (error) {
+					alert('Error registering: ' + error.code + ', ' + error.message);
+				});
 					
 		};
 	}

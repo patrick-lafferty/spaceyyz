@@ -13,7 +13,7 @@
 	OrderConfirmation.$inject = ['orderFactory', '$uibModal', 
 		'$scope', '$timeout', '$state', '$stateParams'];
 	function OrderConfirmation(orderFactory, $uibModal,
-			$scope, $timeout, $state, $stateParams) {
+		$scope, $timeout, $state, $stateParams) {
 
 		var self = this;
 		this.order = $stateParams.order;

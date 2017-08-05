@@ -115,48 +115,49 @@
 		/*
 		 * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
 		 * */
-		Promise.all([
-			vehicleInventoryFactory.getVehicles(),
-			engineFactory.getEngines(),
-			variantFactory.getFamilies()])
-		.then(function (results) {
-			self.vehicles.all = results[0].allVehicles;
-			self.engines = results[1];
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicles(),
+				engineFactory.getEngines(),
+				variantFactory.getFamilies()])
+			.then(function (results) {
+				self.vehicles.all = results[0].allVehicles;
+				self.engines = results[1];
 
-			var variants = results[2];
+				var variants = results[2];
 
-			variants.forEach(function (family) {
-				var vehicle;
-				for(var i = 0; i < self.vehicles.all.length; i++) {
-					if (self.vehicles.all[i].familyKey === family.key) {
-						vehicle = self.vehicles.all[i];
-						break;
-					}
-				}	
+				variants.forEach(function (family) {
+					var vehicle;
+					for(var i = 0; i < self.vehicles.all.length; i++) {
+						if (self.vehicles.all[i].familyKey === family.key) {
+							vehicle = self.vehicles.all[i];
+							break;
+						}
+					}	
 
-				vehicle.variants = family.variants;
+					vehicle.variants = family.variants;
 
-				vehicle.variants.forEach(function (variant) {
-					variant.stages.forEach(function (stage) {
-						stage.engines = stage.engines.map(function (engineKey) {
-							var engine;
-							self.engines.forEach(function (e) {
-								if (e.key === engineKey) {
-									engine = e;
-								}
+					vehicle.variants.forEach(function (variant) {
+						variant.stages.forEach(function (stage) {
+							stage.engines = stage.engines.map(function (engineKey) {
+								var engine;
+								self.engines.forEach(function (e) {
+									if (e.key === engineKey) {
+										engine = e;
+									}
+								});
+
+								return engine;
 							});
-
-							return engine;
 						});
 					});
 				});
-			});
 
-			$timeout(function () {
-				$scope.$apply();
-			});
+				$timeout(function () {
+					$scope.$apply();
+				});
 
-		});
+			});
 
 	}
 })();

@@ -38,7 +38,7 @@
 				|| newEngine.thrust.seaLevel <= 0
 				|| newEngine.thrust.vacuum <= 0
 				|| !newEngine.description) {
-					return;
+				return;
 			}
 
 			engineFactory.addEngine(newEngine);

@@ -36,31 +36,32 @@
 
 		vehicleInventoryFactory.getInventory().then(setInventory);
 
-		Promise.all([
-			vehicleInventoryFactory.getVehicles(),
-			variantFactory.getFamilies()])
-		.then(function (results) {
-			set(results[0]);
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicles(),
+				variantFactory.getFamilies()])
+			.then(function (results) {
+				set(results[0]);
 
-			var variants = results[1];
+				var variants = results[1];
 
-			variants.forEach(function (family) {
-				var vehicle;
-				for(var i = 0; i < self.vehicles.all.length; i++) {
-					if (self.vehicles.all[i].familyKey === family.key) {
-						vehicle = self.vehicles.all[i];
-						break;
-					}
-				}	
+				variants.forEach(function (family) {
+					var vehicle;
+					for(var i = 0; i < self.vehicles.all.length; i++) {
+						if (self.vehicles.all[i].familyKey === family.key) {
+							vehicle = self.vehicles.all[i];
+							break;
+						}
+					}	
 
-				vehicle.variants = family.variants;
+					vehicle.variants = family.variants;
+				});
+
+				$timeout(function () {
+					$scope.$apply();
+				});
+
 			});
-
-			$timeout(function () {
-				$scope.$apply();
-			});
-
-		});
 
 		function set(vehicles) {
 			self.vehicles.all = vehicles.allVehicles;

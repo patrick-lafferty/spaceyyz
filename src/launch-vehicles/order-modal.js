@@ -19,7 +19,7 @@
 	OrderVehicleModal.$inject = ['vehicleInventoryFactory',
 		'$scope', '$timeout', '$stateParams'];
 	function OrderVehicleModal(vehicleInventoryFactory, 
-			$scope, $timeout, $stateParams) {
+		$scope, $timeout, $stateParams) {
 
 		this.vehicle = this.resolve.vehicle;
 		this.variant = this.resolve.variant;

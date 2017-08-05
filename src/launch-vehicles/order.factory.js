@@ -45,7 +45,7 @@
 			return firebase.database().ref().child('orders/nextId').transaction(
 				function (currentValue) {
 					return (currentValue || 0) + 1;
-			});
+				});
 		}
 
 		function addOrder(order) {

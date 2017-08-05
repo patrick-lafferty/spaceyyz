@@ -59,8 +59,6 @@
 			console.log(f.x + ', ' + f.y);
 		});
 
-		
-
 		self.animLength = 5.0;
 		//liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
 		var lengths = [0.022, 0.167, 0.4, 0.55, 0.954];

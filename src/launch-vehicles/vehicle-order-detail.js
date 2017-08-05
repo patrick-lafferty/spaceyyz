@@ -15,8 +15,8 @@
 		'$scope', '$timeout', '$stateParams',
 		'$uibModal', '$state', 'orderFactory', 'variantFactory'];
 	function VehicleOrderDetail(vehicleInventoryFactory, 
-			$scope, $timeout, $stateParams,
-			$uibModal, $state, orderFactory, variantFactory) {
+		$scope, $timeout, $stateParams,
+		$uibModal, $state, orderFactory, variantFactory) {
 
 		this.vehicle = {};
 		var self = this;
@@ -29,25 +29,26 @@
 			});
 		});*/
 
-		Promise.all([
-			vehicleInventoryFactory.getVehicle($stateParams.name),
-			variantFactory.getFamilies()])
-		.then(function (results) {
-			self.vehicle = results[0];
-			var families = results[1];
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicle($stateParams.name),
+				variantFactory.getFamilies()])
+			.then(function (results) {
+				self.vehicle = results[0];
+				var families = results[1];
 
-			for(var i = 0; i < families.length; i++) {
-				if (families[i].key === self.vehicle.familyKey) {
-					self.vehicle.variants = families[i].variants;
-					break;
+				for(var i = 0; i < families.length; i++) {
+					if (families[i].key === self.vehicle.familyKey) {
+						self.vehicle.variants = families[i].variants;
+						break;
+					}
 				}
-			}
 
-			$timeout(function () {
-				$scope.$apply();
+				$timeout(function () {
+					$scope.$apply();
+				});
+
 			});
-
-		});
 
 		self.modalInstance = {};
 		this.open = function(variant) {

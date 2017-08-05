@@ -11,14 +11,13 @@
 	ScheduleFlight.$inject = ['vehicleInventoryFactory', 'spaceportFactory',
 		'$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
 	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
-			$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
+		$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
 		this.payload = 0;
 
 		var self = this;
 		this.solarSystem = solarSystemFactory;
 
 		this.filter = function(vehicle) {
-			//return vehicle.capacity >= Number(self.payload);
 			return vehicle.variants.some(function (variant) {
 				return variant.capacity >= Number(self.payload);
 			});
