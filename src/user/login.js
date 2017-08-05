@@ -1,5 +1,46 @@
 import angular from 'angular';
 
+class Login {
+	static get $inject() {
+		return ['userFactory', '$state'];
+	}
+
+	constructor(userFactory, $state) {
+		this.userFactory = userFactory;
+		this.$state = $state;
+		this.email = '';
+		this.password = '';
+		this.newAccount = {
+			email: '',
+			password: '',
+			confirmPassword: ''
+		};
+	}
+
+	login() {
+		let promise = this.userFactory.login(this.email, this.password);
+		promise.then(function() {
+			this.$state.go(this.$state.params.redirectTo || 'auth.home');
+		});
+	}
+
+	register() {
+		if (this.newAccount.email === ''  			
+			|| this.newAccount.password === ''
+			|| this.newAccount.password !== this.newAccount.confirmPassword) {
+			return;
+		}
+
+		this.userFactory.register(this.newAccount.email, this.newAccount.password).then(
+			function () {
+				this.$state.go(this.$state.params.redirectTo || 'auth.home');
+			},
+			function (error) {
+				alert('Error registering: ' + error.code + ', ' + error.message);
+			});
+	}
+}
+
 const login = angular
 	.module('spaceyyz.user.login', [])
 	.component('login', {
@@ -9,41 +50,3 @@ const login = angular
 	.name;
 
 export default login;
-
-Login.$inject = ['userFactory', '$state'];
-function Login(userFactory, $state) {
-	var self = this;
-	this.email = '';
-	this.password = '';
-	this.newAccount = {
-		email: '',
-		password: '',
-		confirmPassword: ''
-	};
-
-	this.login = function() {
-
-		var promise = userFactory.login(self.email, this.password);
-		promise.then(function() {
-			$state.go($state.params.redirectTo || 'auth.home');
-		});
-
-	};
-
-	this.register = function() {
-		if (self.newAccount.email === ''  			
-			|| self.newAccount.password === ''
-			|| self.newAccount.password !== self.newAccount.confirmPassword) {
-			return;
-		}
-
-		userFactory.register(self.newAccount.email, self.newAccount.password).then(
-			function () {
-				$state.go($state.params.redirectTo || 'auth.home');
-			},
-			function (error) {
-				alert('Error registering: ' + error.code + ', ' + error.message);
-			});
-				
-	};
-}

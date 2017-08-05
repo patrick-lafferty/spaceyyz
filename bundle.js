@@ -44940,9 +44940,11 @@ const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_login__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_account__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_user_factory__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_home__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_login__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_account__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_factory__ = __webpack_require__(94);
+
 
 
 
@@ -44950,9 +44952,10 @@ const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 const user = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
     .module('spaceyyz.components.user', [
-        __WEBPACK_IMPORTED_MODULE_1__user_login__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_2__user_account__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_3__user_user_factory__["a" /* default */]
+        __WEBPACK_IMPORTED_MODULE_1__user_home__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_2__user_login__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_3__user_account__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4__user_user_factory__["a" /* default */]
     ])
     .name;
 
@@ -44967,53 +44970,37 @@ const user = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 
 
-const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
-	.module('spaceyyz.user.login', [])
-	.component('login', {
-		templateUrl: 'src/login/login.html',
-		controller: Login
+class Home {
+
+	constructor(userFactory, $timeout, $scope) {
+		this.user = {
+			email: userFactory.user.email
+		};
+
+		//TODO: replace all onAuthChange(this with onAuthChange("componentName"
+		userFactory.onAuthChange('home', (user) => {
+			this.user.email = user.email;
+			$timeout(function() {
+				$scope.$apply();
+			});
+		});
+	}
+
+	static get $inject() {
+		return ['userFactory', '$timeout', '$scope'];
+	}
+}
+
+const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.user.home', [])
+	.component('home', {
+		templateUrl: 'src/home.html',
+		controller: Home
 	})
 	.name;
 
-/* harmony default export */ __webpack_exports__["a"] = (login);
+/* harmony default export */ __webpack_exports__["a"] = (home);
 
-Login.$inject = ['userFactory', '$state'];
-function Login(userFactory, $state) {
-	var self = this;
-	this.email = '';
-	this.password = '';
-	this.newAccount = {
-		email: '',
-		password: '',
-		confirmPassword: ''
-	};
-
-	this.login = function() {
-
-		var promise = userFactory.login(self.email, this.password);
-		promise.then(function() {
-			$state.go($state.params.redirectTo || 'auth.home');
-		});
-
-	};
-
-	this.register = function() {
-		if (self.newAccount.email === ''  			
-			|| self.newAccount.password === ''
-			|| self.newAccount.password !== self.newAccount.confirmPassword) {
-			return;
-		}
-
-		userFactory.register(self.newAccount.email, self.newAccount.password).then(
-			function () {
-				$state.go($state.params.redirectTo || 'auth.home');
-			},
-			function (error) {
-				alert('Error registering: ' + error.code + ', ' + error.message);
-			});
-				
-	};
-}
 
 /***/ }),
 /* 92 */
@@ -45024,44 +45011,56 @@ function Login(userFactory, $state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 
 
-const account = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
-	.module('spaceyyz.user.account', [])
-	.controller('userAccount', UserAccount)
-	.name;
+class Login {
+	static get $inject() {
+		return ['userFactory', '$state'];
+	}
 
-/* harmony default export */ __webpack_exports__["a"] = (account);
-
-
-UserAccount.$inject = ['userFactory', '$state', '$scope', '$timeout'];
-function UserAccount(userFactory, $state, $scope, $timeout) {
-	var self = this;
-	this.user = userFactory;
-	$scope.user = userFactory;
-	this.getEmail = function(){return userFactory.getEmail();};
-	this.email = function(){return userFactory.getEmail();};
-	this.login = function(email, password) {
-		var promise = userFactory.login(email, password);
-		promise.then(function() {
-			$state.go('home');
-		});
-	};
-
-	this.logout = function() {
+	constructor(userFactory, $state) {
+		this.userFactory = userFactory;
+		this.$state = $state;
 		this.email = '';
-		userFactory.logout();
-	};
+		this.password = '';
+		this.newAccount = {
+			email: '',
+			password: '',
+			confirmPassword: ''
+		};
+	}
 
-	this.isLoggedIn = function() {
-		return self.user.user.email !== '';
-	};
-
-	userFactory.onAuthChange(self, function () {
-		$timeout(function() {
-			$scope.$apply();
+	login() {
+		let promise = this.userFactory.login(this.email, this.password);
+		promise.then(function() {
+			this.$state.go(this.$state.params.redirectTo || 'auth.home');
 		});
-	});
+	}
+
+	register() {
+		if (this.newAccount.email === ''  			
+			|| this.newAccount.password === ''
+			|| this.newAccount.password !== this.newAccount.confirmPassword) {
+			return;
+		}
+
+		this.userFactory.register(this.newAccount.email, this.newAccount.password).then(
+			function () {
+				this.$state.go(this.$state.params.redirectTo || 'auth.home');
+			},
+			function (error) {
+				alert('Error registering: ' + error.code + ', ' + error.message);
+			});
+	}
 }
 
+const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.user.login', [])
+	.component('login', {
+		templateUrl: 'src/login/login.html',
+		controller: Login
+	})
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (login);
 
 /***/ }),
 /* 93 */
@@ -45070,9 +45069,127 @@ function UserAccount(userFactory, $state, $scope, $timeout) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class UserAccount {
+
+	constructor(userFactory, $state, $scope, $timeout) {
+		this.user = userFactory;
+		$scope.user = userFactory;
+		userFactory.onAuthChange(this, function () {
+			$timeout(function() {
+				$scope.$apply();
+			});
+		});
+	}
+
+	getEmail() {
+		return userFactory.getEmail();
+	}
+
+	email() {
+		return userFactory.getEmail();
+	}
+
+	login(email, password) {
+		let promise = userFactory.login(email, password);
+		promise.then(function() {
+			$state.go('home');
+		});
+	}
+
+	logout() {
+		this.email = '';
+		this.userFactory.logout();
+	}
+
+	isLoggedIn() {
+		return this.user.email !== '';
+	}
+
+	static get $inject() {
+		return ['userFactory', '$state', '$scope', '$timeout'];
+	}
+}
+
+const account = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.user.account', [])
+	.controller('userAccount', UserAccount)
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (account);
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* UserFactory is a wrapper around accessing the user account from firebase
  * */
 
+class UserFactory {
+
+	constructor($state) {
+		this.$state = $state;
+		this.email = '';
+		this.password = '';
+		this.authChangeSubscribers = {};
+
+		if (firebase.auth().currentUser) {
+			this.email = firebase.auth().currentUser.email;
+		}
+
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				this.email = user.email;
+			} else {
+				this.email = '';
+			}
+
+			Object.keys(this.authChangeSubscribers).forEach((key) => {
+				this.authChangeSubscribers[key](user);
+			});
+
+		});
+	}
+
+	static get $inject() {
+		return ['$state'];
+	}
+
+	onAuthChange(subscriber, f) {
+		this.authChangeSubscribers[subscriber] = f;
+	}
+
+	getEmail() {
+		return this.email;
+	}
+
+	login(email, password) {
+
+		return firebase.auth()
+			.signInWithEmailAndPassword(email, password).catch(function (error) {
+				alert('Error logging in: ' + error.code + ', ' + error.message);
+			});
+	}
+
+	logout() {
+		firebase.auth().signOut().then(() => {
+			this.email = '';
+			this.$state.go('login', {}, {reload: true});
+		}, function(error) {
+			alert('error logging out: ' + error);
+		});	
+	}
+
+	register(email, password) {
+
+		return firebase.auth().createUserWithEmailAndPassword(email, password);
+	}
+
+}
 
 const factory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 	.module('spaceyyz.user.factory', [])
@@ -45080,76 +45197,6 @@ const factory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 	.name;
 
 /* harmony default export */ __webpack_exports__["a"] = (factory);
-
-	UserFactory.$inject = ['$state'];
-	function UserFactory($state) {
-		var self = this;
-		var factory = {
-			email: this.email,
-			user: {
-				email: ''
-			},
-			getEmail: getEmail,
-			login: login,
-			logout: logout,
-			register: register,
-			onAuthChange: onAuthChange
-		};
-
-		this.email = '';
-		this.password = '';
-
-		this.authChangeSubscribers = {};
-
-		if (firebase.auth().currentUser) {
-			factory.user.email = firebase.auth().currentUser.email;
-		}
-
-		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) {
-				factory.user.email = user.email;
-			} else {
-				factory.user.email = '';
-			}
-
-			Object.keys(self.authChangeSubscribers).forEach(function (key) {
-				self.authChangeSubscribers[key](user);
-			});
-
-		});
-
-		function onAuthChange(subscriber, f) {
-			self.authChangeSubscribers[subscriber] = f;
-		}
-
-		function getEmail() {
-			return self.factory.user.email;
-		}
-
-		function login(email, password) {
-
-			return firebase.auth()
-				.signInWithEmailAndPassword(email, password).catch(function (error) {
-					alert('Error logging in: ' + error.code + ', ' + error.message);
-				});
-		}
-
-		function logout() {
-			firebase.auth().signOut().then(function() {
-				factory.user.email = '';
-				$state.go('login', {}, {reload: true});
-			}, function(error) {
-				alert('error logging out: ' + error);});	
-		}
-
-		function register(email, password) {
-
-			return firebase.auth().createUserWithEmailAndPassword(email, password);
-		}
-
-		return factory;
-	}
-
 
 /***/ })
 /******/ ]);

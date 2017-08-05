@@ -1,6 +1,67 @@
 /* UserFactory is a wrapper around accessing the user account from firebase
  * */
 import angular from 'angular';
+class UserFactory {
+
+	constructor($state) {
+		this.$state = $state;
+		this.email = '';
+		this.password = '';
+		this.authChangeSubscribers = {};
+
+		if (firebase.auth().currentUser) {
+			this.email = firebase.auth().currentUser.email;
+		}
+
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				this.email = user.email;
+			} else {
+				this.email = '';
+			}
+
+			Object.keys(this.authChangeSubscribers).forEach((key) => {
+				this.authChangeSubscribers[key](user);
+			});
+
+		});
+	}
+
+	static get $inject() {
+		return ['$state'];
+	}
+
+	onAuthChange(subscriber, f) {
+		this.authChangeSubscribers[subscriber] = f;
+	}
+
+	getEmail() {
+		return this.email;
+	}
+
+	login(email, password) {
+
+		return firebase.auth()
+			.signInWithEmailAndPassword(email, password).catch(function (error) {
+				alert('Error logging in: ' + error.code + ', ' + error.message);
+			});
+	}
+
+	logout() {
+		firebase.auth().signOut().then(() => {
+			this.email = '';
+			this.$state.go('login', {}, {reload: true});
+		}, function(error) {
+			alert('error logging out: ' + error);
+		});	
+	}
+
+	register(email, password) {
+
+		return firebase.auth().createUserWithEmailAndPassword(email, password);
+	}
+
+}
 
 const factory = angular
 	.module('spaceyyz.user.factory', [])
@@ -8,72 +69,3 @@ const factory = angular
 	.name;
 
 export default factory;
-
-	UserFactory.$inject = ['$state'];
-	function UserFactory($state) {
-		var self = this;
-		var factory = {
-			email: this.email,
-			user: {
-				email: ''
-			},
-			getEmail: getEmail,
-			login: login,
-			logout: logout,
-			register: register,
-			onAuthChange: onAuthChange
-		};
-
-		this.email = '';
-		this.password = '';
-
-		this.authChangeSubscribers = {};
-
-		if (firebase.auth().currentUser) {
-			factory.user.email = firebase.auth().currentUser.email;
-		}
-
-		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) {
-				factory.user.email = user.email;
-			} else {
-				factory.user.email = '';
-			}
-
-			Object.keys(self.authChangeSubscribers).forEach(function (key) {
-				self.authChangeSubscribers[key](user);
-			});
-
-		});
-
-		function onAuthChange(subscriber, f) {
-			self.authChangeSubscribers[subscriber] = f;
-		}
-
-		function getEmail() {
-			return self.factory.user.email;
-		}
-
-		function login(email, password) {
-
-			return firebase.auth()
-				.signInWithEmailAndPassword(email, password).catch(function (error) {
-					alert('Error logging in: ' + error.code + ', ' + error.message);
-				});
-		}
-
-		function logout() {
-			firebase.auth().signOut().then(function() {
-				factory.user.email = '';
-				$state.go('login', {}, {reload: true});
-			}, function(error) {
-				alert('error logging out: ' + error);});	
-		}
-
-		function register(email, password) {
-
-			return firebase.auth().createUserWithEmailAndPassword(email, password);
-		}
-
-		return factory;
-	}
