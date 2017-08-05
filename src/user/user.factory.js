@@ -1,11 +1,13 @@
 /* UserFactory is a wrapper around accessing the user account from firebase
  * */
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.factory('userFactory', UserFactory);
+const factory = angular
+	.module('spaceyyz.user.factory', [])
+	.factory('userFactory', UserFactory)
+	.name;
+
+export default factory;
 
 	UserFactory.$inject = ['$state'];
 	function UserFactory($state) {
@@ -75,5 +77,3 @@
 
 		return factory;
 	}
-
-})();

@@ -2,20 +2,14 @@
  * ConfigVehicle is the component for Config page. Its used to add/modify/delete launch
  * vehicles from the database
  * */
-(function() {
-	'use strict';
+import {PromiseImpl as Promise} from 'firebase';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('configVehicle', {
-			templateUrl: 'src/launch-vehicles/config.html',
-			controller: Config,
-		});
+class Config {
 
-	Config.$inject = ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
-	function Config(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
+	constructor(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
+		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory});
 
-		let self = this;
 		this.vehicles = {
 			all: [],
 		};
@@ -25,91 +19,7 @@
 		this.newVehicle = {variants: []};
 		this.variants = [];
 		this.search_name = '';
-		this.search = function(vehicle) {
-			return vehicle.name.toLowerCase().includes(self.search_name.toLowerCase());
-		};
-
-		this.editVehicle = function(vehicle) {
-			vehicle.beingEdited = true;
-		};
-
-		this.cancelEditVehicle = function(vehicle) {
-			vehicle.beingEdited = false;
-		};
-
-		this.saveVehicle = function(vehicle) {
-			vehicle.beingEdited = false;
-			vehicleInventoryFactory.updateVehicle(vehicle);
-
-			let index = self.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
-
-			self.vehicles.all[index] = vehicle;
-		};
-
-		self.modalInstance = {};
-		this.deleteVehicle = function (vehicle) {
-			self.modalInstance = $uibModal.open({
-				ariaLabelledBy: 'modal-title',
-				ariaDescribedBy: 'modal-body',
-				component: 'confirmVehicleDeleteModal',
-				backdrop: 'static',
-				resolve: {
-					vehicle: function() {
-						return vehicle;
-					}
-				}
-			
-			});
-
-			self.modalInstance.result.then(function (vehicle) {
-				vehicleInventoryFactory.deleteVehicle(vehicle);
-				
-				self.vehicles.all.splice(self.vehicles.all.indexOf(vehicle), 1);
-			});
-
-		};
-
-		this.createVehicle = function(vehicle) {
-			vehicleInventoryFactory.addVehicle(vehicle);
-			self.vehicles.all.push(vehicle);
-			self.newVehicle = {variants: []};
-			self.variants = [];
-		};
-
-		this.addNewVariant = function (vehicle) {
-			//self.variants.push({
-			vehicle.variants.push({
-				name: 'Unnamed',
-				stages: []
-			});
-		};
-
-		this.removeVariant = function (index, vehicle) {
-			vehicle.variants.splice(index, 1);
-		};			
-
-		this.addNewStage = function (variant) {
-			variant.stages.push({
-				engines: [],
-				selectedEngine: {}
-			});
-		};
-
-		this.removeStage = function (index, variant) {
-			variant.stages.splice(index, 1);
-		};
-
-		this.addEngine = function (engine, stage) {
-			if (typeof engine.name === 'undefined') {
-				return;
-			}
-
-			stage.engines.push(engine);
-		};
-
-		this.removeEngine = function (index, stage) {
-			stage.engines.splice(index, 1);
-		};
+		this.modalInstance = {};
 
 		/*
 		 * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
@@ -119,17 +29,17 @@
 				vehicleInventoryFactory.getVehicles(),
 				engineFactory.getEngines(),
 				variantFactory.getFamilies()])
-			.then(function (results) {
-				self.vehicles.all = results[0].allVehicles;
-				self.engines = results[1];
+			.then((results) => {
+				this.vehicles.all = results[0].allVehicles;
+				this.engines = results[1];
 
 				let variants = results[2];
 
 				variants.forEach(function (family) {
 					let vehicle = undefined;
-					for(let i = 0; i < self.vehicles.all.length; i++) {
-						if (self.vehicles.all[i].familyKey === family.key) {
-							vehicle = self.vehicles.all[i];
+					for(let i = 0; i < this.vehicles.all.length; i++) {
+						if (this.vehicles.all[i].familyKey === family.key) {
+							vehicle = this.vehicles.all[i];
 							break;
 						}
 					}	
@@ -140,7 +50,7 @@
 						variant.stages.forEach(function (stage) {
 							stage.engines = stage.engines.map(function (engineKey) {
 								let engine = undefined;
-								self.engines.forEach(function (e) {
+								this.engines.forEach(function (e) {
 									if (e.key === engineKey) {
 										engine = e;
 									}
@@ -157,6 +67,102 @@
 				});
 
 			});
-
 	}
-})();
+
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
+	}
+
+	search(vehicle) {
+		return vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+	}
+
+	editVehicle(vehicle) {
+		vehicle.beingEdited = true;
+	}
+
+	cancelEditVehicle(vehicle) {
+		vehicle.beingEdited = false;
+	}
+
+	saveVehicle(vehicle) {
+		vehicle.beingEdited = false;
+		this.vehicleInventoryFactory.updateVehicle(vehicle);
+
+		let index = this.vehicles.all.findIndex(function(v) { return v.name === vehicle.name;});
+
+		this.vehicles.all[index] = vehicle;
+	}
+
+	deleteVehicle(vehicle) {
+		this.modalInstance = this.$uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			component: 'confirmVehicleDeleteModal',
+			backdrop: 'static',
+			resolve: {
+				vehicle: function() {
+					return vehicle;
+				}
+			}
+		
+		});
+
+		this.modalInstance.result.then(function (vehicle) {
+			this.vehicleInventoryFactory.deleteVehicle(vehicle);
+			
+			this.vehicles.all.splice(this.vehicles.all.indexOf(vehicle), 1);
+		});
+	}
+
+	createVehicle(vehicle) {
+		this.vehicleInventoryFactory.addVehicle(vehicle);
+		this.vehicles.all.push(vehicle);
+		this.newVehicle = {variants: []};
+		this.variants = [];
+	}
+
+	addNewVariant(vehicle) {
+		vehicle.variants.push({
+			name: 'Unnamed',
+			stages: []
+		});
+	}
+
+	removeVariant(index, vehicle) {
+		vehicle.variants.splice(index, 1);
+	}			
+
+	addNewStage(variant) {
+		variant.stages.push({
+			engines: [],
+			selectedEngine: {}
+		});
+	}
+
+	removeStage(index, variant) {
+		variant.stages.splice(index, 1);
+	}
+
+	addEngine(engine, stage) {
+		if (typeof engine.name === 'undefined') {
+			return;
+		}
+
+		stage.engines.push(engine);
+	}
+
+	removeEngine(index, stage) {
+		stage.engines.splice(index, 1);
+	}
+}
+
+const config = angular
+	.module('spaceyyz')
+	.component('configVehicle', {
+		templateUrl: 'src/launch-vehicles/config.html',
+		controller: Config,
+	})
+	.name;
+
+export default config;

@@ -8,18 +8,18 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: __dirname  + "/../src/app.requires.js",
+		app: __dirname  + "/../src/app/app.js",
 	},
 	output: {
 		path: __dirname + "/../", 
 		filename: "bundle.js"
 	},
-	plugins: [
+	/*plugins: [
 		new UglifyJSPlugin({
 			uglifyOptions: {
 				ecma: 6
 			}
 		})
-	]
+	]*/
 
 }

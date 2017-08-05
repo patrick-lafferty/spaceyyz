@@ -7,6 +7,9 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "angular": "^1.6.5",
+    "angular-ui-router": "^1.0.3",
+    "firebase": "^4.2.0",
     "webpack": "^3.4.1"
   },
   "devDependencies": {
