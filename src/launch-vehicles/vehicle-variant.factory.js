@@ -40,12 +40,10 @@ class VehicleVariantFactory {
 	}
 
 	addVariant(variant, familyKey) {
-		var stages = variant.stages.map(function (stage) {
+		var stages = variant.stages.map(function(stage) {
 			return {
 				name: stage.name,
-				engines: stage.engines.map(function (engine) {
-					return engine.key;
-				})
+				engines: stage.engines.map(engine => engine.key)
 			}
 		});
 
@@ -74,8 +72,8 @@ class VehicleVariantFactory {
 	replaceVariants(familyKey, variants) {
 		firebase.database().ref().child('variants/' + familyKey).remove();
 
-		variants.forEach(function (variant) {
-			addVariant(variant, familyKey);
+		variants.forEach(variant => {
+			this.addVariant(variant, familyKey);
 		});
 	}
 }

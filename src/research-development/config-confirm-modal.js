@@ -2,34 +2,33 @@
  * ConfirmEngineDeleteModal is a component for a modal that pops up when
  * the user tries to delete a engine in the Config page
  * */
+import angular from 'angular';
 
-(function() {
-	'use strict';
+class ConfirmEngineDeleteModal {
 
-	angular
-		.module('spaceyyz')
-		.component('confirmEngineDeleteModal', {
-			controller: ConfirmEngineDeleteModal,
-			templateUrl: 'src/research-development/config-confirm-modal.html',
-			bindings: {
-				resolve: '<',
-				modalInstance: '<'
-			}
-		});	
-
-	ConfirmEngineDeleteModal.$inject = ['$scope', '$timeout', '$stateParams'];
-	function ConfirmEngineDeleteModal($scope, $timeout, $stateParams) {
-
+	$onInit() {
 		this.engine = this.resolve.engine;
-		let self = this;
-
-		this.cancel = function() {
-			self.modalInstance.dismiss('cancel');
-		};
-
-		this.confirm = function() {
-			self.modalInstance.close(self.engine);
-		};
-
 	}
-})();
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.engine);
+	}
+}
+
+const confirmEngineDeleteModal = angular
+	.module('spaceyyz.researchDevelopment.confirmEngineDeleteModal', [])
+	.component('confirmEngineDeleteModal', {
+		controller: ConfirmEngineDeleteModal,
+		templateUrl: 'src/research-development/config-confirm-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+export default confirmEngineDeleteModal;

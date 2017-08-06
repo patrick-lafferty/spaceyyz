@@ -2,7 +2,7 @@
  * ConfigVehicle is the component for Config page. Its used to add/modify/delete launch
  * vehicles from the database
  * */
-import {PromiseImpl as Promise} from 'firebase';
+//import {PromiseImpl as Promise} from 'firebase';
 import angular from 'angular';
 
 class Config {
@@ -21,6 +21,8 @@ class Config {
 		this.search_name = '';
 		this.modalInstance = {};
 
+		this.search = vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+
 		/*
 		 * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
 		 * */
@@ -35,7 +37,7 @@ class Config {
 
 				let variants = results[2];
 
-				variants.forEach(function (family) {
+				variants.forEach(family => {
 					let vehicle = this.vehicles.all.find(vehicle => vehicle.familyKey === family.key);
 
 					if (vehicle !== undefined) {
@@ -57,9 +59,7 @@ class Config {
 		return ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
 	}
 
-	search(vehicle) {
-		return vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
-	}
+	
 
 	editVehicle(vehicle) {
 		vehicle.beingEdited = true;
@@ -103,10 +103,12 @@ class Config {
 	}
 
 	addNewVariant(vehicle) {
-		vehicle.variants.push({
+		console.log(vehicle + ' ' + this.newVehicle);
+		this.newVehicle.variants.push({
 			name: 'Unnamed',
 			stages: []
 		});
+		this.$timeout(() => this.$scope.$apply());
 	}
 
 	removeVariant(index, vehicle) {

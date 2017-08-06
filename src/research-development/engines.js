@@ -1,14 +1,7 @@
-(function () {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('researchEngine', {
-			templateUrl: 'src/research-development/engines.html',
-			controller: Engines
-		});
-
-	function Engine() {
+class Engine {
+	constructor() {
 
 		this.name = '';
 		this.isp = {
@@ -22,80 +15,88 @@
 		};
 
 		this.description = '';
+	}
+}
 
+class Engines {
+	static get $inject() {
+		return ['engineFactory', '$scope', '$timeout', '$uibModal'];
 	}
 
-	Engines.$inject = ['engineFactory', '$scope', '$timeout', '$uibModal'];
-	function Engines(engineFactory, $scope, $timeout, $uibModal) {
-		let self = this;
+	constructor(engineFactory, $scope, $timeout, $uibModal) {
 		this.engines = {all: []};
 		this.newEngine = new Engine();
 
-		this.addEngine = function (newEngine) {
-			if (!newEngine.name
-				|| newEngine.isp.seaLevel <= 0
-				|| newEngine.isp.vacuum <= 0
-				|| newEngine.thrust.seaLevel <= 0
-				|| newEngine.thrust.vacuum <= 0
-				|| !newEngine.description) {
-				return;
+		this.modalInstance = {};
+		
+		engineFactory.getEngines().then(engines => {
+			this.engines.all = engines;
+
+			$timeout(() => $scope.$apply());
+		});
+	}
+
+	addEngine(newEngine) {
+		if (!newEngine.name
+			|| newEngine.isp.seaLevel <= 0
+			|| newEngine.isp.vacuum <= 0
+			|| newEngine.thrust.seaLevel <= 0
+			|| newEngine.thrust.vacuum <= 0
+			|| !newEngine.description) {
+			return;
+		}
+
+		this.engineFactory.addEngine(newEngine);
+		this.engines.all.push(newEngine);
+		this.newEngine = new Engine();
+	}
+
+	editEngine(engine) {
+		engine.beingEdited = true;
+	}
+
+	cancelEditEngine(engine) {
+		engine.beingEdited = false;
+	}
+
+	saveEngine(engine) {
+		if (!engine.beingEdited) {
+			return;
+		}
+
+		engine.beingEdited = false;
+
+		this.engineFactory.updateEngine(engine);
+
+		let index = this.engines.all.findIndex(e => e.name === engine.name);
+
+		this.engines.all[index] = engine;
+	}
+
+	deleteEngine(engine) {
+		this.modalInstance = $uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			component: 'confirmEngineDeleteModal',
+			backdrop: 'static',
+			resolve: {
+				engine: () => engine
 			}
-
-			engineFactory.addEngine(newEngine);
-			this.engines.all.push(newEngine);
-			this.newEngine = new Engine();
-		};
-
-		this.editEngine = function (engine) {
-			engine.beingEdited = true;
-		};
-
-		this.cancelEditEngine = function (engine) {
-			engine.beingEdited = false;
-		};
-
-		this.saveEngine = function (engine) {
-			if (!engine.beingEdited) {
-				return;
-			}
-
-			engine.beingEdited = false;
-
-			engineFactory.updateEngine(engine);
-
-			let index = self.engines.all.findIndex(function (e) { return e.name === engine.name;});
-
-			self.engines.all[index] = engine;
-		};
-
-		self.modalInstance = {};
-		this.deleteEngine = function (engine) {
-			self.modalInstance = $uibModal.open({
-				ariaLabelledBy: 'modal-title',
-				ariaDescribedBy: 'modal-body',
-				component: 'confirmEngineDeleteModal',
-				backdrop: 'static',
-				resolve: {
-					engine: function () {
-						return engine;
-					}
-				}
-			});
-
-			self.modalInstance.result.then(function (engine) {
-				engineFactory.deleteEngine(engine);
-				self.engines.all.splice(self.engines.all.indexOf(engine), 1);
-			});
-		};
-
-		engineFactory.getEngines().then(function (engines) {
-			self.engines.all = engines;
-
-			$timeout(function() {
-				$scope.$apply();
-			});
 		});
 
-		return this;
+		this.modalInstance.result.then(engine => {
+			this.engineFactory.deleteEngine(engine);
+			this.engines.all.splice(this.engines.all.indexOf(engine), 1);
+		});
 	}
-})();
+}
+
+const engines = angular
+	.module('spaceyyz.researchDevelopment.engine', [])
+	.component('researchEngine', {
+		templateUrl: 'src/research-development/engines.html',
+		controller: Engines
+	})
+	.name;
+
+export default engines;

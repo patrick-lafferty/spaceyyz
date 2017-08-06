@@ -44,17 +44,19 @@ function categorizeVehicles(vehicles) {
 	vehicleCategories.superHeavyVehicles = [];
 
 	vehicles.forEach(function (vehicle) {
-		vehicle.variants.forEach(function (variant) {
-			if (maximumCapacity(2000)(variant)) {
-				vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
-			} else if (capacityBetween(2000, 20000)(variant)) {
-				vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
-			} else if (capacityBetween(20000, 50000)(variant)) {
-				vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-			} else if (minimumCapacity(50000)(variant)) {
-				vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-			}
-		});
+		if (vehicle.variants) {
+			vehicle.variants.forEach(function (variant) {
+				if (maximumCapacity(2000)(variant)) {
+					vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (capacityBetween(2000, 20000)(variant)) {
+					vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (capacityBetween(20000, 50000)(variant)) {
+					vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (minimumCapacity(50000)(variant)) {
+					vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+				}
+			});
+		}
 	});
 
 	Object.keys(vehicleCategories).forEach(function (key) {
@@ -116,10 +118,13 @@ class InventoryFactory {
 					Object.keys(vehicleInventory).forEach(function (key) {
 						let variant = vehicleInventory[key];
 						let variants = vehicleMap[vehicleInventory.key].variants;
-						for(let i = 0; i < variants.length; i++) {
-							if (variants[i].key === key) {
-								variants[i].count = variant.count;
-								break;
+
+						if (variants !== undefined) {
+							for(let i = 0; i < variants.length; i++) {
+								if (variants[i].key === key) {
+									variants[i].count = variant.count;
+									break;
+								}
 							}
 						}
 					});
@@ -168,7 +173,7 @@ class InventoryFactory {
 
 		vehicle.familyKey = familyKey;
 
-		vehicle.variants.forEach(function (variant) {
+		vehicle.variants.forEach(variant => {
 			this.variantFactory.addVariant(variant, familyKey);
 			inventory[variant.key] = { 
 				count: 0
