@@ -14,12 +14,12 @@ module.exports = {
 		path: __dirname + "/../", 
 		filename: "bundle.js"
 	},
-	/*plugins: [
+	plugins: [
 		new UglifyJSPlugin({
 			uglifyOptions: {
 				ecma: 6
 			}
 		})
-	]*/
+	]
 
 }
