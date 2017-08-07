@@ -8792,7 +8792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_components__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_config__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_config__ = __webpack_require__(128);
 
 
 
@@ -44919,14 +44919,19 @@ angular_1.ng.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProv
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_components_common__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_components_launch_vehicles__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_components_user__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_components_research_development__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_components_spaceports__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__about__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_components_flight__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_components_launch_vehicles__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_components_user__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_components_research_development__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_components_spaceports__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__about__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__filter__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__solar_system_factory__ = __webpack_require__(127);
 
 
-//import flight from 'app.components.flight';
+
+
+
 
 
 
@@ -44936,12 +44941,14 @@ angular_1.ng.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProv
 const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
     .module('spaceyyz.components', [
         __WEBPACK_IMPORTED_MODULE_1__app_components_common__["a" /* default */],
-        //flight,
-        __WEBPACK_IMPORTED_MODULE_2__app_components_launch_vehicles__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_3__app_components_user__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_4__app_components_research_development__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_5__app_components_spaceports__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_6__about__["a" /* default */]
+        __WEBPACK_IMPORTED_MODULE_2__app_components_flight__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_3__app_components_launch_vehicles__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4__app_components_user__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_5__app_components_research_development__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_6__app_components_spaceports__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_7__about__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_8__filter__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_9__solar_system_factory__["a" /* default */]
     ])
     .name;
 
@@ -45023,19 +45030,424 @@ const combobox = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__launch_vehicles_inventory_factory__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__launch_vehicles_order_factory__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__launch_vehicles_vehicle_variant_factory__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__launch_vehicles_order_new__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__launch_vehicles_vehicle__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__launch_vehicles_vehicle_order_detail__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__launch_vehicles_order_modal__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__launch_vehicles_order_delete_modal__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__launch_vehicles_order_confirmation__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__launch_vehicles_development__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__launch_vehicles_inventory__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__launch_vehicles_config__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__launch_vehicles_config_confirm_modal__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__flight_flight_factory__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__flight_schedule__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__flight_progress__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__flight_details__ = __webpack_require__(96);
+
+
+
+
+
+
+const flight = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.flight', [
+          __WEBPACK_IMPORTED_MODULE_1__flight_flight_factory__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_2__flight_schedule__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_3__flight_progress__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_4__flight_details__["a" /* default */]
+      ])
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (flight);
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class FlightFactory {
+    
+		scheduleFlight(flight) {
+			flight.mission.destination.primary = flight.mission.destination.primary.name;
+			flight.mission.vehicle = flight.mission.vehicle.key;
+			flight.launch.dateTimestamp = flight.launch.date.getTime();
+
+			firebase.database().ref().child('flights').push(flight);
+
+		};
+
+		getFlights() {
+			return firebase.database().ref().child('flights').once('value').then(
+				snapshot => {
+					const flightObject = snapshot.val();
+					let flights = [];
+
+					Object.keys(flightObject).forEach(key => {
+            let flight = flightObject[key];
+            flight.mission.name = flight.mission.id;
+            flights.push(flight);
+					});
+
+					return flights;
+				});
+		};
+
+		getFlight(missionName) {
+
+			  return this.getFlights().then(flights => flights.find(flight => flight.mission.name === missionName));
+		}
+	}
+
+const flightFactory =	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.flight.factory', [])
+      .factory('flightFactory', FlightFactory)
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (flightFactory);
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class ScheduleFlight {
+
+	  static get $inject() {
+        return ['vehicleInventoryFactory', 'spaceportFactory',
+		            '$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
+    }
+
+    notifyChanges() {
+        this.$timeout(() => this.$scope.$apply());
+    }
+
+    constructor(vehicleInventoryFactory, spaceportFactory,
+        $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
+        
+        Object.assign(this, {vehicleInventoryFactory, spaceportFactory, $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory});
+        this.payload = 0;
+        this.solarSystem = solarSystemFactory;
+        this.vehicles = {all: []};
+        this.selectedVehicle = {};
+        this.datePicker = {
+            isOpen: false
+        };
+
+        this.filter = vehicle => vehicle.variants.some(
+            variant => variant.capacity >= Number(this.payload));
+
+        this.variantFilter = variant => variant.capacity >= Number(this.payload);
+        this.flight = {
+            mission: {
+                id: '',
+                payload: 0,
+                destination: {
+                    primary: this.solarSystem.planets[2],
+                    secondary: 'None'
+                },
+                type: 'orbit',
+                vehicle: {}
+            },
+            launch: {
+                date: new Date(),
+                site: {}
+            }
+        };
+
+        this.datePickerOptions = {
+            minDate: new Date()
+        };
+
+        this.spaceports = {};
+        this.continent = 'northAmerica';
+        this.spaceport = {};
+        this.selectedValidSpaceport = false;
+        this.filtername = '';
+        this.isopen = false;
+        
+        this.spaceportFilter = spaceport => spaceport.name.toLowerCase().includes(this.filtername.toLowerCase());
+        
+        this.spaceportSelected = spaceport => {
+            this.spaceport = spaceport;
+            this.selectedValidSpaceport = true;
+            this.filtername = spaceport.name;
+        };
+        
+        this.filterChanged = () => {
+            this.isopen = true;
+            this.spaceport = this.ungroupedSpaceports[this.continent].find(s => s.name === this.filtername);
+            this.selectedValidSpaceport = this.spaceport !== undefined;
+        };
+
+        this.schedule = () => {
+            this.flight.mission.name = 'sts-31';
+            flightFactory.scheduleFlight(this.flight);
+        };
+
+        this.continentChanged = () => {
+            this.filterChanged();
+            this.notifyChanges();
+        };
+
+
+        this.selected = function() {
+            this.flight.mission.vehicle = this.selectedVehicle;
+
+            if (this.selectedVehicle.inventory === 0) {
+                this.datePickerOptions.minDate.setFullYear(new Date().getFullYear() + 1);
+
+                if (this.flight.launchDate < this.datePickerOptions.minDate) {
+                    this.flight.launchDate = this.datePickerOptions.minDate;
+                }
+            }
+        };
+
+        vehicleInventoryFactory.getVehicles().then(vehicles => {
+            this.vehicles.all = vehicles.allVehicles;
+
+            this.vehicles.all.forEach(vehicle => vehicle.selected = false);
+
+            this.notifyChanges();
+        });
+
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.ungroupedSpaceports = spaceports;
+            this.spaceports.northAmerica = groupByFilter(spaceports.northAmerica, 'country');
+
+            this.notifyChanges();
+        });
+    }
+	}
+
+const scheduleFlight = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.flight.schedule', [])
+		  .component('scheduleFlight', {
+			    templateUrl: 'src/flight/schedule.html',
+			    controller: ScheduleFlight
+		  })
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (scheduleFlight);
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class FlightProgress {
+
+	  static get $inject() {
+        return ['flightFactory', '$timeout', '$scope'];
+    }
+    
+    constructor(flightFactory, $timeout, $scope) {
+
+        this.flights = [];
+
+        flightFactory.getFlights().then(flights => {
+            this.flights = flights;
+            $timeout(() => $scope.$apply());
+        });
+    }
+}
+
+const flightProgress = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.flight.progress', [])
+		  .component('flightProgress', {
+			    templateUrl: 'src/flight/progress.html',
+			    controller: FlightProgress
+		  })
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (flightProgress);
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class FlightDetails {
+
+	  static get $inject() {
+        return ['$stateParams', 'flightFactory', '$timeout', '$scope'];
+    }
+    
+    checkLaunchStatus() {
+        if (this.flight.launch === undefined || this.flight.launch.date <= Date.now) {
+            this.flight.launched = true;
+        }
+
+        this.flight.status = {
+            velocity: 0,
+            altitude: 0
+        };
+    }
+    
+    constructor($stateParams, flightFactory, $timeout, $scope) {
+        Object.assign(this, {$stateParams, flightFactory, $timeout, $scope});
+        this.flight = $stateParams.flight;
+        this.playbackSpeed = 'Realtime';
+		    this.events = [
+			      ['Ignition', 'Liftoff', 'Roll program'],
+			      ['Maximum Dynamic Pressure'],
+			      ['Stage 1 Sep', 'Stage 2 Ignition'],
+			      ['Fairing sep'],
+			      ['Stage 2 shutdown']
+		    ];
+
+		    this.elapsedTime = 0;
+		    this.maxFlightTime = 600;
+		    this.currentStage = -1;
+        this.animLength = 5.0;
+        //liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
+        this.lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
+        
+        this.changePlaybackSpeed = () => {
+            switch(this.playbackSpeed) {
+            case 'Realtime': {
+                this.animLength = 600;
+                break;
+            }
+            case '10x': 
+            default: {
+                this.animLength = 60;
+                break;
+            }
+            }
+
+            document.querySelectorAll('circle.futureFlightEvent').forEach((e, i) => {
+                e.style.setProperty('animation-delay', this.lengths[i] * this.animLength + 's');
+            });
+            document.querySelectorAll('text.futureFlightEvent').forEach((e, i) => {
+                e.style.setProperty('animation-delay', this.lengths[i] * this.animLength + 's');
+            });
+
+            let path = document.getElementById('ascentPath');
+            path.style.setProperty('animation-duration', this.animLength + 's');
+        };
+
+        if (this.flight.mission === undefined) {
+            //possibly refreshed the page, see if we can pull up the order from the db
+            flightFactory.getFlight(this.$stateParams.missionName).then(flight => {
+                this.flight = flight;
+                this.flight.launched = false;
+                this.setup();
+
+                $timeout(() => this.$scope.$apply());
+            });
+        } else {
+            this.flight.launched = false;
+            this.setup();
+        }
+    }
+
+    setup() {
+        this.checkLaunchStatus();
+        this.setupPath();
+		    this.changePlaybackSpeed();
+		    this.intervalId = window.setInterval(this.tick.bind(this), 1000);
+    }
+
+    setupPath() {
+
+        let path = document.getElementById('ascentPath');
+        let point = document.getElementById('point');
+        let svg = document.querySelector('svg');
+        let p = svg.createSVGPoint();
+
+        path.addEventListener('mousedown', function (event) {
+            p.x = event.clientX;
+            p.y = event.clientY;
+            let f = p.matrixTransform(svg.getScreenCTM().inverse());
+
+            point.setAttribute('cx', f.x);
+            point.setAttribute('cy', f.y);
+        });
+    }
+
+		getStage() {
+			let stage = 0;
+
+			for (let i = 0; i < this.lengths.length; i++) {
+				if (this.elapsedTime >= this.lengths[i] * this.maxFlightTime) {
+					stage++;
+				} else {
+					break;
+				}
+			}
+
+			return stage;
+		}
+
+		tick() {
+			if (this.elapsedTime >= this.maxFlightTime) {
+				window.clearInterval(this.intervalId);
+			}
+
+			this.elapsedTime += (this.maxFlightTime / this.animLength);
+			this.flight.status.velocity = 40 * this.elapsedTime;
+			this.flight.status.altitude++; 
+
+			let stage = this.getStage();
+			if (stage > this.currentStage) {
+				this.currentStage = stage;
+				this.flight.log = [];
+			
+				for (let i = 0; i < stage; i++) {
+					for (let j = 0; j < this.events[i].length; j++) {
+						this.flight.log.push(this.events[i][j]);
+					}
+				}
+				
+			}
+
+			this.$timeout(() => this.$scope.$apply());
+		}
+}
+
+
+const flightDetails =	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.flight.flightDetails', [])
+		  .component('flightDetails', {
+			    templateUrl: 'src/flight/details.html',
+			    controller: FlightDetails
+		  })
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (flightDetails);
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__launch_vehicles_inventory_factory__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__launch_vehicles_order_factory__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__launch_vehicles_vehicle_variant_factory__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__launch_vehicles_order_new__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__launch_vehicles_vehicle__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__launch_vehicles_vehicle_order_detail__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__launch_vehicles_order_modal__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__launch_vehicles_order_delete_modal__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__launch_vehicles_order_confirmation__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__launch_vehicles_development__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__launch_vehicles_inventory__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__launch_vehicles_config__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__launch_vehicles_config_confirm_modal__ = __webpack_require__(110);
 
 
 
@@ -45072,7 +45484,7 @@ const launchVehicles = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (launchVehicles);
 
 /***/ }),
-/* 93 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45295,7 +45707,7 @@ const inventoryFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (inventoryFactory);
 
 /***/ }),
-/* 94 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45369,7 +45781,7 @@ const orderFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (orderFactory);
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45463,7 +45875,7 @@ const variantFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (variantFactory);
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45568,7 +45980,7 @@ const orderNew = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (orderNew);
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45609,7 +46021,7 @@ const vehicle = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (vehicle);
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45711,7 +46123,7 @@ const vehicleOrderDetail = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (vehicleOrderDetail);
 
 /***/ }),
-/* 99 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45754,7 +46166,7 @@ const orderVehicleModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (orderVehicleModal);
 
 /***/ }),
-/* 100 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45802,7 +46214,7 @@ const orderDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (orderDeleteModal);
 
 /***/ }),
-/* 101 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45864,7 +46276,7 @@ const orderConfirmation = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (orderConfirmation);
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45915,7 +46327,7 @@ const vehicleDevelopment = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (vehicleDevelopment);
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45961,7 +46373,7 @@ const vehicleInventory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (vehicleInventory);
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46117,7 +46529,7 @@ const config = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (config);
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46160,16 +46572,16 @@ const confirmVehicleDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.
 /* harmony default export */ __webpack_exports__["a"] = (confirmVehicleDeleteModal);
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_home__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_login__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_account__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_factory__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_home__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_login__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_account__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_factory__ = __webpack_require__(115);
 
 
 
@@ -46188,7 +46600,7 @@ const user = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (user);
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46229,7 +46641,7 @@ const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46289,7 +46701,7 @@ const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (login);
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46346,7 +46758,7 @@ const account = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (account);
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46425,15 +46837,15 @@ const factory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (factory);
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__research_development_engines__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__research_development_engine_factory__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__research_development_config_confirm_modal__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__research_development_engines__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__research_development_engine_factory__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__research_development_config_confirm_modal__ = __webpack_require__(119);
 
 
 
@@ -46450,7 +46862,7 @@ const researchDevelopment = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (researchDevelopment);
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46560,7 +46972,7 @@ const engines = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (engines);
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46628,7 +47040,7 @@ const engineFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (engineFactory);
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46670,16 +47082,16 @@ const confirmEngineDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (confirmEngineDeleteModal);
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status_js__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory_js__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__spaceports_configure_js__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal_js__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__spaceports_configure__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal__ = __webpack_require__(124);
 
  
 
@@ -46688,10 +47100,10 @@ const confirmEngineDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 const spaceports = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
       .module('spaceyyz.components.spaceports', [
-          __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status_js__["a" /* default */],
-          __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory_js__["a" /* default */],
-          __WEBPACK_IMPORTED_MODULE_3__spaceports_configure_js__["a" /* default */],
-          __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal_js__["a" /* default */]
+          __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_3__spaceports_configure__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal__["a" /* default */]
       ])
       .name;
 
@@ -46699,7 +47111,7 @@ const spaceports = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46736,7 +47148,7 @@ const spaceport = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46804,7 +47216,7 @@ const spaceportFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46897,7 +47309,7 @@ const configureSpaceport = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46947,7 +47359,7 @@ const confirmSpaceportDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___defaul
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46970,7 +47382,110 @@ function About() {
 
 
 /***/ }),
-/* 121 */
+/* 126 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+const groupBy =	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+    .module('spaceyyz.filter', [])
+		.filter('groupBy', function () {
+			return function (input, group) {
+				var groups = {};
+
+				if (input === undefined) {
+					return groups;
+				}
+
+        for(const element of input) {
+					const groupName = element[group];
+
+					if (groups[groupName] === undefined) {
+						groups[groupName] = {
+							name: groupName,
+							spaceports: []
+						};
+					}
+
+					groups[groupName].spaceports.push(element);
+				}
+
+				return groups;
+			};
+		})
+    .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (groupBy);
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+
+class SolarSystem {
+    constructor() {
+        this.planets = [
+            {
+                name: 'Mercury',
+                moons: ['None']
+            },
+            {
+                name: 'Venus',
+                moons: ['None']
+            },
+            {
+                name: 'Earth',
+                moons: ['None', 'Moon']
+            },
+            {
+                name: 'Mars',
+                moons: ['None', 'Phobos', 'Deimos']
+            },
+            {
+                name: 'Jupiter',
+                //ALL THESE WORLDS ARE YOURS - EXCEPT EUROPA. ATTEMPT NO LANDINGS THERE.
+                moons: ['None', 'Io', 'Europa', 'Ganymede', 'Callisto']
+            },
+            {
+                name: 'Saturn',
+                moons: ['None', 'Titan', 'Rhea']
+            },
+            {
+                name: 'Uranus',
+                moons: ['None', 'Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon']
+            },
+            {
+                name: 'Neptune',
+                moons: ['None', 'Triton']
+            },
+            {
+                name: 'Pluto',
+                //Hail Hydra
+                moons: ['None', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
+            },
+        ];
+    }
+	}
+
+const solarSystem =	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.solarSystem', [])
+      .factory('solarSystemFactory', SolarSystem)
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (solarSystem);
+
+
+/***/ }),
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
