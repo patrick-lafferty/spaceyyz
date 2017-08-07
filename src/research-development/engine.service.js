@@ -1,9 +1,9 @@
 /*
- * EngineFactory is responsible for reading/writing data about rocket engines from firebase
+ * EngineService is responsible for reading/writing data about rocket engines from firebase
  * */
 import angular from 'angular';
 
-class EngineFactory {
+class EngineService {
 	constructor() {
 	}
 
@@ -52,9 +52,9 @@ class EngineFactory {
 	}
 }
 
-const engineFactory = angular
-	.module('spaceyyz.researchDevelopment.engineFactory', [])
-	.factory('engineFactory', EngineFactory)
+const engineService = angular
+	.module('spaceyyz.researchDevelopment.engineService', [])
+	.service('engineService', EngineService)
 	.name;
 
-export default engineFactory;
+export default engineService;

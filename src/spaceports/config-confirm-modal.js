@@ -9,7 +9,7 @@ import angular from 'angular';
 class ConfirmSpaceportDeleteModal {
 
     static get $inject() {
-        return ['spaceportFactory'];
+        return ['spaceportService'];
     }
 
     $onInit() {

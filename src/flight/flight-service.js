@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-class FlightFactory {
+class FlightService {
     
 		scheduleFlight(flight) {
 			flight.mission.destination.primary = flight.mission.destination.primary.name;
@@ -33,9 +33,9 @@ class FlightFactory {
 		}
 	}
 
-const flightFactory =	angular
-      .module('spaceyyz.flight.factory', [])
-      .factory('flightFactory', FlightFactory)
+const flightService =	angular
+      .module('spaceyyz.flight.service', [])
+      .service('flightService', FlightService)
       .name;
 
-export default flightFactory;
+export default flightService;

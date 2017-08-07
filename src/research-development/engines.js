@@ -20,16 +20,16 @@ class Engine {
 
 class Engines {
 	static get $inject() {
-		return ['engineFactory', '$scope', '$timeout', '$uibModal'];
+		return ['engineService', '$scope', '$timeout', '$uibModal'];
 	}
 
-	constructor(engineFactory, $scope, $timeout, $uibModal) {
+	constructor(engineService, $scope, $timeout, $uibModal) {
 		this.engines = {all: []};
 		this.newEngine = new Engine();
 
 		this.modalInstance = {};
 		
-		engineFactory.getEngines().then(engines => {
+		engineService.getEngines().then(engines => {
 			this.engines.all = engines;
 
 			$timeout(() => $scope.$apply());
@@ -46,7 +46,7 @@ class Engines {
 			return;
 		}
 
-		this.engineFactory.addEngine(newEngine);
+		this.engineService.addEngine(newEngine);
 		this.engines.all.push(newEngine);
 		this.newEngine = new Engine();
 	}
@@ -66,7 +66,7 @@ class Engines {
 
 		engine.beingEdited = false;
 
-		this.engineFactory.updateEngine(engine);
+		this.engineService.updateEngine(engine);
 
 		let index = this.engines.all.findIndex(e => e.name === engine.name);
 
@@ -85,7 +85,7 @@ class Engines {
 		});
 
 		this.modalInstance.result.then(engine => {
-			this.engineFactory.deleteEngine(engine);
+			this.engineService.deleteEngine(engine);
 			this.engines.all.splice(this.engines.all.indexOf(engine), 1);
 		});
 	}

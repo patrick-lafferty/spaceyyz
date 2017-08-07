@@ -3,13 +3,13 @@ import angular from 'angular';
 class Spaceports {
 
     static get $inject() {
-        return ['spaceportFactory', '$timeout', '$scope'];
+        return ['spaceportService', '$timeout', '$scope'];
     }
 
-    constructor(spaceportFactory, $timeout, $scope) {
+    constructor(spaceportService, $timeout, $scope) {
         this.spaceports = {};
 
-        spaceportFactory.getSpaceports().then(spaceports => {
+        spaceportService.getSpaceports().then(spaceports => {
             this.spaceports = spaceports;
 
             $timeout(() => $scope.$apply());

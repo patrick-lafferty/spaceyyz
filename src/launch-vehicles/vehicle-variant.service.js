@@ -1,11 +1,11 @@
 import angular from 'angular';
 
-class VehicleVariantFactory {
+class VehicleVariantService {
 	constructor() {
 
 		var configuration = {
 			//need stages, engines
-			//perhaps inventoryfactory should hold rocket families, which store
+			//perhaps inventoryservice should hold rocket families, which store
 			//all of the possible stages and engines
 			//a configuration is then one complete set of stages
 		};
@@ -78,9 +78,9 @@ class VehicleVariantFactory {
 	}
 }
 
-const variantFactory = angular
-		.module('spaceyyz.launchVehicles.vehicleVariantFactory', [])
-		.factory('variantFactory', VehicleVariantFactory)
+const variantService = angular
+		.module('spaceyyz.launchVehicles.vehicleVariantService', [])
+		.service('variantService', VehicleVariantService)
 		.name;
 
-export default variantFactory;
+export default variantService;

@@ -48,7 +48,7 @@ class SolarSystem {
 
 const solarSystem =	angular
       .module('spaceyyz.solarSystem', [])
-      .factory('solarSystemFactory', SolarSystem)
+      .service('solarSystemService', SolarSystem)
       .name;
 
 export default solarSystem;

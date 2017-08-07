@@ -1,12 +1,12 @@
 import angular from 'angular';
 import engines from '../research-development/engines';
-import engineFactory from '../research-development/engine.factory';
+import engineService from '../research-development/engine.service';
 import confirmEngineDeleteModal from '../research-development/config-confirm-modal';
 
 const researchDevelopment = angular
     .module('spaceyyz.components.researchDevelopment', [
         engines,
-        engineFactory,
+        engineService,
         confirmEngineDeleteModal
     ])
     .name;

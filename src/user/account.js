@@ -2,10 +2,10 @@ import angular from 'angular';
 
 class UserAccount {
 
-	constructor(userFactory, $state, $scope, $timeout) {
-		this.user = userFactory;
-		$scope.user = userFactory;
-		userFactory.onAuthChange(this, function () {
+	constructor(userService, $state, $scope, $timeout) {
+		this.user = userService;
+		$scope.user = userService;
+		userService.onAuthChange(this, function () {
 			$timeout(function() {
 				$scope.$apply();
 			});
@@ -13,15 +13,15 @@ class UserAccount {
 	}
 
 	getEmail() {
-		return userFactory.getEmail();
+		return userService.getEmail();
 	}
 
 	email() {
-		return userFactory.getEmail();
+		return userService.getEmail();
 	}
 
 	login(email, password) {
-		let promise = userFactory.login(email, password);
+		let promise = userService.login(email, password);
 		promise.then(function() {
 			$state.go('home');
 		});
@@ -29,7 +29,7 @@ class UserAccount {
 
 	logout() {
 		this.email = '';
-		this.userFactory.logout();
+		this.userService.logout();
 	}
 
 	isLoggedIn() {
@@ -37,7 +37,7 @@ class UserAccount {
 	}
 
 	static get $inject() {
-		return ['userFactory', '$state', '$scope', '$timeout'];
+		return ['userService', '$state', '$scope', '$timeout'];
 	}
 }
 

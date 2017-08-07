@@ -17,7 +17,11 @@ module.exports = {
 	plugins: [
 		new UglifyJSPlugin({
 			uglifyOptions: {
-				ecma: 6
+          //mangle: false,
+          //compress: false,
+				  //ecma: 6,
+          //beautify: true,
+          //keep_quoted_props: true
 			}
 		})
 	]

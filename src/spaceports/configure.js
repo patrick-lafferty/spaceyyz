@@ -3,11 +3,11 @@ import angular from 'angular';
 class ConfigureSpaceport {
 
     static get $inject() {
-        return ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
+        return ['spaceportService', '$timeout', '$scope', '$uibModal'];
     }
     
-    constructor(spaceportFactory, $timeout, $scope, $uibModal) {
-        Object.assign(this, {spaceportFactory, $timeout, $scope, $uibModal});
+    constructor(spaceportService, $timeout, $scope, $uibModal) {
+        Object.assign(this, {spaceportService, $timeout, $scope, $uibModal});
 
         this.search_name = '';
         this.newSpaceport = {};
@@ -16,7 +16,7 @@ class ConfigureSpaceport {
 		    this.modalInstance = {};
 		    this.search = spaceport => spaceport.name.toLowerCase().includes(this.search_name.toLowerCase());
 
-        spaceportFactory.getSpaceports().then(spaceports => {
+        spaceportService.getSpaceports().then(spaceports => {
             this.spaceports = spaceports;
 
             $timeout(() => $scope.$apply());
@@ -37,7 +37,7 @@ class ConfigureSpaceport {
 
 		saveSpaceport(spaceport) {
 			spaceport.beingEdited = false;
-			spaceportFactory.updateSpaceport(spaceport);
+			spaceportService.updateSpaceport(spaceport);
 
 			let index = this.spaceports.all.findIndex(function (s) {
 				return s.name === spaceport.name;
@@ -47,7 +47,7 @@ class ConfigureSpaceport {
 		}
 
 		createSpaceport(spaceport) {
-			spaceportFactory.addSpaceport(spaceport);
+			spaceportService.addSpaceport(spaceport);
 			this.spaceports.all.push(spaceport);
 			this.newSpaceport = {};
 			this.successfullyCreated = true;
@@ -66,7 +66,7 @@ class ConfigureSpaceport {
 			});
 
 			this.modalInstance.result.then(spaceport => {
-				spaceportFactory.deleteSpaceport(spaceport);
+				spaceportService.deleteSpaceport(spaceport);
 				
 				this.spaceports.all.splice(this.spaceports.all.indexOf(spaceport), 1);
 			});

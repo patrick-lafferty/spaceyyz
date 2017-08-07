@@ -1,7 +1,7 @@
-/* UserFactory is a wrapper around accessing the user account from firebase
+/* UserService is a wrapper around accessing the user account from firebase
  * */
 import angular from 'angular';
-class UserFactory {
+class UserService {
 
 	constructor($state) {
 		this.$state = $state;
@@ -63,9 +63,9 @@ class UserFactory {
 
 }
 
-const factory = angular
-	.module('spaceyyz.user.factory', [])
-	.factory('userFactory', UserFactory)
+const service = angular
+	.module('spaceyyz.user.service', [])
+	.service('userService', UserService)
 	.name;
 
-export default factory;
+export default service;

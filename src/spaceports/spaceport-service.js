@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-class SpaceportFactory {
+class SpaceportService {
 
     getSpaceports() {
         return firebase.database().ref().child('spaceports').once('value')
@@ -51,9 +51,9 @@ class SpaceportFactory {
 		
 	}
 
-const spaceportFactory = angular
-		  .module('spaceyyz.spaceports.spaceportFactory', [])
-      .factory('spaceportFactory', SpaceportFactory)
+const spaceportService = angular
+		  .module('spaceyyz.spaceports.spaceportService', [])
+      .service('spaceportService', SpaceportService)
       .name;
 
-export default spaceportFactory;
+export default spaceportService;

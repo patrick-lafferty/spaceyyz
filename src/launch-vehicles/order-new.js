@@ -9,11 +9,11 @@ import angular from 'angular';
 class OrderLaunchVehicle {
 
 	static get $inject() {
-		return ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
+		return ['vehicleInventoryService', '$scope', '$timeout', 'variantService'];
 	}
 
-	constructor(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
-		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, variantFactory});
+	constructor(vehicleInventoryService, $scope, $timeout, variantService) {
+		Object.assign(this, {vehicleInventoryService, $scope, $timeout, variantService});
 
 		this.primaries = [
 			{name: 'Earth', satellites: ['None', 'Moon'], selectedSatellite: 'None'},
@@ -40,12 +40,12 @@ class OrderLaunchVehicle {
 			return true;
 		};
 
-		vehicleInventoryFactory.getInventory().then(result => this.setInventory(result));
+		vehicleInventoryService.getInventory().then(result => this.setInventory(result));
 
 		Promise
 			.all([
-				vehicleInventoryFactory.getVehicles(),
-				variantFactory.getFamilies()])
+				vehicleInventoryService.getVehicles(),
+				variantService.getFamilies()])
 			.then(results => {
 				this.set(results[0]);
 

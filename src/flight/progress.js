@@ -3,14 +3,14 @@ import angular from 'angular';
 class FlightProgress {
 
 	  static get $inject() {
-        return ['flightFactory', '$timeout', '$scope'];
+        return ['flightService', '$timeout', '$scope'];
     }
     
-    constructor(flightFactory, $timeout, $scope) {
+    constructor(flightService, $timeout, $scope) {
 
         this.flights = [];
 
-        flightFactory.getFlights().then(flights => {
+        flightService.getFlights().then(flights => {
             this.flights = flights;
             $timeout(() => $scope.$apply());
         });

@@ -1,8 +1,11 @@
-/* OrderFactory manages access to orders stored in firebase
+/* OrderService manages access to orders stored in firebase
  * */
 import angular from 'angular';
 
-class OrderFactory {
+class OrderService {
+    constructor() {
+        
+    }
 
 	getOrders() {
 		return firebase.database().ref().child('orders/current').once('value').then(function(snapshot) {
@@ -58,9 +61,9 @@ class OrderFactory {
 	}
 }
 
-const orderFactory = angular
-		.module('spaceyyz.launchVehicles.orderFactory', [])
-		.factory('orderFactory', OrderFactory)
+const orderService = angular
+		.module('spaceyyz.launchVehicles.orderService', [])
+		.service('orderService', OrderService)
 		.name;
 
-export default orderFactory;
+export default orderService;

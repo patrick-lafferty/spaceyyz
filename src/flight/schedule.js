@@ -3,20 +3,20 @@ import angular from 'angular';
 class ScheduleFlight {
 
 	  static get $inject() {
-        return ['vehicleInventoryFactory', 'spaceportFactory',
-		            '$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
+        return ['vehicleInventoryService', 'spaceportService',
+		            '$timeout', '$scope', 'groupByFilter', 'solarSystemService', 'flightService'];
     }
 
     notifyChanges() {
         this.$timeout(() => this.$scope.$apply());
     }
 
-    constructor(vehicleInventoryFactory, spaceportFactory,
-        $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
+    constructor(vehicleInventoryService, spaceportService,
+        $timeout, $scope, groupByFilter, solarSystemService, flightService) {
         
-        Object.assign(this, {vehicleInventoryFactory, spaceportFactory, $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory});
+        Object.assign(this, {vehicleInventoryService, spaceportService, $timeout, $scope, groupByFilter, solarSystemService, flightService});
         this.payload = 0;
-        this.solarSystem = solarSystemFactory;
+        this.solarSystem = solarSystemService;
         this.vehicles = {all: []};
         this.selectedVehicle = {};
         this.datePicker = {
@@ -71,7 +71,7 @@ class ScheduleFlight {
 
         this.schedule = () => {
             this.flight.mission.name = 'sts-31';
-            flightFactory.scheduleFlight(this.flight);
+            flightService.scheduleFlight(this.flight);
         };
 
         this.continentChanged = () => {
@@ -92,7 +92,7 @@ class ScheduleFlight {
             }
         };
 
-        vehicleInventoryFactory.getVehicles().then(vehicles => {
+        vehicleInventoryService.getVehicles().then(vehicles => {
             this.vehicles.all = vehicles.allVehicles;
 
             this.vehicles.all.forEach(vehicle => vehicle.selected = false);
@@ -100,7 +100,7 @@ class ScheduleFlight {
             this.notifyChanges();
         });
 
-        spaceportFactory.getSpaceports().then(spaceports => {
+        spaceportService.getSpaceports().then(spaceports => {
             this.ungroupedSpaceports = spaceports;
             this.spaceports.northAmerica = groupByFilter(spaceports.northAmerica, 'country');
 

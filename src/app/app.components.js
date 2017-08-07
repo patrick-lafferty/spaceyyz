@@ -7,7 +7,7 @@ import researchDevelopment from './app.components.research-development';
 import spaceports from './app.components.spaceports';
 import about from '../about';
 import groupBy from '../filter';
-import solarSystem from '../solar-system-factory';
+import solarSystem from '../solar-system-service';
 
 const components = angular
     .module('spaceyyz.components', [

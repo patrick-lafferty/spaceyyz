@@ -5,25 +5,25 @@ import angular from 'angular';
 
 class VehicleOrderDetail {
 	static get $inject() {
-		return ['vehicleInventoryFactory',
+		return ['vehicleInventoryService',
 			'$scope', '$timeout', '$stateParams',
-			'$uibModal', '$state', 'orderFactory', 'variantFactory'];
+			'$uibModal', '$state', 'orderService', 'variantService'];
 	}
 
-	constructor(vehicleInventoryFactory, 
+	constructor(vehicleInventoryService, 
 		$scope, $timeout, $stateParams,
-		$uibModal, $state, orderFactory, variantFactory) {
+		$uibModal, $state, orderService, variantService) {
 
-		Object.assign(this, {vehicleInventoryFactory, 
+		Object.assign(this, {vehicleInventoryService, 
 			$scope, $timeout, $stateParams,
-			$uibModal, $state, orderFactory, variantFactory});
+			$uibModal, $state, orderService, variantService});
 
 		this.vehicle = {};
 
 		Promise
 			.all([
-				vehicleInventoryFactory.getVehicle($stateParams.name),
-				variantFactory.getFamilies()])
+				vehicleInventoryService.getVehicle($stateParams.name),
+				variantService.getFamilies()])
 			.then(results => {
 				this.vehicle = results[0];
 				let families = results[1];
@@ -69,10 +69,10 @@ class VehicleOrderDetail {
 				cost: variant.cost
 			};
 
-			this.orderFactory.getNewOrderNumber().then(snapshot => {
+			this.orderService.getNewOrderNumber().then(snapshot => {
 				let orderNumber = snapshot.snapshot.val();
 				order.number = orderNumber;
-				this.orderFactory.addOrder(order);
+				this.orderService.addOrder(order);
 
 				this.$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
 			}, function (error) {

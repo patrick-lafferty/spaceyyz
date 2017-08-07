@@ -5,16 +5,16 @@ import angular from 'angular';
 class OrderConfirmation {
 
 	static get $inject() {
-		return ['orderFactory', '$uibModal', '$scope', '$timeout', '$state', '$stateParams'];
+		return ['orderService', '$uibModal', '$scope', '$timeout', '$state', '$stateParams'];
 	}
 
-	constructor(orderFactory, $uibModal, $scope, $timeout, $state, $stateParams) {
-		Object.assign(this, {orderFactory, $uibModal, $scope, $timeout, $state, $stateParams});
+	constructor(orderService, $uibModal, $scope, $timeout, $state, $stateParams) {
+		Object.assign(this, {orderService, $uibModal, $scope, $timeout, $state, $stateParams});
 		this.order = $stateParams.order;
 
 		if (this.order.number === undefined) {
 			//possibly refreshed the page, see if we can pull up the order from the db
-			orderFactory.getOrder(Number($stateParams.orderNumber)).then(order => {
+			orderService.getOrder(Number($stateParams.orderNumber)).then(order => {
 				this.order = order;
 				
 				$timeout(() => this.$scope.$apply());
@@ -37,7 +37,7 @@ class OrderConfirmation {
 		});
 
 		this.modalInstance.result.then(thing => {
-			this.orderFactory.deleteOrder(this.order);
+			this.orderService.deleteOrder(this.order);
 			this.$state.go('development');
 		});
 	}

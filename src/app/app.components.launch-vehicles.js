@@ -1,7 +1,7 @@
 import angular from 'angular';
-import inventoryFactory from '../launch-vehicles/inventory.factory';
-import orderFactory from '../launch-vehicles/order.factory';
-import vehicleVariantFactory from '../launch-vehicles/vehicle-variant.factory';
+import inventoryService from '../launch-vehicles/inventory.service';
+import orderService from '../launch-vehicles/order.service';
+import vehicleVariantService from '../launch-vehicles/vehicle-variant.service';
 import orderNew from '../launch-vehicles/order-new';
 import vehicle from '../launch-vehicles/vehicle';
 import vehicleOrderDetail from '../launch-vehicles/vehicle-order-detail';
@@ -15,9 +15,9 @@ import configConfirmModal from '../launch-vehicles/config-confirm-modal';
 
 const launchVehicles = angular
     .module('spaceyyz.components.launchVehicles', [
-        inventoryFactory,
-        orderFactory,
-        vehicleVariantFactory,
+        inventoryService,
+        orderService,
+        vehicleVariantService,
         orderNew,
         vehicle,
         vehicleOrderDetail,

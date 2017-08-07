@@ -4,17 +4,17 @@ import angular from 'angular';
 
 class VehicleInventory {
 	static get $inject() {
-		return ['vehicleInventoryFactory', '$timeout', '$scope'];
+		return ['vehicleInventoryService', '$timeout', '$scope'];
 	}
 
-	constructor(vehicleInventoryFactory, $timeout, $scope) {
+	constructor(vehicleInventoryService, $timeout, $scope) {
 
 		this.searchType = 'name';
 		this.search_name = '';
 		this.search_payload = 0;
 
 		Promise
-			.all([vehicleInventoryFactory.getVehicles()])
+			.all([vehicleInventoryService.getVehicles()])
 			.then(results => {
 				var vehicles = results[0];
 				this.smallVehicles = vehicles.smallVehicles;

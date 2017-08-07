@@ -1,5 +1,5 @@
 /*
- * VehicleInventoryFactory handles all things vehicular. It manages accessing/modifying vehicles stored in firebase
+ * VehicleInventoryService handles all things vehicular. It manages accessing/modifying vehicles stored in firebase
  * */
 import angular from 'angular';
 
@@ -68,14 +68,14 @@ function categorizeVehicles(vehicles) {
 	return vehicleCategories;
 }
 
-class InventoryFactory {
+class InventoryService {
 
 	static get $inject() {
-		return ['variantFactory'];
+		return ['variantService'];
 	}
 
-	constructor(variantFactory) {
-		this.variantFactory = variantFactory;
+	constructor(variantService) {
+		this.variantService = variantService;
 	}
 
 	combineVehiclesWithVariants(vehicles, variants) {
@@ -94,7 +94,7 @@ class InventoryFactory {
 			.all([
 				firebase.database().ref().child('vehicles').once('value'),
 				this.getInventory(),
-				this.variantFactory.getFamilies()
+				this.variantService.getFamilies()
 			])
 			.then(results => {
 
@@ -179,7 +179,7 @@ class InventoryFactory {
 		vehicle.familyKey = familyKey;
 
 		vehicle.variants.forEach(variant => {
-			this.variantFactory.addVariant(variant, familyKey);
+			this.variantService.addVariant(variant, familyKey);
 			inventory[variant.key] = { 
 				count: 0
 			};
@@ -197,7 +197,7 @@ class InventoryFactory {
 			familyKey: vehicle.familyKey
 		});
 
-		this.variantFactory.replaceVariants(vehicle.familyKey, vehicle.variants);
+		this.variantService.replaceVariants(vehicle.familyKey, vehicle.variants);
 	}
 
 	deleteVehicle(vehicle)
@@ -207,9 +207,9 @@ class InventoryFactory {
 	}
 }
 
-const inventoryFactory = angular
-		.module('spaceyyz.launchVehicles.inventoryFactory', [])
-		.factory('vehicleInventoryFactory', InventoryFactory)
+const inventoryService = angular
+		.module('spaceyyz.launchVehicles.inventoryService', [])
+		.service('vehicleInventoryService', InventoryService)
 		.name;
 
-export default inventoryFactory;
+export default inventoryService;

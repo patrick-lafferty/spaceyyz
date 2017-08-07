@@ -2,11 +2,11 @@ import angular from 'angular';
 
 class Login {
 	static get $inject() {
-		return ['userFactory', '$state'];
+		return ['userService', '$state'];
 	}
 
-	constructor(userFactory, $state) {
-		this.userFactory = userFactory;
+	constructor(userService, $state) {
+		this.userService = userService;
 		this.$state = $state;
 		this.email = '';
 		this.password = '';
@@ -18,7 +18,7 @@ class Login {
 	}
 
 	login() {
-		let promise = this.userFactory.login(this.email, this.password);
+		let promise = this.userService.login(this.email, this.password);
 		promise.then(function() {
 			this.$state.go(this.$state.params.redirectTo || 'auth.home');
 		});
@@ -31,7 +31,7 @@ class Login {
 			return;
 		}
 
-		this.userFactory.register(this.newAccount.email, this.newAccount.password).then(
+		this.userService.register(this.newAccount.email, this.newAccount.password).then(
 			function () {
 				this.$state.go(this.$state.params.redirectTo || 'auth.home');
 			},

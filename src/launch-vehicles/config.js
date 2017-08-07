@@ -7,8 +7,8 @@ import angular from 'angular';
 
 class Config {
 
-	constructor(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
-		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory});
+	constructor(vehicleInventoryService, $scope, $timeout, $uibModal, engineService, variantService) {
+		Object.assign(this, {vehicleInventoryService, $scope, $timeout, $uibModal, engineService, variantService});
 
 		this.vehicles = {
 			all: [],
@@ -28,9 +28,9 @@ class Config {
 		 * */
 		Promise
 			.all([
-				vehicleInventoryFactory.getVehicles(),
-				engineFactory.getEngines(),
-				variantFactory.getFamilies()])
+				vehicleInventoryService.getVehicles(),
+				engineService.getEngines(),
+				variantService.getFamilies()])
 			.then(results => {
 				this.vehicles.all = results[0].allVehicles;
 				this.engines = results[1];
@@ -56,7 +56,7 @@ class Config {
 	}
 
 	static get $inject() {
-		return ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
+		return ['vehicleInventoryService', '$scope', '$timeout', '$uibModal', 'engineService', 'variantService'];
 	}
 
 	
@@ -71,7 +71,7 @@ class Config {
 
 	saveVehicle(vehicle) {
 		vehicle.beingEdited = false;
-		this.vehicleInventoryFactory.updateVehicle(vehicle);
+		this.vehicleInventoryService.updateVehicle(vehicle);
 
 		let index = this.vehicles.all.findIndex(v => v.name === vehicle.name);
 
@@ -90,13 +90,13 @@ class Config {
 		});
 
 		this.modalInstance.result.then(vehicle => {
-			this.vehicleInventoryFactory.deleteVehicle(vehicle);
+			this.vehicleInventoryService.deleteVehicle(vehicle);
 			this.vehicles.all.splice(this.vehicles.all.indexOf(vehicle), 1);
 		});
 	}
 
 	createVehicle(vehicle) {
-		this.vehicleInventoryFactory.addVehicle(vehicle);
+		this.vehicleInventoryService.addVehicle(vehicle);
 		this.vehicles.all.push(vehicle);
 		this.newVehicle = {variants: []};
 		this.variants = [];

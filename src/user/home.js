@@ -2,13 +2,13 @@ import angular from 'angular';
 
 class Home {
 
-	constructor(userFactory, $timeout, $scope) {
+	constructor(userService, $timeout, $scope) {
 		this.user = {
-			email: userFactory.email
+			email: userService.email
 		};
 
 		//TODO: replace all onAuthChange(this with onAuthChange("componentName"
-		userFactory.onAuthChange('home', (user) => {
+		userService.onAuthChange('home', (user) => {
 			this.user.email = user.email;
 			$timeout(function() {
 				$scope.$apply();
@@ -17,7 +17,7 @@ class Home {
 	}
 
 	static get $inject() {
-		return ['userFactory', '$timeout', '$scope'];
+		return ['userService', '$timeout', '$scope'];
 	}
 }
 

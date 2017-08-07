@@ -3,7 +3,7 @@ import angular from 'angular';
 class FlightDetails {
 
 	  static get $inject() {
-        return ['$stateParams', 'flightFactory', '$timeout', '$scope'];
+        return ['$stateParams', 'flightService', '$timeout', '$scope'];
     }
     
     checkLaunchStatus() {
@@ -17,8 +17,8 @@ class FlightDetails {
         };
     }
     
-    constructor($stateParams, flightFactory, $timeout, $scope) {
-        Object.assign(this, {$stateParams, flightFactory, $timeout, $scope});
+    constructor($stateParams, flightService, $timeout, $scope) {
+        Object.assign(this, {$stateParams, flightService, $timeout, $scope});
         this.flight = $stateParams.flight;
         this.playbackSpeed = 'Realtime';
 		    this.events = [
@@ -62,7 +62,7 @@ class FlightDetails {
 
         if (this.flight.mission === undefined) {
             //possibly refreshed the page, see if we can pull up the order from the db
-            flightFactory.getFlight(this.$stateParams.missionName).then(flight => {
+            flightService.getFlight(this.$stateParams.missionName).then(flight => {
                 this.flight = flight;
                 this.flight.launched = false;
                 this.setup();
@@ -79,7 +79,7 @@ class FlightDetails {
         this.checkLaunchStatus();
         this.setupPath();
 		    this.changePlaybackSpeed();
-		    this.intervalId = window.setInterval(this.tick.bind(this), 1000);
+		    this.intervalId = window.setInterval(() => this.tick(), 1000);
     }
 
     setupPath() {

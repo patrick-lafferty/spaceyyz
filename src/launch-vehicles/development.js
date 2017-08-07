@@ -7,15 +7,15 @@
 class VehicleDevelopment {
 
 	static get $inject() {
-		return ['orderFactory', '$timeout', '$scope'];
+		return ['orderService', '$timeout', '$scope'];
 	}
 
-	constructor(orderFactory, $timeout, $scope) {
+	constructor(orderService, $timeout, $scope) {
 		this.orders = {
 			all: []
 		};
 
-		orderFactory.getOrders().then(orders => {
+		orderService.getOrders().then(orders => {
 			this.orders.all = orders;
 
 			let timestampNow = new Date().getTime();
