@@ -1,14 +1,8 @@
-(function () {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.factory('flightFactory', FlightFactory);
-
-	function FlightFactory() {
-		var self = this;
-
-		this.scheduleFlight = function (flight) {
+class FlightFactory {
+    
+		scheduleFlight(flight) {
 			flight.mission.destination.primary = flight.mission.destination.primary.name;
 			flight.mission.vehicle = flight.mission.vehicle.key;
 			flight.launch.dateTimestamp = flight.launch.date.getTime();
@@ -17,34 +11,31 @@
 
 		};
 
-		this.getFlights = function () {
+		getFlights() {
 			return firebase.database().ref().child('flights').once('value').then(
-				function (snapshot) {
-					var flightObject = snapshot.val();
+				snapshot => {
+					const flightObject = snapshot.val();
+					let flights = [];
 
-					var flights = [];
-
-					Object.keys(flightObject).forEach(function (key) {
-						var flight = flightObject[key];
-						flight.mission.name = flight.mission.id;
-						flights.push(flight);
+					Object.keys(flightObject).forEach(key => {
+            let flight = flightObject[key];
+            flight.mission.name = flight.mission.id;
+            flights.push(flight);
 					});
 
 					return flights;
 				});
 		};
 
-		this.getFlight = function (missionName) {
+		getFlight(missionName) {
 
-			return self.getFlights().then(function (flights) {
-				var index = flights.findIndex(function (flight) {
-					return flight.mission.name === missionName;
-				});
-
-				return flights[index];
-			});
-		};
-
-		return this;
+			  return this.getFlights().then(flights => flights.find(flight => flight.mission.name === missionName));
+		}
 	}
-})();
+
+const flightFactory =	angular
+      .module('spaceyyz.flight.factory', [])
+      .factory('flightFactory', FlightFactory)
+      .name;
+
+export default flightFactory;

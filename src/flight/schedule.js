@@ -1,132 +1,120 @@
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('scheduleFlight', {
-			templateUrl: 'src/flight/schedule.html',
-			controller: ScheduleFlight
-		});
+class ScheduleFlight {
 
-	ScheduleFlight.$inject = ['vehicleInventoryFactory', 'spaceportFactory',
-		'$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
-	function ScheduleFlight(vehicleInventoryFactory, spaceportFactory,
-		$timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
-		this.payload = 0;
+	  static get $inject() {
+        return ['vehicleInventoryFactory', 'spaceportFactory',
+		            '$timeout', '$scope', 'groupByFilter', 'solarSystemFactory', 'flightFactory'];
+    }
 
-		let self = this;
-		this.solarSystem = solarSystemFactory;
+    notifyChanges() {
+        this.$timeout(() => this.$scope.$apply());
+    }
 
-		this.filter = function(vehicle) {
-			return vehicle.variants.some(function (variant) {
-				return variant.capacity >= Number(self.payload);
-			});
-		};
+    constructor(vehicleInventoryFactory, spaceportFactory,
+        $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory) {
+        
+        Object.assign(this, {vehicleInventoryFactory, spaceportFactory, $timeout, $scope, groupByFilter, solarSystemFactory, flightFactory});
+        this.payload = 0;
+        this.solarSystem = solarSystemFactory;
+        this.vehicles = {all: []};
+        this.selectedVehicle = {};
+        this.datePicker = {
+            isOpen: false
+        };
 
-		this.variantFilter = function (variant) {
-			return variant.capacity >= Number(self.payload);
-		};
+        this.filter = vehicle => vehicle.variants.some(
+            variant => variant.capacity >= Number(this.payload));
 
-		this.vehicles = {all: []};
-		this.selectedVehicle = {};
-		this.datePicker = {
-			isOpen: false
-		};
+        this.variantFilter = variant => variant.capacity >= Number(this.payload);
+        this.flight = {
+            mission: {
+                id: '',
+                payload: 0,
+                destination: {
+                    primary: this.solarSystem.planets[2],
+                    secondary: 'None'
+                },
+                type: 'orbit',
+                vehicle: {}
+            },
+            launch: {
+                date: new Date(),
+                site: {}
+            }
+        };
 
-		this.flight = {
-			mission: {
-				id: '',
-				payload: 0,
-				destination: {
-					primary: self.solarSystem.planets[2],
-					secondary: 'None'
-				},
-				type: 'orbit',
-				vehicle: {}
-			},
-			launch: {
-				date: new Date(),
-				site: {}
-			}
-		};
+        this.datePickerOptions = {
+            minDate: new Date()
+        };
 
-		this.datePickerOptions = {
-			minDate: new Date()
-		};
+        this.spaceports = {};
+        this.continent = 'northAmerica';
+        this.spaceport = {};
+        this.selectedValidSpaceport = false;
+        this.filtername = '';
+        this.isopen = false;
+        
+        this.spaceportFilter = spaceport => spaceport.name.toLowerCase().includes(this.filtername.toLowerCase());
+        
+        this.spaceportSelected = spaceport => {
+            this.spaceport = spaceport;
+            this.selectedValidSpaceport = true;
+            this.filtername = spaceport.name;
+        };
+        
+        this.filterChanged = () => {
+            this.isopen = true;
+            this.spaceport = this.ungroupedSpaceports[this.continent].find(s => s.name === this.filtername);
+            this.selectedValidSpaceport = this.spaceport !== undefined;
+        };
 
-		this.spaceports = {};
-		this.continent = 'northAmerica';
-		this.spaceport = {};
-		this.selectedValidSpaceport = false;
-		this.filtername = '';
-		this.spaceportFilter = function (spaceport) {
-			return spaceport.name.toLowerCase().includes(self.filtername.toLowerCase());
-		};
-		this.isopen = false;
-		this.spaceportSelected = function(spaceport) {
-			self.spaceport = spaceport;
-			self.selectedValidSpaceport = true;
-			self.filtername = spaceport.name;
-		};
-		this.filterChanged = function () {
-			self.isopen = true;
-			self.spaceport = {};
-			self.selectedValidSpaceport = false;
-			
-			for(let i = 0; i < self.ungroupedSpaceports[self.continent].length; i++) {
-				let spaceport = self.ungroupedSpaceports[self.continent][i];
+        this.schedule = () => {
+            this.flight.mission.name = 'sts-31';
+            flightFactory.scheduleFlight(this.flight);
+        };
 
-				if (spaceport.name === self.filtername) {
-					self.spaceport = spaceport;
-					self.selectedValidSpaceport = true;
-					break;
-				}
-			}
-		};
+        this.continentChanged = () => {
+            this.filterChanged();
+            this.notifyChanges();
+        };
 
-		this.schedule = function () {
-			self.flight.mission.name = 'sts-31';
-			flightFactory.scheduleFlight(self.flight);
-		};
 
-		this.continentChanged = function () {
-			self.filterChanged();
-			notifyChanges();
-		};
-		
-		function notifyChanges() {
-			$timeout(function() {
-				$scope.$apply();
-			});
-		}
+        this.selected = function() {
+            this.flight.mission.vehicle = this.selectedVehicle;
 
-		this.selected = function() {
-			self.flight.mission.vehicle = self.selectedVehicle;
+            if (this.selectedVehicle.inventory === 0) {
+                this.datePickerOptions.minDate.setFullYear(new Date().getFullYear() + 1);
 
-			if (self.selectedVehicle.inventory === 0) {
-				self.datePickerOptions.minDate.setFullYear(new Date().getFullYear() + 1);
+                if (this.flight.launchDate < this.datePickerOptions.minDate) {
+                    this.flight.launchDate = this.datePickerOptions.minDate;
+                }
+            }
+        };
 
-				if (self.flight.launchDate < self.datePickerOptions.minDate) {
-					self.flight.launchDate = self.datePickerOptions.minDate;
-				}
-			}
-		};
+        vehicleInventoryFactory.getVehicles().then(vehicles => {
+            this.vehicles.all = vehicles.allVehicles;
 
-		vehicleInventoryFactory.getVehicles().then(function (vehicles) {
-			self.vehicles.all = vehicles.allVehicles;
+            this.vehicles.all.forEach(vehicle => vehicle.selected = false);
 
-			self.vehicles.all.forEach(function (vehicle) {
-				vehicle.selected = false;
-			});
+            this.notifyChanges();
+        });
 
-			notifyChanges();
-		});
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.ungroupedSpaceports = spaceports;
+            this.spaceports.northAmerica = groupByFilter(spaceports.northAmerica, 'country');
 
-		spaceportFactory.getSpaceports().then(function (spaceports) {
-			self.ungroupedSpaceports = spaceports;
-			self.spaceports.northAmerica = groupByFilter(spaceports.northAmerica, 'country');
-
-			notifyChanges();
-		});
+            this.notifyChanges();
+        });
+    }
 	}
-})();
+
+const scheduleFlight = angular
+      .module('spaceyyz.flight.schedule', [])
+		  .component('scheduleFlight', {
+			    templateUrl: 'src/flight/schedule.html',
+			    controller: ScheduleFlight
+		  })
+      .name;
+
+export default scheduleFlight;

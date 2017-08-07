@@ -1,21 +1,19 @@
-(function () {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
+const groupBy =	angular
+    .module('spaceyyz.filter', [])
 		.filter('groupBy', function () {
 			return function (input, group) {
 				var groups = {};
 
-				if (typeof input === 'undefined') {
+				if (input === undefined) {
 					return groups;
 				}
 
-				for(let i = 0; i < input.length; i++) {
-					const element = input[i];
+        for(const element of input) {
 					const groupName = element[group];
 
-					if (typeof groups[groupName] === 'undefined') {
+					if (groups[groupName] === undefined) {
 						groups[groupName] = {
 							name: groupName,
 							spaceports: []
@@ -27,5 +25,7 @@
 
 				return groups;
 			};
-		});
-})();
+		})
+    .name;
+
+export default groupBy;

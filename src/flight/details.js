@@ -1,108 +1,109 @@
-(function () {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('flightDetails', {
-			templateUrl: 'src/flight/details.html',
-			controller: FlightDetails
-		});
+class FlightDetails {
 
-	FlightDetails.$inject = ['$stateParams', 'flightFactory', '$timeout', '$scope'];
-	function FlightDetails($stateParams, flightFactory, $timeout, $scope) {
-		var self = this;
-		this.flight = $stateParams.flight;
-		this.playbackSpeed = 'Realtime';
+	  static get $inject() {
+        return ['$stateParams', 'flightFactory', '$timeout', '$scope'];
+    }
+    
+    checkLaunchStatus() {
+        if (this.flight.launch === undefined || this.flight.launch.date <= Date.now) {
+            this.flight.launched = true;
+        }
 
-		function checkLaunchStatus() {
-			if (self.flight.launch.date <= Date.now) {
-				self.flight.launched = true;
-			}
+        this.flight.status = {
+            velocity: 0,
+            altitude: 0
+        };
+    }
+    
+    constructor($stateParams, flightFactory, $timeout, $scope) {
+        Object.assign(this, {$stateParams, flightFactory, $timeout, $scope});
+        this.flight = $stateParams.flight;
+        this.playbackSpeed = 'Realtime';
+		    this.events = [
+			      ['Ignition', 'Liftoff', 'Roll program'],
+			      ['Maximum Dynamic Pressure'],
+			      ['Stage 1 Sep', 'Stage 2 Ignition'],
+			      ['Fairing sep'],
+			      ['Stage 2 shutdown']
+		    ];
 
-			self.flight.status = {
-				velocity: 0,
-				altitude: 0
-			};
-		}
+		    this.elapsedTime = 0;
+		    this.maxFlightTime = 600;
+		    this.currentStage = -1;
+        this.animLength = 5.0;
+        //liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
+        this.lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
+        
+        this.changePlaybackSpeed = () => {
+            switch(this.playbackSpeed) {
+            case 'Realtime': {
+                this.animLength = 600;
+                break;
+            }
+            case '10x': 
+            default: {
+                this.animLength = 60;
+                break;
+            }
+            }
 
-		if (typeof this.flight.mission === 'undefined') {
-			//possibly refreshed the page, see if we can pull up the order from the db
-			flightFactory.getFlight($stateParams.missionName).then(function (flight) {
-				self.flight = flight;
-				
-				self.flight.launched = false;
-				checkLaunchStatus();
+            document.querySelectorAll('circle.futureFlightEvent').forEach((e, i) => {
+                e.style.setProperty('animation-delay', this.lengths[i] * this.animLength + 's');
+            });
+            document.querySelectorAll('text.futureFlightEvent').forEach((e, i) => {
+                e.style.setProperty('animation-delay', this.lengths[i] * this.animLength + 's');
+            });
 
-				$timeout(function() {
-					$scope.$apply();
-				});
-			});
-		} else {
-			self.flight.launched = false;
-			checkLaunchStatus();
-		}
+            let path = document.getElementById('ascentPath');
+            path.style.setProperty('animation-duration', this.animLength + 's');
+        };
 
-		let path = document.getElementById('ascentPath');
-		let point = document.getElementById('point');
+        if (this.flight.mission === undefined) {
+            //possibly refreshed the page, see if we can pull up the order from the db
+            flightFactory.getFlight(this.$stateParams.missionName).then(flight => {
+                this.flight = flight;
+                this.flight.launched = false;
+                this.setup();
 
-		let svg = document.querySelector('svg');
-		let p = svg.createSVGPoint();
+                $timeout(() => this.$scope.$apply());
+            });
+        } else {
+            this.flight.launched = false;
+            this.setup();
+        }
+    }
 
-		path.addEventListener('mousedown', function (event) {
-			p.x = event.clientX;
-			p.y = event.clientY;
-			let f = p.matrixTransform(svg.getScreenCTM().inverse());
-	
-			point.setAttribute('cx', f.x);
-			point.setAttribute('cy', f.y);
-		});
+    setup() {
+        this.checkLaunchStatus();
+        this.setupPath();
+		    this.changePlaybackSpeed();
+		    this.intervalId = window.setInterval(this.tick.bind(this), 1000);
+    }
 
-		self.animLength = 5.0;
-		//liftoff, maxq, stage 1 sep, fairing sep, stage 2 shutdown
-		let lengths = [0.022, 0.167, 0.4, 0.55, 0.954];
-		this.changePlaybackSpeed = function () {
-			switch(self.playbackSpeed) {
-				case 'Realtime': {
-					self.animLength = 600;
-					break;
-				}
-				case '10x': 
-				default: {
-					self.animLength = 60;
-					break;
-				}
-			}
+    setupPath() {
 
-			document.querySelectorAll('circle.futureFlightEvent').forEach(function (e, i) {
-				e.style.setProperty('animation-delay', lengths[i] * self.animLength + 's');
-			});
-			document.querySelectorAll('text.futureFlightEvent').forEach(function (e, i) {
-				e.style.setProperty('animation-delay', lengths[i] * self.animLength + 's');
-			});
+        let path = document.getElementById('ascentPath');
+        let point = document.getElementById('point');
+        let svg = document.querySelector('svg');
+        let p = svg.createSVGPoint();
 
-			path.style.setProperty('animation-duration', self.animLength + 's');
-		};
+        path.addEventListener('mousedown', function (event) {
+            p.x = event.clientX;
+            p.y = event.clientY;
+            let f = p.matrixTransform(svg.getScreenCTM().inverse());
 
-		this.changePlaybackSpeed();
+            point.setAttribute('cx', f.x);
+            point.setAttribute('cy', f.y);
+        });
+    }
 
-		let intervalId = window.setInterval(tick, 1000);
-
-		self.events = [
-			['Ignition', 'Liftoff', 'Roll program'],
-			['Maximum Dynamic Pressure'],
-			['Stage 1 Sep', 'Stage 2 Ignition'],
-			['Fairing sep'],
-			['Stage 2 shutdown']
-		];
-
-		this.elapsedTime = 0;
-		this.maxFlightTime = 600;
-		
-		function getStage() {
+		getStage() {
 			let stage = 0;
 
-			for (let i = 0; i < lengths.length; i++) {
-				if (self.elapsedTime >= lengths[i] * self.maxFlightTime) {
+			for (let i = 0; i < this.lengths.length; i++) {
+				if (this.elapsedTime >= this.lengths[i] * this.maxFlightTime) {
 					stage++;
 				} else {
 					break;
@@ -112,31 +113,39 @@
 			return stage;
 		}
 
-		self.currentStage = -1;
-		function tick() {
-			if (self.elapsedTime >= self.maxFlightTime) {
-				window.clearInterval(intervalId);
+		tick() {
+			if (this.elapsedTime >= this.maxFlightTime) {
+				window.clearInterval(this.intervalId);
 			}
 
-			self.elapsedTime += (self.maxFlightTime / self.animLength);
-			self.flight.status.velocity = 40 * self.elapsedTime;
-			self.flight.status.altitude++; 
+			this.elapsedTime += (this.maxFlightTime / this.animLength);
+			this.flight.status.velocity = 40 * this.elapsedTime;
+			this.flight.status.altitude++; 
 
-			let stage = getStage();
-			if (stage > self.currentStage) {
-				self.currentStage = stage;
-				self.flight.log = [];
+			let stage = this.getStage();
+			if (stage > this.currentStage) {
+				this.currentStage = stage;
+				this.flight.log = [];
 			
 				for (let i = 0; i < stage; i++) {
-					for (let j = 0; j < self.events[i].length; j++) {
-						self.flight.log.push(self.events[i][j]);
+					for (let j = 0; j < this.events[i].length; j++) {
+						this.flight.log.push(this.events[i][j]);
 					}
 				}
 				
 			}
 
-			$timeout(function () {$scope.$apply();});
+			this.$timeout(() => this.$scope.$apply());
 		}
-	}
+}
 
-})();
+
+const flightDetails =	angular
+      .module('spaceyyz.flight.flightDetails', [])
+		  .component('flightDetails', {
+			    templateUrl: 'src/flight/details.html',
+			    controller: FlightDetails
+		  })
+      .name;
+
+export default flightDetails;

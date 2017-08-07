@@ -1,8 +1,8 @@
 import angular from 'angular';
-import spaceport from '../spaceports/spaceport-status.js'; 
-import spaceportFactory from '../spaceports/spaceport-factory.js';
-import configureSpaceport from '../spaceports/configure.js';
-import confirmSpaceportDeleteModal from '../spaceports/config-confirm-modal.js';
+import spaceport from '../spaceports/spaceport-status'; 
+import spaceportFactory from '../spaceports/spaceport-factory';
+import configureSpaceport from '../spaceports/configure';
+import confirmSpaceportDeleteModal from '../spaceports/config-confirm-modal';
 
 const spaceports = angular
       .module('spaceyyz.components.spaceports', [

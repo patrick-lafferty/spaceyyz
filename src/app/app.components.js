@@ -1,21 +1,25 @@
 import angular from 'angular';
 import common from './app.components.common';
-//import flight from 'app.components.flight';
+import flight from './app.components.flight';
 import launchVehicles from './app.components.launch-vehicles';
 import user from './app.components.user';
 import researchDevelopment from './app.components.research-development';
 import spaceports from './app.components.spaceports';
 import about from '../about';
+import groupBy from '../filter';
+import solarSystem from '../solar-system-factory';
 
 const components = angular
     .module('spaceyyz.components', [
         common,
-        //flight,
+        flight,
         launchVehicles,
         user,
         researchDevelopment,
         spaceports,
-        about
+        about,
+        groupBy,
+        solarSystem
     ])
     .name;
 

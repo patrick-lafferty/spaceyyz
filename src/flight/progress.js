@@ -1,23 +1,28 @@
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('flightProgress', {
-			templateUrl: 'src/flight/progress.html',
-			controller: FlightProgress
-		});
+class FlightProgress {
 
-	FlightProgress.$inject = ['flightFactory', '$timeout', '$scope'];
-	function FlightProgress(flightFactory, $timeout, $scope) {
+	  static get $inject() {
+        return ['flightFactory', '$timeout', '$scope'];
+    }
+    
+    constructor(flightFactory, $timeout, $scope) {
 
-		var self = this;
-		this.flights = [];
+        this.flights = [];
 
-		flightFactory.getFlights().then(function (flights) {
-			self.flights = flights;
+        flightFactory.getFlights().then(flights => {
+            this.flights = flights;
+            $timeout(() => $scope.$apply());
+        });
+    }
+}
 
-			$timeout(function () { $scope.$apply();});
-		});
-	}
-})();
+const flightProgress = angular
+      .module('spaceyyz.flight.progress', [])
+		  .component('flightProgress', {
+			    templateUrl: 'src/flight/progress.html',
+			    controller: FlightProgress
+		  })
+      .name;
+
+export default flightProgress;
