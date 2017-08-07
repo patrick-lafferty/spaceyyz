@@ -117,13 +117,18 @@ class InventoryFactory {
 				inventory.forEach(function (vehicleInventory) {
 					Object.keys(vehicleInventory).forEach(function (key) {
 						let variant = vehicleInventory[key];
-						let variants = vehicleMap[vehicleInventory.key].variants;
+						let vehicle = vehicleMap[vehicleInventory.key];
 
-						if (variants !== undefined) {
-							for(let i = 0; i < variants.length; i++) {
-								if (variants[i].key === key) {
-									variants[i].count = variant.count;
-									break;
+						if (vehicle) {
+						
+							let variants = vehicle.variants;
+
+							if (variants !== undefined) {
+								for(let i = 0; i < variants.length; i++) {
+									if (variants[i].key === key) {
+										variants[i].count = variant.count;
+										break;
+									}
 								}
 							}
 						}

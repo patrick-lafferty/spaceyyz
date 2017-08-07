@@ -67,6 +67,14 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(59);
+module.exports = angular;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -79,9 +87,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module common
  */
 /** for typedoc */
-var predicates_1 = __webpack_require__(1);
-var hof_1 = __webpack_require__(2);
-var coreservices_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var w = typeof window === 'undefined' ? {} : window;
 var angular = w.angular || {};
 exports.fromJson = angular.fromJson || JSON.parse.bind(JSON);
@@ -717,7 +725,7 @@ exports.silentRejection = function (error) {
 //# sourceMappingURL=common.js.map
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -731,7 +739,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module common_predicates
  */
 /** */
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var stateObject_1 = __webpack_require__(23);
 var toStr = Object.prototype.toString;
 var tis = function (t) { return function (x) { return typeof (x) === t; }; };
@@ -770,7 +778,7 @@ exports.isPromise = hof_1.and(exports.isObject, hof_1.pipe(hof_1.prop('then'), e
 //# sourceMappingURL=predicates.js.map
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1021,7 +1029,7 @@ exports.pattern = pattern;
 //# sourceMappingURL=hof.js.map
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1038,7 +1046,7 @@ exports.services = services;
 //# sourceMappingURL=coreservices.js.map
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1066,14 +1074,6 @@ __export(__webpack_require__(80));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(59);
-module.exports = angular;
-
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1087,10 +1087,10 @@ module.exports = angular;
  * @module common_strings
  */ /** */
 Object.defineProperty(exports, "__esModule", { value: true });
-var predicates_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var rejectFactory_1 = __webpack_require__(12);
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var transition_1 = __webpack_require__(18);
 var resolvable_1 = __webpack_require__(14);
 /**
@@ -1273,8 +1273,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @coreapi
  * @module trace
  */ /** for typedoc */
-var hof_1 = __webpack_require__(2);
-var predicates_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
 var strings_1 = __webpack_require__(6);
 /** @hidden */
 function uiViewString(viewData) {
@@ -1491,8 +1491,8 @@ exports.trace = trace;
  * @module state
  */ /** for typedoc */
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 /**
  * Encapsulate the target (destination) state/params/options of a [[Transition]].
  *
@@ -1633,10 +1633,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @coreapi
  * @module params
  */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
-var predicates_1 = __webpack_require__(1);
-var coreservices_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
+var coreservices_1 = __webpack_require__(4);
 var paramType_1 = __webpack_require__(27);
 /** @hidden */ var hasOwn = Object.prototype.hasOwnProperty;
 /** @hidden */ var isShorthand = function (cfg) {
@@ -1833,7 +1833,7 @@ exports.Param = Param;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ng_from_import = __webpack_require__(5);
+var ng_from_import = __webpack_require__(0);
 var ng_from_global = angular;
 exports.ng = (ng_from_import && ng_from_import.module) ? ng_from_import : ng_from_global;
 //# sourceMappingURL=angular.js.map
@@ -1849,9 +1849,9 @@ exports.ng = (ng_from_import && ng_from_import.module) ? ng_from_import : ng_fro
  */ /** for typedoc */
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var strings_1 = __webpack_require__(6);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var RejectType;
 (function (RejectType) {
     RejectType[RejectType["SUPERSEDED"] = 2] = "SUPERSEDED";
@@ -1946,12 +1946,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** for typedoc */
 var interface_1 = __webpack_require__(9);
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var strings_1 = __webpack_require__(6);
-var predicates_1 = __webpack_require__(1);
-var hof_1 = __webpack_require__(2);
+var predicates_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var trace_1 = __webpack_require__(7);
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var rejectFactory_1 = __webpack_require__(12);
 var targetState_1 = __webpack_require__(8);
 var defaultOptions = {
@@ -2170,11 +2170,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @coreapi
  * @module resolve
  */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var coreservices_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(1);
+var coreservices_1 = __webpack_require__(4);
 var trace_1 = __webpack_require__(7);
 var strings_1 = __webpack_require__(6);
-var predicates_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 // TODO: explicitly make this user configurable
 exports.defaultResolvePolicy = {
     when: "LAZY",
@@ -2311,7 +2311,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** */
 var index_1 = __webpack_require__(16);
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var beforeAfterSubstr = function (char) { return function (str) {
     if (!str)
         return ["", ""];
@@ -2383,11 +2383,11 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module common */ /** for typedoc */
-__export(__webpack_require__(0));
-__export(__webpack_require__(3));
-__export(__webpack_require__(17));
-__export(__webpack_require__(2));
 __export(__webpack_require__(1));
+__export(__webpack_require__(4));
+__export(__webpack_require__(17));
+__export(__webpack_require__(3));
+__export(__webpack_require__(2));
 __export(__webpack_require__(24));
 __export(__webpack_require__(6));
 __export(__webpack_require__(7));
@@ -2495,10 +2495,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** for typedoc */
 var trace_1 = __webpack_require__(7);
-var coreservices_1 = __webpack_require__(3);
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
-var hof_1 = __webpack_require__(2);
+var coreservices_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var interface_1 = __webpack_require__(9); // has or is using
 var transitionHook_1 = __webpack_require__(13);
 var hookRegistry_1 = __webpack_require__(25);
@@ -3123,8 +3123,8 @@ exports.Transition = Transition;
 
 /** @module path */ /** for typedoc */
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var targetState_1 = __webpack_require__(8);
 var pathNode_1 = __webpack_require__(26);
 /**
@@ -3303,10 +3303,10 @@ exports.PathUtils = PathUtils;
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module resolve */
 /** for typedoc */
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var trace_1 = __webpack_require__(7);
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var interface_1 = __webpack_require__(32);
 var resolvable_1 = __webpack_require__(14);
 var pathFactory_1 = __webpack_require__(19);
@@ -3512,9 +3512,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module url
  */
 /** for typedoc */
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
 var param_1 = __webpack_require__(10);
 var strings_1 = __webpack_require__(6);
 /** @hidden */
@@ -4021,8 +4021,8 @@ exports.UrlMatcher = UrlMatcher;
  */ /** */
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(15);
-var predicates_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
+var predicates_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
 /** A base `LocationServices` */
 var BaseLocationServices = (function () {
     function BaseLocationServices(router, fireAfterUpdate) {
@@ -4067,10 +4067,10 @@ exports.BaseLocationServices = BaseLocationServices;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var glob_1 = __webpack_require__(17);
-var predicates_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 /**
  * Internal representation of a UI-Router state.
  *
@@ -4243,8 +4243,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @coreapi
  * @module transition
  */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var interface_1 = __webpack_require__(9); // has or is using
 var glob_1 = __webpack_require__(17);
 /**
@@ -4402,8 +4402,8 @@ exports.makeEvent = makeEvent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module path */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var param_1 = __webpack_require__(10);
 /**
  * @internalapi
@@ -4489,8 +4489,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module params
  */
 /** */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 /**
  * An internal class which implements [[ParamTypeDefinition]].
  *
@@ -4650,9 +4650,9 @@ var url_1 = __webpack_require__(71);
 var lazyLoad_1 = __webpack_require__(47);
 var transitionEventType_1 = __webpack_require__(48);
 var transitionHook_1 = __webpack_require__(13);
-var predicates_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var predicates_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var ignoredTransition_1 = __webpack_require__(72);
 var invalidTransition_1 = __webpack_require__(73);
 /**
@@ -4890,7 +4890,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** for typedoc */
 var angular_1 = __webpack_require__(11);
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 var views_1 = __webpack_require__(30);
 var templateFactory_1 = __webpack_require__(81);
 var stateProvider_1 = __webpack_require__(56);
@@ -4999,7 +4999,7 @@ exports.getLocals = function (ctx) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 function getNg1ViewConfigFactory() {
     var templateFactory = null;
     return function (path, view) {
@@ -5118,8 +5118,8 @@ exports.Ng1ViewConfig = Ng1ViewConfig;
  * @module transition
  */ /** for typedoc */
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var interface_1 = __webpack_require__(9);
 var transitionHook_1 = __webpack_require__(13);
 /**
@@ -5265,10 +5265,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module params
  */
 /** */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
-var hof_1 = __webpack_require__(2);
-var coreservices_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var paramType_1 = __webpack_require__(27);
 /**
  * A registry for parameter types.
@@ -5427,7 +5427,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module params
  */
 /** */
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 /** @internalapi */
 var StateParams = (function () {
     function StateParams(params) {
@@ -5473,12 +5473,12 @@ exports.StateParams = StateParams;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module state */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var strings_1 = __webpack_require__(6);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var resolvable_1 = __webpack_require__(14);
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var parseUrl = function (url) {
     if (!predicates_1.isString(url))
         return false;
@@ -5754,8 +5754,8 @@ exports.StateBuilder = StateBuilder;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module state */ /** for typedoc */
-var predicates_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
+var predicates_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
 var StateMatcher = (function () {
     function StateMatcher(_states) {
         this._states = _states;
@@ -5823,10 +5823,10 @@ exports.StateMatcher = StateMatcher;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module state */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var stateObject_1 = __webpack_require__(23);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 /** @internalapi */
 var StateQueueManager = (function () {
     function StateQueueManager($registry, $urlRouter, states, builder, listeners) {
@@ -5927,8 +5927,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var stateMatcher_1 = __webpack_require__(36);
 var stateBuilder_1 = __webpack_require__(35);
 var stateQueueManager_1 = __webpack_require__(37);
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 var StateRegistry = (function () {
     /** @internalapi */
     function StateRegistry(_router) {
@@ -6087,10 +6087,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module state
  */
 /** */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var queue_1 = __webpack_require__(24);
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 var pathFactory_1 = __webpack_require__(19);
 var pathNode_1 = __webpack_require__(26);
 var transitionService_1 = __webpack_require__(28);
@@ -6100,7 +6100,7 @@ var param_1 = __webpack_require__(10);
 var glob_1 = __webpack_require__(17);
 var resolveContext_1 = __webpack_require__(20);
 var lazyLoad_1 = __webpack_require__(47);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 /**
  * Provides state related service functions
  *
@@ -6672,8 +6672,8 @@ var view_1 = __webpack_require__(44);
 var stateRegistry_1 = __webpack_require__(38);
 var stateService_1 = __webpack_require__(39);
 var globals_1 = __webpack_require__(45);
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var urlService_1 = __webpack_require__(46);
 var trace_1 = __webpack_require__(7);
 /** @hidden */
@@ -6855,8 +6855,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @internalapi
  * @module url
  */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var urlMatcher_1 = __webpack_require__(21);
 var param_1 = __webpack_require__(10);
 var paramTypes_1 = __webpack_require__(33);
@@ -6989,10 +6989,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module url
  */
 /** for typedoc */
-var common_1 = __webpack_require__(0);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 var urlMatcher_1 = __webpack_require__(21);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 var urlRule_1 = __webpack_require__(43);
 var targetState_1 = __webpack_require__(8);
 /** @hidden */
@@ -7268,9 +7268,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module url
  */ /** */
 var urlMatcher_1 = __webpack_require__(21);
-var predicates_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
+var predicates_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
 /**
  * Creates a [[UrlRule]]
  *
@@ -7482,9 +7482,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @coreapi
  * @module view
  */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var hof_1 = __webpack_require__(2);
-var predicates_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var hof_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
 var trace_1 = __webpack_require__(7);
 /**
  * The View service
@@ -7815,8 +7815,8 @@ exports.UIRouterGlobals = UIRouterGlobals;
  * @module url
  */ /** */
 Object.defineProperty(exports, "__esModule", { value: true });
-var coreservices_1 = __webpack_require__(3);
-var common_1 = __webpack_require__(0);
+var coreservices_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(1);
 /** @hidden */
 var makeStub = function (keys) {
     return keys.reduce(function (acc, key) { return (acc[key] = coreservices_1.notImplemented(key), acc); }, { dispose: common_1.noop });
@@ -7897,7 +7897,7 @@ exports.UrlService = UrlService;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 /**
  * A [[TransitionHookFn]] that performs lazy loading
  *
@@ -8346,8 +8346,8 @@ exports.PushStateLocationService = PushStateLocationService;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var predicates_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
+var predicates_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
 /** A `LocationConfig` mock that gets/sets all config from an in-memory object */
 var MemoryLocationConfig = (function () {
     function MemoryLocationConfig() {
@@ -8382,7 +8382,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-var predicates_1 = __webpack_require__(1);
+var predicates_1 = __webpack_require__(2);
 /** A `LocationConfig` that delegates to the browser's `location` object */
 var BrowserLocationConfig = (function () {
     function BrowserLocationConfig(router, _isHtml5) {
@@ -8431,7 +8431,7 @@ exports.BrowserLocationConfig = BrowserLocationConfig;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module ng1 */ /** for typedoc */
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 /**
  * The Angular 1 `StateProvider`
  *
@@ -8577,8 +8577,8 @@ exports.StateProvider = StateProvider;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module url */ /** */
-var core_1 = __webpack_require__(4);
-var core_2 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
+var core_2 = __webpack_require__(5);
 /**
  * Manages rules for client-side URL
  *
@@ -8787,11 +8787,13 @@ exports.UrlRouterProvider = UrlRouterProvider;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_components__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_config__ = __webpack_require__(121);
+
 
 
 
@@ -8799,8 +8801,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a
     .module('spaceyyz', [
         __WEBPACK_IMPORTED_MODULE_2__app_components__["a" /* default */],
-        __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a
+        __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a,
+        'ui.bootstrap'
     ]);
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_config__["a" /* default */])();
 
 
 /***/ }),
@@ -42653,9 +42658,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-var core = __webpack_require__(4);
+var core = __webpack_require__(5);
 exports.core = core;
-__export(__webpack_require__(4));
+__export(__webpack_require__(5));
 __export(__webpack_require__(29));
 __export(__webpack_require__(30));
 __export(__webpack_require__(56));
@@ -42766,8 +42771,8 @@ exports.registerAddCoreResolvables = function (transitionService) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module hooks */ /** */
-var predicates_1 = __webpack_require__(1);
-var coreservices_1 = __webpack_require__(3);
+var predicates_1 = __webpack_require__(2);
+var coreservices_1 = __webpack_require__(4);
 var targetState_1 = __webpack_require__(8);
 /**
  * A [[TransitionHookFn]] that redirects to a different state or params
@@ -42873,9 +42878,9 @@ exports.registerOnEnterHook = function (transitionService) {
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module hooks */
 /** for typedoc */
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var resolveContext_1 = __webpack_require__(20);
-var hof_1 = __webpack_require__(2);
+var hof_1 = __webpack_require__(3);
 /**
  * A [[TransitionHookFn]] which resolves all EAGER Resolvables in the To Path
  *
@@ -42921,8 +42926,8 @@ exports.registerLazyResolveState = function (transitionService) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module hooks */ /** for typedoc */
-var common_1 = __webpack_require__(0);
-var coreservices_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(1);
+var coreservices_1 = __webpack_require__(4);
 /**
  * A [[TransitionHookFn]] which waits for the views to load
  *
@@ -42973,7 +42978,7 @@ exports.registerActivateViews = function (transitionService) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 /**
  * A [[TransitionHookFn]] which updates global UI-Router state
  *
@@ -43224,7 +43229,7 @@ var memoryLocationService_1 = __webpack_require__(52);
 var memoryLocationConfig_1 = __webpack_require__(54);
 var injector_1 = __webpack_require__(50);
 var q_1 = __webpack_require__(49);
-var coreservices_1 = __webpack_require__(3);
+var coreservices_1 = __webpack_require__(4);
 function servicesPlugin(router) {
     coreservices_1.services.$injector = injector_1.$injector;
     coreservices_1.services.$q = q_1.$q;
@@ -43276,7 +43281,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** @module view */
 /** for typedoc */
 var angular_1 = __webpack_require__(11);
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 /**
  * Service which manages loading of templates from a ViewConfig.
  */
@@ -43474,7 +43479,7 @@ var scopeBindings = function (bindingsObj) { return Object.keys(bindingsObj || {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 /** @module ng1 */ /** */
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 var services_1 = __webpack_require__(29);
 /**
  * This is a [[StateBuilder.builder]] function for angular1 `onEnter`, `onExit`,
@@ -43504,7 +43509,7 @@ exports.getStateHookBuilder = function (hookName) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 /**
  * Implements UI-Router LocationServices and LocationConfig using Angular 1's $location service
  */
@@ -43970,7 +43975,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module directives
  */ /** for typedoc */
 var angular_1 = __webpack_require__(11);
-var core_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(5);
 /** @hidden */
 function parseStateRef(ref) {
     var paramsOnly = ref.match(/^\s*({[^}]*})\s*$/), parsed;
@@ -44593,8 +44598,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module directives
  */ /** for typedoc */
 var angular_1 = __webpack_require__(11);
-var angular_2 = __webpack_require__(5);
-var core_1 = __webpack_require__(4);
+var angular_2 = __webpack_require__(0);
+var core_1 = __webpack_require__(5);
 var views_1 = __webpack_require__(30);
 var services_1 = __webpack_require__(29);
 exports.uiView = ['$view', '$animate', '$uiViewScroll', '$interpolate', '$q',
@@ -44911,39 +44916,1260 @@ angular_1.ng.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProv
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_components_user__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_components_common__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_components_launch_vehicles__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_components_user__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_components_research_development__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_components_spaceports__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__about__ = __webpack_require__(120);
+
 
 //import flight from 'app.components.flight';
-//import launchVehicles from 'app.components.launchVehicles';
 
-//import researchDevelopment from 'app.components.researchDevelopment';
-//import spaceports from 'app.components.spaceports';
+
+
+
+
 
 const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
     .module('spaceyyz.components', [
+        __WEBPACK_IMPORTED_MODULE_1__app_components_common__["a" /* default */],
         //flight,
-        //launchVehicles,
-        __WEBPACK_IMPORTED_MODULE_1__app_components_user__["a" /* default */]//,
-        //researchDevelopment,
-        //spaceports
+        __WEBPACK_IMPORTED_MODULE_2__app_components_launch_vehicles__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_3__app_components_user__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4__app_components_research_development__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_5__app_components_spaceports__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_6__about__["a" /* default */]
     ])
     .name;
 
 /* harmony default export */ __webpack_exports__["a"] = (components);
+
 
 /***/ }),
 /* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_home__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_login__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_account__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_factory__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_combobox__ = __webpack_require__(91);
+
+
+
+const common = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+    .module('spaceyyz.components.common', [
+        __WEBPACK_IMPORTED_MODULE_1__common_combobox__["a" /* default */]
+    ])
+    .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (common);
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class Combobox {
+
+	constructor() {
+		this.filterName = '';
+		this.isOpen = false;
+		this.selectedValidItem = false;
+	}
+	
+	filterNameChanged() {
+		this.isOpen = true;
+		this.selectedItem = this.items.find(item => item[this.display] === this.filterName); 
+		this.selectedValidItem = this.selectedItem !== undefined;
+	}
+
+	itemSelected(item) {
+		this.selectedItem = item;
+		this.selectedValidItem = true;
+		this.filterName = item[this.display];
+	}
+
+	itemFilter(item) {
+		return item[this.display].toLowerCase().includes(this.filterName.toLowerCase());
+	}
+}
+
+const combobox = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.common.combobox', [])
+		.component('combobox', {
+			templateUrl: 'src/common/combobox.html',
+			controller: Combobox,
+			bindings: {
+				items: '=',
+				display: '@display',
+				selectedItem: '='
+			}
+		})
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (combobox);
+
+/***/ }),
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__launch_vehicles_inventory_factory__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__launch_vehicles_order_factory__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__launch_vehicles_vehicle_variant_factory__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__launch_vehicles_order_new__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__launch_vehicles_vehicle__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__launch_vehicles_vehicle_order_detail__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__launch_vehicles_order_modal__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__launch_vehicles_order_delete_modal__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__launch_vehicles_order_confirmation__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__launch_vehicles_development__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__launch_vehicles_inventory__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__launch_vehicles_config__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__launch_vehicles_config_confirm_modal__ = __webpack_require__(105);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const launchVehicles = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+    .module('spaceyyz.components.launchVehicles', [
+        __WEBPACK_IMPORTED_MODULE_1__launch_vehicles_inventory_factory__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_2__launch_vehicles_order_factory__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_3__launch_vehicles_vehicle_variant_factory__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4__launch_vehicles_order_new__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_5__launch_vehicles_vehicle__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_6__launch_vehicles_vehicle_order_detail__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_7__launch_vehicles_order_modal__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_8__launch_vehicles_order_delete_modal__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_9__launch_vehicles_order_confirmation__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_10__launch_vehicles_development__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_11__launch_vehicles_inventory__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_12__launch_vehicles_config__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_13__launch_vehicles_config_confirm_modal__["a" /* default */]
+    ])
+    .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (launchVehicles);
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * VehicleInventoryFactory handles all things vehicular. It manages accessing/modifying vehicles stored in firebase
+ * */
+
+
+function minimumCapacity(capacity) {
+	return function(vehicle) {
+		return vehicle.capacity >= capacity;
+	};
+}
+
+function maximumCapacity(capacity) {
+	return function(vehicle) {
+		return vehicle.capacity < capacity;
+	};
+}
+
+function capacityBetween(minimum, maximum) {
+	return function(vehicle) {
+		return vehicle.capacity >= minimum && vehicle.capacity < maximum;
+	};
+}
+
+function sortByCapacity(a, b) {
+	return b.variant.capacity - a.variant.capacity;
+}
+
+class CategorizedVehicle {
+	constructor(vehicle, variant) {
+		this.name = vehicle.name;
+		this.nameWithoutSpaces = vehicle.nameWithoutSpaces;
+		this.description = vehicle.description;
+		this.key = vehicle.key;
+		this.familyKey = vehicle.familyKey;
+		this.variant = variant;
+	}
+}
+
+function categorizeVehicles(vehicles) {
+	let vehicleCategories = Object.create(null);
+	vehicleCategories.smallVehicles = [];
+	vehicleCategories.mediumVehicles = [];
+	vehicleCategories.heavyVehicles = [];
+	vehicleCategories.superHeavyVehicles = [];
+
+	vehicles.forEach(function (vehicle) {
+		if (vehicle.variants) {
+			vehicle.variants.forEach(function (variant) {
+				if (maximumCapacity(2000)(variant)) {
+					vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (capacityBetween(2000, 20000)(variant)) {
+					vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (capacityBetween(20000, 50000)(variant)) {
+					vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+				} else if (minimumCapacity(50000)(variant)) {
+					vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+				}
+			});
+		}
+	});
+
+	Object.keys(vehicleCategories).forEach(function (key) {
+		vehicleCategories[key].sort(sortByCapacity);
+	});
+
+	vehicleCategories.allVehicles = vehicles;
+	
+	return vehicleCategories;
+}
+
+class InventoryFactory {
+
+	static get $inject() {
+		return ['variantFactory'];
+	}
+
+	constructor(variantFactory) {
+		this.variantFactory = variantFactory;
+	}
+
+	combineVehiclesWithVariants(vehicles, variants) {
+		variants.forEach(function (family) {
+			let vehicle = vehicles.find(vehicle => vehicle.familyKey === family.key);
+
+			if (vehicle !== undefined) {
+				vehicle.variants = family.variants;
+			}
+		});
+	}
+
+	getVehicles() {
+
+		return Promise
+			.all([
+				firebase.database().ref().child('vehicles').once('value'),
+				this.getInventory(),
+				this.variantFactory.getFamilies()
+			])
+			.then(results => {
+
+				var vehicleObject = results[0].val();
+				var vehicles = [];
+				var vehicleMap = Object.create(null);
+
+				Object.keys(vehicleObject).forEach(function (key) {
+					var object = vehicleObject[key];
+					object.key = key;
+					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
+					vehicles.push(object);
+					vehicleMap[object.key] = object;
+				});
+
+				this.combineVehiclesWithVariants(vehicles, results[2]);
+
+				let inventory = results[1];
+
+				inventory.forEach(function (vehicleInventory) {
+					Object.keys(vehicleInventory).forEach(function (key) {
+						let variant = vehicleInventory[key];
+						let vehicle = vehicleMap[vehicleInventory.key];
+
+						if (vehicle) {
+						
+							let variants = vehicle.variants;
+
+							if (variants !== undefined) {
+								for(let i = 0; i < variants.length; i++) {
+									if (variants[i].key === key) {
+										variants[i].count = variant.count;
+										break;
+									}
+								}
+							}
+						}
+					});
+				});
+
+				return categorizeVehicles(vehicles);
+			});
+	}
+
+	getVehicle(name) {
+		return this.getVehicles().then(function (vehicles) {
+			return vehicles.allVehicles.find(vehicle => vehicle.nameWithoutSpaces === name);
+		});
+	}
+
+	 getInventory() {
+		return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
+			let inventoryObject = snapshot.val();
+			let inventory = [];
+
+			Object.keys(inventoryObject).forEach(function (key) {
+				let object = inventoryObject[key];
+				object.key = key;
+				inventory.push(object);
+			});
+
+			return inventory;
+		});
+	}
+
+	addVehicle(vehicle) {
+		var key = firebase.database().ref().child('vehicles').push().key;
+		var updates = {};
+
+		var inventory = {
+			//count: 0
+		};
+
+		var familyKey = firebase.database().ref().child('variants').push().key;
+
+		updates['/vehicles/' + key] = {
+			name: vehicle.name,
+			description: vehicle.description,
+			familyKey: familyKey
+		};
+
+		vehicle.familyKey = familyKey;
+
+		vehicle.variants.forEach(variant => {
+			this.variantFactory.addVariant(variant, familyKey);
+			inventory[variant.key] = { 
+				count: 0
+			};
+		});
+
+		updates['/inventory/' + key] = inventory;
+		firebase.database().ref().update(updates);
+	}
+
+	updateVehicle(vehicle)
+	{
+		firebase.database().ref().child('vehicles/' + vehicle.key).set({
+			name: vehicle.name,
+			description: vehicle.description,
+			familyKey: vehicle.familyKey
+		});
+
+		this.variantFactory.replaceVariants(vehicle.familyKey, vehicle.variants);
+	}
+
+	deleteVehicle(vehicle)
+	{
+		firebase.database().ref().child('vehicles/' + vehicle.key).remove();
+		firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
+	}
+}
+
+const inventoryFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.inventoryFactory', [])
+		.factory('vehicleInventoryFactory', InventoryFactory)
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (inventoryFactory);
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* OrderFactory manages access to orders stored in firebase
+ * */
+
+
+class OrderFactory {
+
+	getOrders() {
+		return firebase.database().ref().child('orders/current').once('value').then(function(snapshot) {
+			var orderObject = snapshot.val();
+			var orders = [];
+
+			Object.keys(orderObject).forEach(function (key) {
+				let object = orderObject[key];
+				object.key = key;
+				object.deliveryDate = new Date(object.deliveryTimestamp);
+				object.orderDate = new Date(object.orderTimestamp);
+				orders.push(object);
+			});
+
+			return orders;
+		});
+	}
+
+	getOrder(number) {
+		return this.getOrders().then(orders => orders.find(order => order.number === number));
+	}
+
+	getNewOrderNumber() {
+		return firebase.database().ref().child('orders/nextId').transaction(
+			function (currentValue) {
+				return (currentValue || 0) + 1;
+			});
+	}
+
+	addOrder(order) {
+		var key = firebase.database().ref().child('orders/current').push().key;
+		var updates = {};
+
+		order.deliveryTimestamp = order.deliveryDate.getTime();
+
+		updates['/orders/current/' + key] = order;
+		firebase.database().ref().update(updates);
+	}
+
+	updateOrder(order)
+	{
+		firebase.database().ref().child('orders/current/' + order.key).set({
+			number: order.number,
+			orderTimestamp: order.orderTimestamp,
+			deliveryTimestamp: order.deliveryDate.getTime(),
+			vehicleName: order.vehicleName,
+			cost: order.cost
+		});
+	}
+
+	deleteOrder(order) {
+		firebase.database().ref().child('orders/current/' + order.key).remove();
+	}
+}
+
+const orderFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.orderFactory', [])
+		.factory('orderFactory', OrderFactory)
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (orderFactory);
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class VehicleVariantFactory {
+	constructor() {
+
+		var configuration = {
+			//need stages, engines
+			//perhaps inventoryfactory should hold rocket families, which store
+			//all of the possible stages and engines
+			//a configuration is then one complete set of stages
+		};
+
+	}
+
+	getFamilies() {
+		return firebase.database().ref().child('variants').once('value').then(function (snapshot) {
+			var familyObject = snapshot.val();
+			var families = [];
+
+			if (familyObject !== null) {
+				Object.keys(familyObject).forEach(function (key) {
+					var family = familyObject[key];
+					var variants = [];
+
+					Object.keys(family).forEach(function (variantKey) {
+						var variant = family[variantKey];
+						variant.key = variantKey;
+						variants.push(variant);
+					});
+
+					family.variants = variants;
+					family.key = key;
+
+					families.push(family);
+				});
+			}
+
+			return families;
+		});
+	}
+
+	addVariant(variant, familyKey) {
+		var stages = variant.stages.map(function(stage) {
+			return {
+				name: stage.name,
+				engines: stage.engines.map(engine => engine.key)
+			}
+		});
+
+		firebase.database().ref().child('variants/' + familyKey).push({
+			name: variant.name,
+			capacity: variant.capacity,
+			cost: variant.cost,
+			description: variant.description,
+			stages: stages
+		});
+	}
+
+	updateVariant(variant, familyKey)
+	{
+		firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).set({
+			name: variant.name,
+			stages: variant.stages
+		});
+	}
+
+	deleteVariant(variant, familyKey)
+	{
+		firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).remove();
+	}
+
+	replaceVariants(familyKey, variants) {
+		firebase.database().ref().child('variants/' + familyKey).remove();
+
+		variants.forEach(variant => {
+			this.addVariant(variant, familyKey);
+		});
+	}
+}
+
+const variantFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.vehicleVariantFactory', [])
+		.factory('variantFactory', VehicleVariantFactory)
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (variantFactory);
+
+/***/ }),
+/* 96 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* OrderLaunchVehicle is the component for the Order New page.
+ * It lists all of the vehicles currently configured in the database that
+ * can be purchased by the user. It allows filtering by name or payload, 
+ * and sorting alphabetically if filtering by name, or sorting by payload capacity
+ * if filtering by payload.
+ * */
+
+
+class OrderLaunchVehicle {
+
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$scope', '$timeout', 'variantFactory'];
+	}
+
+	constructor(vehicleInventoryFactory, $scope, $timeout, variantFactory) {
+		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, variantFactory});
+
+		this.primaries = [
+			{name: 'Earth', satellites: ['None', 'Moon'], selectedSatellite: 'None'},
+			{name: 'Mars', satellites: ['None', 'Phobos', 'Deimos'], selectedSatellite: 'None'}
+		];
+
+		this.vehicles = {
+			all: [],
+			small: [],
+			medium: [],
+			heavy: [],
+			superHeavy: []
+		};
+
+		this.selectedPrimary = this.primaries[0];
+		this.search_name = '';
+		this.search_payload = 10000;
+
+		this.variantFilter = variant => {
+			if (this.searchType === 'capacity') {
+				return variant.capacity >= this.search_payload;
+			}
+
+			return true;
+		};
+
+		vehicleInventoryFactory.getInventory().then(result => this.setInventory(result));
+
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicles(),
+				variantFactory.getFamilies()])
+			.then(results => {
+				this.set(results[0]);
+
+				let variants = results[1];
+
+				variants.forEach(family => {
+					let vehicle = this.vehicles.all.find(vehicle =>vehicle.familyKey === family.key);
+
+					if (vehicle !== undefined) {
+						vehicle.variants = family.variants;
+					}
+				});
+
+				$timeout(() => this.$scope.$apply());
+			});
+	}
+
+	set(vehicles) {
+		this.vehicles.all = vehicles.allVehicles;
+		this.vehicles.small = vehicles.smallVehicles;
+		this.vehicles.medium = vehicles.mediumVehicles;
+		this.vehicles.heavy = vehicles.heavyVehicles;
+		this.vehicles.superHeavy = vehicles.superHeavyVehicles;
+	}
+		
+	setInventory(inventory) {
+		this.inventory = inventory;
+	}
+
+	search(type) {
+		if (type === 'name') {
+			return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+		} else if (type === 'capacity') {
+			return vehicle => vehicle.variants.some(variant => variant.capacity >= this.search_payload);
+		}
+	}
+
+	
+}
+
+const orderNew = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.orderNew', [])
+		.component('orderLaunchVehicle', {
+			templateUrl: 'src/launch-vehicles/order-new.html',
+			controller: OrderLaunchVehicle 
+		})
+		.name;	
+	
+/* harmony default export */ __webpack_exports__["a"] = (orderNew);
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* VehicleList is a component that represents a list of vehicles that 
+ * can be filtered, for easy reuse across different pages.
+ * */
+
+
+class Vehicle {
+	constructor() {
+		this.searchType = 'name';
+		this.search_name = '';
+		this.search_payload = 10000;
+	}
+
+	search(type) {
+		if (type === 'name') {
+			return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+		} else if (type === 'capacity') {
+			return vehicle => vehicle.variant.capacity >= self.search_payload;
+		}
+	}
+}
+
+const vehicle = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.vehicle', [])
+		.component('vehicleList', {
+			templateUrl: 'src/launch-vehicles/vehicle.html',
+			controller: Vehicle,
+			bindings: {
+				vehicles: '<',
+			}
+		})
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (vehicle);
+
+/***/ }),
+/* 98 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* VehicleOrderDetail is the component for the individual vehicle pages
+ * where the user can view the vehicle's details and order it.
+ * */
+
+
+class VehicleOrderDetail {
+	static get $inject() {
+		return ['vehicleInventoryFactory',
+			'$scope', '$timeout', '$stateParams',
+			'$uibModal', '$state', 'orderFactory', 'variantFactory'];
+	}
+
+	constructor(vehicleInventoryFactory, 
+		$scope, $timeout, $stateParams,
+		$uibModal, $state, orderFactory, variantFactory) {
+
+		Object.assign(this, {vehicleInventoryFactory, 
+			$scope, $timeout, $stateParams,
+			$uibModal, $state, orderFactory, variantFactory});
+
+		this.vehicle = {};
+
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicle($stateParams.name),
+				variantFactory.getFamilies()])
+			.then(results => {
+				this.vehicle = results[0];
+				let families = results[1];
+				
+				let variants = families.find(family => family.key === this.vehicle.familyKey);
+
+				if (variants !== undefined) {
+					this.vehicle.variants = variants;
+				}
+
+				$timeout(function () {
+					$scope.$apply();
+				});
+
+			});
+
+		this.modalInstance = {};
+	}
+
+	open(variant) {
+		this.modalInstance = this.$uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'launch-vehicles/order-modal.html',
+			component: 'orderVehicleModal',
+			backdrop: 'static',
+			resolve: {
+				vehicle: () => this.vehicle, 
+				variant: () => variant
+			}
+		});
+
+		this.modalInstance.result.then(variant => {
+
+			let deliveryDate = new Date(); 
+			deliveryDate.setFullYear(new Date().getFullYear() + 1);
+
+			let order = {
+				orderTimestamp: new Date().getTime(),
+				deliveryDate: deliveryDate,
+				vehicleName: this.vehicle.name,
+				variantName: variant.name,
+				cost: variant.cost
+			};
+
+			this.orderFactory.getNewOrderNumber().then(snapshot => {
+				let orderNumber = snapshot.snapshot.val();
+				order.number = orderNumber;
+				this.orderFactory.addOrder(order);
+
+				this.$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
+			}, function (error) {
+				console.error(error);
+			});
+		});
+
+	}
+}
+
+const vehicleOrderDetail = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.launchVehicles.vehicleOrderDetail', [])
+		.component('vehicleOrderDetail', {
+			templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
+			controller: VehicleOrderDetail 
+		})
+		.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (vehicleOrderDetail);
+
+/***/ }),
+/* 99 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* OrderVehicleModal is the controller for the modal that pops up
+ * when the user clicks on the order button on a vehicle's information
+ * page.
+ * */
+
+
+class OrderVehicleModal {
+
+	$onInit() {
+		this.vehicle = this.resolve.vehicle;
+		this.variant = this.resolve.variant;
+	}
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.variant);
+	}
+}
+
+const orderVehicleModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.orderModal', [])
+	.component('orderVehicleModal', {
+		controller: OrderVehicleModal,
+		templateUrl: 'src/launch-vehicles/order-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (orderVehicleModal);
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* OrderDeleteModal is the controller for the modal that pops up
+ * when the user clicks on the order delete button on an order's confirmation
+ * page.
+ * */
+
+
+class OrderDeleteModal {
+
+	$onInit() {
+		this.order = this.resolve.order;
+
+		const timestampNow = new Date().getTime();
+		const t = timestampNow - this.order.orderTimestamp;
+		const progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
+				
+		this.costToCancel = this.order.cost * progress;
+	}
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close({name: 0});
+	}
+}
+
+const orderDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.orderDeleteModal', [])
+	.component('orderDeleteModal', {
+		controller: OrderDeleteModal,
+		templateUrl: 'src/launch-vehicles/order-delete-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (orderDeleteModal);
+
+/***/ }),
+/* 101 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* OrderConfirmation is the component for displaying a specific vehicle order's confirmation details
+ * */
+
+
+class OrderConfirmation {
+
+	static get $inject() {
+		return ['orderFactory', '$uibModal', '$scope', '$timeout', '$state', '$stateParams'];
+	}
+
+	constructor(orderFactory, $uibModal, $scope, $timeout, $state, $stateParams) {
+		Object.assign(this, {orderFactory, $uibModal, $scope, $timeout, $state, $stateParams});
+		this.order = $stateParams.order;
+
+		if (this.order.number === undefined) {
+			//possibly refreshed the page, see if we can pull up the order from the db
+			orderFactory.getOrder(Number($stateParams.orderNumber)).then(order => {
+				this.order = order;
+				
+				$timeout(() => this.$scope.$apply());
+			});
+		}
+
+		this.modalInstance = {};
+	}
+
+	cancelOrder() {
+		this.modalInstance = this.$uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'launch-vehicles/order-delete-modal.html',
+			component: 'orderDeleteModal',
+			backdrop: 'static',
+			resolve: {
+				order: () => this.order
+			}
+		});
+
+		this.modalInstance.result.then(thing => {
+			this.orderFactory.deleteOrder(this.order);
+			this.$state.go('development');
+		});
+	}
+}
+
+const orderConfirmation = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.orderConfirmation', [])
+	.component('orderConfirmation', {
+		templateUrl: 'src/launch-vehicles/order-confirmation.html',
+		controller: OrderConfirmation,
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (orderConfirmation);
+
+/***/ }),
+/* 102 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* VehicleDevelopment is the component for the In Development page
+ * It shows all of the orders currently being processed, with
+ * a progress bar showing how many dates into the order they are.
+ * */
+ 
+
+class VehicleDevelopment {
+
+	static get $inject() {
+		return ['orderFactory', '$timeout', '$scope'];
+	}
+
+	constructor(orderFactory, $timeout, $scope) {
+		this.orders = {
+			all: []
+		};
+
+		orderFactory.getOrders().then(orders => {
+			this.orders.all = orders;
+
+			let timestampNow = new Date().getTime();
+
+			this.orders.all.forEach(function (order) {
+				let t = timestampNow - order.orderTimestamp;
+				order.progress = 100 * t / (order.deliveryTimestamp - order.orderTimestamp);
+			});
+
+			$timeout(function() {
+				$scope.$apply();
+			});
+		});
+	}
+}
+
+const vehicleDevelopment = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.vehicleDevelopment', [])
+	.component('vehicleDevelopment', {
+		templateUrl: 'src/launch-vehicles/development.html',
+		controller: VehicleDevelopment 
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (vehicleDevelopment);
+
+/***/ }),
+/* 103 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* VehicleInventory is the component for the Inventory page. It lists all of the completed owned vehicles
+ * */
+
+
+class VehicleInventory {
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$timeout', '$scope'];
+	}
+
+	constructor(vehicleInventoryFactory, $timeout, $scope) {
+
+		this.searchType = 'name';
+		this.search_name = '';
+		this.search_payload = 0;
+
+		Promise
+			.all([vehicleInventoryFactory.getVehicles()])
+			.then(results => {
+				var vehicles = results[0];
+				this.smallVehicles = vehicles.smallVehicles;
+				this.mediumVehicles = vehicles.mediumVehicles;
+				this.heavyVehicles = vehicles.mediumVehicles;
+				this.superHeavyVehicles = vehicles.superHeavyVehicles;
+
+				$timeout(() => $scope.$apply());
+			});
+	}
+}
+
+const vehicleInventory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.vehicleInventory', [])
+	.component('vehicleInventory', {
+		templateUrl: 'src/launch-vehicles/inventory.html',
+		controller: VehicleInventory
+	})
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (vehicleInventory);
+
+/***/ }),
+/* 104 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * ConfigVehicle is the component for Config page. Its used to add/modify/delete launch
+ * vehicles from the database
+ * */
+//import {PromiseImpl as Promise} from 'firebase';
+
+
+class Config {
+
+	constructor(vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory) {
+		Object.assign(this, {vehicleInventoryFactory, $scope, $timeout, $uibModal, engineFactory, variantFactory});
+
+		this.vehicles = {
+			all: [],
+		};
+
+		this.engines = [];
+
+		this.newVehicle = {variants: []};
+		this.variants = [];
+		this.search_name = '';
+		this.modalInstance = {};
+
+		this.search = vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+
+		/*
+		 * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
+		 * */
+		Promise
+			.all([
+				vehicleInventoryFactory.getVehicles(),
+				engineFactory.getEngines(),
+				variantFactory.getFamilies()])
+			.then(results => {
+				this.vehicles.all = results[0].allVehicles;
+				this.engines = results[1];
+
+				let variants = results[2];
+
+				variants.forEach(family => {
+					let vehicle = this.vehicles.all.find(vehicle => vehicle.familyKey === family.key);
+
+					if (vehicle !== undefined) {
+						vehicle.variants = family.variants;
+
+						vehicle.variants.forEach(variant => {
+							variant.stages.forEach(stage => {
+								stage.engines = stage.engines.map(engineKey => this.engines.find(engine => engine.key === engineKey));
+							});
+						});
+					}
+				});
+
+				$timeout(() => this.$scope.$apply());
+			});
+	}
+
+	static get $inject() {
+		return ['vehicleInventoryFactory', '$scope', '$timeout', '$uibModal', 'engineFactory', 'variantFactory'];
+	}
+
+	
+
+	editVehicle(vehicle) {
+		vehicle.beingEdited = true;
+	}
+
+	cancelEditVehicle(vehicle) {
+		vehicle.beingEdited = false;
+	}
+
+	saveVehicle(vehicle) {
+		vehicle.beingEdited = false;
+		this.vehicleInventoryFactory.updateVehicle(vehicle);
+
+		let index = this.vehicles.all.findIndex(v => v.name === vehicle.name);
+
+		this.vehicles.all[index] = vehicle;
+	}
+
+	deleteVehicle(vehicle) {
+		this.modalInstance = this.$uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			component: 'confirmVehicleDeleteModal',
+			backdrop: 'static',
+			resolve: {
+				vehicle: () => vehicle
+			}
+		});
+
+		this.modalInstance.result.then(vehicle => {
+			this.vehicleInventoryFactory.deleteVehicle(vehicle);
+			this.vehicles.all.splice(this.vehicles.all.indexOf(vehicle), 1);
+		});
+	}
+
+	createVehicle(vehicle) {
+		this.vehicleInventoryFactory.addVehicle(vehicle);
+		this.vehicles.all.push(vehicle);
+		this.newVehicle = {variants: []};
+		this.variants = [];
+	}
+
+	addNewVariant(vehicle) {
+		vehicle.variants.push({
+			name: 'Unnamed',
+			stages: []
+		});
+	}
+
+	removeVariant(index, vehicle) {
+		vehicle.variants.splice(index, 1);
+	}			
+
+	addNewStage(variant) {
+		variant.stages.push({
+			engines: [],
+			selectedEngine: {}
+		});
+	}
+
+	removeStage(index, variant) {
+		variant.stages.splice(index, 1);
+	}
+
+	addEngine(engine, stage) {
+		if (engine.name === undefined) {
+			return;
+		}
+
+		stage.engines.push(engine);
+	}
+
+	removeEngine(index, stage) {
+		stage.engines.splice(index, 1);
+	}
+}
+
+const config = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.config', [])
+	.component('configVehicle', {
+		templateUrl: 'src/launch-vehicles/config.html',
+		controller: Config,
+	})
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (config);
+
+/***/ }),
+/* 105 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * ConfirmVehicleDeleteModal is a component for a modal that pops up when
+ * the user tries to delete a vehicle in the Config page
+ * */
+
+
+
+class ConfirmVehicleDeleteModal {
+
+	$onInit() {
+		this.vehicle = this.resolve.vehicle;
+	}
+	
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.vehicle);
+	}
+}
+
+const confirmVehicleDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.launchVehicles.confirmVehicleDeleteModal', [])
+	.component('confirmVehicleDeleteModal', {
+		controller: ConfirmVehicleDeleteModal,
+		templateUrl: 'src/launch-vehicles/config-confirm-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (confirmVehicleDeleteModal);
+
+/***/ }),
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_home__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_login__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_account__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_factory__ = __webpack_require__(110);
 
 
 
@@ -44962,11 +46188,11 @@ const user = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (user);
 
 /***/ }),
-/* 91 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 
 
@@ -44974,7 +46200,7 @@ class Home {
 
 	constructor(userFactory, $timeout, $scope) {
 		this.user = {
-			email: userFactory.user.email
+			email: userFactory.email
 		};
 
 		//TODO: replace all onAuthChange(this with onAuthChange("componentName"
@@ -44994,7 +46220,7 @@ class Home {
 const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 	.module('spaceyyz.user.home', [])
 	.component('home', {
-		templateUrl: 'src/home.html',
+		templateUrl: 'src/user/home.html',
 		controller: Home
 	})
 	.name;
@@ -45003,11 +46229,11 @@ const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 
 
 /***/ }),
-/* 92 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 
 
@@ -45055,7 +46281,7 @@ class Login {
 const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 	.module('spaceyyz.user.login', [])
 	.component('login', {
-		templateUrl: 'src/login/login.html',
+		templateUrl: 'src/user/login.html',
 		controller: Login
 	})
 	.name;
@@ -45063,11 +46289,11 @@ const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (login);
 
 /***/ }),
-/* 93 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 
 
@@ -45120,11 +46346,11 @@ const account = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 /* harmony default export */ __webpack_exports__["a"] = (account);
 
 /***/ }),
-/* 94 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* UserFactory is a wrapper around accessing the user account from firebase
  * */
@@ -45197,6 +46423,758 @@ const factory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
 	.name;
 
 /* harmony default export */ __webpack_exports__["a"] = (factory);
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__research_development_engines__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__research_development_engine_factory__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__research_development_config_confirm_modal__ = __webpack_require__(114);
+
+
+
+
+
+const researchDevelopment = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+    .module('spaceyyz.components.researchDevelopment', [
+        __WEBPACK_IMPORTED_MODULE_1__research_development_engines__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_2__research_development_engine_factory__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_3__research_development_config_confirm_modal__["a" /* default */]
+    ])
+    .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (researchDevelopment);
+
+/***/ }),
+/* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class Engine {
+	constructor() {
+
+		this.name = '';
+		this.isp = {
+			seaLevel: 0,
+			vacuum: 0
+		};
+
+		this.thrust = {
+			seaLevel: 0,
+			vacuum: 0
+		};
+
+		this.description = '';
+	}
+}
+
+class Engines {
+	static get $inject() {
+		return ['engineFactory', '$scope', '$timeout', '$uibModal'];
+	}
+
+	constructor(engineFactory, $scope, $timeout, $uibModal) {
+		this.engines = {all: []};
+		this.newEngine = new Engine();
+
+		this.modalInstance = {};
+		
+		engineFactory.getEngines().then(engines => {
+			this.engines.all = engines;
+
+			$timeout(() => $scope.$apply());
+		});
+	}
+
+	addEngine(newEngine) {
+		if (!newEngine.name
+			|| newEngine.isp.seaLevel <= 0
+			|| newEngine.isp.vacuum <= 0
+			|| newEngine.thrust.seaLevel <= 0
+			|| newEngine.thrust.vacuum <= 0
+			|| !newEngine.description) {
+			return;
+		}
+
+		this.engineFactory.addEngine(newEngine);
+		this.engines.all.push(newEngine);
+		this.newEngine = new Engine();
+	}
+
+	editEngine(engine) {
+		engine.beingEdited = true;
+	}
+
+	cancelEditEngine(engine) {
+		engine.beingEdited = false;
+	}
+
+	saveEngine(engine) {
+		if (!engine.beingEdited) {
+			return;
+		}
+
+		engine.beingEdited = false;
+
+		this.engineFactory.updateEngine(engine);
+
+		let index = this.engines.all.findIndex(e => e.name === engine.name);
+
+		this.engines.all[index] = engine;
+	}
+
+	deleteEngine(engine) {
+		this.modalInstance = $uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			component: 'confirmEngineDeleteModal',
+			backdrop: 'static',
+			resolve: {
+				engine: () => engine
+			}
+		});
+
+		this.modalInstance.result.then(engine => {
+			this.engineFactory.deleteEngine(engine);
+			this.engines.all.splice(this.engines.all.indexOf(engine), 1);
+		});
+	}
+}
+
+const engines = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.researchDevelopment.engine', [])
+	.component('researchEngine', {
+		templateUrl: 'src/research-development/engines.html',
+		controller: Engines
+	})
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (engines);
+
+/***/ }),
+/* 113 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * EngineFactory is responsible for reading/writing data about rocket engines from firebase
+ * */
+
+
+class EngineFactory {
+	constructor() {
+	}
+
+	getEngines () {
+
+		return firebase.database().ref().child('engines').once('value').then(function(snapshot) {
+
+			var engineObject = snapshot.val();
+			var engines = [];
+
+			if (engineObject !== null && engineObject !== undefined) {
+
+				Object.keys(engineObject).forEach(function (key) {
+					var object = engineObject[key];
+					object.key = key;
+					engines.push(object);
+				});
+			}
+			
+			return engines;
+		});
+	}
+
+	addEngine(engine) {
+		var key = firebase.database().ref().child('engines').push({
+			name: engine.name,
+			isp: engine.isp,
+			thrust: engine.thrust,
+			description: engine.description
+		});
+	}
+
+	updateEngine(engine)
+	{
+		firebase.database().ref().child('engines/' + engine.key).set({
+			name: engine.name,
+			isp: engine.isp,
+			thrust: engine.thrust,
+			description: engine.description
+		});
+	}
+
+	deleteEngine(engine)
+	{
+		firebase.database().ref().child('engines/' + engine.key).remove();
+	}
+}
+
+const engineFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.researchDevelopment.engineFactory', [])
+	.factory('engineFactory', EngineFactory)
+	.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (engineFactory);
+
+/***/ }),
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * ConfirmEngineDeleteModal is a component for a modal that pops up when
+ * the user tries to delete a engine in the Config page
+ * */
+
+
+class ConfirmEngineDeleteModal {
+
+	$onInit() {
+		this.engine = this.resolve.engine;
+	}
+
+	cancel() {
+		this.modalInstance.dismiss('cancel');
+	}
+
+	confirm() {
+		this.modalInstance.close(this.engine);
+	}
+}
+
+const confirmEngineDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+	.module('spaceyyz.researchDevelopment.confirmEngineDeleteModal', [])
+	.component('confirmEngineDeleteModal', {
+		controller: ConfirmEngineDeleteModal,
+		templateUrl: 'src/research-development/config-confirm-modal.html',
+		bindings: {
+			resolve: '<',
+			modalInstance: '<'
+		}
+	})
+	.name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (confirmEngineDeleteModal);
+
+/***/ }),
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status_js__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory_js__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__spaceports_configure_js__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal_js__ = __webpack_require__(119);
+
+ 
+
+
+
+
+const spaceports = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.components.spaceports', [
+          __WEBPACK_IMPORTED_MODULE_1__spaceports_spaceport_status_js__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_2__spaceports_spaceport_factory_js__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_3__spaceports_configure_js__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_4__spaceports_config_confirm_modal_js__["a" /* default */]
+      ])
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (spaceports);
+
+
+/***/ }),
+/* 116 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class Spaceports {
+
+    static get $inject() {
+        return ['spaceportFactory', '$timeout', '$scope'];
+    }
+
+    constructor(spaceportFactory, $timeout, $scope) {
+        this.spaceports = {};
+
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.spaceports = spaceports;
+
+            $timeout(() => $scope.$apply());
+        });
+    }
+}
+
+const spaceport = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		  .module('spaceyyz.spaceports.spaceport', [])
+		  .component('spaceportStatus', {
+			    templateUrl: 'src/spaceports/spaceport-status.html',
+			    controller: Spaceports,
+		  })
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (spaceport);
+
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class SpaceportFactory {
+
+    getSpaceports() {
+        return firebase.database().ref().child('spaceports').once('value')
+            .then(snapshot => {
+                let spaceportObject = snapshot.val();
+                let spaceports = [];
+                let all = [];
+
+                Object.keys(spaceportObject).forEach(key => {
+                    let continent = [];
+                    
+                    Object.keys(spaceportObject[key]).forEach(k => {
+                        var spaceport = spaceportObject[key][k];
+                        spaceport.key = k;
+                        spaceport.continent = key;
+                        continent.push(spaceport);
+                        all.push(spaceport);
+                    });
+
+                    spaceports[key] = continent;
+                });
+
+                spaceports.all = all;
+
+                return spaceports;
+        });
+    }
+
+		addSpaceport(spaceport) {
+			var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push(
+				{
+					name: spaceport.name,
+					country: spaceport.country
+				}).key;
+			spaceport.key = key;
+		}
+
+		updateSpaceport(spaceport) {
+			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
+				name: spaceport.name,
+				country: spaceport.country
+			});
+		}
+
+		deleteSpaceport(spaceport) {
+			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();			
+		}
+		
+	}
+
+const spaceportFactory = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		  .module('spaceyyz.spaceports.spaceportFactory', [])
+      .factory('spaceportFactory', SpaceportFactory)
+      .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (spaceportFactory);
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+class ConfigureSpaceport {
+
+    static get $inject() {
+        return ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
+    }
+    
+    constructor(spaceportFactory, $timeout, $scope, $uibModal) {
+        Object.assign(this, {spaceportFactory, $timeout, $scope, $uibModal});
+
+        this.search_name = '';
+        this.newSpaceport = {};
+        this.spaceports = {};
+        this.successfullyCreated = false;
+		    this.modalInstance = {};
+		    this.search = spaceport => spaceport.name.toLowerCase().includes(this.search_name.toLowerCase());
+
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.spaceports = spaceports;
+
+            $timeout(() => $scope.$apply());
+        });
+    }
+
+		onChange() {
+			this.successfullyCreated = false;
+		}
+
+		editSpaceport(spaceport) {
+			spaceport.beingEdited = true;
+		}
+
+		cancelEditSpaceport(spaceport) {
+			spaceport.beingEdited = false;
+		}
+
+		saveSpaceport(spaceport) {
+			spaceport.beingEdited = false;
+			spaceportFactory.updateSpaceport(spaceport);
+
+			let index = this.spaceports.all.findIndex(function (s) {
+				return s.name === spaceport.name;
+			});
+
+			this.spaceports.all[index] = spaceport;
+		}
+
+		createSpaceport(spaceport) {
+			spaceportFactory.addSpaceport(spaceport);
+			this.spaceports.all.push(spaceport);
+			this.newSpaceport = {};
+			this.successfullyCreated = true;
+		}
+
+		deleteSpaceport(spaceport) {
+			this.modalInstance = this.$uibModal.open({
+				ariaLabelledBy: 'modal-title',
+				ariaDescribedBy: 'modal-body',
+				component: 'confirmSpaceportDeleteModal',
+				backdrop: 'static',
+				resolve: {
+					spaceport: () => spaceport
+				}
+			
+			});
+
+			this.modalInstance.result.then(spaceport => {
+				spaceportFactory.deleteSpaceport(spaceport);
+				
+				this.spaceports.all.splice(this.spaceports.all.indexOf(spaceport), 1);
+			});
+		}
+	}
+
+const configureSpaceport = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.spaceports.configureSpaceport', [])
+		  .component('configureSpaceport', {
+			    templateUrl: 'src/spaceports/configure.html',
+			    controller: ConfigureSpaceport
+		  })
+    .name;
+
+/* harmony default export */ __webpack_exports__["a"] = (configureSpaceport);
+
+
+/***/ }),
+/* 119 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * ConfirmSpaceportDeleteModal is a component for a modal that pops up when
+ * the user tries to delete a spaceport in the Config page
+ * */
+
+
+
+
+class ConfirmSpaceportDeleteModal {
+
+    static get $inject() {
+        return ['spaceportFactory'];
+    }
+
+    $onInit() {
+
+        this.spaceport = this.resolve.spaceport;
+    }
+    
+    cancel() {
+        this.modalInstance.dismiss('cancel');
+    }
+
+    confirm() {
+        this.modalInstance.close(self.spaceport);
+    }
+	}
+
+const confirmSpaceportDeleteModal = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+      .module('spaceyyz.spaceports.confirmSpaceportDeleteModal', [])
+		  .component('confirmSpaceportDeleteModal', {
+			    controller: ConfirmSpaceportDeleteModal,
+			    templateUrl: 'src/spaceports/config-confirm-modal.html',
+			    bindings: {
+				      resolve: '<',
+				      modalInstance: '<'
+			    }
+		  })
+      .name;	
+
+/* harmony default export */ __webpack_exports__["a"] = (confirmSpaceportDeleteModal);
+
+
+/***/ }),
+/* 120 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+
+
+const about = __WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz.about', [])
+		.component('about', {
+			templateUrl: 'src/about.html',
+			controller: About
+		})
+		.name;
+
+/* harmony default export */ __webpack_exports__["a"] = (about);
+
+function About() {
+}
+
+
+/***/ }),
+/* 121 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = configure;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/*
+ * Set up all of the state routing and authentication
+ * */
+
+
+function configure() {
+	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz')
+		.config(['$stateProvider', function ($stateProvider) {
+			var states = [ 
+				{
+					name: 'home',
+					url: '/home',
+					component: 'home',
+				},
+				{
+					name: 'orderNew',
+					url: '/launchVehicles/orderNew',
+					component: 'orderLaunchVehicle',
+				},
+				{
+					name: 'vehicleOrderDetail',
+					url: '/launchVehicles/orderNew/:name',
+					component: 'vehicleOrderDetail',
+				},
+				{
+					name: 'orderConfirmation',
+					url: '/launchVehicles/order/:orderNumber',
+					component: 'orderConfirmation',
+					params: {
+						order: {},
+						hiddenParam: 'YES'
+					},
+				},
+				{
+					name: 'development',
+					url: '/launchVehicles/development',
+					component: 'vehicleDevelopment',
+				},
+				{
+					name: 'completed',
+					url: '/launchVehicles/inventory',
+					component: 'vehicleInventory',
+				},
+				{
+					name: 'config',
+					url: '/launchVehicles/config',
+					component: 'configVehicle',
+				},
+				{
+					name: 'schedule',
+					url: '/flight/schedule',
+					component: 'scheduleFlight',
+				},
+				{
+					name: 'progress',
+					url: '/flight/progress',
+					component: 'flightProgress',
+				},
+				{
+					name: 'flightDetails',
+					url: '/flight/details/:missionName',
+					component: 'flightDetails',
+					params: {
+						flight: {},
+						hiddenParam: 'YES'
+					},
+				},
+				/*{
+					name: 'northAmericanSpaceports',
+					url: '/spaceports/north-america',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'north america';},
+					}
+				},
+				{
+					name: 'europeanSpaceports',
+					url: '/spaceports/europe',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'europe';},
+					}
+				},
+				{
+					name: 'asianSpaceports',
+					url: '/spaceports/asia',
+					component: 'spaceports',
+					resolve: {
+						location: function(){return 'asia';},
+					}
+				},*/
+				{
+					name: 'spaceportStatus',
+					url: '/spaceports/status',
+					component: 'spaceportStatus',
+					params: {
+						continent: {},
+						hiddenParam: 'YES'
+					},
+				},
+				{
+					name: 'configureSpaceport',
+					url: '/spaceports/configure',
+					component: 'configureSpaceport'
+				},
+				{
+					name: 'researchEngine',
+					url: '/research/engine',
+					component: 'researchEngine',
+				},
+				{
+					name: 'designStage',
+					url: '/research/stage',
+					component: 'designStage',
+				}
+				/*{
+					name: 'default',
+					url: '*path',
+					component: 'home'
+				}*/
+			];
+
+			var nonAuthStates = [
+				{
+					name: 'about',
+					url: '/about',
+					component: 'about'
+				},
+				{
+					name: 'login',
+					url: '/login',
+					component: 'login',
+					params: {
+						redirectTo: 'home'
+					},
+				}
+			];
+
+			var authState = {
+				name: 'auth',
+				template: '<ui-view></ui-view>'
+			};
+
+			$stateProvider.state(authState);
+			states.forEach(function(state) {
+				state.parent = authState;
+				//state.name = 'auth.' + state.name;
+				$stateProvider.state(state);
+			});
+			
+			nonAuthStates.forEach(function (state) {
+				$stateProvider.state(state);
+			});
+
+		}]);
+
+	__WEBPACK_IMPORTED_MODULE_0_angular___default.a
+		.module('spaceyyz')
+		.run(['$state', '$transitions', function($state, $transitions) {
+
+			$transitions.onBefore({to: 'login'}, function (trans) {
+
+				var user = firebase.auth().currentUser;
+				if (user) { 
+					return trans.router.stateService.target('home');
+				}
+
+				return true;
+			});
+			$transitions.onBefore({to: function(state) {
+				return state.parent.name == "auth";
+			}}, 
+
+			function(trans) {
+				var user = firebase.auth().currentUser;
+
+				if (user) {
+					return true;
+				} else {
+					/*
+						* user can be undefined if they're logged in but refreshed the page
+						* check to see if firebase saved a token to indicate that they
+						* will be automatically signed in
+						*/
+					for(const key in localStorage) {
+						if (key.startsWith('firebase:authUser'))
+						{
+							return true;
+						}
+					}
+
+					return trans.router.stateService.target('login', {redirectTo: trans.$to().name}, {reload: true});
+				}
+			});
+
+		}]);
+}
 
 /***/ })
 /******/ ]);

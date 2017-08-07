@@ -4,7 +4,7 @@ import common from './app.components.common';
 import launchVehicles from './app.components.launch-vehicles';
 import user from './app.components.user';
 import researchDevelopment from './app.components.research-development';
-//import spaceports from 'app.components.spaceports';
+import spaceports from './app.components.spaceports';
 import about from '../about';
 
 const components = angular
@@ -14,7 +14,7 @@ const components = angular
         launchVehicles,
         user,
         researchDevelopment,
-        //spaceports
+        spaceports,
         about
     ])
     .name;

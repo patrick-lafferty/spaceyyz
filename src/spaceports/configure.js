@@ -1,84 +1,84 @@
-(function () {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('configureSpaceport', {
-			templateUrl: 'src/spaceports/configure.html',
-			controller: ConfigureSpaceport
-		});
+class ConfigureSpaceport {
 
-	ConfigureSpaceport.$inject = ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
-	function ConfigureSpaceport(spaceportFactory, $timeout, $scope, $uibModal) {
-		let self = this;
+    static get $inject() {
+        return ['spaceportFactory', '$timeout', '$scope', '$uibModal'];
+    }
+    
+    constructor(spaceportFactory, $timeout, $scope, $uibModal) {
+        Object.assign(this, {spaceportFactory, $timeout, $scope, $uibModal});
 
-		this.search_name = '';
-		this.newSpaceport = {};
-		this.spaceports = {};
-		this.successfullyCreated = false;
+        this.search_name = '';
+        this.newSpaceport = {};
+        this.spaceports = {};
+        this.successfullyCreated = false;
+		    this.modalInstance = {};
+		    this.search = spaceport => spaceport.name.toLowerCase().includes(this.search_name.toLowerCase());
 
-		spaceportFactory.getSpaceports().then(function (spaceports) {
-			self.spaceports = spaceports;
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.spaceports = spaceports;
 
-			$timeout(function () {
-				$scope.$apply();
-			});
-		});
+            $timeout(() => $scope.$apply());
+        });
+    }
 
-		this.onChange = function () {
-			self.successfullyCreated = false;
-		};
+		onChange() {
+			this.successfullyCreated = false;
+		}
 
-		this.search = function (spaceport) {
-			return spaceport.name.toLowerCase().includes(self.search_name.toLowerCase());
-		};
-
-		this.editSpaceport = function (spaceport) {
+		editSpaceport(spaceport) {
 			spaceport.beingEdited = true;
-		};
+		}
 
-		this.cancelEditSpaceport = function (spaceport) {
+		cancelEditSpaceport(spaceport) {
 			spaceport.beingEdited = false;
-		};
+		}
 
-		this.saveSpaceport = function (spaceport) {
+		saveSpaceport(spaceport) {
 			spaceport.beingEdited = false;
 			spaceportFactory.updateSpaceport(spaceport);
 
-			let index = self.spaceports.all.findIndex(function (s) {
+			let index = this.spaceports.all.findIndex(function (s) {
 				return s.name === spaceport.name;
 			});
 
-			self.spaceports.all[index] = spaceport;
-		};
+			this.spaceports.all[index] = spaceport;
+		}
 
-		this.createSpaceport = function (spaceport) {
+		createSpaceport(spaceport) {
 			spaceportFactory.addSpaceport(spaceport);
-			self.spaceports.all.push(spaceport);
-			self.newSpaceport = {};
+			this.spaceports.all.push(spaceport);
+			this.newSpaceport = {};
 			this.successfullyCreated = true;
-		};
+		}
 
-		this.modalInstance = {};
-		this.deleteSpaceport = function (spaceport) {
-			self.modalInstance = $uibModal.open({
+		deleteSpaceport(spaceport) {
+			this.modalInstance = this.$uibModal.open({
 				ariaLabelledBy: 'modal-title',
 				ariaDescribedBy: 'modal-body',
 				component: 'confirmSpaceportDeleteModal',
 				backdrop: 'static',
 				resolve: {
-					spaceport: function() {
-						return spaceport;
-					}
+					spaceport: () => spaceport
 				}
 			
 			});
 
-			self.modalInstance.result.then(function (spaceport) {
+			this.modalInstance.result.then(spaceport => {
 				spaceportFactory.deleteSpaceport(spaceport);
 				
-				self.spaceports.all.splice(self.spaceports.all.indexOf(spaceport), 1);
+				this.spaceports.all.splice(this.spaceports.all.indexOf(spaceport), 1);
 			});
-		};
+		}
 	}
-})();
+
+const configureSpaceport = angular
+      .module('spaceyyz.spaceports.configureSpaceport', [])
+		  .component('configureSpaceport', {
+			    templateUrl: 'src/spaceports/configure.html',
+			    controller: ConfigureSpaceport
+		  })
+    .name;
+
+export default configureSpaceport;

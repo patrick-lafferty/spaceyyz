@@ -1,24 +1,28 @@
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('spaceportStatus', {
-			templateUrl: 'src/spaceports/spaceport-status.html',
-			controller: Spaceports,
-		});
+class Spaceports {
 
-	Spaceports.$inject = ['spaceportFactory', '$timeout', '$scope'];
-	function Spaceports(spaceportFactory, $timeout, $scope) {
-		var self = this;
-		this.spaceports = {};
-		
-		spaceportFactory.getSpaceports().then(function (spaceports) {
-			self.spaceports = spaceports;
+    static get $inject() {
+        return ['spaceportFactory', '$timeout', '$scope'];
+    }
 
-			$timeout(function () {
-				$scope.$apply();
-			});
-		});
-	}
-})();
+    constructor(spaceportFactory, $timeout, $scope) {
+        this.spaceports = {};
+
+        spaceportFactory.getSpaceports().then(spaceports => {
+            this.spaceports = spaceports;
+
+            $timeout(() => $scope.$apply());
+        });
+    }
+}
+
+const spaceport = angular
+		  .module('spaceyyz.spaceports.spaceport', [])
+		  .component('spaceportStatus', {
+			    templateUrl: 'src/spaceports/spaceport-status.html',
+			    controller: Spaceports,
+		  })
+      .name;
+
+export default spaceport;

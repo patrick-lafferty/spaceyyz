@@ -103,12 +103,10 @@ class Config {
 	}
 
 	addNewVariant(vehicle) {
-		console.log(vehicle + ' ' + this.newVehicle);
-		this.newVehicle.variants.push({
+		vehicle.variants.push({
 			name: 'Unnamed',
 			stages: []
 		});
-		this.$timeout(() => this.$scope.$apply());
 	}
 
 	removeVariant(index, vehicle) {

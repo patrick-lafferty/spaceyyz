@@ -3,33 +3,39 @@
  * the user tries to delete a spaceport in the Config page
  * */
 
-(function() {
-	'use strict';
+import angular from 'angular';
 
-	angular
-		.module('spaceyyz')
-		.component('confirmSpaceportDeleteModal', {
-			controller: ConfirmSpaceportDeleteModal,
-			templateUrl: 'src/spaceports/config-confirm-modal.html',
-			bindings: {
-				resolve: '<',
-				modalInstance: '<'
-			}
-		});	
 
-	ConfirmSpaceportDeleteModal.$inject = ['spaceportFactory'];
-	function ConfirmSpaceportDeleteModal(spaceportFactory)  {
+class ConfirmSpaceportDeleteModal {
 
-		this.spaceport = this.resolve.spaceport;
-		let self = this;
+    static get $inject() {
+        return ['spaceportFactory'];
+    }
 
-		this.cancel = function() {
-			self.modalInstance.dismiss('cancel');
-		};
+    $onInit() {
 
-		this.confirm = function() {
-			self.modalInstance.close(self.spaceport);
-		};
+        this.spaceport = this.resolve.spaceport;
+    }
+    
+    cancel() {
+        this.modalInstance.dismiss('cancel');
+    }
 
+    confirm() {
+        this.modalInstance.close(self.spaceport);
+    }
 	}
-})();
+
+const confirmSpaceportDeleteModal = angular
+      .module('spaceyyz.spaceports.confirmSpaceportDeleteModal', [])
+		  .component('confirmSpaceportDeleteModal', {
+			    controller: ConfirmSpaceportDeleteModal,
+			    templateUrl: 'src/spaceports/config-confirm-modal.html',
+			    bindings: {
+				      resolve: '<',
+				      modalInstance: '<'
+			    }
+		  })
+      .name;	
+
+export default confirmSpaceportDeleteModal;
