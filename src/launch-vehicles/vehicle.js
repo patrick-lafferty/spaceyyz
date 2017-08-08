@@ -4,30 +4,30 @@
 import angular from 'angular';
 
 class Vehicle {
-	constructor() {
-		this.searchType = 'name';
-		this.search_name = '';
-		this.search_payload = 10000;
-	}
+    constructor() {
+        this.searchType = 'name';
+        this.search_name = '';
+        this.search_payload = 10000;
+    }
 
-	search(type) {
-		if (type === 'name') {
-			return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
-		} else if (type === 'capacity') {
-			return vehicle => vehicle.variant.capacity >= self.search_payload;
-		}
-	}
+    search(type) {
+        if (type === 'name') {
+            return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+        } else if (type === 'capacity') {
+            return vehicle => vehicle.variant.capacity >= self.search_payload;
+        }
+    }
 }
 
 const vehicle = angular
-		.module('spaceyyz.launchVehicles.vehicle', [])
-		.component('vehicleList', {
-			templateUrl: 'src/launch-vehicles/vehicle.html',
-			controller: Vehicle,
-			bindings: {
-				vehicles: '<',
-			}
-		})
-		.name;
+    .module('spaceyyz.launchVehicles.vehicle', [])
+    .component('vehicleList', {
+        templateUrl: 'src/launch-vehicles/vehicle.html',
+        controller: Vehicle,
+        bindings: {
+            vehicles: '<',
+        }
+    })
+    .name;
 
 export default vehicle;

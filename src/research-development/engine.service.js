@@ -4,57 +4,54 @@
 import angular from 'angular';
 
 class EngineService {
-	constructor() {
-	}
+    constructor() {}
 
-	getEngines () {
+    getEngines() {
 
-		return firebase.database().ref().child('engines').once('value').then(function(snapshot) {
+        return firebase.database().ref().child('engines').once('value').then(function(snapshot) {
 
-			var engineObject = snapshot.val();
-			var engines = [];
+            var engineObject = snapshot.val();
+            var engines = [];
 
-			if (engineObject !== null && engineObject !== undefined) {
+            if (engineObject !== null && engineObject !== undefined) {
 
-				Object.keys(engineObject).forEach(function (key) {
-					var object = engineObject[key];
-					object.key = key;
-					engines.push(object);
-				});
-			}
-			
-			return engines;
-		});
-	}
+                Object.keys(engineObject).forEach(function(key) {
+                    var object = engineObject[key];
+                    object.key = key;
+                    engines.push(object);
+                });
+            }
 
-	addEngine(engine) {
-		var key = firebase.database().ref().child('engines').push({
-			name: engine.name,
-			isp: engine.isp,
-			thrust: engine.thrust,
-			description: engine.description
-		});
-	}
+            return engines;
+        });
+    }
 
-	updateEngine(engine)
-	{
-		firebase.database().ref().child('engines/' + engine.key).set({
-			name: engine.name,
-			isp: engine.isp,
-			thrust: engine.thrust,
-			description: engine.description
-		});
-	}
+    addEngine(engine) {
+        var key = firebase.database().ref().child('engines').push({
+            name: engine.name,
+            isp: engine.isp,
+            thrust: engine.thrust,
+            description: engine.description
+        });
+    }
 
-	deleteEngine(engine)
-	{
-		firebase.database().ref().child('engines/' + engine.key).remove();
-	}
+    updateEngine(engine) {
+        firebase.database().ref().child('engines/' + engine.key).set({
+            name: engine.name,
+            isp: engine.isp,
+            thrust: engine.thrust,
+            description: engine.description
+        });
+    }
+
+    deleteEngine(engine) {
+        firebase.database().ref().child('engines/' + engine.key).remove();
+    }
 }
 
 const engineService = angular
-	.module('spaceyyz.researchDevelopment.engineService', [])
-	.service('engineService', EngineService)
-	.name;
+    .module('spaceyyz.researchDevelopment.engineService', [])
+    .service('engineService', EngineService)
+    .name;
 
 export default engineService;

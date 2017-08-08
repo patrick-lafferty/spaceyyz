@@ -4,212 +4,210 @@
 import angular from 'angular';
 
 function minimumCapacity(capacity) {
-	return function(vehicle) {
-		return vehicle.capacity >= capacity;
-	};
+    return function(vehicle) {
+        return vehicle.capacity >= capacity;
+    };
 }
 
 function maximumCapacity(capacity) {
-	return function(vehicle) {
-		return vehicle.capacity < capacity;
-	};
+    return function(vehicle) {
+        return vehicle.capacity < capacity;
+    };
 }
 
 function capacityBetween(minimum, maximum) {
-	return function(vehicle) {
-		return vehicle.capacity >= minimum && vehicle.capacity < maximum;
-	};
+    return function(vehicle) {
+        return vehicle.capacity >= minimum && vehicle.capacity < maximum;
+    };
 }
 
 function sortByCapacity(a, b) {
-	return b.variant.capacity - a.variant.capacity;
+    return b.variant.capacity - a.variant.capacity;
 }
 
 class CategorizedVehicle {
-	constructor(vehicle, variant) {
-		this.name = vehicle.name;
-		this.nameWithoutSpaces = vehicle.nameWithoutSpaces;
-		this.description = vehicle.description;
-		this.key = vehicle.key;
-		this.familyKey = vehicle.familyKey;
-		this.variant = variant;
-	}
+    constructor(vehicle, variant) {
+        this.name = vehicle.name;
+        this.nameWithoutSpaces = vehicle.nameWithoutSpaces;
+        this.description = vehicle.description;
+        this.key = vehicle.key;
+        this.familyKey = vehicle.familyKey;
+        this.variant = variant;
+    }
 }
 
 function categorizeVehicles(vehicles) {
-	let vehicleCategories = Object.create(null);
-	vehicleCategories.smallVehicles = [];
-	vehicleCategories.mediumVehicles = [];
-	vehicleCategories.heavyVehicles = [];
-	vehicleCategories.superHeavyVehicles = [];
+    let vehicleCategories = Object.create(null);
+    vehicleCategories.smallVehicles = [];
+    vehicleCategories.mediumVehicles = [];
+    vehicleCategories.heavyVehicles = [];
+    vehicleCategories.superHeavyVehicles = [];
 
-	vehicles.forEach(function (vehicle) {
-		if (vehicle.variants) {
-			vehicle.variants.forEach(function (variant) {
-				if (maximumCapacity(2000)(variant)) {
-					vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
-				} else if (capacityBetween(2000, 20000)(variant)) {
-					vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
-				} else if (capacityBetween(20000, 50000)(variant)) {
-					vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-				} else if (minimumCapacity(50000)(variant)) {
-					vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
-				}
-			});
-		}
-	});
+    vehicles.forEach(function(vehicle) {
+        if (vehicle.variants) {
+            vehicle.variants.forEach(function(variant) {
+                if (maximumCapacity(2000)(variant)) {
+                    vehicleCategories.smallVehicles.push(new CategorizedVehicle(vehicle, variant));
+                } else if (capacityBetween(2000, 20000)(variant)) {
+                    vehicleCategories.mediumVehicles.push(new CategorizedVehicle(vehicle, variant));
+                } else if (capacityBetween(20000, 50000)(variant)) {
+                    vehicleCategories.heavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+                } else if (minimumCapacity(50000)(variant)) {
+                    vehicleCategories.superHeavyVehicles.push(new CategorizedVehicle(vehicle, variant));
+                }
+            });
+        }
+    });
 
-	Object.keys(vehicleCategories).forEach(function (key) {
-		vehicleCategories[key].sort(sortByCapacity);
-	});
+    Object.keys(vehicleCategories).forEach(function(key) {
+        vehicleCategories[key].sort(sortByCapacity);
+    });
 
-	vehicleCategories.allVehicles = vehicles;
-	
-	return vehicleCategories;
+    vehicleCategories.allVehicles = vehicles;
+
+    return vehicleCategories;
 }
 
 class InventoryService {
 
-	static get $inject() {
-		return ['variantService'];
-	}
+    static get $inject() {
+        return ['variantService'];
+    }
 
-	constructor(variantService) {
-		this.variantService = variantService;
-	}
+    constructor(variantService) {
+        this.variantService = variantService;
+    }
 
-	combineVehiclesWithVariants(vehicles, variants) {
-		variants.forEach(function (family) {
-			let vehicle = vehicles.find(vehicle => vehicle.familyKey === family.key);
+    combineVehiclesWithVariants(vehicles, variants) {
+        variants.forEach(function(family) {
+            let vehicle = vehicles.find(vehicle => vehicle.familyKey === family.key);
 
-			if (vehicle !== undefined) {
-				vehicle.variants = family.variants;
-			}
-		});
-	}
+            if (vehicle !== undefined) {
+                vehicle.variants = family.variants;
+            }
+        });
+    }
 
-	getVehicles() {
+    getVehicles() {
 
-		return Promise
-			.all([
-				firebase.database().ref().child('vehicles').once('value'),
-				this.getInventory(),
-				this.variantService.getFamilies()
-			])
-			.then(results => {
+        return Promise
+            .all([
+                firebase.database().ref().child('vehicles').once('value'),
+                this.getInventory(),
+                this.variantService.getFamilies()
+            ])
+            .then(results => {
 
-				var vehicleObject = results[0].val();
-				var vehicles = [];
-				var vehicleMap = Object.create(null);
+                var vehicleObject = results[0].val();
+                var vehicles = [];
+                var vehicleMap = Object.create(null);
 
-				Object.keys(vehicleObject).forEach(function (key) {
-					var object = vehicleObject[key];
-					object.key = key;
-					object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
-					vehicles.push(object);
-					vehicleMap[object.key] = object;
-				});
+                Object.keys(vehicleObject).forEach(function(key) {
+                    var object = vehicleObject[key];
+                    object.key = key;
+                    object.nameWithoutSpaces = object.name.replace(/\s+/g, '-');
+                    vehicles.push(object);
+                    vehicleMap[object.key] = object;
+                });
 
-				this.combineVehiclesWithVariants(vehicles, results[2]);
+                this.combineVehiclesWithVariants(vehicles, results[2]);
 
-				let inventory = results[1];
+                let inventory = results[1];
 
-				inventory.forEach(function (vehicleInventory) {
-					Object.keys(vehicleInventory).forEach(function (key) {
-						let variant = vehicleInventory[key];
-						let vehicle = vehicleMap[vehicleInventory.key];
+                inventory.forEach(function(vehicleInventory) {
+                    Object.keys(vehicleInventory).forEach(function(key) {
+                        let variant = vehicleInventory[key];
+                        let vehicle = vehicleMap[vehicleInventory.key];
 
-						if (vehicle) {
-						
-							let variants = vehicle.variants;
+                        if (vehicle) {
 
-							if (variants !== undefined) {
-								for(let i = 0; i < variants.length; i++) {
-									if (variants[i].key === key) {
-										variants[i].count = variant.count;
-										break;
-									}
-								}
-							}
-						}
-					});
-				});
+                            let variants = vehicle.variants;
 
-				return categorizeVehicles(vehicles);
-			});
-	}
+                            if (variants !== undefined) {
+                                for (let i = 0; i < variants.length; i++) {
+                                    if (variants[i].key === key) {
+                                        variants[i].count = variant.count;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
 
-	getVehicle(name) {
-		return this.getVehicles().then(function (vehicles) {
-			return vehicles.allVehicles.find(vehicle => vehicle.nameWithoutSpaces === name);
-		});
-	}
+                return categorizeVehicles(vehicles);
+            });
+    }
 
-	 getInventory() {
-		return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
-			let inventoryObject = snapshot.val();
-			let inventory = [];
+    getVehicle(name) {
+        return this.getVehicles().then(function(vehicles) {
+            return vehicles.allVehicles.find(vehicle => vehicle.nameWithoutSpaces === name);
+        });
+    }
 
-			Object.keys(inventoryObject).forEach(function (key) {
-				let object = inventoryObject[key];
-				object.key = key;
-				inventory.push(object);
-			});
+    getInventory() {
+        return firebase.database().ref().child('inventory').once('value').then(function(snapshot) {
+            let inventoryObject = snapshot.val();
+            let inventory = [];
 
-			return inventory;
-		});
-	}
+            Object.keys(inventoryObject).forEach(function(key) {
+                let object = inventoryObject[key];
+                object.key = key;
+                inventory.push(object);
+            });
 
-	addVehicle(vehicle) {
-		var key = firebase.database().ref().child('vehicles').push().key;
-		var updates = {};
+            return inventory;
+        });
+    }
 
-		var inventory = {
-			//count: 0
-		};
+    addVehicle(vehicle) {
+        var key = firebase.database().ref().child('vehicles').push().key;
+        var updates = {};
 
-		var familyKey = firebase.database().ref().child('variants').push().key;
+        var inventory = {
+            //count: 0
+        };
 
-		updates['/vehicles/' + key] = {
-			name: vehicle.name,
-			description: vehicle.description,
-			familyKey: familyKey
-		};
+        var familyKey = firebase.database().ref().child('variants').push().key;
 
-		vehicle.familyKey = familyKey;
+        updates['/vehicles/' + key] = {
+            name: vehicle.name,
+            description: vehicle.description,
+            familyKey: familyKey
+        };
 
-		vehicle.variants.forEach(variant => {
-			this.variantService.addVariant(variant, familyKey);
-			inventory[variant.key] = { 
-				count: 0
-			};
-		});
+        vehicle.familyKey = familyKey;
 
-		updates['/inventory/' + key] = inventory;
-		firebase.database().ref().update(updates);
-	}
+        vehicle.variants.forEach(variant => {
+            this.variantService.addVariant(variant, familyKey);
+            inventory[variant.key] = {
+                count: 0
+            };
+        });
 
-	updateVehicle(vehicle)
-	{
-		firebase.database().ref().child('vehicles/' + vehicle.key).set({
-			name: vehicle.name,
-			description: vehicle.description,
-			familyKey: vehicle.familyKey
-		});
+        updates['/inventory/' + key] = inventory;
+        firebase.database().ref().update(updates);
+    }
 
-		this.variantService.replaceVariants(vehicle.familyKey, vehicle.variants);
-	}
+    updateVehicle(vehicle) {
+        firebase.database().ref().child('vehicles/' + vehicle.key).set({
+            name: vehicle.name,
+            description: vehicle.description,
+            familyKey: vehicle.familyKey
+        });
 
-	deleteVehicle(vehicle)
-	{
-		firebase.database().ref().child('vehicles/' + vehicle.key).remove();
-		firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
-	}
+        this.variantService.replaceVariants(vehicle.familyKey, vehicle.variants);
+    }
+
+    deleteVehicle(vehicle) {
+        firebase.database().ref().child('vehicles/' + vehicle.key).remove();
+        firebase.database().ref().child('variants/' + vehicle.familyKey).remove();
+    }
 }
 
 const inventoryService = angular
-		.module('spaceyyz.launchVehicles.inventoryService', [])
-		.service('vehicleInventoryService', InventoryService)
-		.name;
+    .module('spaceyyz.launchVehicles.inventoryService', [])
+    .service('vehicleInventoryService', InventoryService)
+    .name;
 
 export default inventoryService;

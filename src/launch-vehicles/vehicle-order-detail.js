@@ -4,91 +4,103 @@
 import angular from 'angular';
 
 class VehicleOrderDetail {
-	static get $inject() {
-		return ['vehicleInventoryService',
-			'$scope', '$timeout', '$stateParams',
-			'$uibModal', '$state', 'orderService', 'variantService'];
-	}
+    static get $inject() {
+        return ['vehicleInventoryService',
+            '$scope', '$timeout', '$stateParams',
+            '$uibModal', '$state', 'orderService', 'variantService'
+        ];
+    }
 
-	constructor(vehicleInventoryService, 
-		$scope, $timeout, $stateParams,
-		$uibModal, $state, orderService, variantService) {
+    constructor(vehicleInventoryService,
+        $scope, $timeout, $stateParams,
+        $uibModal, $state, orderService, variantService) {
 
-		Object.assign(this, {vehicleInventoryService, 
-			$scope, $timeout, $stateParams,
-			$uibModal, $state, orderService, variantService});
+        Object.assign(this, {
+            vehicleInventoryService,
+            $scope,
+            $timeout,
+            $stateParams,
+            $uibModal,
+            $state,
+            orderService,
+            variantService
+        });
 
-		this.vehicle = {};
+        this.vehicle = {};
 
-		Promise
-			.all([
-				vehicleInventoryService.getVehicle($stateParams.name),
-				variantService.getFamilies()])
-			.then(results => {
-				this.vehicle = results[0];
-				let families = results[1];
-				
-				let variants = families.find(family => family.key === this.vehicle.familyKey);
+        Promise
+            .all([
+                vehicleInventoryService.getVehicle($stateParams.name),
+                variantService.getFamilies()
+            ])
+            .then(results => {
+                this.vehicle = results[0];
+                let families = results[1];
 
-				if (variants !== undefined) {
-					this.vehicle.variants = variants;
-				}
+                let variants = families.find(family => family.key === this.vehicle.familyKey);
 
-				$timeout(function () {
-					$scope.$apply();
-				});
+                if (variants !== undefined) {
+                    this.vehicle.variants = variants;
+                }
 
-			});
+                $timeout(function() {
+                    $scope.$apply();
+                });
 
-		this.modalInstance = {};
-	}
+            });
 
-	open(variant) {
-		this.modalInstance = this.$uibModal.open({
-			ariaLabelledBy: 'modal-title',
-			ariaDescribedBy: 'modal-body',
-			templateUrl: 'launch-vehicles/order-modal.html',
-			component: 'orderVehicleModal',
-			backdrop: 'static',
-			resolve: {
-				vehicle: () => this.vehicle, 
-				variant: () => variant
-			}
-		});
+        this.modalInstance = {};
+    }
 
-		this.modalInstance.result.then(variant => {
+    open(variant) {
+        this.modalInstance = this.$uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'launch-vehicles/order-modal.html',
+            component: 'orderVehicleModal',
+            backdrop: 'static',
+            resolve: {
+                vehicle: () => this.vehicle,
+                variant: () => variant
+            }
+        });
 
-			let deliveryDate = new Date(); 
-			deliveryDate.setFullYear(new Date().getFullYear() + 1);
+        this.modalInstance.result.then(variant => {
 
-			let order = {
-				orderTimestamp: new Date().getTime(),
-				deliveryDate: deliveryDate,
-				vehicleName: this.vehicle.name,
-				variantName: variant.name,
-				cost: variant.cost
-			};
+            let deliveryDate = new Date();
+            deliveryDate.setFullYear(new Date().getFullYear() + 1);
 
-			this.orderService.getNewOrderNumber().then(snapshot => {
-				let orderNumber = snapshot.snapshot.val();
-				order.number = orderNumber;
-				this.orderService.addOrder(order);
+            let order = {
+                orderTimestamp: new Date().getTime(),
+                deliveryDate: deliveryDate,
+                vehicleName: this.vehicle.name,
+                variantName: variant.name,
+                cost: variant.cost
+            };
 
-				this.$state.go('orderConfirmation', {orderNumber: orderNumber, order: order});
-			}, function (error) {
-				console.error(error);
-			});
-		});
+            this.orderService.getNewOrderNumber().then(snapshot => {
+                let orderNumber = snapshot.snapshot.val();
+                order.number = orderNumber;
+                this.orderService.addOrder(order);
 
-	}
+                this.$state.go('orderConfirmation', {
+                    orderNumber: orderNumber,
+                    order: order
+                });
+            }, function(error) {
+                console.error(error);
+            });
+        });
+
+    }
 }
 
 const vehicleOrderDetail = angular
-		.module('spaceyyz.launchVehicles.vehicleOrderDetail', [])
-		.component('vehicleOrderDetail', {
-			templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
-			controller: VehicleOrderDetail 
-		})
-		.name;	
+    .module('spaceyyz.launchVehicles.vehicleOrderDetail', [])
+    .component('vehicleOrderDetail', {
+        templateUrl: 'src/launch-vehicles/vehicle-order-detail.html',
+        controller: VehicleOrderDetail
+    })
+    .name;
 
 export default vehicleOrderDetail;

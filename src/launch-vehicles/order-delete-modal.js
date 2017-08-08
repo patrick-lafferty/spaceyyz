@@ -6,35 +6,37 @@ import angular from 'angular';
 
 class OrderDeleteModal {
 
-	$onInit() {
-		this.order = this.resolve.order;
+    $onInit() {
+        this.order = this.resolve.order;
 
-		const timestampNow = new Date().getTime();
-		const t = timestampNow - this.order.orderTimestamp;
-		const progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
-				
-		this.costToCancel = this.order.cost * progress;
-	}
+        const timestampNow = new Date().getTime();
+        const t = timestampNow - this.order.orderTimestamp;
+        const progress = t / (this.order.deliveryTimestamp - this.order.orderTimestamp);
 
-	cancel() {
-		this.modalInstance.dismiss('cancel');
-	}
+        this.costToCancel = this.order.cost * progress;
+    }
 
-	confirm() {
-		this.modalInstance.close({name: 0});
-	}
+    cancel() {
+        this.modalInstance.dismiss('cancel');
+    }
+
+    confirm() {
+        this.modalInstance.close({
+            name: 0
+        });
+    }
 }
 
 const orderDeleteModal = angular
-	.module('spaceyyz.launchVehicles.orderDeleteModal', [])
-	.component('orderDeleteModal', {
-		controller: OrderDeleteModal,
-		templateUrl: 'src/launch-vehicles/order-delete-modal.html',
-		bindings: {
-			resolve: '<',
-			modalInstance: '<'
-		}
-	})
-	.name;	
+    .module('spaceyyz.launchVehicles.orderDeleteModal', [])
+    .component('orderDeleteModal', {
+        controller: OrderDeleteModal,
+        templateUrl: 'src/launch-vehicles/order-delete-modal.html',
+        bindings: {
+            resolve: '<',
+            modalInstance: '<'
+        }
+    })
+    .name;
 
 export default orderDeleteModal;

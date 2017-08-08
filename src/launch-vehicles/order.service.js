@@ -4,66 +4,65 @@ import angular from 'angular';
 
 class OrderService {
     constructor() {
-        
+
     }
 
-	getOrders() {
-		return firebase.database().ref().child('orders/current').once('value').then(function(snapshot) {
-			var orderObject = snapshot.val();
-			var orders = [];
+    getOrders() {
+        return firebase.database().ref().child('orders/current').once('value').then(function(snapshot) {
+            var orderObject = snapshot.val();
+            var orders = [];
 
-			Object.keys(orderObject).forEach(function (key) {
-				let object = orderObject[key];
-				object.key = key;
-				object.deliveryDate = new Date(object.deliveryTimestamp);
-				object.orderDate = new Date(object.orderTimestamp);
-				orders.push(object);
-			});
+            Object.keys(orderObject).forEach(function(key) {
+                let object = orderObject[key];
+                object.key = key;
+                object.deliveryDate = new Date(object.deliveryTimestamp);
+                object.orderDate = new Date(object.orderTimestamp);
+                orders.push(object);
+            });
 
-			return orders;
-		});
-	}
+            return orders;
+        });
+    }
 
-	getOrder(number) {
-		return this.getOrders().then(orders => orders.find(order => order.number === number));
-	}
+    getOrder(number) {
+        return this.getOrders().then(orders => orders.find(order => order.number === number));
+    }
 
-	getNewOrderNumber() {
-		return firebase.database().ref().child('orders/nextId').transaction(
-			function (currentValue) {
-				return (currentValue || 0) + 1;
-			});
-	}
+    getNewOrderNumber() {
+        return firebase.database().ref().child('orders/nextId').transaction(
+            function(currentValue) {
+                return (currentValue || 0) + 1;
+            });
+    }
 
-	addOrder(order) {
-		var key = firebase.database().ref().child('orders/current').push().key;
-		var updates = {};
+    addOrder(order) {
+        var key = firebase.database().ref().child('orders/current').push().key;
+        var updates = {};
 
-		order.deliveryTimestamp = order.deliveryDate.getTime();
+        order.deliveryTimestamp = order.deliveryDate.getTime();
 
-		updates['/orders/current/' + key] = order;
-		firebase.database().ref().update(updates);
-	}
+        updates['/orders/current/' + key] = order;
+        firebase.database().ref().update(updates);
+    }
 
-	updateOrder(order)
-	{
-		firebase.database().ref().child('orders/current/' + order.key).set({
-			number: order.number,
-			orderTimestamp: order.orderTimestamp,
-			deliveryTimestamp: order.deliveryDate.getTime(),
-			vehicleName: order.vehicleName,
-			cost: order.cost
-		});
-	}
+    updateOrder(order) {
+        firebase.database().ref().child('orders/current/' + order.key).set({
+            number: order.number,
+            orderTimestamp: order.orderTimestamp,
+            deliveryTimestamp: order.deliveryDate.getTime(),
+            vehicleName: order.vehicleName,
+            cost: order.cost
+        });
+    }
 
-	deleteOrder(order) {
-		firebase.database().ref().child('orders/current/' + order.key).remove();
-	}
+    deleteOrder(order) {
+        firebase.database().ref().child('orders/current/' + order.key).remove();
+    }
 }
 
 const orderService = angular
-		.module('spaceyyz.launchVehicles.orderService', [])
-		.service('orderService', OrderService)
-		.name;
+    .module('spaceyyz.launchVehicles.orderService', [])
+    .service('orderService', OrderService)
+    .name;
 
 export default orderService;

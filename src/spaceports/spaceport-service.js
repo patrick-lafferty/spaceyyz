@@ -29,30 +29,30 @@ class SpaceportService {
         });
     }
 
-		addSpaceport(spaceport) {
-			var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push(
-				{
-					name: spaceport.name,
-					country: spaceport.country
-				}).key;
-			spaceport.key = key;
-		}
+    addSpaceport(spaceport) {
+      var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push(
+        {
+          name: spaceport.name,
+          country: spaceport.country
+        }).key;
+      spaceport.key = key;
+    }
 
-		updateSpaceport(spaceport) {
-			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
-				name: spaceport.name,
-				country: spaceport.country
-			});
-		}
+    updateSpaceport(spaceport) {
+      firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
+        name: spaceport.name,
+        country: spaceport.country
+      });
+    }
 
-		deleteSpaceport(spaceport) {
-			firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();			
-		}
-		
-	}
+    deleteSpaceport(spaceport) {
+      firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();      
+    }
+    
+  }
 
 const spaceportService = angular
-		  .module('spaceyyz.spaceports.spaceportService', [])
+      .module('spaceyyz.spaceports.spaceportService', [])
       .service('spaceportService', SpaceportService)
       .name;
 
