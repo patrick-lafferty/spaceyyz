@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Wed Nov 16 2016 12:51:08 GMT-0500 (EST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -12,44 +12,41 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['browserify', 'mocha', 'chai'],
 
-	plugins: ['karma-mocha', 'karma-chai', 'karma-browserify', 'karma-mocha-reporter', 'karma-sourcemap-loader'],
+    plugins: ['karma-mocha', 'karma-chai', 'karma-browserify', 'karma-mocha-reporter', 'karma-sourcemap-loader'],
 
-
-    // list of files / patterns to load in the browser
     files: [
-    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js',
-    'https://unpkg.com/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-    'https://unpkg.com/angular-ui-router@next/release/angular-ui-router.min.js',
-		//{ pattern: 'node_modules/angular-ui-router/release/angular-ui-router.js.map', included: false},
-		'../node_modules/angular-mocks/angular-mocks.js',
-		'../src/app.module.js',
-		'../src/app.requires.js',
-		'../src/**/*.js',
-      	'../test/**/*.js'
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js',
+      'https://unpkg.com/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+      'https://unpkg.com/angular-ui-router@next/release/angular-ui-router.min.js',
+      '../node_modules/angular-mocks/angular-mocks.js',
+      '../src/**/*.js',
+      '../test/**/*.js'
     ],
 
-
-    // list of files to exclude
     exclude: [
-		'bundle.js', 'karma.conf.js', 'webpack.config.prod.js', 'webpack.config.dev.js',
-		'node_modules/*!(mocha|karma-mocha/lib|chai|karma-chai|angular-mocks|angular-ui-bootstrap|angular-ui-router)/**/*.js',
-		'node_modules/JSONStream/**/*.js',
-		'coverage/**/*.js'
+      'bundle.js', 'karma.conf.js', 'webpack.config.prod.js', 'webpack.config.dev.js',
+      'node_modules/*!(mocha|karma-mocha/lib|chai|karma-chai|angular-mocks|angular-ui-bootstrap|angular-ui-router)/**/*.js',
+      'node_modules/JSONStream/**/*.js',
+      'coverage/**/*.js'
     ],
-
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		'../src/**/*.js': ['browserify', 'sourcemap'],
-		'../test/**/*.js': ['browserify', 'sourcemap']
+      '../src/**/*.js': ['browserify', 'sourcemap'],
+      '../test/**/*.js': ['browserify', 'sourcemap']
     },
 
-	browserify: {
-		debug: true
-	},
+    browserify: {
+      debug: true,
+      'transform': [[
+        'babelify', {
+        presets: ['es2015']
+        }
+      ]]
+    },
 
-	devtool: 'inline-source-map',
+    devtool: 'inline-source-map',
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -86,10 +83,10 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     concurrency: 1, //Infinity
 
-	client: {
-		mocha: {
-			reporter: 'html'
-		}
-	}
+    client: {
+      mocha: {
+        reporter: 'html'
+      }
+    }
   })
 }

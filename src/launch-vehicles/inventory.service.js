@@ -76,6 +76,7 @@ class InventoryService {
 
     constructor(variantService) {
         this.variantService = variantService;
+        this.categorizeVehicles = categorizeVehicles;
     }
 
     combineVehiclesWithVariants(vehicles, variants) {

@@ -57,8 +57,8 @@ describe('Vehicle Inventory Factory', function () {
 
 	beforeEach(function () {
 		angular.mock.module('spaceyyz')
-		inject(function(_vehicleInventoryFactory_) {
-			factory = _vehicleInventoryFactory_;
+		inject(function(_vehicleInventoryService_) {
+			factory = _vehicleInventoryService_;
 		});
 
 		vehicles = Object.keys(firebase.store.vehicles).map(
