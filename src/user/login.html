@@ -39,6 +39,7 @@
 					<label for="password" class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-4">
 						<input type="password" id="password" class="form-control" ng-model="$ctrl.newAccount.password">
+						<div ng-show="$ctrl.newAccount.password.length">Password must be at least 6 characters long</div>
 					</div>
 				</div>
 

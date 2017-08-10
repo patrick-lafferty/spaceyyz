@@ -27,7 +27,8 @@ class Login {
 	register() {
 		if (this.newAccount.email === ''  			
 			|| this.newAccount.password === ''
-			|| this.newAccount.password !== this.newAccount.confirmPassword) {
+			|| this.newAccount.password !== this.newAccount.confirmPassword
+			|| this.newAccount.password.length < 6) {
 			return;
 		}
 
