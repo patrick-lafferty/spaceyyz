@@ -24,9 +24,11 @@ class Engines {
 	}
 
 	constructor(engineService, $scope, $timeout, $uibModal) {
+		Object.assign(this, {
+			engineService, $uibModal
+		});
 		this.engines = {all: []};
 		this.newEngine = new Engine();
-		this.$uibModal = $uibModal;
 		this.modalInstance = {};
 		
 		engineService.getEngines().then(engines => {

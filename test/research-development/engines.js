@@ -35,7 +35,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 	beforeEach(function () {
 		angular.mock.module('spaceyyz');
 		angular.mock.module(function ($provide) {
-			$provide.value('engineFactory', engineFactory);
+			$provide.value('engineService', engineFactory);
 			$provide.value('$uibModal', $uibModal);
 		});
 	});
