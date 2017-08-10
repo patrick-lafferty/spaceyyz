@@ -27,7 +27,7 @@ class EngineService {
     }
 
     addEngine(engine) {
-        var key = firebase.database().ref().child('engines').push({
+        firebase.database().ref().child('engines').push({
             name: engine.name,
             isp: engine.isp,
             thrust: engine.thrust,

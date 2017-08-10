@@ -43,7 +43,7 @@ class OrderConfirmation {
             }
         });
 
-        this.modalInstance.result.then(thing => {
+        this.modalInstance.result.then(() => {
             this.orderService.deleteOrder(this.order);
             this.$state.go('development');
         });

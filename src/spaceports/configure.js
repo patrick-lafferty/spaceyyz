@@ -42,7 +42,7 @@ class ConfigureSpaceport {
 
     saveSpaceport(spaceport) {
         spaceport.beingEdited = false;
-        spaceportService.updateSpaceport(spaceport);
+        this.spaceportService.updateSpaceport(spaceport);
 
         let index = this.spaceports.all.findIndex(function(s) {
             return s.name === spaceport.name;
@@ -52,7 +52,7 @@ class ConfigureSpaceport {
     }
 
     createSpaceport(spaceport) {
-        spaceportService.addSpaceport(spaceport);
+        this.spaceportService.addSpaceport(spaceport);
         this.spaceports.all.push(spaceport);
         this.newSpaceport = {};
         this.successfullyCreated = true;
@@ -71,7 +71,7 @@ class ConfigureSpaceport {
         });
 
         this.modalInstance.result.then(spaceport => {
-            spaceportService.deleteSpaceport(spaceport);
+            this.spaceportService.deleteSpaceport(spaceport);
 
             this.spaceports.all.splice(this.spaceports.all.indexOf(spaceport), 1);
         });

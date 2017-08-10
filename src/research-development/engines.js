@@ -26,7 +26,7 @@ class Engines {
 	constructor(engineService, $scope, $timeout, $uibModal) {
 		this.engines = {all: []};
 		this.newEngine = new Engine();
-
+		this.$uibModal = $uibModal;
 		this.modalInstance = {};
 		
 		engineService.getEngines().then(engines => {
@@ -74,7 +74,7 @@ class Engines {
 	}
 
 	deleteEngine(engine) {
-		this.modalInstance = $uibModal.open({
+		this.modalInstance = this.$uibModal.open({
 			ariaLabelledBy: 'modal-title',
 			ariaDescribedBy: 'modal-body',
 			component: 'confirmEngineDeleteModal',

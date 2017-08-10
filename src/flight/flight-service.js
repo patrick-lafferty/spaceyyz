@@ -9,7 +9,7 @@ class FlightService {
 
         firebase.database().ref().child('flights').push(flight);
 
-    };
+    }
 
     getFlights() {
         return firebase.database().ref().child('flights').once('value').then(
@@ -25,7 +25,7 @@ class FlightService {
 
                 return flights;
             });
-    };
+    }
 
     getFlight(missionName) {
 

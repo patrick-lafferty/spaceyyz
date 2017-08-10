@@ -1,16 +1,6 @@
 import angular from 'angular';
 
 class VehicleVariantService {
-    constructor() {
-
-        var configuration = {
-            //need stages, engines
-            //perhaps inventoryservice should hold rocket families, which store
-            //all of the possible stages and engines
-            //a configuration is then one complete set of stages
-        };
-
-    }
 
     getFamilies() {
         return firebase.database().ref().child('variants').once('value').then(function(snapshot) {
@@ -44,7 +34,7 @@ class VehicleVariantService {
             return {
                 name: stage.name,
                 engines: stage.engines.map(engine => engine.key)
-            }
+            };
         });
 
         firebase.database().ref().child('variants/' + familyKey).push({

@@ -169,7 +169,7 @@ export default function configure() {
 				return true;
 			});
 			$transitions.onBefore({to: function(state) {
-				return state.parent.name == "auth";
+				return state.parent.name === 'auth';
 			}}, 
 
 			function(trans) {
