@@ -3,6 +3,9 @@ import angular from 'angular';
 class UserAccount {
 
 	constructor(userService, $state, $scope, $timeout) {
+		Object.assign(this, {
+			userService, $state
+		});
 		this.user = userService;
 		$scope.user = userService;
 		userService.onAuthChange(this, function () {
@@ -13,18 +16,17 @@ class UserAccount {
 	}
 
 	getEmail() {
-		return userService.getEmail();
+		return this.userService.getEmail();
 	}
 
 	email() {
-		return userService.getEmail();
+		return this.userService.getEmail();
 	}
 
 	login(email, password) {
-		let promise = userService.login(email, password);
-		promise.then(function() {
-			$state.go('home');
-		});
+		this.userService
+			.login(email, password)
+			.then(() => this.$state.go('home'));
 	}
 
 	logout() {
@@ -33,7 +35,7 @@ class UserAccount {
 	}
 
 	isLoggedIn() {
-		return this.user.email !== '';
+		return this.userService.email !== '';
 	}
 
 	static get $inject() {

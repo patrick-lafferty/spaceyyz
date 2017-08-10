@@ -18,10 +18,10 @@ class Login {
 	}
 
 	login() {
-		let promise = this.userService.login(this.email, this.password);
-		promise.then(function() {
-			this.$state.go(this.$state.params.redirectTo || 'auth.home');
-		});
+		this.userService
+			.login(this.email, this.password)
+			.then(() => 
+				this.$state.go(this.$state.params.redirectTo || 'auth.home'));
 	}
 
 	register() {
@@ -33,9 +33,7 @@ class Login {
 		}
 
 		this.userService.register(this.newAccount.email, this.newAccount.password).then(
-			function () {
-				this.$state.go(this.$state.params.redirectTo || 'auth.home');
-			},
+			() => this.$state.go(this.$state.params.redirectTo || 'auth.home'),
 			function (error) {
 				alert('Error registering: ' + error.code + ', ' + error.message);
 			});
