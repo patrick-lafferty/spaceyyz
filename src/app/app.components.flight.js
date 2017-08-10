@@ -5,12 +5,12 @@ import progress from '../flight/progress';
 import details from '../flight/details';
 
 const flight = angular
-      .module('spaceyyz.flight', [
-          flightService,
-          schedule,
-          progress,
-          details
-      ])
-      .name;
+    .module('spaceyyz.flight', [
+        flightService,
+        schedule,
+        progress,
+        details
+    ])
+    .name;
 
 export default flight;

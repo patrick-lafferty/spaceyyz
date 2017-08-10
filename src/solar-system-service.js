@@ -3,8 +3,7 @@ import angular from 'angular';
 
 class SolarSystem {
     constructor() {
-        this.planets = [
-            {
+        this.planets = [{
                 name: 'Mercury',
                 moons: ['None']
             },
@@ -44,11 +43,11 @@ class SolarSystem {
             },
         ];
     }
-	}
+}
 
-const solarSystem =	angular
-      .module('spaceyyz.solarSystem', [])
-      .service('solarSystemService', SolarSystem)
-      .name;
+const solarSystem = angular
+    .module('spaceyyz.solarSystem', [])
+    .service('solarSystemService', SolarSystem)
+    .name;
 
 export default solarSystem;
