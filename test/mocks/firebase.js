@@ -1,51 +1,45 @@
-var firebase = { store: {} };
-
 /* Replacement for Firebase's Promise
  * Returns the value immediately (not async)
  * */
-function Promise (foo) {
-	this.value = foo;
-}
+export class Promise {
+	constructor (foo) {
+		this.value = foo;
+	}
 
-Promise.prototype.then = function (onSuccess) {
-	onSuccess(this.value);
-};
+	then(onSuccess) {
+		onSuccess(this.value);
+	}
+}
 
 /* Replacement for Firebase's Snapshot
  * Just stores and returns a single value
  * */
-function Snapshot (value) {
-	this.value = value;
+class Snapshot {
+	constructor (value) {
+		this.value = value;
+	}
+
+	val() {
+		return this.value;
+	}
 }
 
-Snapshot.prototype.val = function () {
-	return this.value;
-};
+export let firebase = {
+	store: {},
+	database: function () {
+		return { 
 
-firebase.database = function () {
-
-	self.ref = function () {
-		return {
-			child: function (name) {
+			ref: function () {
 				return {
-					once: function (unused) {
-						return new Promise(new Snapshot(firebase.store[name]));
+					child: function (name) {
+						return {
+							once: function () {
+								return new Promise(new Snapshot(firebase.store[name]));
+							}
+						};
 					}
 				};
 			}
 		};
-	};
-
-	return self; /*{
-
-		ref: function () {
-		},
-
-	};*/
-};
-
-var exports = module.exports = {
-	firebase: firebase,
-	Promise: Promise
-
+	}
 };

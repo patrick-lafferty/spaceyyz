@@ -1,7 +1,6 @@
 let assert = require('chai').assert;
-let fb = require('../mocks/firebase');
-let firebase = window.firebase = fb.firebase;
-let Promise = fb.Promise;
+import {firebase, Promise} from '../mocks/firebase';
+window.firebase = firebase;
 
 describe('ResearchEngine component for Research&Development menu', function () {
 
@@ -10,7 +9,6 @@ describe('ResearchEngine component for Research&Development menu', function () {
 		addEngine: function (engine) {},
 		updateEngine: function (engine) {},
 		deleteEngine: function (engine) {}
-		
 	};
 
 	let $uibModal = {
