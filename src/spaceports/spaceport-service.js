@@ -11,7 +11,7 @@ class SpaceportService {
 
                 Object.keys(spaceportObject).forEach(key => {
                     let continent = [];
-                    
+
                     Object.keys(spaceportObject[key]).forEach(k => {
                         var spaceport = spaceportObject[key][k];
                         spaceport.key = k;
@@ -26,34 +26,33 @@ class SpaceportService {
                 spaceports.all = all;
 
                 return spaceports;
-        });
+            });
     }
 
     addSpaceport(spaceport) {
-      var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push(
-        {
-          name: spaceport.name,
-          country: spaceport.country
+        var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push({
+            name: spaceport.name,
+            country: spaceport.country
         }).key;
-      spaceport.key = key;
+        spaceport.key = key;
     }
 
     updateSpaceport(spaceport) {
-      firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
-        name: spaceport.name,
-        country: spaceport.country
-      });
+        firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
+            name: spaceport.name,
+            country: spaceport.country
+        });
     }
 
     deleteSpaceport(spaceport) {
-      firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();      
+        firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).remove();
     }
-    
-  }
+
+}
 
 const spaceportService = angular
-      .module('spaceyyz.spaceports.spaceportService', [])
-      .service('spaceportService', SpaceportService)
-      .name;
+    .module('spaceyyz.spaceports.spaceportService', [])
+    .service('spaceportService', SpaceportService)
+    .name;
 
 export default spaceportService;

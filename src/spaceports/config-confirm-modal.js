@@ -16,7 +16,7 @@ class ConfirmSpaceportDeleteModal {
 
         this.spaceport = this.resolve.spaceport;
     }
-    
+
     cancel() {
         this.modalInstance.dismiss('cancel');
     }
@@ -24,18 +24,18 @@ class ConfirmSpaceportDeleteModal {
     confirm() {
         this.modalInstance.close(self.spaceport);
     }
-	}
+}
 
 const confirmSpaceportDeleteModal = angular
-      .module('spaceyyz.spaceports.confirmSpaceportDeleteModal', [])
-		  .component('confirmSpaceportDeleteModal', {
-			    controller: ConfirmSpaceportDeleteModal,
-			    templateUrl: 'src/spaceports/config-confirm-modal.html',
-			    bindings: {
-				      resolve: '<',
-				      modalInstance: '<'
-			    }
-		  })
-      .name;	
+    .module('spaceyyz.spaceports.confirmSpaceportDeleteModal', [])
+    .component('confirmSpaceportDeleteModal', {
+        controller: ConfirmSpaceportDeleteModal,
+        templateUrl: 'src/spaceports/config-confirm-modal.html',
+        bindings: {
+            resolve: '<',
+            modalInstance: '<'
+        }
+    })
+    .name;
 
 export default confirmSpaceportDeleteModal;

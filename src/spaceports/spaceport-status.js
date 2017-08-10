@@ -18,11 +18,11 @@ class Spaceports {
 }
 
 const spaceport = angular
-		  .module('spaceyyz.spaceports.spaceport', [])
-		  .component('spaceportStatus', {
-			    templateUrl: 'src/spaceports/spaceport-status.html',
-			    controller: Spaceports,
-		  })
-      .name;
+    .module('spaceyyz.spaceports.spaceport', [])
+    .component('spaceportStatus', {
+        templateUrl: 'src/spaceports/spaceport-status.html',
+        controller: Spaceports,
+    })
+    .name;
 
 export default spaceport;
