@@ -10,7 +10,8 @@ module.exports = {
 	"globals": {
 		"angular": 1,
 		"firebase": 1,
-		"Promise": 1
+		"Promise": 1,
+		"inject": 1
 	},
     "extends": "eslint:recommended",
     "rules": {

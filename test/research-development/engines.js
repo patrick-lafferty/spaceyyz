@@ -1,4 +1,4 @@
-let assert = require('chai').assert;
+import {assert} from 'chai';
 import {firebase, Promise} from '../mocks/firebase';
 window.firebase = firebase;
 
@@ -6,16 +6,16 @@ describe('ResearchEngine component for Research&Development menu', function () {
 
 	let engineFactory = {
 		getEngines: function () { return new Promise([]);},
-		addEngine: function (engine) {},
-		updateEngine: function (engine) {},
-		deleteEngine: function (engine) {}
+		addEngine: function () {},
+		updateEngine: function () {},
+		deleteEngine: function () {}
 	};
 
 	let $uibModal = {
 		open: function (modal) { 
 			return {
 				result: new Promise(modal.resolve.engine)
-			}
+			};
 		}
 	};
 
@@ -33,7 +33,7 @@ describe('ResearchEngine component for Research&Development menu', function () {
 	};
 
 	beforeEach(function () {
-		angular.mock.module('spaceyyz')
+		angular.mock.module('spaceyyz');
 		angular.mock.module(function ($provide) {
 			$provide.value('engineFactory', engineFactory);
 			$provide.value('$uibModal', $uibModal);
