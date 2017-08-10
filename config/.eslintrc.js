@@ -12,11 +12,6 @@ module.exports = {
 	},
     "extends": "eslint:recommended",
     "rules": {
-        "indent": [
-            "error",
-			4,
-			{"SwitchCase": 1} 
-        ],
         "linebreak-style": [
             "error",
             "unix"

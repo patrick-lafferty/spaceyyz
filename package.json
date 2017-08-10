@@ -17,7 +17,7 @@
     "angularjs": "0.0.1",
     "browserify": "^14.4.0",
     "chai": "^4.1.0",
-    "eslint": "^4.3.0",
+    "eslint": "^4.4.1",
     "karma": "^1.7.0",
     "karma-browserify": "^5.1.1",
     "karma-chai": "^0.1.0",

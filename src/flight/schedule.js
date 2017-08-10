@@ -2,9 +2,10 @@ import angular from 'angular';
 
 class ScheduleFlight {
 
-	  static get $inject() {
+    static get $inject() {
         return ['vehicleInventoryService', 'spaceportService',
-		            '$timeout', '$scope', 'groupByFilter', 'solarSystemService', 'flightService'];
+            '$timeout', '$scope', 'groupByFilter', 'solarSystemService', 'flightService'
+        ];
     }
 
     notifyChanges() {
@@ -13,11 +14,21 @@ class ScheduleFlight {
 
     constructor(vehicleInventoryService, spaceportService,
         $timeout, $scope, groupByFilter, solarSystemService, flightService) {
-        
-        Object.assign(this, {vehicleInventoryService, spaceportService, $timeout, $scope, groupByFilter, solarSystemService, flightService});
+
+        Object.assign(this, {
+            vehicleInventoryService,
+            spaceportService,
+            $timeout,
+            $scope,
+            groupByFilter,
+            solarSystemService,
+            flightService
+        });
         this.payload = 0;
         this.solarSystem = solarSystemService;
-        this.vehicles = {all: []};
+        this.vehicles = {
+            all: []
+        };
         this.selectedVehicle = {};
         this.datePicker = {
             isOpen: false
@@ -54,15 +65,15 @@ class ScheduleFlight {
         this.selectedValidSpaceport = false;
         this.filtername = '';
         this.isopen = false;
-        
+
         this.spaceportFilter = spaceport => spaceport.name.toLowerCase().includes(this.filtername.toLowerCase());
-        
+
         this.spaceportSelected = spaceport => {
             this.spaceport = spaceport;
             this.selectedValidSpaceport = true;
             this.filtername = spaceport.name;
         };
-        
+
         this.filterChanged = () => {
             this.isopen = true;
             this.spaceport = this.ungroupedSpaceports[this.continent].find(s => s.name === this.filtername);
@@ -107,14 +118,14 @@ class ScheduleFlight {
             this.notifyChanges();
         });
     }
-	}
+}
 
 const scheduleFlight = angular
-      .module('spaceyyz.flight.schedule', [])
-		  .component('scheduleFlight', {
-			    templateUrl: 'src/flight/schedule.html',
-			    controller: ScheduleFlight
-		  })
-      .name;
+    .module('spaceyyz.flight.schedule', [])
+    .component('scheduleFlight', {
+        templateUrl: 'src/flight/schedule.html',
+        controller: ScheduleFlight
+    })
+    .name;
 
 export default scheduleFlight;

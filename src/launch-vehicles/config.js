@@ -35,7 +35,7 @@ class Config {
         /*
          * vehicles/engines/variants are stored separately in the database, so we need to combine them all here to display
          * */
-        Promi se
+        Promise
             .all([
                 vehicleInventoryService.getVehicles(),
                 engineService.getEngines(),

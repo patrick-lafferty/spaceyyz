@@ -2,10 +2,10 @@ import angular from 'angular';
 
 class FlightProgress {
 
-	  static get $inject() {
+    static get $inject() {
         return ['flightService', '$timeout', '$scope'];
     }
-    
+
     constructor(flightService, $timeout, $scope) {
 
         this.flights = [];
@@ -18,11 +18,11 @@ class FlightProgress {
 }
 
 const flightProgress = angular
-      .module('spaceyyz.flight.progress', [])
-		  .component('flightProgress', {
-			    templateUrl: 'src/flight/progress.html',
-			    controller: FlightProgress
-		  })
-      .name;
+    .module('spaceyyz.flight.progress', [])
+    .component('flightProgress', {
+        templateUrl: 'src/flight/progress.html',
+        controller: FlightProgress
+    })
+    .name;
 
 export default flightProgress;
