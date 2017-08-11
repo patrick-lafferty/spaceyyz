@@ -1,0 +1,45 @@
+/*
+logoContainer
+logoSquircle
+*/
+
+.logoContainer {
+	overflow: hidden;
+	height: 40px;
+}
+
+.logoSquircle {
+	opacity: 0.4;
+	background: #19b3fe;
+	width: 500px;
+	height: 500px;
+	margin-left: -140px;
+	margin-top: -500px;
+	transform-origin: 49% 50%;
+	border-radius: 79%;
+	animation: logoTransforms 7000ms infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+	z-index: 0;
+}
+
+.squircle1 {
+	opacity: 0.55;
+	background: #52bff3;
+	transform-origin: 47% 50%;
+	animation-delay: -3.5s;
+}
+
+.squircle2 {
+	opacity: 0.55;
+	background: #52bff3;
+	margin-top: -470px;
+	transform-origin: 47% 50%;
+	animation-delay: -3.5s;
+}
+
+@keyframes logoTransforms {
+	from { transform: rotate(0deg) rotateX(0deg)}
+
+	50% { transform: rotate(180deg) rotateX(20deg)}
+
+	to { transform: rotate(360deg) rotateX(0deg)}
+}

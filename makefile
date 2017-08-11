@@ -1,13 +1,16 @@
-dev: clean
+style: 
+	node_modules/less/bin/lessc src/style/main.less spaceyyz.css
+
+dev: clean style
 	webpack --config config/webpack.config.dev.js --progress --colors
 	cp src/index.html index.html
 
-prod: clean
+prod: clean style
 	webpack --config config/webpack.config.prod.js --progress --colors 
 	cp src/index.html index.html
 
 clean:
-	$(RM) index.html bundle.*
+	$(RM) index.html bundle.* spaceyyz.css
 
 test:
 	node_modules/karma/bin/karma start config/karma.conf.js
