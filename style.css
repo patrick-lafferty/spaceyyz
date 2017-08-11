@@ -76,6 +76,10 @@ html, body {
 	margin-top: 10px;
 }
 
+.variantBrief {
+	margin-left: 2rem;
+}
+
 .modal-header, .modal-body, .modal-footer {
 	color: #333;
 }
@@ -126,7 +130,6 @@ html, body {
 .sideMenu ul {
 	list-style: none;
 }
-
 
 input[type='number'] {
 	-moz-appearance: textfield;

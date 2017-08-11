@@ -30,6 +30,7 @@ class ScheduleFlight {
             all: []
         };
         this.selectedVehicle = {};
+        this.selectedVariant = {};
         this.datePicker = {
             isOpen: false
         };
@@ -111,7 +112,10 @@ class ScheduleFlight {
         vehicleInventoryService.getVehicles().then(vehicles => {
             this.vehicles.all = vehicles.allVehicles;
 
-            this.vehicles.all.forEach(vehicle => vehicle.selected = false);
+            this.vehicles.all.forEach(vehicle => {
+                vehicle.selected = false;
+                vehicle.selectedVariant = vehicle.variants[0];
+            });
 
             this.notifyChanges();
         });
