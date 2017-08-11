@@ -47,7 +47,7 @@ class ScheduleFlight {
                     secondary: 'None'
                 },
                 type: 'orbit',
-                vehicle: {}
+                vehicle: {invalid: true}
             },
             launch: {
                 date: new Date(),
@@ -81,6 +81,11 @@ class ScheduleFlight {
         };
 
         this.schedule = () => {
+
+            if (this.flight.mission.vehicle.invalid) {
+                return;
+            }
+
             this.flight.mission.name = 'sts-31';
             flightService.scheduleFlight(this.flight);
         };

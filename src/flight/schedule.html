@@ -1,142 +1,126 @@
 <div class="view">
 	<h1>Schedule a new flight</h1>
-	<uib-tabset active="active">
-		<uib-tab heading="Flight planner" index="0">
-			<h2>Mission Parameters</h2>
-			<form class="form-horizontal" style="margin-top: 10px">
-				<div class="form-group">
-					<label for="payload" class="col-sm-2 control-label">Payload</label>
-					<div class="col-sm-3 input-group">
-						<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload" required ng-pattern="/^[1-9][0-9]*/">
-						<div class="input-group-addon">kg</div>
-					</div>	
-				</div>
-				<div class="form-group">
-					<label for="type" class="col-sm-2 control-label">Type</label>
+	<h2>Mission Parameters</h2>
+	<form class="form-horizontal" style="margin-top: 10px">
+		<div class="form-group">
+			<label for="payload" class="col-sm-2 control-label">Payload</label>
+			<div class="col-sm-3 input-group">
+				<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload" required ng-pattern="/^[1-9][0-9]*/">
+				<div class="input-group-addon">kg</div>
+			</div>	
+		</div>
+		<div class="form-group">
+			<label for="type" class="col-sm-2 control-label">Type</label>
+			<div class="input-group">
+				<select id="type" class="form-control" ng-model="$ctrl.flight.mission.type">
+					<option value="orbit">Orbit</option>
+					<option value="flyby">Flyby</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Destination</label>
+			<div class="col-sm-8"> 
+				<div class="form-group row">
+					<label for="primaryDestination" class="col-sm-2 control-label">Primary</label>
 					<div class="input-group">
-						<select id="type" class="form-control" ng-model="$ctrl.flight.mission.type">
-							<option value="orbit">Orbit</option>
-							<option value="flyby">Flyby</option>
+						<select id="primaryDestination" class="form-control" ng-model="$ctrl.flight.mission.destination.primary" ng-options="planet as planet.name for planet in $ctrl.solarSystem.planets">
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Destination</label>
-					<div class="col-sm-8"> 
-						<div class="form-group row">
-							<label for="primaryDestination" class="col-sm-2 control-label">Primary</label>
-							<div class="input-group">
-								<select id="primaryDestination" class="form-control" ng-model="$ctrl.flight.mission.destination.primary" ng-options="planet as planet.name for planet in $ctrl.solarSystem.planets">
-								</select>
-							</div>
-						</div>
 
-						<div class="form-group row">
-							<label for="secondaryDestination" class="col-sm-2 control-label">Secondary</label>
-							<div class="input-group">
-								<select id="secondary" class="form-control" ng-model="$ctrl.flight.mission.destination.secondary" ng-options="moon for moon in $ctrl.flight.mission.destination.primary.moons">
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-
-			<h2>Vehicles that meet mission requirements</h2>
-			<ul class="vehicles">
-				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.filter">
-					<div class="vehiclePreview">
-						<div class="radio" style="flex: 0 1 30px">
-							<label>
-								<input type="radio" name="vehicles" ng-model="$ctrl.selectedVehicle" ng-value="vehicle" ng-click="$ctrl.selected()">
-							</label>	
-						</div>
-						<div>
-							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
-							<!--<p>Capacity: {{vehicle.capacity | number}}kg</p>
-							<p>Cost: {{vehicle.cost | currency}}</p>
-							<p>In stock: {{vehicle.inventory}}</p>-->
-							<h5>Variants</h5>
-							<ul>
-								<li class="no-list-style" ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
-									<strong>{{variant.name}}</strong>
-									<p style="margin-left: 20px">Capacity: {{variant.capacity | number}}kg</p>
-									<p style="margin-left: 20px">Cost: {{variant.cost | currency}}</p>
-								</li>
-							</ul>
-						</div>
-						<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
-					</div>
-					<div ng-show="$ctrl.selectedVehicle === vehicle && vehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Currently out of stock, will be ordered if you schedule this flight</div>
-				</li>
-			</ul>
-
-			<h2>Launch Parameters</h2>
-			<form class="form-horizontal" style="margin-top: 10px">
-				<div class="form-group">
-					<label for="launchDate" class="col-sm-2 control-label">Launch Date</label>
-					<div class="col-sm-3 input-group">
-						<input type="text" uib-datepicker-popup close-text="Close" class="form-control" id="launchDate" ng-model="$ctrl.flight.launch.date" is-open="datePicker.isOpen" datepicker-options="$ctrl.datePickerOptions">
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-primary" ng-click="datePicker.isOpen = true">
-								<i class="glyphicon glyphicon-calendar"></i>
-							</button>
-						</span>
-					</div>
-				</div>
-				<div ng-show="$ctrl.selectedVehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Flight will be delayed until the launch vehicle is constructed</div>
-				<div class="form-group" style="display: flex; align-items: center">
-					<label for="launchTime" class="col-sm-2 control-label" style="padding-top: 0px">Launch Time</label>
-					<div class="col-sm-3 input-group">
-						<div uib-timepicker ng-model="$ctrl.flight.launch.date" show-meridian="false"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="continent" class="col-sm-2 control-label">Launch Site</label>
-					<!--
-					<div class="col-sm-3 input-group">
-						<input type="text" id="launchSite">
-					</div>
-					-->
-					<div class="col-sm-2" style="padding-left: 0px">
-						<select id="continent" class="form-control" ng-model="$ctrl.continent" ng-change="$ctrl.continentChanged()">
-							<option value="northAmerica">North America</option>
-							<option value="europe">Europe</option>
-							<option value="asia">Asia</option>
+				<div class="form-group row">
+					<label for="secondaryDestination" class="col-sm-2 control-label">Secondary</label>
+					<div class="input-group">
+						<select id="secondary" class="form-control" ng-model="$ctrl.flight.mission.destination.secondary" ng-options="moon for moon in $ctrl.flight.mission.destination.primary.moons">
 						</select>
 					</div>
-
-					<div color="black" uib-dropdown class="btn-group" has-error has-feedback is-open="$ctrl.isopen">
-						<label class="control-label sr-only" for="filterName"></label>
-						<input id="filterName" type="text" uib-dropdown-toggle ng-model="$ctrl.filtername"
-						ng-change="$ctrl.filterChanged()" class="form-control" ng-focus="$ctrl.isopen = true" style="color: black;">
-						<span ng-class="{'glyphicon-remove': !$ctrl.selectedValidSpaceport}" class="glyphicon form-control-feedback" style="color: red"></span>
-						<div uib-dropdown-menu class="dropdown-menu">
-							<div ng-repeat="group in $ctrl.spaceports[$ctrl.continent]"
-								style="color: black">
-								<p><strong>{{group.name}}</strong></p>
-								<ul style="list-style: none">
-									<li ng-repeat="spaceport in group.spaceports | filter: $ctrl.spaceportFilter" ng-click="$ctrl.spaceportSelected(spaceport)">{{spaceport.name}}</li>
-								</ul>
-							</div>
-						</div>
-					</div>
 				</div>
+			</div>
+		</div>
+	</form>
 
-				<div class="form-group col-sm-5">
-					<button id="schedule" type="button" class="btn btn-primary" ng-click="$ctrl.schedule()">Schedule
+	<h2>Vehicles that meet mission requirements</h2>
+	<ul class="vehicles">
+		<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.filter">
+			<div class="vehiclePreview">
+				<div class="radio" style="flex: 0 1 30px">
+					<label>
+						<input type="radio" name="vehicles" ng-model="$ctrl.selectedVehicle" ng-value="vehicle" ng-click="$ctrl.selected()">
+					</label>	
+				</div>
+				<div>
+					<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
+					<h5>Variants</h5>
+					<ul>
+						<li class="no-list-style" ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
+							<strong>{{variant.name}}</strong>
+							<p style="margin-left: 20px">Capacity: {{variant.capacity | number}}kg</p>
+							<p style="margin-left: 20px">Cost: {{variant.cost | currency}}</p>
+						</li>
+					</ul>
+				</div>
+				<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
+			</div>
+			<div ng-show="$ctrl.selectedVehicle === vehicle && vehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Currently out of stock, will be ordered if you schedule this flight</div>
+		</li>
+	</ul>
+
+	<h2>Launch Parameters</h2>
+	<form class="form-horizontal" style="margin-top: 10px">
+		<div class="form-group">
+			<label for="launchDate" class="col-sm-2 control-label">Launch Date</label>
+			<div class="col-sm-3 input-group">
+				<input type="text" uib-datepicker-popup close-text="Close" class="form-control" id="launchDate" ng-model="$ctrl.flight.launch.date" is-open="datePicker.isOpen" datepicker-options="$ctrl.datePickerOptions">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-primary" ng-click="datePicker.isOpen = true">
+						<i class="glyphicon glyphicon-calendar"></i>
 					</button>
+				</span>
+			</div>
+		</div>
+		<div ng-show="$ctrl.selectedVehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Flight will be delayed until the launch vehicle is constructed</div>
+		<div class="form-group" style="display: flex; align-items: center">
+			<label for="launchTime" class="col-sm-2 control-label" style="padding-top: 0px">Launch Time</label>
+			<div class="col-sm-3 input-group">
+				<div uib-timepicker ng-model="$ctrl.flight.launch.date" show-meridian="false"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="continent" class="col-sm-2 control-label">Launch Site</label>
+			<div class="col-sm-2" style="padding-left: 0px">
+				<select id="continent" class="form-control" ng-model="$ctrl.continent" ng-change="$ctrl.continentChanged()">
+					<option value="northAmerica">North America</option>
+					<option value="europe">Europe</option>
+					<option value="asia">Asia</option>
+				</select>
+			</div>
+
+			<div color="black" uib-dropdown class="btn-group" has-error has-feedback is-open="$ctrl.isopen">
+				<label class="control-label sr-only" for="filterName"></label>
+				<input id="filterName" type="text" uib-dropdown-toggle ng-model="$ctrl.filtername"
+				ng-change="$ctrl.filterChanged()" class="form-control" ng-focus="$ctrl.isopen = true" style="color: black;">
+				<span ng-class="{'glyphicon-remove': !$ctrl.selectedValidSpaceport}" class="glyphicon form-control-feedback" style="color: red"></span>
+				<div uib-dropdown-menu class="dropdown-menu">
+					<div ng-repeat="group in $ctrl.spaceports[$ctrl.continent]"
+						style="color: black">
+						<p><strong>{{group.name}}</strong></p>
+						<ul style="list-style: none">
+							<li ng-repeat="spaceport in group.spaceports | filter: $ctrl.spaceportFilter" ng-click="$ctrl.spaceportSelected(spaceport)">{{spaceport.name}}</li>
+						</ul>
+					</div>
 				</div>
-			</form>
+			</div>
+		</div>
 
-			<br ng-repeat="x in [1, 2, 3, 4, 5]">
+		<div ng-show="$ctrl.flight.mission.vehicle.invalid" uib-alert ng-class="'alert-warning'">Select a vehicle to schedule a launch</div>
 
-		</uib-tab>
+		<div class="form-group col-sm-5">
+			<button id="schedule" type="button" class="btn btn-primary" ng-click="$ctrl.schedule()">Schedule
+			</button>
+		</div>
+	</form>
 
-		<uib-tab heading="Manual" index="1">
-			<h1>Not implemented yet</h1>
-		</uib-tab>
-		
-	</uib-tabset>
+	<br ng-repeat="x in [1, 2, 3, 4, 5]">
 </div>
 
