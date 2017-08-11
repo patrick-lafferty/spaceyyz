@@ -90,6 +90,10 @@ class VehicleOrderDetail {
             }, function(/*error*/) {
                 //console.error(error);
             });
+        }, () => {
+            /*we don't care that the user dismissed the modal,
+            but angular will complain about possible unhandled rejections 
+            if we don't add the catch function, so just add a dummy func*/
         });
 
     }
