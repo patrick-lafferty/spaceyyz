@@ -9,3 +9,4 @@ coverage/
 # !node_modules/angular-ui-router
 # !node_modules/anymatch
 # !node_modules/bootstrap
+bundle.js.map

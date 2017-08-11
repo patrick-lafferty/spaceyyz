@@ -1,10 +1,10 @@
 dev: clean
-	webpack --config config/webpack.config.dev.js --progress --colors -d
-	cp src/index-dev.html index.html
+	webpack --config config/webpack.config.dev.js --progress --colors
+	cp src/index.html index.html
 
 prod: clean
 	webpack --config config/webpack.config.prod.js --progress --colors 
-	cp src/index-prod.html index.html
+	cp src/index.html index.html
 
 clean:
 	$(RM) index.html bundle.*
