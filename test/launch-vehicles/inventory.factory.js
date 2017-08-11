@@ -1,7 +1,6 @@
-let assert = require('chai').assert;
-let fb = require('../mocks/firebase');
-let firebase = window.firebase = fb.firebase;
-let Promise = fb.Promise;
+import {assert} from 'chai';
+import {firebase} from '../mocks/firebase';
+window.firebase = firebase;
 
 describe('Vehicle Inventory Factory', function () {
 	let factory = undefined;
@@ -56,7 +55,7 @@ describe('Vehicle Inventory Factory', function () {
 	let variants = [];	
 
 	beforeEach(function () {
-		angular.mock.module('spaceyyz')
+		angular.mock.module('spaceyyz');
 		inject(function(_vehicleInventoryService_) {
 			factory = _vehicleInventoryService_;
 		});

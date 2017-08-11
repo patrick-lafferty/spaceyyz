@@ -87,8 +87,8 @@ class VehicleOrderDetail {
                     orderNumber: orderNumber,
                     order: order
                 });
-            }, function(error) {
-                console.error(error);
+            }, function(/*error*/) {
+                //console.error(error);
             });
         });
 
