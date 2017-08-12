@@ -1,3 +1,5 @@
+@import "colours.less";
+
 .btn.btn-primary,
 .btn-primary:hover,
 .btn-primary:active,
@@ -6,6 +8,23 @@
 	background-color: #19b3fe;
 	color: #505050;
 	background-image: none 
+}
+
+.btn-group.open .dropdown-toggle {
+	box-shadow: unset;
+	-webkit-box-shadow: unset;
+}
+
+.dropdown-menu > li > a:focus {
+	background-color: @cool-blue;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+	background-color: unset;
+	background-image: unset;
+	filter: unset;
+	background-repeat: unset;
+	
 }
 
 .nav-tabs > li > a:hover {

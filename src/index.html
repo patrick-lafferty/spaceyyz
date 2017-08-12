@@ -21,10 +21,18 @@
 			</div>
 
 			<nav class="navigation">
-				<div class="menu">
-					<div class="menu__list">
+				<div class="menu btn-group" uib-dropdown>
+					<button id="home-button" class="menu__list" type="button" uib-dropdown-toggle>
 						Home
-					</div>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="home-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="home" ui-sref-active="active"><p class="menu__link">Account</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="about" ui-sref-active="active"><p class="menu__link">About</p></a>
+						</li>
+					</ul>
 				</div>
 				<div class="menu">
 					<div class="menu__list">
