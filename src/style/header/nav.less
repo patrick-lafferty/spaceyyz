@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.menu__list {
+.menu__button {
     background: none;
     border: none;
 }
@@ -29,11 +29,6 @@
 .menu__item:hover {
     background-color: @cool-blue;
 }
-
-.menu__link {
-    transform: skew(20deg);
-}
-
 
 @media (min-width: 320px) {
     .navigation {
@@ -65,7 +60,11 @@
         padding: 1rem;
     }
 
-    .menu__list {
+    .menu__button {
+        transform: skew(20deg);
+    }
+
+    .menu__link {
         transform: skew(20deg);
     }
 }

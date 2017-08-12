@@ -21,8 +21,8 @@
 			</div>
 
 			<nav class="navigation">
-				<div class="menu btn-group" uib-dropdown>
-					<button id="home-button" class="menu__list" type="button" uib-dropdown-toggle>
+				<div class="menu" uib-dropdown>
+					<button id="home-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Home
 					</button>
 					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="home-button">
@@ -34,25 +34,63 @@
 						</li>
 					</ul>
 				</div>
-				<div class="menu">
-					<div class="menu__list">
+				<div class="menu" uib-dropdown>
+					<button id="vehicles-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Vehicles
-					</div>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="vehicles-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="orderNew" ui-sref-active="active"><p class="menu__link">Order New</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="development" ui-sref-active="active"><p class="menu__link">In Development</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="completed" ui-sref-active="active"><p class="menu__link">Inventory</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="config" ui-sref-active="active"><p class="menu__link">Configure</p></a>
+						</li>
+					</ul>
 				</div>
-				<div class="menu">
-					<div class="menu__list">
+				<div class="menu" uib-dropdown>
+					<button id="flights-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Flights
-					</div>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="flights-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="schedule" ui-sref-active="active"><p class="menu__link">Schedule flight</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="progress" ui-sref-active="active"><p class="menu__link">Check Progress</p></a>
+						</li>
+					</ul>
 				</div>
-				<div class="menu">
-					<div class="menu__list">
+				<div class="menu" uib-dropdown>
+					<button id="spaceports-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Spaceports
-					</div>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="spaceports-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="spaceportStatus" ui-sref-active="active"><p class="menu__link">Status</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="configureSpaceport" ui-sref-active="active"><p class="menu__link">Configure</p></a>
+						</li>
+					</ul>
 				</div>
-				<div class="menu">
-					<div class="menu__list">
+				<div class="menu" uib-dropdown>
+					<button id="research-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Research
-					</div>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="resarch-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="researchEngine" ui-sref-active="active"><p class="menu__link">Engines</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="designStage" ui-sref-active="active"><p class="menu__link">Stages</p></a>
+						</li>
+					</ul>
 				</div>
 			</nav>
 
