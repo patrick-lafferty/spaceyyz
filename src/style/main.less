@@ -15,8 +15,15 @@ body {
     display: grid;
     grid-template-areas: 
         "logo navigation login"
+        "main main main"
         ;
     grid-template-columns: 1fr 2fr 1fr;
+}
+
+.main-view {
+    color: @cool-blue;
+    grid-area: main;
+    margin: 0rem 4rem 0rem 4rem;
 }
 
 @media (min-width: 320px) {
@@ -25,7 +32,8 @@ body {
         grid-template-areas: 
             "logo"
             "navigation"
-            "login";
+            "login"
+            "main";
         grid-template-columns: 1fr;
     }
 }
@@ -39,9 +47,10 @@ body {
     .main {
         grid-template-areas:
             "logo navigation"
-            "login login";
+            "login login"
+            "main main";
 
         grid-template-columns: 1fr 2fr;
-        grid-row-gap: 2rem;
+        grid-row-gap: 0rem;
     }
 }
