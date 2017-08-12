@@ -6,7 +6,7 @@
 .btn-primary:visited,
 .btn-primary:focus {
 	background-color: #19b3fe;
-	color: #505050;
+	color: @dark-grey;
 	background-image: none 
 }
 
@@ -24,18 +24,30 @@
 	background-image: unset;
 	filter: unset;
 	background-repeat: unset;
-	
+}
+
+.nav-tabs {
+	border: none;
 }
 
 .nav-tabs > li > a:hover {
 	color: #505050;
+	border: none;
 }
 
 .nav-tabs > li > a {
 	margin-right: 0px;
 	border-radius: 4px;
+	border: none;
 	background-color: rgb(101, 101, 101);
-	color: white;
+	color: @cool-blue;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+	background-color: @cool-blue;
+	border: none;
 }
 
 label.control-label {
@@ -47,7 +59,7 @@ label.control-label {
 }
 
 .glyphicon {
-	color: red;
+	color: @dark-grey;
 	right: 10px;
 }
 

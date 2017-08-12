@@ -1,20 +1,21 @@
 @import "bootstrap_customization.less";
 @import "header.less";
+@import "user.less";
 
 html, body {
     height: 100%;
-    //color: rgba(255, 255, 255, 0.8);
     font-family: 'Montserrat', sanserrif;
 }
 
 body {
-    background-color: #505050;
+    //background-color: #505050;
+    background-color: @dark-grey;
 }
 
 .main {
     display: grid;
     grid-template-areas: 
-        "logo navigation login"
+        "logo navigation navigation"
         "main main main"
         ;
     grid-template-columns: 1fr 2fr 1fr;
@@ -28,11 +29,10 @@ body {
 
 @media (min-width: 320px) {
     .main {
-        grid-row-gap: 1.5rem;
+        //grid-row-gap: 1.5rem;
         grid-template-areas: 
             "logo"
             "navigation"
-            "login"
             "main";
         grid-template-columns: 1fr;
     }
@@ -47,7 +47,6 @@ body {
     .main {
         grid-template-areas:
             "logo navigation"
-            "login login"
             "main main";
 
         grid-template-columns: 1fr 2fr;
