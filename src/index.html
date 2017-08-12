@@ -9,8 +9,75 @@
 		<link rel="stylesheet" type="text/css" href="spaceyyz.css">
 		<title>SpaceYYZ</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	<body style="overflow:hidden">
+	<body>
+		<div class="main">
+			<div class="logo">
+				<h1 class="logo__name">SpaceYYZ</h1>
+				<div class="logo__squircle"></div>
+				<div class="logo__squircle squircle1"></div>
+				<div class="logo__squircle squircle2"></div>
+			</div>
+
+			<nav class="navigation">
+				<div class="menu">
+					<div class="menu__list">
+						Home
+					</div>
+				</div>
+				<div class="menu">
+					<div class="menu__list">
+						Vehicles
+					</div>
+				</div>
+				<div class="menu">
+					<div class="menu__list">
+						Flights
+					</div>
+				</div>
+				<div class="menu">
+					<div class="menu__list">
+						Spaceports
+					</div>
+				</div>
+				<div class="menu">
+					<div class="menu__list">
+						Research
+					</div>
+				</div>
+			</nav>
+
+			<div class="login" ng-controller="userAccount as user">
+
+				<div ng-show="user.email">
+					Logged in as {{user.email}}
+					<button ng-click="user.logout()" type="button" class="btn btn-primary">Log out</button>
+				</div>
+
+				<div ng-hide="user.email">
+					<form class="form-inline" ng-submit="user.login()">
+						<div class="form-group">
+							<label for="email" class="sr-only control-label">Email</label>
+							<div>
+								<input type="text" id="email" class="form-control" ng-model="email" placeholder="Email">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="sr-only control-label">Password</label>
+							<div>
+								<input type="password" id="password" class="form-control" ng-model="password" placeholder="Password">
+							</div>
+						</div>
+
+						<button ng-click="user.login(email, password)" type="button" class="btn btn-primary">Log in</button>
+					</form>
+				</div>
+			</div>
+
+		</div>
+		<!--
 		<div class="clearfix" style="color: black; height: 40px">
 			<div class="pull-left">
 
@@ -97,6 +164,7 @@
 
 		<div ui-view style="overflow-y: auto; background-color: #505050; height: calc(100% - 40px)">
 		</div>
+		-->
 		
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>

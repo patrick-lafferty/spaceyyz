@@ -1,3 +1,47 @@
 @import "bootstrap_customization.less";
 @import "header.less";
 
+html, body {
+    height: 100%;
+    //color: rgba(255, 255, 255, 0.8);
+    font-family: 'Montserrat', sanserrif;
+}
+
+body {
+    background-color: #505050;
+}
+
+.main {
+    display: grid;
+    grid-template-areas: 
+        "logo navigation login"
+        ;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+@media (min-width: 320px) {
+    .main {
+        grid-row-gap: 1.5rem;
+        grid-template-areas: 
+            "logo"
+            "navigation"
+            "login";
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 480px) {
+    .main {
+    }
+}
+
+@media (min-width: 800px) {
+    .main {
+        grid-template-areas:
+            "logo navigation"
+            "login login";
+
+        grid-template-columns: 1fr 2fr;
+        grid-row-gap: 2rem;
+    }
+}

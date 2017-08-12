@@ -1,0 +1,81 @@
+@import "../colours.less";
+
+.navigation {
+    color: @menu-text;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    height: 8rem;
+    justify-content: space-around;
+
+    grid-area: navigation;
+}
+
+.menu {
+    background-color: @cool-blue;
+    display: flex;
+    align-items: center;
+}
+
+
+@media (min-width: 320px) {
+    .navigation {
+        font-size: 1.6rem;
+        height: unset;
+        justify-content: start;
+        margin-top: 0rem;
+    }
+
+    .menu {
+        padding: 0.5rem;
+    }
+}
+
+@media (min-width: 420px) {
+    .menu {
+        padding: 0.8rem;
+    }
+}
+
+@media (min-width: 480px) {
+    .navigation {
+        font-size: 1.7rem;
+        margin: auto;
+    }
+
+    .menu {
+        transform: skew(-20deg);
+        padding: 1rem;
+    }
+
+    .menu__list {
+        transform: skew(20deg);
+    }
+}
+
+@media (min-width: 600px) { 
+    .navigation {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 800px) {
+    .navigation {
+        align-self: center;
+        justify-content: space-evenly;
+        margin: unset;
+        margin-top: 0rem;
+
+    }
+}
+
+@media (min-width: 900px) {
+    .navigation {
+        font-size: 2.2rem;
+        height: 6rem;
+    }
+}
