@@ -194,5 +194,7 @@ export default function configure() {
 				}
 			});
 
+			$state.go('home');
+
 		}]);
 }

@@ -1,3 +1,37 @@
+.confirm-password {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.confirm-password__input {
+    grid-row: 1;
+    grid-column: 1/6;
+}
+
+.confirm-password__glyph {
+    grid-row: 1;
+    grid-column: 5/6;
+    align-self: end;
+    width: 2rem;
+    height: 2.5rem;
+}
+
+.login__control {
+    width: 25rem;
+    margin-top: 1rem;
+}
+
+.login__form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.login__widget {
+    width: 27rem;
+    margin: auto;
+    margin-top: 2rem;
+}
 
 @media (min-width: 320px) {
     .login__header {
