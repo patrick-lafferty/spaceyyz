@@ -19,9 +19,9 @@ class UserAccount {
 		return this.userService.getEmail();
 	}
 
-	email() {
+	/*email() {
 		return this.userService.getEmail();
-	}
+	}*/
 
 	login(email, password) {
 		this.userService
@@ -35,6 +35,7 @@ class UserAccount {
 	}
 
 	isLoggedIn() {
+		console.log("isLoggedIn?");
 		return this.userService.email !== '';
 	}
 

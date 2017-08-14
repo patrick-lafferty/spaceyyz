@@ -1,36 +1,52 @@
 <div class="view">
-	<h1 class="login__header">Login to SpaceYYZ</h1>
-	<p>This is just a demo application. You can create an account with any random email (no email verification is sent), or just use boris@severnaya.ru, password is invincible.</p>
-	<uib-tabset active="active" class="login__widget">
-		<uib-tab class="col-md-offset-1" index="0" heading="Login">
-			<form class="login__form" ng-submit="$ctrl.login()" >
-				<label for="email" class="control-label">Email</label>
-				<input type="text" id="email" class="form-control login__control" ng-model="$ctrl.email" placeholder="boris@severnaya.ru">
+	<div class="welcome">
+		Welcome to SpaceYYZ
+		<div class="welcome__image">
+			<div class="welcome__separator">
+			</div>
+			<div class="welcome__gradient-imitator">
+			</div>
+		</div>
 
-				<label for="password" class="control-label">Password</label>
-				<input type="password" id="password" class="form-control login__control" ng-model="$ctrl.password" placeholder="invincible">
+		<div class="welcome__im"></div>
+	</div>
 
-				<button type="submit" class="btn btn-primary btn-block login__control">Login</button>
+	<div class="main-login">
 
-			</form>
-		</uib-tab>
-		<uib-tab index="1" heading="Sign up">
-			<form class="login__form" ng-submit="$ctrl.login()" >
-				<label for="email" class="control-label">Email</label>
-				<input type="text" id="email" class="form-control login__control" ng-model="$ctrl.newAccount.email">
+		<h1 class="login__header">Login to SpaceYYZ</h1>
+		<p>This is just a demo application. You can create an account with any random email (no email verification is sent), or just use boris@severnaya.ru, password is invincible.</p>
+		<uib-tabset active="active" class="login__widget">
+			<uib-tab class="col-md-offset-1" index="0" heading="Login">
+				<form class="login__form" ng-submit="$ctrl.login()" >
+					<label for="email" class="control-label">Email</label>
+					<input type="text" id="email" class="form-control login__control" ng-model="$ctrl.email" placeholder="boris@severnaya.ru">
 
-				<label for="password" class="control-label">Password</label>
-				<input type="password" id="password" class="form-control login__control" ng-model="$ctrl.newAccount.password">
-				<p ng-show="$ctrl.newAccount.password.length < 6">Password must be at least 6 characters long</p>
+					<label for="password" class="control-label">Password</label>
+					<input type="password" id="password" class="form-control login__control" ng-model="$ctrl.password" placeholder="invincible">
 
-				<label for="confirmPassword" class="control-label">Confirm Password</label>
-				<div class="confirm-password">
-					<input type="password" id="confirmPassword" class="form-control login__control confirm-password__input" ng-model="$ctrl.newAccount.confirmPassword">
-					<span ng-class="{'glyphicon-remove': $ctrl.newAccount.password !== $ctrl.newAccount.confirmPassword}" class="glyphicon confirm-password__glyph" ></span>
-				</div>
+					<button type="submit" class="btn btn-primary btn-block login__control">Login</button>
 
-				<button type="button" ng-click="$ctrl.register()" class="btn btn-primary btn-block login__control">Register</button>
-			</form>
-		</uib-tab>
-	</uib-tabset>
+				</form>
+			</uib-tab>
+			<uib-tab index="1" heading="Sign up">
+				<form class="login__form" ng-submit="$ctrl.login()" >
+					<label for="email" class="control-label">Email</label>
+					<input type="text" id="email" class="form-control login__control" ng-model="$ctrl.newAccount.email">
+
+					<label for="password" class="control-label">Password</label>
+					<input type="password" id="password" class="form-control login__control" ng-model="$ctrl.newAccount.password">
+					<p ng-show="$ctrl.newAccount.password.length < 6">Password must be at least 6 characters long</p>
+
+					<label for="confirmPassword" class="control-label">Confirm Password</label>
+					<div class="confirm-password">
+						<input type="password" id="confirmPassword" class="form-control login__control confirm-password__input" ng-model="$ctrl.newAccount.confirmPassword">
+						<span ng-class="{'glyphicon-remove': $ctrl.newAccount.password !== $ctrl.newAccount.confirmPassword}" class="glyphicon confirm-password__glyph" ></span>
+					</div>
+
+					<button type="button" ng-click="$ctrl.register()" class="btn btn-primary btn-block login__control">Register</button>
+				</form>
+			</uib-tab>
+		</uib-tabset>
+	</div>
+
 </div>
