@@ -24,15 +24,20 @@ class Login {
 			.then(() => { 
 				let nav = document.querySelector('.navigation');
 				nav.classList.add('navigation--offscreen');
+
 				document.querySelector('.main-login').classList.add('login__transition');
 				document.querySelector('.welcome').classList.add('welcome__transition');
-				document.querySelector('.welcome__im').classList.add('welcome__im--animate');
+
+				let message = document.querySelector('.message__gradient-imitator');
+				message.classList.add('message__gradient-imitator--animate');
+
 				document.querySelector('.welcome__gradient-imitator').classList.add('welcome__gradient-imitator--animate');
 
-				document.querySelector('.welcome__im').addEventListener('animationstart', function () {
+				message.addEventListener('animationstart', function () {
 					nav.classList.add('navigation--slide-in');
 				});
-				document.querySelector('.welcome__im').addEventListener('animationend', () => {
+
+				message.addEventListener('animationend', () => {
 					this.$state.go(this.$state.params.redirectTo || 'auth.home');
 				});
 			});

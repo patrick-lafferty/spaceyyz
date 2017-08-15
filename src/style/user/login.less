@@ -77,7 +77,7 @@
     animation-fill-mode: forwards;
 }
 
-.welcome__im {
+.message__gradient-imitator {
     height: 20rem;
     width: 101%;
     background-color: @dark-grey;
@@ -86,7 +86,7 @@
     transform: translateX(-100%);
 }
 
-.welcome__im--animate {
+.message__gradient-imitator--animate {
     
     animation: gradientImitatorZero 200ms cubic-bezier(0.655, 0.005, 0.895, 0.390);
     animation-fill-mode: forwards;
@@ -94,22 +94,19 @@
 }
 
 .welcome__transition {
-    animation: loginrevShift 100ms linear;//, loginDisappear 100ms ease-out;
+    animation: loginrevShift 100ms linear;
     animation-fill-mode: forwards;
     visibility: visible;
-    animation-delay: 0ms;//, 580ms;
 }
 
 @keyframes loginShift {
     to { 
-        //transform: translateX(100%);
         opacity: 0;
     }
 }
 
 @keyframes loginrevShift {
     to { 
-        //transform: translateX(100%);
         opacity: 1;
     }
 }
