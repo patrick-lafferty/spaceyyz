@@ -12,6 +12,15 @@ class UserService {
         if (firebase.auth().currentUser) {
             this.email = firebase.auth().currentUser.email;
         }
+        else {
+            //check if firebase token is saved in local storage
+            let key = Object.keys(localStorage).find(key => key.startsWith("firebase:authUser"));
+
+            if (key !== undefined) {
+                let user = JSON.parse(localStorage.getItem(key));
+                this.email = user.email;
+            }
+        }
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
