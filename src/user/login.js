@@ -22,6 +22,7 @@ class Login {
 		this.userService
 			.login(this.email, this.password)
 			.then(() => { 
+				scroll(0, 0);
 				document.querySelector('.main-login').classList.add('login__transition');
 				document.querySelector('.welcome').classList.add('welcome__transition');
 
@@ -35,7 +36,7 @@ class Login {
 				});
 
 				message.addEventListener('animationend', () => {
-					//this.$state.go(this.$state.params.redirectTo || 'auth.home');
+					this.$state.go(this.$state.params.redirectTo || 'auth.home');
 				});
 			});
 	}
