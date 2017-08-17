@@ -26,7 +26,6 @@
 }
 
 .navigation--slide-in {
-    //transform: translateX(100%);
     animation: navigationSlideIn 200ms cubic-bezier(0.655, 0.005, 0.895, 0.390);
     animation-fill-mode: forwards;
     animation-delay: 450ms;
@@ -77,17 +76,9 @@
     }
 
     .menu {
-        transform: skew(-20deg);
         padding: 1rem;
     }
-
-    .menu__button {
-        transform: skew(20deg);
-    }
-
-    .menu__link {
-        transform: skew(20deg);
-    }
+   
 }
 
 @media (min-width: 600px) { 
@@ -99,7 +90,6 @@
 @media (min-width: 800px) {
     .navigation {
         align-self: center;
-        justify-content: space-evenly;
         margin: unset;
         margin-top: 0rem;
 
@@ -110,5 +100,19 @@
     .navigation {
         font-size: 2.2rem;
         height: 6rem;
+        justify-content: space-evenly;
+    }
+
+     .menu {
+        transform: skew(-20deg);
+        padding: 1rem;
+    }
+
+    .menu__button {
+        transform: skew(20deg);
+    }
+
+    .menu__link {
+        transform: skew(20deg);
     }
 }

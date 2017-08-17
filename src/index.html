@@ -12,7 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<div class="main">
+		<div class="main" ng-class="{'main--logged-out': user.email == ''}" ng-controller="userAccount as user">
 			<div class="logo">
 				<h1 class="logo__name">SpaceYYZ</h1>
 				<div class="logo__squircle"></div>
@@ -20,7 +20,7 @@
 				<div class="logo__squircle squircle2"></div>
 			</div>
 
-			<nav class="navigation" ng-class="{'navigation--offscreen': user.user.email}"  ng-controller="userAccount as user" ng-show="user.email">
+			<nav class="navigation" ng-class="{'navigation--offscreen': user.email == ''}">
 				<div class="menu" uib-dropdown>
 					<button id="home-button" class="menu__button" type="button" uib-dropdown-toggle>
 						Home

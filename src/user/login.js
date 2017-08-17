@@ -29,7 +29,7 @@ class Login {
 				document.querySelector('.welcome').classList.add('welcome__transition');
 
 				let message = document.querySelector('.message__gradient-imitator');
-				message.classList.add('message__gradient-imitator--animate');
+				//message.classList.add('message__gradient-imitator--animate');
 
 				document.querySelector('.welcome__gradient-imitator').classList.add('welcome__gradient-imitator--animate');
 
@@ -38,7 +38,7 @@ class Login {
 				});
 
 				message.addEventListener('animationend', () => {
-					this.$state.go(this.$state.params.redirectTo || 'auth.home');
+					//this.$state.go(this.$state.params.redirectTo || 'auth.home');
 				});
 			});
 	}
