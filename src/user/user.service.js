@@ -65,6 +65,8 @@ class UserService {
         }, function(error) {
             alert('error logging out: ' + error);
         });
+
+        document.querySelector('.navigation').classList.add('navigation--offscreen');
     }
 
     register(email, password) {

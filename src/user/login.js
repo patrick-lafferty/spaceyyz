@@ -22,19 +22,16 @@ class Login {
 		this.userService
 			.login(this.email, this.password)
 			.then(() => { 
-				let nav = document.querySelector('.navigation');
-				nav.classList.add('navigation--offscreen');
-
 				document.querySelector('.main-login').classList.add('login__transition');
 				document.querySelector('.welcome').classList.add('welcome__transition');
 
 				let message = document.querySelector('.message__gradient-imitator');
-				//message.classList.add('message__gradient-imitator--animate');
+				message.classList.add('message__gradient-imitator--animate');
 
 				document.querySelector('.welcome__gradient-imitator').classList.add('welcome__gradient-imitator--animate');
 
 				message.addEventListener('animationstart', function () {
-					nav.classList.add('navigation--slide-in');
+					document.querySelector('.navigation').classList.add('navigation--slide-in');
 				});
 
 				message.addEventListener('animationend', () => {

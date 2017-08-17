@@ -157,7 +157,7 @@ export default function configure() {
 
 	angular
 		.module('spaceyyz')
-		.run(['$state', '$transitions', function($state, $transitions) {
+		.run(['$state', '$transitions', 'userService', function($state, $transitions, userService) {
 
 			$transitions.onBefore({to: 'login'}, function (trans) {
 
@@ -193,6 +193,11 @@ export default function configure() {
 					return trans.router.stateService.target('login', {redirectTo: trans.$to().name}, {reload: true});
 				}
 			});
+
+			if (userService.email) {
+				//logged in from cached token, so force the nav to show
+				document.querySelector('.navigation').classList.remove('navigation--offscreen');
+			}
 
 			$state.go('home');
 

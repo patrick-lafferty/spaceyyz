@@ -6,8 +6,9 @@ class UserAccount {
 		Object.assign(this, {
 			userService, $state
 		});
+		
 		this.user = userService;
-		$scope.user = userService;
+
 		userService.onAuthChange(this, function () {
 			$timeout(function() {
 				$scope.$apply();
@@ -18,10 +19,6 @@ class UserAccount {
 	getEmail() {
 		return this.userService.getEmail();
 	}
-
-	/*email() {
-		return this.userService.getEmail();
-	}*/
 
 	login(email, password) {
 		this.userService
