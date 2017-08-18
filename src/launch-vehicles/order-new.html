@@ -1,101 +1,42 @@
 <div class="view"> 
 	<h1>Order New Launch Vehicle</h1>
-	<uib-tabset active="active">
-		<uib-tab index="0" heading="Prefab">
-			<form class="form-horizontal" style="margin-top: 10px">
-				<div class="form-group">
-					<div class="">
-						<label class="col-sm-2 control-label">Search by:</label>
-						<select ng-model="$ctrl.searchType" ng-init="$ctrl.searchType='name'" class="col-sm-2 btn btn-primary dropdown-toggle">
-							<option value="name">Name</option>
-							<option value="capacity">Payload</option>
-						</select>
-					</div>
+	<form class="form-horizontal order--search">
+		<label class="search--label">Search by:</label>
+		<select ng-model="$ctrl.searchType" ng-init="$ctrl.searchType='name'" class="btn btn-primary dropdown-toggle search--type">
+			<option value="name">Name</option>
+			<option value="capacity">Payload</option>
+		</select>
 
-					<div ng-switch="$ctrl.searchType" class="col-sm-2">
-						<div ng-switch-when="name" class="input-group"> 
-							<input type="text" ng-model="$ctrl.search_name" class="form-control" id="name" placeholder="" />
-						</div>
-						<div ng-switch-when="capacity" class="input-group">
-							<input type="text" ng-model="$ctrl.search_payload" class="form-control" id="payload" placeholder="10000" />
-							<div class="input-group-addon">kg</div>
-						</div>
-					</div>
-				</div>
-			</form>
-
-			<ul class="vehicles">
-				<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search($ctrl.searchType) | orderBy: $ctrl.searchType : $ctrl.searchType === 'capacity'">
-					<div class="vehiclePreview">
-						<div>
-							<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a></h4>
-							<h5>Variants</h5>
-							<ul>
-								<li class="no-list-style" ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
-									<strong>{{variant.name}}</strong>
-									<p style="margin-left: 20px">Capacity: {{variant.capacity | number}}kg</p>
-									<p style="margin-left: 20px">Cost: {{variant.cost | currency}}</p>
-								</li>
-							</ul>
-						</div>
-						<p class="vehiclePreviewDescription">{{vehicle.description}}</p>
-					</div>
-				</li>
-			</ul>
-
-		</uib-tab>
-		<uib-tab index="1" heading="Custom">
-			<h1>Not implemented yet</h1>
-		</uib-tab>
-		<uib-tab index="2" heading="Delta-V Calculator">
-			<h1>Not implemented yet</h1>
-			<div class="form-horizontal">
-				<div class="form-group">
-					<label for="payload" class="col-sm-2 control-label">Payload</label>
-					<div class="col-sm-2">
-						<div class="input-group">
-							<input type="text" class="form-control" id="payload" placeholder="10000" />
-							<div class="input-group-addon">kg</div>
-						</div>
-					</div>
-				</div>
-
-				<h2>Orbit</h2>
-
-				<div class="form-group">
-					<label for="destination" class="col-sm-2 control-label">Destination</label>
-					<div class="col-sm-2">
-						<select ng-model="$ctrl.selectedPrimary" class="form-control btn btn-primary dropdown-toggle" ng-options="p.name for p in $ctrl.primaries">
-						</select>
-					</div>
-
-					<div class="col-sm-2">
-						<select ng-model="$ctrl.selectedPrimary.selectedSatellite" class="form-control btn btn-primary dropdown-toggle" ng-options="s for s in $ctrl.selectedPrimary.satellites">
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Apoapsis</label>
-					<div class="col-sm-2">
-						<div class="input-group">
-							<input type="text" class="form-control" id="apoapsis" placeholder="10000" />
-							<div class="input-group-addon">km</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Periapsis</label>
-					<div class="col-sm-2">
-						<div class="input-group">
-							<input type="text" class="form-control" id="periapsis" placeholder="10000" />
-							<div class="input-group-addon">km</div>
-						</div>
-					</div>
-				</div>
-
+		<div ng-switch="$ctrl.searchType" class="">
+			<div ng-switch-when="name" class="input-group"> 
+				<input type="text" ng-model="$ctrl.search_name" class="form-control" id="name" placeholder="" />
 			</div>
-		</uib-tab>
-	</uib-tabset>
+			<div ng-switch-when="capacity" class="input-group">
+				<input type="text" ng-model="$ctrl.search_payload" class="form-control" id="payload" placeholder="10000" />
+				<div class="input-group-addon">kg</div>
+			</div>
+		</div>
+	</form>
+
+	<ul class="vehicle-list">
+		<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.search($ctrl.searchType) | orderBy: $ctrl.searchType : $ctrl.searchType === 'capacity'">
+			<section>
+				<h1>
+					<a class="vehicle--name" ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}}</a>
+				</h1>
+
+				<h2 class="variants--header">Variants</h2>
+
+				<div class="vehicle--variants">
+					<div ng-repeat="variant in vehicle.variants | filter: $ctrl.variantFilter">
+						<strong class="vehicle--name">{{variant.name}}</strong>
+						<p>Capacity: {{variant.capacity | number}}kg</p>
+						<p>Cost: {{variant.cost | currency}}</p>
+					</div>
+				</div>
+
+				<p class="vehicle--description">{{vehicle.description}}</p>
+			</section>
+		</li>
+	</ul>
 </div>
