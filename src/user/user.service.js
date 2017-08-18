@@ -14,7 +14,7 @@ class UserService {
         }
         else {
             //check if firebase token is saved in local storage
-            let key = Object.keys(localStorage).find(key => key.startsWith("firebase:authUser"));
+            let key = Object.keys(localStorage).find(key => key.startsWith('firebase:authUser'));
 
             if (key !== undefined) {
                 let user = JSON.parse(localStorage.getItem(key));

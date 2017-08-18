@@ -32,7 +32,6 @@ class UserAccount {
 	}
 
 	isLoggedIn() {
-		console.log("isLoggedIn?");
 		return this.userService.email !== '';
 	}
 
