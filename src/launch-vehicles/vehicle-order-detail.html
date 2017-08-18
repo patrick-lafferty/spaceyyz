@@ -1,41 +1,28 @@
-<div class="view">
-	<div style="display: flex; justify-content: space-between">
-		<h1 style="flex: 1 1 auto">{{$ctrl.vehicle.name}}</h1>
-		<!--<div style="display: flex">
-			<h2 style="margin-right: 20px">Cost: {{$ctrl.vehicle.cost | currency}}</h2>
-			<button class="btn btn-primary" ng-click="$ctrl.open()">Order</button>
-		</div>-->
+<div>
+	<div> 
+		<h1>{{$ctrl.vehicle.name}}</h1>
 	</div>
 
 	<p>{{$ctrl.vehicle.description}}</p>
 
 	<h3>Variants</h3>
 
-	<ul class="vehicles">
+	<ul class="vehicle-list">
 		<li ng-repeat="variant in $ctrl.vehicle.variants">
-			<article>
-				<div style="display: flex; justify-content: space-between">
-					<h4 style="flex: 1 1 auto">{{variant.name}}</h4>
-					<div style="display: flex">
-						<h4>Cost: {{variant.cost | currency}}</h4>
-						<button class="btn btn-primary" ng-click="$ctrl.open(variant)">Order</button>
-					</div>
+			<section>
+				<div class="name--bar">
+					<h1>{{variant.name}}</h1>
+					<p>Cost: {{variant.cost | currency}}</p>
+					<button class="btn btn-primary" ng-click="$ctrl.open(variant)">Order</button>
 				</div>
 
-				<section style="margin-left: 40px">
-					<h5>Payload Capabilities</h5>
-					<p style="margin-left: 20px">To LEO: {{variant.capacity | number}}kg</p>
+				<section>
+					<h2>Payload Capabilities</h2>
+					<p>To LEO: {{variant.capacity | number}}kg</p>
 					<br />
-					<p style="margin-bottom: 20px">{{variant.description}}</p>
+					<p>{{variant.description}}</p>
 				</section>
-			</article>
+			</section>
 		</li>
 	</ul>
-<!--
-	<h3>Payload Capabilities</h3>
-	<p>To LEO: {{$ctrl.vehicle.capacity | number}}kg</p>
-
-	<h3>Description</h3>
-	<p>{{$ctrl.vehicle.description}}</p>
--->
 </div>

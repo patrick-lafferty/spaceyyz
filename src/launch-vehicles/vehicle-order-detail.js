@@ -40,7 +40,7 @@ class VehicleOrderDetail {
                 let variants = families.find(family => family.key === this.vehicle.familyKey);
 
                 if (variants !== undefined) {
-                    this.vehicle.variants = variants;
+                    this.vehicle.variants = variants.variants;
                 }
 
                 $timeout(function() {
