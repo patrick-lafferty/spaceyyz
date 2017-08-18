@@ -1,16 +1,17 @@
-<div class="view">
+<div>
 	<h1>Vehicles in development</h1>
 	<p>Click on an order number to see the order details</p>
-	<ul class="orders">
+	<ul class="vehicle-list">
 		<li ng-repeat="order in $ctrl.orders.all">
-			<h3>Order number: <a ui-sref="orderConfirmation({orderNumber: order.number, order: order})" ui-sref-active="active">{{order.number}}</a></h3>
+			<h2>Order number: 
+				<a ui-sref="orderConfirmation({orderNumber: order.number, order: order})" 
+					ui-sref-active="active">{{order.number}}</a>
+			</h2>
 			<p>Vehicle name: {{order.vehicleName}}</p>
 			<p>Delivery date: {{order.deliveryDate.toDateString()}}</p>
-			<div style="display: flex">
-				<p>Progress:</p>
-				<div class="col-sm-4">
-					<uib-progressbar value="order.progress"></uib-progressbar>
-				</div>
+			<div class="order--progress">
+				<p>Progress</p>
+				<uib-progressbar class="progress--bar" value="order.progress"></uib-progressbar>
 			</div>
 		</li>
 	</ul>
