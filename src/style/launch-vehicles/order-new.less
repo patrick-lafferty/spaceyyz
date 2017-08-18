@@ -5,18 +5,31 @@
     margin-top: 2rem;
 }
 
+@media (max-width: 479px) {
+    .order--search {
+        display: block;
+    }
+}
+
 .search--label {
     padding-top: 0px;
     text-align: right;
 }
 
 .search--type {
-    margin: 0rem 2rem;
+    margin: 1rem 2rem;
 }
 
 .vehicle-list {
     list-style: none;
     margin-top: 4rem;
+}
+
+@media (max-width: 480px) {
+    .vehicle-list {
+        margin: 0; 
+        padding: 0;
+    }
 }
 
 .vehicle--name {
@@ -30,9 +43,16 @@
 
 .vehicle--description {
     font-size: 1.3em;
+    margin-top: 1rem;
 }
 
 .variants--header {
     font-size: 1.7em;
     text-align: center;
+}
+
+@media (max-width: 480px) {
+    .variants--header {
+        font-size: 1.4em;
+    }
 }
