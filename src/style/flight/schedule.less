@@ -1,3 +1,16 @@
+.launch__continent {
+    grid-column: 2;
+}
+
+.launch__form {
+    align-items: center;
+}
+
+.launch--warning {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
 .preview {
     margin: 2rem;
 }
@@ -6,6 +19,67 @@
     margin: 4rem 0rem;
 }
 
+.schedule__button {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin: 2rem 1rem;
+}
+
 .spaceport {
     color: @dark-grey;
+}
+
+@media (min-width: 600px) {
+    .launch__form,
+    .mission__form {
+        margin: auto;
+        width: 80%;
+        grid-template-columns: 1fr 3fr;
+    }
+
+    .schedule__heading {
+        .center--horizontal;
+    }
+}
+
+@media (min-width: 1000px) {
+    .launch__form,
+    .mission__form {
+        grid-template-columns: 1fr 1fr 1fr;
+
+        .form-label {
+            align-self: center;
+            justify-self: end;
+        }
+    }
+
+    .launch--warning {
+        width: 40rem;
+        justify-self: center;
+    }
+
+    .mission__candidates {
+        margin: auto;
+        width: 70%;
+    }
+
+    .preview {
+        margin: 1rem 1rem;
+    }
+
+    .schedule__button {
+        width: 40rem;
+        justify-self: center;
+    }
+
+    
+
+    .variant__name {
+        margin: 1rem 2rem;
+        width: 20rem;
+    }
+
+    .vehicle__name {
+        font-size: 2rem;
+    }
 }

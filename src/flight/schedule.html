@@ -1,7 +1,9 @@
 <div class="view">
 	<h1>Schedule a new flight</h1>
-	<h2>Mission Parameters</h2>
-	<form class="config-form">
+
+	<h2 class="schedule__heading">Mission Parameters</h2>
+
+	<form class="config-form mission__form">
 		<label for="payload" class="form-label">Payload</label>
 		<div class="input-group">
 			<input type="text" class="form-control" id="payload" ng-model="$ctrl.payload" required ng-pattern="/^[1-9][0-9]*/">
@@ -31,14 +33,14 @@
 
 	</form>
 
-	<h2 class="requirement--header">Vehicles that meet mission requirements</h2>
-	<ul class="vehicle-list">
+	<h2 class="requirement--header schedule__heading">Vehicles that meet mission requirements</h2>
+	<ul class="vehicle-list mission__candidates">
 		<li ng-repeat="vehicle in $ctrl.vehicles.all | filter:$ctrl.filter">
-			<section class="vehiclePreview">
+			<section> 
 
 				<label>
 					<input type="radio" name="vehicles" ng-model="$ctrl.selectedVehicle" ng-value="vehicle" ng-click="$ctrl.selected()">
-					<a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">
+					<a class="vehicle__name" ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">
 						{{vehicle.name}}
 					</a>
 				</label>	
@@ -47,7 +49,7 @@
 					<p>{{vehicle.description}}</p>
 
 					<label>Variant:
-						<select class="form-control" ng-model="vehicle.selectedVariant" ng-options="variant as variant.name for variant in vehicle.variants">
+						<select class="form-control variant__name" ng-model="vehicle.selectedVariant" ng-options="variant as variant.name for variant in vehicle.variants">
 						</select>
 					</label>
 
@@ -62,8 +64,8 @@
 		</li>
 	</ul>
 
-	<h2>Launch Parameters</h2>
-	<form class="config-form">
+	<h2 class="schedule__heading">Launch Parameters</h2>
+	<form class="config-form launch__form">
 
 		<label for="launchDate" class="form-label">Launch Date</label>
 		<div class="input-group">
@@ -75,20 +77,21 @@
 			</span>
 		</div>
 
-		<div ng-show="$ctrl.selectedVehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Flight will be delayed until the launch vehicle is constructed</div>
+		<div class="launch--warning" ng-show="$ctrl.selectedVehicle.inventory === 0" uib-alert ng-class="'alert-warning'">Flight will be delayed until the launch vehicle is constructed</div>
 
 		<label for="launchTime" class="form-label">Launch Time</label>
 		<div class="input-group">
 			<div uib-timepicker ng-model="$ctrl.flight.launch.date" show-meridian="false"></div>
 		</div>
 
-		<label for="continent" class="control-label">Launch Site</label>
-		<select id="continent" class="form-control" ng-model="$ctrl.continent" ng-change="$ctrl.continentChanged()">
+		<label for="continent" class="form-label">Launch Site</label>
+		<select id="continent" class="form-control launch__continent" ng-model="$ctrl.continent" ng-change="$ctrl.continentChanged()">
 			<option value="northAmerica">North America</option>
 			<option value="europe">Europe</option>
 			<option value="asia">Asia</option>
 		</select>
 
+		<label for="spaceport" class="form-label">Spaceport</label>
 		<div uib-dropdown class="btn-group" has-error has-feedback is-open="$ctrl.isopen">
 			<label class="form-label sr-only" for="filterName"></label>
 			<input id="filterName" type="text" uib-dropdown-toggle ng-model="$ctrl.filtername"
@@ -104,12 +107,12 @@
 			</div>
 		</div>
 
-		<div ng-show="$ctrl.flight.mission.vehicle.invalid" uib-alert ng-class="'alert-warning'">Select a vehicle to schedule a launch</div>
+		<div class="launch--warning" ng-show="$ctrl.flight.mission.vehicle.invalid" uib-alert ng-class="'alert-warning'">Select a vehicle to schedule a launch</div>
 
-		<div class="form-group">
-			<button id="schedule" type="button" class="btn btn-primary" ng-click="$ctrl.schedule()">Schedule
-			</button>
-		</div>
+		<button id="schedule" type="button" 
+			class="btn btn-primary schedule__button" ng-click="$ctrl.schedule()">
+			Schedule
+		</button>
 	</form>
 </div>
 
