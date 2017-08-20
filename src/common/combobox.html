@@ -1,14 +1,19 @@
-<div uib-dropdown class="btn-group" has-error has-feedback is-open="$ctrl.isOpen">
+<div uib-dropdown class="btn-group combobox" has-error has-feedback is-open="$ctrl.isOpen">
 	<label class="control-label sr-only" for="filterName"></label>
-	<input role="combobox" id="filterName" type="text" uib-dropdown-toggle ng-model="$ctrl.filterName" ng-change="$ctrl.filterNameChanged()" class="form-control" ng-focus="$ctrl.isOpen = true" autocomplete="off">
+	<input role="combobox" id="filterName" type="text" 
+		uib-dropdown-toggle ng-model="$ctrl.filterName" 
+		ng-change="$ctrl.filterNameChanged()" class="form-control" 
+		ng-focus="$ctrl.isOpen = true" autocomplete="off">
 	
-	<span ng-class="{'glyphicon-remove': !$ctrl.selectedValidItem}" class="glyphicon form-control-feedback" style="color: red"></span>
+	<span ng-class="{'glyphicon-remove': !$ctrl.selectedValidItem}" 
+		class="glyphicon form-control-feedback combobox--icon"></span>
 	
 	<div uib-dropdown-menu class="dropdown-menu">
-		<!--<div ng-repeat=""> this is for grouping-->
-			<ul style="list-style: none">
-				<li ng-repeat="item in $ctrl.items" style="color: black" ng-click="$ctrl.itemSelected(item)">{{item[$ctrl.display]}}</li>
-			</ul>
-		<!--</div>-->
+		<ul class="combobox--list"> 
+			<li ng-repeat="item in $ctrl.items" 
+				class="combobox--item" ng-click="$ctrl.itemSelected(item)">
+				{{item[$ctrl.display]}}
+			</li>
+		</ul>
 	</div>
 </div>

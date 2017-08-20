@@ -1,0 +1,55 @@
+.config-form {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-column-gap: 1rem;
+    grid-row-gap: 2rem;
+    margin-top: 2rem;
+}
+
+.config-form--list {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.form-label {
+    grid-column: 1;
+}
+
+.form-group {
+    display: flex;
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+textarea.form-control {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    height: 15rem;
+}
+
+@media (max-width: 479px) {
+    .config-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-control {
+        grid-column: 1;
+    }
+
+    .form-group {
+        grid-column: 1;
+    }
+
+    .form-combobox {
+        grid-column: 1;
+    }
+
+    button.form-control {
+        grid-column: 1;
+    }
+
+    textarea.form-control {
+        grid-column: 1;
+    }
+}
+

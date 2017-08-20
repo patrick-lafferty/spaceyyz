@@ -21,7 +21,7 @@
 		</div>
 	</form>
 
-	<ul class="vehicles">
+	<ul class="vehicle-list">
 		<li ng-repeat="vehicle in $ctrl.vehicles | filter:$ctrl.search($ctrl.searchType) | orderBy: $ctrl.searchType : $ctrl.searchType === 'capacity'">
 			<h4><a ui-sref="vehicleOrderDetail({name: vehicle.nameWithoutSpaces})" ui-sref-active="active">{{vehicle.name}} {{vehicle.variant.name}}</a></h4>
 			<p>Capacity: {{vehicle.variant.capacity | number}}kg to LEO</p>
