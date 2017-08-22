@@ -1,6 +1,30 @@
 import angular from 'angular';
 
+class Spaceport {
+    constructor(name, country, continent) {
+        Object.assign(this, {name, country, continent});
+
+        this.scheduledFlights = [];
+        this.pastFlights = [];
+    }
+}
+
 class SpaceportService {
+
+    constructor() {
+        //this.setupSpaceports();
+    }
+
+    setupSpaceports() {
+        firebase.database().ref().child('spaceports').remove();
+        console.log('[spaceport service] Removed all spaceports');
+
+        let spaceports = [
+            new Spaceport('Kennedy', 'United States', 'northAmerica'),
+        ];
+
+        spaceports.forEach(spaceport => this.addSpaceport(spaceport));
+    }
 
     getSpaceports() {
         return firebase.database().ref().child('spaceports').once('value')
@@ -16,6 +40,15 @@ class SpaceportService {
                         var spaceport = spaceportObject[key][k];
                         spaceport.key = k;
                         spaceport.continent = key;
+
+                        if (spaceport.scheduledFlights === undefined) {
+                            spaceport.scheduledFlights = [];
+                        }
+
+                        if (spaceport.pastFlights === undefined) {
+                            spaceport.pastFlights = [];
+                        }
+
                         continent.push(spaceport);
                         all.push(spaceport);
                     });
@@ -32,15 +65,25 @@ class SpaceportService {
     addSpaceport(spaceport) {
         var key = firebase.database().ref().child('spaceports/' + spaceport.continent).push({
             name: spaceport.name,
-            country: spaceport.country
+            country: spaceport.country,
+            scheduledFlights: [],
+            pastFlights: []
         }).key;
         spaceport.key = key;
+    }
+
+    scheduleFlight(spaceport, key) {
+
+        spaceport.scheduledFlights.push(key);
+        this.updateSpaceport(spaceport);
     }
 
     updateSpaceport(spaceport) {
         firebase.database().ref().child('spaceports/' + spaceport.continent + '/' + spaceport.key).set({
             name: spaceport.name,
-            country: spaceport.country
+            country: spaceport.country,
+            scheduledFlights: spaceport.scheduledFlights,
+            pastFlights: spaceport.pastFlights
         });
     }
 

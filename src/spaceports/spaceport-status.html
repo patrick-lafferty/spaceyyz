@@ -2,9 +2,18 @@
 	<h1>Spaceport Status</h1>
 	<uib-tabset active="active">
 		<uib-tab index="0" heading="North America">
-			<ul>
+			<ul class="no-list-style">
 				<li ng-repeat="spaceport in $ctrl.spaceports.northAmerica">
-					{{spaceport.name}}
+					<section>
+						<h1>{{spaceport.name}}</h1>
+						<h2>Scheduled launches</h2>
+						<div class="spaceport">
+							<a class="spaceport__name" ng-repeat="flight in spaceport.scheduledFlights" ui-sref="flightDetails({missionName: flight.mission.name, flight: flight})" 
+								ui-sref-active="active">{{flight.mission.name | uppercase}}</a>
+							<p class="spaceport__launch-date" ng-repeat="flight in spaceport.scheduledFlights">{{flight.launch.dateTimestamp | date: 'medium'}}</p>
+							<p class="spaceport__tminus" ng-repeat="flight in spaceport.scheduledFlights">{{flight.launch.tminus}} days</p>
+						</div>
+					</section>
 				</li>
 			</ul>
 		</uib-tab>

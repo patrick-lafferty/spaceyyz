@@ -2,13 +2,24 @@ import angular from 'angular';
 
 class FlightService {
 
-    scheduleFlight(flight) {
+    static get $inject() {
+        return ['spaceportService'];
+    }
+
+    constructor(spaceportService) {
+        this.spaceportService = spaceportService;
+
+        //this.removeAllFlights();
+    }
+
+    scheduleFlight(flight, spaceport) {
         flight.mission.destination.primary = flight.mission.destination.primary.name;
         flight.mission.vehicle = flight.mission.vehicle.key;
         flight.launch.dateTimestamp = flight.launch.date.getTime();
 
-        firebase.database().ref().child('flights').push(flight);
+        var key = firebase.database().ref().child('flights').push(flight).key;
 
+        this.spaceportService.scheduleFlight(spaceport, key);
     }
 
     getFlights() {
@@ -17,11 +28,15 @@ class FlightService {
                 const flightObject = snapshot.val();
                 let flights = [];
 
-                Object.keys(flightObject).forEach(key => {
-                    let flight = flightObject[key];
-                    flight.mission.name = flight.mission.id;
-                    flights.push(flight);
-                });
+                if (flightObject != null) {
+                    Object.keys(flightObject).forEach(key => {
+                        let flight = flightObject[key];
+                        flight.key = key;
+                        flight.launch.date = new Date(flight.launch.dateTimestamp);
+                        //flight.mission.name = flight.mission.id;
+                        flights.push(flight);
+                    });
+                }
 
                 return flights;
             });
@@ -30,6 +45,11 @@ class FlightService {
     getFlight(missionName) {
 
         return this.getFlights().then(flights => flights.find(flight => flight.mission.name === missionName));
+    }
+
+    removeAllFlights() {
+        firebase.database().ref().child('flights').remove();
+        console.log("[flight service] Removed all flights");
     }
 }
 

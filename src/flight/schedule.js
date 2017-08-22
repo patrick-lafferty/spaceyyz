@@ -83,12 +83,13 @@ class ScheduleFlight {
 
         this.schedule = () => {
 
-            if (this.flight.mission.vehicle.invalid) {
+            if (this.flight.mission.vehicle.invalid
+                || !this.selectedValidSpaceport) {
                 return;
             }
 
             this.flight.mission.name = 'sts-31';
-            flightService.scheduleFlight(this.flight);
+            flightService.scheduleFlight(this.flight, this.spaceport);
         };
 
         this.continentChanged = () => {

@@ -3,14 +3,29 @@ import angular from 'angular';
 class Spaceports {
 
     static get $inject() {
-        return ['spaceportService', '$timeout', '$scope'];
+        return ['spaceportService', '$timeout', '$scope', 'flightService'];
     }
 
-    constructor(spaceportService, $timeout, $scope) {
+    constructor(spaceportService, $timeout, $scope, flightService) {
         this.spaceports = {};
 
-        spaceportService.getSpaceports().then(spaceports => {
-            this.spaceports = spaceports;
+        Promise.all([spaceportService.getSpaceports(),
+            flightService.getFlights()
+        ]).then(results => {
+            this.spaceports = results[0];
+            const flights = results[1];
+            const now = new Date();
+            const millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+            this.spaceports.all.forEach(spaceport => {
+                spaceport.scheduledFlights = spaceport.scheduledFlights.map(key => {
+                    let flight = flights.find(flight => flight.key === key);
+
+                    flight.launch.tminus = (now - flight.launch.date) / millisecondsPerDay;
+
+                    return flight;
+                });
+            });
 
             $timeout(() => $scope.$apply());
         });
