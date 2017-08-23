@@ -77,55 +77,19 @@
 						<li class="menu__item" role="menuitem">
 							<a ui-sref="spaceportStatus" ui-sref-active="active"><p class="menu__link">Status</p></a>
 						</li>
-						<li class="menu__item" role="menuitem">
-							<a ui-sref="configureSpaceport" ui-sref-active="active"><p class="menu__link">Configure</p></a>
-						</li>
 					</ul>
 				</div>
 				<div class="menu" uib-dropdown>
 					<button id="research-button" class="menu__button" type="button" uib-dropdown-toggle>
-						Research
+						Design
 					</button>
 					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="resarch-button">
 						<li class="menu__item" role="menuitem">
 							<a ui-sref="researchEngine" ui-sref-active="active"><p class="menu__link">Engines</p></a>
 						</li>
-						<li class="menu__item" role="menuitem">
-							<a ui-sref="designStage" ui-sref-active="active"><p class="menu__link">Stages</p></a>
-						</li>
 					</ul>
 				</div>
 			</nav>
-
-			<!--
-			<div class="login" ng-controller="userAccount as user">
-
-				<div ng-show="user.email">
-					Logged in as {{user.email}}
-					<button ng-click="user.logout()" type="button" class="btn btn-primary">Log out</button>
-				</div>
-
-				<div ng-hide="user.email">
-					<form class="form-inline" ng-submit="user.login()">
-						<div class="form-group">
-							<label for="email" class="sr-only control-label">Email</label>
-							<div>
-								<input type="text" id="email" class="form-control" ng-model="email" placeholder="Email">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="sr-only control-label">Password</label>
-							<div>
-								<input type="password" id="password" class="form-control" ng-model="password" placeholder="Password">
-							</div>
-						</div>
-
-						<button ng-click="user.login(email, password)" type="button" class="btn btn-primary">Log in</button>
-					</form>
-				</div>
-			</div>
-			-->
 
 			<main class="main-view" ui-view> 
 			</main>
