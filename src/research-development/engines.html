@@ -2,14 +2,17 @@
 	<h1>Engines</h1>
 
 	<uib-tabset active="active">
-		<uib-tab index="0" heading="Existing">
-			<ul class="no-list-style" style="margin-top: 10px">
-				<li ng-repeat="engine in $ctrl.engines.all | orderBy: 'name'">
+		<uib-tab index="0" heading="Catalog">
+			<ul class="no-list-style catalog">
+				<li class="catalog__item" ng-repeat="engine in $ctrl.engines.all | orderBy: 'name'">
 					<form class="form-horizontal">
-						<div class="form-group">
+						<div class="named-menu">
 							<h4>{{engine.name}}</h4>
 							<div class="btn-group" uib-dropdown is-open="status.isopen">
-								<button id="change" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">Modify <span class="caret"></span></button>
+								<button id="change" type="button" class="btn btn-primary" 
+									uib-dropdown-toggle ng-disabled="disabled">
+									Modify <span class="caret"></span>
+								</button>
 								<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="change">
 									<li role="menuitem" ng-hide="engine.beingEdited"><a ng-click="$ctrl.editEngine(engine)">Edit</a></li>
 									<li role="menuitem" ng-show="engine.beingEdited"><a ng-click="$ctrl.cancelEditEngine(engine)">Cancel edit</a></li>
@@ -19,8 +22,8 @@
 						</div>
 						<div ng-show="engine.beingEdited">
 							<div class="form-group">
-								<label for="ispSeaLevel" class="col-sm-2 control-label">Isp (Sea level)</label>
-								<div class="col-sm-2">
+								<label for="ispSeaLevel" class="control-label">Isp (Sea level)</label>
+								<div>
 									<div class="input-group">
 										<input type="number" class="form-control" id="ispSeaLevel" ng-model="engine.isp.seaLevel">
 										<span ng-class="{'glyphicon-remove': engine.isp.seaLevel <= 0}" class="glyphicon form-control-feedback"></span>
@@ -28,7 +31,7 @@
 									</div>
 								</div>
 								<label for="ispVacuum" class="col-sm-1 control-label">Vacuum</label>
-								<div class="col-sm-2">
+								<div>
 									<div class="input-group">
 										<input type="number" class="form-control" id="ispVacuum" ng-model="engine.isp.vacuum">
 										<span ng-class="{'glyphicon-remove': engine.isp.vacuum <= 0}" class="glyphicon form-control-feedbacl"></span>
@@ -38,8 +41,8 @@
 							</div>
 
 							<div class="form-group">
-								<label for="thrustSeaLevel" class="col-sm-2 control-label">Thrust (Sea level)</label>
-								<div class="col-sm-2">
+								<label for="thrustSeaLevel" class=" control-label">Thrust (Sea level)</label>
+								<div>
 									<div class="input-group">
 										<input type="number" class="form-control" id="thrustSeaLevel" ng-model="engine.thrust.seaLevel">
 										<span ng-class="{'glyphicon-remove': engine.thrust.seaLevel <= 0}" class="glyphicon form-control-feedback"></span>
@@ -47,7 +50,7 @@
 									</div>
 								</div>
 								<label for="thrustVacuum" class="col-sm-1 control-label">Vacuum</label>
-								<div class="col-sm-2">
+								<div>
 									<div class="input-group">
 										<input type="number" class="form-control" id="thrustVacuum" ng-model="engine.thrust.vacuum">
 										<span ng-class="{'glyphicon-remove':  engine.thrust.vacuum <= 0}" class="glyphicon form-control-feedback"></span>
@@ -57,48 +60,55 @@
 							</div>
 								
 							<div class="form-group">
-								<label for="description" class="col-sm-2 control-label">Description</label>
-								<div class="col-sm-5">
+								<label for="description" class=" control-label">Description</label>
+								<div>
 									<textarea ng-model="engine.description" class="form-control" id="description"></textarea>
 									<span ng-class="{'glyphicon-remove': !engine.description}" class="glyphicon form-control-feedback"></span>
 								</div>
 							</div>
 						</div>
-						<div ng-hide="engine.beingEdited">
 
-							<p>Isp (Sea level): {{engine.isp.seaLevel}}s <span style="margin-left: 20px">(Vacuum): {{engine.isp.vacuum}}s</span></p>
-							<p>Thrust (Sea level): {{engine.thrust.seaLevel}}kN	<span style="margin-left: 20px">(Vacuum): {{engine.thrust.vacuum}}kN</span></p>
+						<section ng-hide="engine.beingEdited" class="engine">
 
-								
-							<p>Description: {{engine.description}}</p>
-						</div>
+							<p class="engine__sea-level">Sea Level</p>
+							<p class="engine__vacuum">Vacuum</p>
+
+							<p class="engine__header">Isp</p>
+							<p class="engine__sea-level">{{engine.isp.seaLevel}}s</p>
+							<p class="engine__vacuum">{{engine.isp.vacuum}}s</p>
+
+							<p class="engine__header">Thrust</p>
+							<p class="engine__sea-level">{{engine.thrust.seaLevel}}kN</p>
+							<p class="engine__vacuum">{{engine.thrust.vacuum}}kN</p>
+
+							<p class="engine__header">Description</p>
+							<p class="engine__description">{{engine.description}}</p>
+						</section>
+
 					</form>
 				</li>
 			</ul>
 		</uib-tab>
-		<uib-tab index="1" heading="New">
-		</uib-tab>
-		<uib-tab index="2" heading="Config">
-			<p><em>This tab is for testing purposes only to add engines to the database. The normal procedure for creating new engines is to use the New tab</em></p>
+		<uib-tab index="1" heading="Create New">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-2 control-label">Name</label>
-					<div class="col-sm-5" has-error has-feedback>
+					<label for="name" class="control-label">Name</label>
+					<div has-error has-feedback>
 						<input type="text" class="form-control" id="name" ng-model="$ctrl.newEngine.name">
 						<span ng-class="{'glyphicon-remove': !$ctrl.newEngine.name}" class="glyphicon form-control-feedback"></span>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="ispSeaLevel" class="col-sm-2 control-label">Isp (Sea level)</label>
-					<div class="col-sm-2">
+					<label for="ispSeaLevel" class="control-label">Isp (Sea level)</label>
+					<div>
 						<div class="input-group flex-container">
 							<input type="number" class="form-control" id="ispSeaLevel" ng-model="$ctrl.newEngine.isp.seaLevel">
 							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.seaLevel <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
 							<div class="input-group-addon">s</div>
 						</div>
 					</div>
-					<label for="ispVacuum" class="col-sm-1 control-label">Vacuum</label>
-					<div class="col-sm-2">
+					<label for="ispVacuum" class="control-label">Vacuum</label>
+					<div>
 						<div class="input-group flex-container">
 							<input type="number" class="form-control" id="ispVacuum" ng-model="$ctrl.newEngine.isp.vacuum">
 							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.isp.vacuum <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
@@ -108,8 +118,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="thrustSeaLevel" class="col-sm-2 control-label">Thrust (Sea level)</label>
-					<div class="col-sm-2">
+					<label for="thrustSeaLevel" class=" control-label">Thrust (Sea level)</label>
+					<div>
 						<div class="input-group">
 							<input type="number" class="form-control" id="thrustSeaLevel" ng-model="$ctrl.newEngine.thrust.seaLevel">
 							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.seaLevel <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
@@ -117,7 +127,7 @@
 						</div>
 					</div>
 					<label for="thrustVacuum" class="col-sm-1 control-label">Vacuum</label>
-					<div class="col-sm-2">
+					<div>
 						<div class="input-group">
 							<input type="number" class="form-control" id="thrustVacuum" ng-model="$ctrl.newEngine.thrust.vacuum">
 							<span ng-class="{'glyphicon-remove': $ctrl.newEngine.thrust.vacuum <= 0}" class="glyphicon glyphicon-with-addon form-control-feedback"></span>
@@ -127,18 +137,16 @@
 				</div>
 
 				<div class="form-group">
-					<label for="description" class="col-sm-2 control-label">Description</label>
+					<label for="description" class=" control-label">Description</label>
 
-					<div class="col-sm-5">
+					<div>
 						<textarea ng-model="$ctrl.newEngine.description" class="form-control" id="description"></textarea>
 						<span ng-class="{'glyphicon-remove': !$ctrl.newEngine.description}" class="glyphicon form-control-feedback"></span>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-2">
-						<button type="button" class="btn btn-primary" ng-click="$ctrl.addEngine($ctrl.newEngine)">Add engine</button>
-					</div>
+					<button type="button" class="btn btn-primary" ng-click="$ctrl.addEngine($ctrl.newEngine)">Add engine</button>
 				</div>
 			</form>
 
