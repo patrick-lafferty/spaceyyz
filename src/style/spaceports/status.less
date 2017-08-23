@@ -1,17 +1,26 @@
-.spaceport {
-    display: grid;
+.spaceport-list__element:not(:first-child) {
+    margin: 10rem 0rem;
 }
 
-.spaceport__name {
-    grid-column: 1;
+.spaceport {
+    table-layout: fixed;
+    width: 90%;
+}
+
+@media (max-width: 799px) {
+    .spaceport-list {
+        padding: 0rem;
+    }
+}
+
+.spaceport__column-headers {
+    color: @cool-blue;
 }
 
 .spaceport__launch-date {
     color: @cool-blue;
-    grid-column: 2;
 }
 
 .spaceport__tminus {
     color: @cool-blue;
-    grid-column: 3;
 }

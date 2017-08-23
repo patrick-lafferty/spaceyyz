@@ -21,6 +21,16 @@ class SpaceportService {
 
         let spaceports = [
             new Spaceport('Kennedy', 'United States', 'northAmerica'),
+            new Spaceport('Cape Canaveral', 'United States', 'northAmerica'),
+            new Spaceport('Vandenberg', 'United States', 'northAmerica'),
+
+            new Spaceport('Plesetsk', 'Russia', 'europe'),
+            new Spaceport('El Arenosillo', 'Spain', 'europe'),
+
+            new Spaceport('Baikonur', 'Russia', 'asia'),
+            new Spaceport('Jiuquan', 'China', 'asia'),
+            new Spaceport('Wenchang', 'China', 'asia'),
+            new Spaceport('Tanegashima', 'Japan', 'asia'),
         ];
 
         spaceports.forEach(spaceport => this.addSpaceport(spaceport));
