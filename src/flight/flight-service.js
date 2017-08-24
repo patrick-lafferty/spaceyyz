@@ -17,7 +17,7 @@ class FlightService {
         flight.mission.vehicle = flight.mission.vehicle.key;
         flight.launch.dateTimestamp = flight.launch.date.getTime();
 
-        var key = firebase.database().ref().child('flights').push(flight).key;
+        let key = firebase.database().ref().child('flights').push(flight).key;
 
         this.spaceportService.scheduleFlight(spaceport, key);
     }
@@ -33,7 +33,6 @@ class FlightService {
                         let flight = flightObject[key];
                         flight.key = key;
                         flight.launch.date = new Date(flight.launch.dateTimestamp);
-                        //flight.mission.name = flight.mission.id;
                         flights.push(flight);
                     });
                 }
@@ -47,10 +46,13 @@ class FlightService {
         return this.getFlights().then(flights => flights.find(flight => flight.mission.name === missionName));
     }
 
+    /*
+    for debugging purposes only
+        
     removeAllFlights() {
         firebase.database().ref().child('flights').remove();
-        console.log("[flight service] Removed all flights");
-    }
+        console.log('[flight service] Removed all flights');
+    }*/
 }
 
 const flightService = angular

@@ -15,9 +15,10 @@ class SpaceportService {
         //this.setupSpaceports();
     }
 
+    //for debugging purposes only
     setupSpaceports() {
         firebase.database().ref().child('spaceports').remove();
-        console.log('[spaceport service] Removed all spaceports');
+        //console.log('[spaceport service] Removed all spaceports');
 
         let spaceports = [
             new Spaceport('Kennedy', 'United States', 'northAmerica'),
