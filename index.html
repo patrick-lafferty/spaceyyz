@@ -6,97 +6,94 @@
 						 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 						 integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="spaceyyz_bootstrap_theme.css">
+		<link rel="stylesheet" type="text/css" href="spaceyyz.css">
 		<title>SpaceYYZ</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	<body style="overflow:hidden">
-		<div class="clearfix" style="color: black; height: 40px">
-			<div class="pull-left">
-
-				<div class="pull-left logoContainer">
-					<h1 style="display: inline;">SpaceYYZ</h1>
-					<div class="logoSquircle"></div>
-					<div class="logoSquircle squircle1"></div>
-					<div class="logoSquircle squircle2"></div>
-				</div>
-
-				<i>your one stop shop for Space Operations</i>
+	<body>
+		<div class="main" ng-class="{'main--logged-out': user.email == ''}" ng-controller="userAccount as user">
+			<div class="logo">
+				<h1 class="logo__name">SpaceYYZ</h1>
+				<div class="logo__squircle"></div>
+				<div class="logo__squircle squircle1"></div>
+				<div class="logo__squircle squircle2"></div>
 			</div>
 
-			<div class="pull-right" style="overflow: hidden; margin-top: 3px; margin-right: 3px" ng-controller="userAccount as userr">
-
-				<div ng-show="user.email">
-					Logged in as {{user.email}}
-					<button ng-click="user.logout()" type="button" class="btn btn-primary">Log out</button>
-				</div>
-
-				<div ng-hide="userr.isLoggedIn()">
-					<form class="form-inline" ng-submit="userr.login()">
-						<div class="form-group">
-							<label for="email" class="sr-only control-label">Email</label>
-							<div>
-								<input type="text" id="email" class="form-control" ng-model="email" placeholder="Email">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="sr-only control-label">Password</label>
-							<div>
-								<input type="password" id="password" class="form-control" ng-model="password" placeholder="Password">
-							</div>
-						</div>
-
-						<button ng-click="userr.login(email, password)" type="button" class="btn btn-primary">Log in</button>
-					</form>
-				</div>
-
-
-			</div>
-		</div>
-
-		<div class="sideMenu">
-			<uib-accordion>
-				<div uib-accordion-group class="panel-default" heading="Home">
-					<ul>
-						<li><a ui-sref="home" ui-sref-active="active">Account</a></li>
-						<li><a ui-sref="about" ui-sref-active="active">About</a></li>
+			<nav class="navigation navigation--offscreen" ng-hide="user.user.email == ''">
+				<div class="menu" uib-dropdown>
+					<button id="home-button" class="menu__button" type="button" uib-dropdown-toggle>
+						Home
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="home-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="home" ui-sref-active="active"><p class="menu__link">Account</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="about" ui-sref-active="active"><p class="menu__link">About</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a href="#" ng-click="user.logout()"><p class="menu__link">Log out</p></a>
+						</li>
 					</ul>
 				</div>
-				<div uib-accordion-group class="panel-default" heading="Launch Vehicles">
-					<ul>
-						<li><a ui-sref="orderNew" ui-sref-active="active">Order New</a></li>
-						<li><a ui-sref="development" ui-sref-active="active">In Development</a></li>
-						<li><a ui-sref="completed" ui-sref-active="active">Inventory</a></li>
-						<li><a ui-sref="config" ui-sref-active="active">Config</a></li>
+				<div class="menu" uib-dropdown>
+					<button id="vehicles-button" class="menu__button" type="button" uib-dropdown-toggle>
+						Vehicles
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="vehicles-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="orderNew" ui-sref-active="active"><p class="menu__link">Order New</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="development" ui-sref-active="active"><p class="menu__link">In Development</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="completed" ui-sref-active="active"><p class="menu__link">Inventory</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="config" ui-sref-active="active"><p class="menu__link">Configure</p></a>
+						</li>
 					</ul>
 				</div>
-
-				<div uib-accordion-group class="panel-default" heading="Flights">
-					<ul>
-						<li><a ui-sref="schedule" ui-sref-active="active">Schedule flight</a></li>
-						<li><a ui-sref="progress" ui-sref-active="active">In Progress</a></li>
+				<div class="menu" uib-dropdown>
+					<button id="flights-button" class="menu__button" type="button" uib-dropdown-toggle>
+						Flights
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="flights-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="schedule" ui-sref-active="active"><p class="menu__link">Schedule flight</p></a>
+						</li>
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="progress" ui-sref-active="active"><p class="menu__link">Check Progress</p></a>
+						</li>
 					</ul>
 				</div>
-
-				<div uib-accordion-group class="panel-default" heading="Spaceports">
-					<ul>
-						<li><a ui-sref="spaceportStatus" ui-sref-active="active">Status</a></li>
-						<li><a ui-sref="configureSpaceport" ui-sref-active="active">Configure</a></li>
+				<div class="menu" uib-dropdown>
+					<button id="spaceports-button" class="menu__button" type="button" uib-dropdown-toggle>
+						Spaceports
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="spaceports-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="spaceportStatus" ui-sref-active="active"><p class="menu__link">Status</p></a>
+						</li>
 					</ul>
 				</div>
-
-				<div uib-accordion-group class="panel-default" heading="Research & Development">
-					<ul>
-						<li><a ui-sref="researchEngine" ui-sref-active="active">Engines</a></li>
-						<li><a ui-sref="designStage" ui-sref-active="active">Stages</a></li>
+				<div class="menu" uib-dropdown>
+					<button id="research-button" class="menu__button" type="button" uib-dropdown-toggle>
+						Design
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="resarch-button">
+						<li class="menu__item" role="menuitem">
+							<a ui-sref="researchEngine" ui-sref-active="active"><p class="menu__link">Engines</p></a>
+						</li>
 					</ul>
 				</div>
-			</uib-accordion>	
-		</div>
+			</nav>
 
-		<div ui-view style="overflow-y: auto; background-color: #505050; height: calc(100% - 40px)">
+			<main class="main-view" ui-view> 
+			</main>
+
 		</div>
 		
 		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
