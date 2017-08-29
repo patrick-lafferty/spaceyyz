@@ -481,6 +481,12 @@ logoSquircle
   grid-column-start: 1;
   grid-column-end: 4;
 }
+.config__description {
+  grid-column-end: 3;
+}
+.config__name {
+  margin-right: 2rem;
+}
 .form-label {
   grid-column: 1;
 }
@@ -488,6 +494,10 @@ logoSquircle
   display: flex;
   grid-column-start: 2;
   grid-column-end: 4;
+}
+.stage-list {
+  list-style: none;
+  padding: 0rem;
 }
 textarea.form-control {
   grid-column-start: 2;
