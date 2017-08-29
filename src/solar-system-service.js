@@ -38,7 +38,6 @@ class SolarSystem {
             },
             {
                 name: 'Pluto',
-                //Hail Hydra
                 moons: ['None', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
             },
         ];
