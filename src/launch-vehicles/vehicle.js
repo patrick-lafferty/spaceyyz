@@ -12,7 +12,12 @@ class Vehicle {
 
     search(type) {
         if (type === 'name') {
-            return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
+            return vehicle => {
+                let searchNameLowerCase = this.search_name.toLowerCase();
+                
+                return vehicle.name.toLowerCase().includes(searchNameLowerCase)
+                    || vehicle.variant.name.toLowerCase().includes(searchNameLowerCase);
+            };
         } else if (type === 'capacity') {
             return vehicle => vehicle.variant.capacity >= this.search_payload;
         }
