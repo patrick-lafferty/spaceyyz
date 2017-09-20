@@ -14,7 +14,7 @@ class Vehicle {
         if (type === 'name') {
             return vehicle => vehicle.name.toLowerCase().includes(this.search_name.toLowerCase());
         } else if (type === 'capacity') {
-            return vehicle => vehicle.variant.capacity >= self.search_payload;
+            return vehicle => vehicle.variant.capacity >= this.search_payload;
         }
     }
 }
