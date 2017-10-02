@@ -40,9 +40,7 @@ class Engines {
 
 	addEngine(newEngine) {
 		if (!newEngine.name
-			|| newEngine.isp.seaLevel <= 0
 			|| newEngine.isp.vacuum <= 0
-			|| newEngine.thrust.seaLevel <= 0
 			|| newEngine.thrust.vacuum <= 0
 			|| !newEngine.description) {
 			return;
