@@ -90,6 +90,7 @@
 						<ul>
 							<li ng-repeat="variant in vehicle.variants">
 								<p><strong>{{variant.name}}:</strong> Capacity: {{variant.capacity | number}}kg to LEO, Cost: {{variant.cost | currency}}</p>
+								<!--<button ng-click="$ctrl.setVariantCount(variant, vehicle.familyKey)">Set Count</button>-->
 							</li>
 						</ul>
 					</div>

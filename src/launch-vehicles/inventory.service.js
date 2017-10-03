@@ -103,6 +103,10 @@ class InventoryService {
                 var vehicles = [];
                 var vehicleMap = Object.create(null);
 
+                if (vehicleObject == null) {
+                    return categorizeVehicles([]);
+                }
+
                 Object.keys(vehicleObject).forEach(function(key) {
                     var object = vehicleObject[key];
                     object.key = key;

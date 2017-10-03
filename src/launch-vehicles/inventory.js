@@ -19,7 +19,7 @@ class VehicleInventory {
                 var vehicles = results[0];
                 this.smallVehicles = vehicles.smallVehicles;
                 this.mediumVehicles = vehicles.mediumVehicles;
-                this.heavyVehicles = vehicles.mediumVehicles;
+                this.heavyVehicles = vehicles.heavyVehicles;
                 this.superHeavyVehicles = vehicles.superHeavyVehicles;
 
                 $timeout(() => $scope.$apply());

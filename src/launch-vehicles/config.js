@@ -79,6 +79,10 @@ class Config {
         vehicle.beingEdited = false;
     }
 
+    setVariantCount(variant, familyKey) {
+        this.variantService.setVariantCount(variant, familyKey);
+    }
+
     saveVehicle(vehicle) {
         vehicle.beingEdited = false;
         this.vehicleInventoryService.updateVehicle(vehicle);

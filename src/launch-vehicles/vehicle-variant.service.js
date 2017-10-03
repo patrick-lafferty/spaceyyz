@@ -53,6 +53,14 @@ class VehicleVariantService {
         });
     }
 
+    setVariantCount(variant, familyKey) {
+        let count = Math.floor(Math.random() * (20 - 3 + 1)) + 3;
+
+        firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).update({
+            count: count
+        }); 
+    }
+
     deleteVariant(variant, familyKey) {
         firebase.database().ref().child('variants/' + familyKey + '/' + variant.key).remove();
     }
